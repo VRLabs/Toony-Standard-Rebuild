@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Label text="Base Information" style="margin-bottom: 4px; -unity-font-style: bold;" />
+    <ui:TextField label="Id" binding-path="Id" />
+    <ui:TextField label="Name" binding-path="Name" />
+    <ui:TextField label="Author" binding-path="Author" />
+    <ui:TextField label="Version" binding-path="Version" />
+    <ui:TextField label="Description" binding-path="Description" multiline="true" />
+    <VRLabs.ToonyStandardRebuild.ModularShaderSystem.InspectorList binding-path="ModuleDependencies" show-elements-text="false" />
+    <VRLabs.ToonyStandardRebuild.ModularShaderSystem.InspectorList binding-path="IncompatibleWith" show-elements-text="false" />
+    
+    <ui:Label text="Settings" style="margin-bottom: 4px; -unity-font-style: bold; margin-top: 20px;" />
+    <uie:PropertyField binding-path="Enabled" label="Enable Property" focusable="true" />
+    <VRLabs.ToonyStandardRebuild.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Properties" />
+    <VRLabs.ToonyStandardRebuild.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Functions" />
+    <VRLabs.ToonyStandardRebuild.ModularShaderSystem.InspectorList show-elements-text="false" binding-path="Templates" />
+</ui:UXML>

@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d402a036c37434784f96227e0d05b3, type: 3}
+  m_Name: Toony Standard Rebuild
+  m_EditorClassIdentifier: 
+  Id: ToonyStandardRebuild
+  Name: Toony Standard RE:Build
+  Version: 0.1
+  Author: VRLabs
+  Description: 
+  UseTemplatesForProperties: 0
+  ShaderPropertiesTemplate: {fileID: 0}
+  ShaderPath: VRLabs/Toony Standard RE:Build
+  ShaderTemplate: {fileID: -544282384758852595, guid: dfac9c1ed2c4dfe4993d609796f69d3e,
+    type: 3}
+  CustomEditor: VRLabs.ToonyStandardRebuild.TSRGUI
+  TemplateKeywords: []
+  Properties:
+  - Name: _SrcBlend
+    DisplayName: Src Blend
+    Type: Float
+    DefaultValue: 1.0
+    Attributes: []
+  - Name: _DstBlend
+    DisplayName: Dst Blend
+    Type: Float
+    DefaultValue: 0.0
+    Attributes: []
+  - Name: _ZWrite
+    DisplayName: ZWrite
+    Type: Float
+    DefaultValue: 1.0
+    Attributes: []
+  - Name: _Cull
+    DisplayName: Cull Mode
+    Type: Int
+    DefaultValue: 2
+    Attributes:
+    - Enum(UnityEngine.Rendering.CullMode)
+  - Name: _StencilID
+    DisplayName: Stencil ID (0-255)
+    Type: Range(0,255)
+    DefaultValue: 0
+    Attributes:
+    - IntRange
+  - Name: _StencilComp
+    DisplayName: Stencil Comparison
+    Type: Int
+    DefaultValue: 0
+    Attributes:
+    - Enum(UnityEngine.Rendering.CompareFunction)
+  - Name: _StencilOp
+    DisplayName: Stencil Operation
+    Type: Int
+    DefaultValue: 0
+    Attributes:
+    - Enum(UnityEngine.Rendering.StencilOp)
+  BaseModules:
+  - {fileID: 11400000, guid: 23830d8c75a857544bd3da31924e6665, type: 2}
+  - {fileID: 11400000, guid: e66ce777bcc13c546ba94135b9e5b188, type: 2}
+  - {fileID: 11400000, guid: 0de1fc82dd8efba4aa505b29f993fb6c, type: 2}
+  - {fileID: 11400000, guid: 001953108dd6577448489c1e83e63c7d, type: 2}
+  - {fileID: 11400000, guid: 59e7502c70c2463408763c21e3633b04, type: 2}
+  AdditionalModules: []
+  LockBaseModules: 0
+  LastGeneratedShaders:
+  - {fileID: 4800000, guid: 854a2294bb3904740920fa97af7a7696, type: 3}
+  AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
+    Assembly-CSharp-Editor\",\r\n    \"Name\": \"Toony Standard Rebuild\",\r\n   
+    \"Sections\": {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
+    \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
+    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, Assembly-CSharp-Editor\",\r\n               
+    \"SectionName\": \"Stencil Options\",\r\n                \"ActivatePropertyName\":
+    \"_Cull\",\r\n                \"ActivateValue\": 0,\r\n                \"Controls\":
+    {\r\n                    \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 2,\r\n                   
+    \"$rcontent\": [\r\n                        {\r\n                           
+    \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor\",\r\n                            \"Name\": \"AAAAA\",\r\n                           
+    \"ControlType\": 6,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 5,\r\n                               
+    \"$rcontent\": [\r\n                                    $eref:0,\r\n                                   
+    {\r\n                                        \"$id\": 6,\r\n                                       
+    \"$type\": \"6|System.String, mscorlib\",\r\n                                       
+    \"{\\n  \\\"KernelName\\\": \\\"PackRGBA\\\",\\n  \\\"Inputs\\\": [\\n    {\\n     
+    \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"RChannel\\\",\\n      \\\"Settings\\\":
+    [ 1, 1 ]\\n    },\\n    {\\n      \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"GChannel\\\",\\n     
+    \\\"Settings\\\": [ 1, 1 ]\\n    },\\n    {\\n      \\\"Type\\\": 0,\\n     
+    \\\"InputName\\\":\\\"BChannel\\\",\\n      \\\"Settings\\\": [ 1, 1 ]\\n   
+    },\\n    {\\n      \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"AChannel\\\",\\n     
+    \\\"Settings\\\": [ 1, 1 ]\\n    }\\n  ]\\n}\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 7,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_MainTex\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 8,\r\n                                       
+    \"$type\": 6,\r\n                                        \"\"\r\n                                   
+    },\r\n                                    $iref:8\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 9,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 10,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"BBBB\",\r\n                            \"ControlType\": 11,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 11,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 3,\r\n                               
+    \"$rcontent\": [\r\n                                    $iref:8,\r\n                                   
+    {\r\n                                        \"$id\": 12,\r\n                                       
+    \"$type\": \"7|System.Single, mscorlib\",\r\n                                       
+    0\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 13,\r\n                                       
+    \"$type\": 7,\r\n                                        1\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 14,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        }\r\n                    ]\r\n                }\r\n           
+    }\r\n        ]\r\n    }\r\n}","unityObjectReferences":[{"instanceID":16974}]}'

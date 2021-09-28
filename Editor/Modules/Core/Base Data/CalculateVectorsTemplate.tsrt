@@ -1,0 +1,37 @@
+half3 Unity_SafeNormalize(half3 inVec)
+{
+    half dp3 = max(0.001f, dot(inVec, inVec));
+    return inVec * rsqrt(dp3);
+}
+
+void CalculateNormals(inout float3 normal, inout float3 tangent, inout float3 bitangent, float3 normalmap)
+{
+    float3 tspace0 = float3(tangent.x, bitangent.x, normal.x);
+    float3 tspace1 = float3(tangent.y, bitangent.y, normal.y);
+    float3 tspace2 = float3(tangent.z, bitangent.z, normal.z);
+
+    float3 calcedNormal;
+    calcedNormal.x = dot(tspace0, normalmap);
+    calcedNormal.y = dot(tspace1, normalmap);
+    calcedNormal.z = dot(tspace2, normalmap);
+    
+    calcedNormal = normalize(calcedNormal);
+    float3 bumpedTangent = (cross(bitangent, calcedNormal));
+    float3 bumpedBitangent = (cross(calcedNormal, bumpedTangent));
+
+    normal = calcedNormal;
+    tangent = bumpedTangent;
+    bitangent = bumpedBitangent;
+}
+
+void GetDirectionVectors()
+{
+    NormalDir    = normalize(FragData.normal);
+    TangentDir   = normalize(UnityObjectToWorldDir(FragData.tangentDir.xyz));
+    BitangentDir = normalize(cross(NormalDir, TangentDir) * FragData.tangentDir.w * unity_WorldTransformParams.w);
+    CalculateNormals(NormalDir, TangentDir, BitangentDir, Normals);
+    LightDir     = normalize(UnityWorldSpaceLightDir(FragData.worldPos));
+    ViewDir      = normalize(UnityWorldSpaceViewDir(FragData.worldPos));
+    ReflectDir   = reflect(-ViewDir, NormalDir);
+    HalfDir      = Unity_SafeNormalize(LightDir + ViewDir);
+}

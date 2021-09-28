@@ -1,0 +1,8 @@
+ void GetDotProducts()
+{
+    UnmaxedNdotL = dot(NormalDir, LightDir);
+    NdotL = max(UnmaxedNdotL, 0);
+    NdotV = abs(dot(NormalDir, ViewDir));
+    NdotH = max(dot(NormalDir, HalfDir),0);
+    LdotH = max(dot(LightDir, HalfDir),0);
+}

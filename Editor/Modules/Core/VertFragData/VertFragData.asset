@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6eb4885991aef4bb8e8696cd587c3d, type: 3}
+  m_Name: VertFragData
+  m_EditorClassIdentifier: 
+  Id: VertFragData
+  Name: Vertex and fragment data
+  Version: 0.1
+  Author: VRLabs
+  Description: 
+  RequiredIncludes: []
+  Enabled:
+    Name: 
+    DisplayName: 
+    Type: Float
+    DefaultValue: 0.0
+    Attributes: []
+    EnableValue: 0
+  Properties: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates:
+  - Template: {fileID: -544282384758852595, guid: 79ae60db0d0fb5149bdfc1fa1b9cb8f5,
+      type: 3}
+    Keywords:
+    - VERTEX_DATA
+    NeedsVariant: 0
+    TemplateKeywords: []
+  - Template: {fileID: -544282384758852595, guid: 11f1579ab09273b4f9401aec7e7da860,
+      type: 3}
+    Keywords:
+    - FRAGMENT_DATA
+    NeedsVariant: 0
+    TemplateKeywords: []
+  Functions: []

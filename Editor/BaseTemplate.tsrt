@@ -1,0 +1,90 @@
+Blend [_SrcBlend] [_DstBlend]
+ZWrite [_ZWrite]
+Cull [_Cull]
+Stencil
+{
+    Ref [_StencilID]
+    Comp [_StencilComp]
+    Pass [_StencilOp]
+}
+
+Pass 
+{
+    Tags
+    {
+        "LightMode" = "ForwardBase"
+    }
+    
+    CGPROGRAM
+    #pragma target 3.0
+    #pragma vertex Vertex
+    #pragma fragment Fragment
+    #pragma multi_compile_fwdbase
+    #pragma multi_compile_fog	
+    #pragma multi_compile _ VERTEXLIGHT_ON
+    #ifndef UNITY_PASS_FORWARDBASE
+        #define UNITY_PASS_FORWARDBASE
+    #endif
+    
+    #pragma shader_feature _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+
+    #include "UnityCG.cginc"
+    #include "UnityLightingCommon.cginc"
+    #include "UnityStandardUtils.cginc"
+    #include "AutoLight.cginc"
+    
+    #K#MAIN_PASS
+    
+    ENDCG
+}
+
+Pass 
+{
+    Tags
+    {
+        "LightMode" = "ForwardAdd"
+    }
+
+    Blend [_SrcBlend] One
+    Fog { Color (0,0,0,0) } // in additive pass fog should be black
+    ZWrite Off
+
+    CGPROGRAM
+    #pragma target 3.0
+    #pragma vertex Vertex
+    #pragma fragment Fragment
+    #pragma multi_compile_fwdadd_fullshadows
+    #pragma multi_compile_fog
+
+    #pragma shader_feature _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
+        
+    #include "UnityCG.cginc"
+    #include "UnityLightingCommon.cginc"
+    #include "UnityStandardUtils.cginc"
+    #include "AutoLight.cginc"
+
+    #K#ADD_PASS
+
+    ENDCG
+}
+
+Pass 
+{
+    Tags 
+    {
+        "LightMode" = "Meta"
+    }
+
+    Cull Off
+
+    CGPROGRAM
+
+    #pragma vertex Vertex
+    #pragma fragment Fragment
+
+    #K#META_PASS
+
+    ENDCG
+}
+
+#K#ADDITIONAL_PASSES

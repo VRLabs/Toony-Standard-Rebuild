@@ -1,0 +1,18 @@
+i.pos        = UnityObjectToClipPos(v.vertex);
+i.normal     = UnityObjectToWorldNormal(v.normal);
+i.worldPos   = mul(unity_ObjectToWorld, v.vertex);		
+i.tangentDir = v.tangentDir;
+i.uv         = v.uv;
+i.uv2        = v.uv1;
+i.uv2        = v.uv2;
+
+UNITY_TRANSFER_SHADOW(i, v.uv);
+UNITY_TRANSFER_FOG(i, i.pos);
+
+#if defined(LIGHTMAP_ON)
+    i.lightmapUV = v.uv1 * unity_LightmapST.xy + unity_LightmapST.zw;
+#endif
+
+#if defined(DYNAMICLIGHTMAP_ON)
+    i.dynamicLightmapUV = v.uv2 * unity_DynamicLightmapST.xy + unity_DynamicLightmapST.zw;
+#endif
