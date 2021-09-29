@@ -7,6 +7,8 @@ using UnityEngine;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
+using VRLabs.ToonyStandardRebuild.OdinSerializer;
+using System.Text;
 
 namespace VRLabs.ToonyStandardRebuild
 {
@@ -74,7 +76,7 @@ namespace VRLabs.ToonyStandardRebuild
                 ModularShader = FindAssetsByType<ModularShader>().FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
                 if (ModularShader == null)
                 {
-                    _startupErrors.Add("The modular shader asset has not been found for this shader, this inspector works only on Toony Standard Restiched generated shaders");
+                    _startupErrors.Add("The modular shader asset has not been found for this shader, this inspector works only on Toony Standard RE:Build generated shaders");
                 }
                 else
                 {
@@ -117,38 +119,71 @@ namespace VRLabs.ToonyStandardRebuild
             _mainOrderedSection = this.AddOrderedSectionGroup("MainGroup");
 
             string modularShaderPath = AssetDatabase.GetAssetPath(ModularShader);
-            string modularShaderName = Path.GetFileNameWithoutExtension(modularShaderPath);
-            string modularShaderUIPath = modularShaderPath.Replace(modularShaderName + ".asset", modularShaderName + "UI.asset");
 
             LoadLocalizationSettings(modularShaderPath);
 
-            if (File.Exists(modularShaderUIPath))
-                LoadUIModule(modularShaderUIPath);
+            if (File.Exists(modularShaderPath))
+                LoadUIModule(ModularShader, modularShaderPath);
 
             foreach (ShaderModule shaderModule in ModularShader.BaseModules)
             {
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
-                string moduleName = Path.GetFileNameWithoutExtension(modulePath);
-                string moduleUIPath = modulePath.Replace(moduleName + ".asset", moduleName + "UI.asset");
-                if (File.Exists(moduleUIPath))
-                    LoadUIModule(moduleUIPath);
+                if (File.Exists(modulePath))
+                    LoadUIModule(shaderModule, modulePath);
             }
 
             foreach (ShaderModule shaderModule in ModularShader.AdditionalModules)
             {
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
-                string moduleName = Path.GetFileNameWithoutExtension(modulePath);
-                string moduleUIPath = modulePath.Replace(moduleName + ".asset", moduleName + "UI.asset");
-                if (File.Exists(moduleUIPath))
-                    LoadUIModule(moduleUIPath);
+                if (File.Exists(modulePath))
+                    LoadUIModule(shaderModule, modulePath);
             }
         }
 
-        private void LoadUIModule(string modulePath)
+        private void LoadUIModule(ModularShader modularShader, string modulePath)
         {
-            //TODO: fix this
-            var module = new ModuleUI();//AssetDatabase.LoadAssetAtPath<ModuleUI>(modulePath);
+            ModuleUI module = LoadSerializedData(modularShader.AdditionalSerializedData);
+            List<SimpleControl> loadedControls = LoadControls(module);
+            _controlsByModule.Add(modulePath, loadedControls);
+            LoadModuleLocalization(loadedControls, modulePath);
+        }
 
+        private void LoadUIModule(ShaderModule shaderModule, string modulePath)
+        {
+            ModuleUI module = LoadSerializedData(shaderModule.AdditionalSerializedData);
+            List<SimpleControl> loadedControls = LoadControls(module);
+            _controlsByModule.Add(modulePath, loadedControls);
+            LoadModuleLocalization(loadedControls, modulePath);
+        }
+
+        private static ModuleUI LoadSerializedData(string serialziedData)
+        {
+            if (string.IsNullOrWhiteSpace(serialziedData))
+            {
+                return new ModuleUI();
+            }
+            else
+            {
+                var data = JsonUtility.FromJson<SerializedUIData>(serialziedData);
+                List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
+                foreach (var guid in data.unityGUIDReferences)
+                {
+                    if (string.IsNullOrWhiteSpace(guid))
+                    {
+                        unityObjectReferences.Add(null);
+                    }
+                    else
+                    {
+                        string path = AssetDatabase.GUIDToAssetPath(guid);
+                        unityObjectReferences.Add(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path));
+                    }
+                }
+                return SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
+            }
+        }
+
+        private List<SimpleControl> LoadControls(ModuleUI module)
+        {
             var loadedControls = new List<SimpleControl>();
             foreach (var moduleSection in module.Sections)
             {
@@ -178,8 +213,8 @@ namespace VRLabs.ToonyStandardRebuild
                 foreach (var sectionControl in moduleSection.Controls)
                     LoadControl(section, sectionControl, loadedControls);
             }
-            _controlsByModule.Add(modulePath, loadedControls);
-            LoadModuleLocalization(loadedControls, modulePath);
+
+            return loadedControls;
         }
 
         private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls)
@@ -203,10 +238,13 @@ namespace VRLabs.ToonyStandardRebuild
         private void DrawSettingsGUI()
         {
             if (_availableModules == null)
+            {
                 _availableModules = FindAssetsByType<ShaderModule>()
                     .Where(x => ModularShader.BaseModules.All(y => y != x) &&
                                 ModularShader.AdditionalModules.All(y => y != x))
                     .ToList();
+            }
+
             if (_usedModules == null)
             {
                 _usedModules = new List<ShaderModule>(ModularShader.AdditionalModules);

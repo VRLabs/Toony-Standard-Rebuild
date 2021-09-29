@@ -10,16 +10,14 @@ using VRLabs.ToonyStandardRebuild.OdinSerializer;
 
 namespace VRLabs.ToonyStandardRebuild
 {
-    //[CustomEditor(typeof(ModuleUI))]
+    [Serializable]
+    public class SerializedUIData
+    {
+        public string module = "";
+        public List<string> unityGUIDReferences = new List<string>();
+    }
     public class ModuleUIEditor : EditorWindow
     {
-        [Serializable]
-        private class SerializedData
-        {
-            public string module = "";
-            public List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
-        }
-
         [MenuItem("VRLabs/Toony Standard RE:Build/Edit UI For module")]
         public static void ShowExample()
         {
@@ -116,8 +114,15 @@ namespace VRLabs.ToonyStandardRebuild
         {
             if (!currentSelectorUsed && _modularShaderField.value != null)
             {
-                SerializedData data = new SerializedData();
-                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out data.unityObjectReferences));
+                SerializedUIData data = new SerializedUIData();
+                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
+                foreach (var reference in unityObjectReferences)
+                {
+                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _))
+                        data.unityGUIDReferences.Add(guid);
+                    else
+                        data.unityGUIDReferences.Add("");
+                }
                 ((ModularShader)_modularShaderField.value).AdditionalSerializedData = JsonUtility.ToJson(data);
                 EditorUtility.SetDirty(_modularShaderField.value);
                 AssetDatabase.SaveAssets();
@@ -125,8 +130,15 @@ namespace VRLabs.ToonyStandardRebuild
 
             if (currentSelectorUsed && _shaderModuleField.value != null)
             {
-                SerializedData data = new SerializedData();
-                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out data.unityObjectReferences));
+                SerializedUIData data = new SerializedUIData();
+                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
+                foreach (var reference in unityObjectReferences)
+                {
+                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _))
+                        data.unityGUIDReferences.Add(guid);
+                    else
+                        data.unityGUIDReferences.Add("");
+                }
                 ((ShaderModule)_shaderModuleField.value).AdditionalSerializedData = JsonUtility.ToJson(data);
                 EditorUtility.SetDirty(_modularShaderField.value);
                 AssetDatabase.SaveAssets();
@@ -142,8 +154,21 @@ namespace VRLabs.ToonyStandardRebuild
             }
             else
             {
-                var data = JsonUtility.FromJson<SerializedData>(serializedData);
-                _ui = SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, data.unityObjectReferences) ?? new ModuleUI();
+                var data = JsonUtility.FromJson<SerializedUIData>(serializedData);
+                List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
+                foreach (var guid in data.unityGUIDReferences)
+                {
+                    if (string.IsNullOrWhiteSpace(guid))
+                    {
+                        unityObjectReferences.Add(null);
+                    }
+                    else
+                    {
+                        string path = AssetDatabase.GUIDToAssetPath(guid);
+                        unityObjectReferences.Add(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path));
+                    }
+                }
+                _ui = SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
             }
 
             if (!currentSelectorUsed && newValue != null)

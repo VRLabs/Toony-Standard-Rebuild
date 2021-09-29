@@ -77,53 +77,5 @@ MonoBehaviour:
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
     Assembly-CSharp-Editor\",\r\n    \"Name\": \"Toony Standard Rebuild\",\r\n   
     \"Sections\": {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
-    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
-    \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
-    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, Assembly-CSharp-Editor\",\r\n               
-    \"SectionName\": \"Stencil Options\",\r\n                \"ActivatePropertyName\":
-    \"_Cull\",\r\n                \"ActivateValue\": 0,\r\n                \"Controls\":
-    {\r\n                    \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
-    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 2,\r\n                   
-    \"$rcontent\": [\r\n                        {\r\n                           
-    \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
-    Assembly-CSharp-Editor\",\r\n                            \"Name\": \"AAAAA\",\r\n                           
-    \"ControlType\": 6,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
-    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 5,\r\n                               
-    \"$rcontent\": [\r\n                                    $eref:0,\r\n                                   
-    {\r\n                                        \"$id\": 6,\r\n                                       
-    \"$type\": \"6|System.String, mscorlib\",\r\n                                       
-    \"{\\n  \\\"KernelName\\\": \\\"PackRGBA\\\",\\n  \\\"Inputs\\\": [\\n    {\\n     
-    \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"RChannel\\\",\\n      \\\"Settings\\\":
-    [ 1, 1 ]\\n    },\\n    {\\n      \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"GChannel\\\",\\n     
-    \\\"Settings\\\": [ 1, 1 ]\\n    },\\n    {\\n      \\\"Type\\\": 0,\\n     
-    \\\"InputName\\\":\\\"BChannel\\\",\\n      \\\"Settings\\\": [ 1, 1 ]\\n   
-    },\\n    {\\n      \\\"Type\\\": 0,\\n      \\\"InputName\\\":\\\"AChannel\\\",\\n     
-    \\\"Settings\\\": [ 1, 1 ]\\n    }\\n  ]\\n}\"\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 7,\r\n                                        \"$type\": 6,\r\n                                       
-    \"_MainTex\"\r\n                                    },\r\n                                   
-    {\r\n                                        \"$id\": 8,\r\n                                       
-    \"$type\": 6,\r\n                                        \"\"\r\n                                   
-    },\r\n                                    $iref:8\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 9,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 10,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"BBBB\",\r\n                            \"ControlType\": 11,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 11,\r\n                               
-    \"$type\": 5,\r\n                                \"$rlength\": 3,\r\n                               
-    \"$rcontent\": [\r\n                                    $iref:8,\r\n                                   
-    {\r\n                                        \"$id\": 12,\r\n                                       
-    \"$type\": \"7|System.Single, mscorlib\",\r\n                                       
-    0\r\n                                    },\r\n                                   
-    {\r\n                                        \"$id\": 13,\r\n                                       
-    \"$type\": 7,\r\n                                        1\r\n                                   
-    }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 14,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        }\r\n                    ]\r\n                }\r\n           
-    }\r\n        ]\r\n    }\r\n}","unityObjectReferences":[{"instanceID":16974}]}'
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 0,\r\n       
+    \"$rcontent\": [\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
