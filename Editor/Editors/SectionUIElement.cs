@@ -23,14 +23,14 @@ namespace VRLabs.ToonyStandardRebuild
         private TextField _sectionNameField;
         private TextField _activateNameField;
         private FloatField _activateValueField;
-        private ObjectInspectorList<ControlsUIElement.Template, ControlUI> _controlsList;
+        private ObjectInspectorList<ControlUI> _controlsList;
 
         public SectionUIElement()
         {
             _sectionNameField = new TextField("Section Name");
             _activateNameField = new TextField("Property name");
             _activateValueField = new FloatField("Activate value");
-            _controlsList = new ObjectInspectorList<ControlsUIElement.Template, ControlUI>("Controls", ControlsUIElement.ElementTemplate);
+            _controlsList = new ObjectInspectorList<ControlUI>("Controls", ControlsUIElement.ElementTemplate);
             Add(_sectionNameField);
             Add(_activateNameField);
             Add(_activateValueField);

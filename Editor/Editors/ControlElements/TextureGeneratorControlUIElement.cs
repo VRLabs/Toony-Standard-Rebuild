@@ -7,13 +7,11 @@ using UnityEditor;
 
 namespace VRLabs.ToonyStandardRebuild
 {
-    //TODO: finish this shit
     public class TextureGeneratorControlUIElement : VisualElement
     {
         private TextField _textureNameField;
         private TextField _firstExtraField;
         private TextField _secondExtraField;
-        private Toggle _customCompute;
         private ObjectField _computeShader;
         private Button _computeSettingsButton;
         private Label _computeSettingsLabelLabel;
@@ -21,77 +19,77 @@ namespace VRLabs.ToonyStandardRebuild
         private string _computeSetting;
 
         private List<object> _parameters;
-        public TextureGeneratorControlUIElement(List<object> Parameters)
+        public TextureGeneratorControlUIElement(List<object> parameters)
         {
-            _parameters = Parameters;
+            _parameters = parameters;
 
             _textureNameField = new TextField("Texture name");
             _firstExtraField = new TextField("First extra property");
             _secondExtraField = new TextField("Second extra property");
             _computeShader = new ObjectField("Compute shader");
             _computeShader.objectType = typeof(ComputeShader);
-            _customCompute = new Toggle("Custom compute shader");
+            var customCompute = new Toggle("Custom compute shader");
             _computeSettingsButton = new Button(SettingsClickAction);
             _computeSettingsButton.text = "Select compute settings JSON";
             _computeSettingsLabelLabel = new Label("Loaded compute settings JSON:");
             _computeSettingsLabelLabel.style.borderTopWidth = 4;
             _computeSettingsLabel = new Label();
             _computeSettingsLabel.AddToClassList("texture-generation-compute-json");
-            _customCompute.value = Parameters.Count == 5;
+            customCompute.value = parameters.Count == 5;
 
-            if (Parameters.Count == 3)
+            if (parameters.Count == 3)
             {
-                if (!(Parameters[0] is string))
-                    Parameters[0] = "";
-                if (!(Parameters[1] is string))
-                    Parameters[1] = "";
-                if (!(Parameters[2] is string))
-                    Parameters[2] = "";
+                if (!(parameters[0] is string))
+                    parameters[0] = "";
+                if (!(parameters[1] is string))
+                    parameters[1] = "";
+                if (!(parameters[2] is string))
+                    parameters[2] = "";
             }
-            else if (Parameters.Count == 5)
+            else if (parameters.Count == 5)
             {
-                if (!(Parameters[0] is ComputeShader))
-                    Parameters[0] = null;
-                if (!(Parameters[1] is string))
-                    Parameters[1] = "";
-                if (!(Parameters[2] is string))
-                    Parameters[2] = "";
-                if (!(Parameters[3] is string))
-                    Parameters[3] = "";
-                if (!(Parameters[4] is string))
-                    Parameters[4] = "";
+                if (!(parameters[0] is ComputeShader))
+                    parameters[0] = null;
+                if (!(parameters[1] is string))
+                    parameters[1] = "";
+                if (!(parameters[2] is string))
+                    parameters[2] = "";
+                if (!(parameters[3] is string))
+                    parameters[3] = "";
+                if (!(parameters[4] is string))
+                    parameters[4] = "";
             }
             else
             {
-                Parameters.Clear();
-                Parameters.Add("");
-                Parameters.Add("");
-                Parameters.Add("");
+                parameters.Clear();
+                parameters.Add("");
+                parameters.Add("");
+                parameters.Add("");
             }
 
-            if (_customCompute.value)
+            if (customCompute.value)
             {
-                _computeSetting = (string)Parameters[1];
-                _computeShader.SetValueWithoutNotify((Object)Parameters[0]);
-                _textureNameField.SetValueWithoutNotify((string)Parameters[2]);
-                _firstExtraField.SetValueWithoutNotify((string)Parameters[3]);
-                _secondExtraField.SetValueWithoutNotify((string)Parameters[4]);
+                _computeSetting = (string)parameters[1];
+                _computeShader.SetValueWithoutNotify((Object)parameters[0]);
+                _textureNameField.SetValueWithoutNotify((string)parameters[2]);
+                _firstExtraField.SetValueWithoutNotify((string)parameters[3]);
+                _secondExtraField.SetValueWithoutNotify((string)parameters[4]);
             }
             else
             {
-                _textureNameField.SetValueWithoutNotify((string)Parameters[0]);
-                _firstExtraField.SetValueWithoutNotify((string)Parameters[1]);
-                _secondExtraField.SetValueWithoutNotify((string)Parameters[2]);
+                _textureNameField.SetValueWithoutNotify((string)parameters[0]);
+                _firstExtraField.SetValueWithoutNotify((string)parameters[1]);
+                _secondExtraField.SetValueWithoutNotify((string)parameters[2]);
             }
 
-            ApplyBindings(_customCompute.value, false);
+            ApplyBindings(customCompute.value, false);
 
-            _customCompute.RegisterValueChangedCallback(x => ApplyBindings(x.newValue));
+            customCompute.RegisterValueChangedCallback(x => ApplyBindings(x.newValue));
 
             Add(_textureNameField);
             Add(_firstExtraField);
             Add(_secondExtraField);
-            Add(_customCompute);
+            Add(customCompute);
             Add(_computeShader);
             Add(_computeSettingsButton);
             Add(_computeSettingsLabelLabel);

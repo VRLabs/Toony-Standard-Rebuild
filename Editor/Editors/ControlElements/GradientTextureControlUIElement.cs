@@ -1,39 +1,36 @@
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 using System.Collections.Generic;
 
 namespace VRLabs.ToonyStandardRebuild
 {
     public class GradientTextureControlUIElement : VisualElement
     {
-        private TextField _textureNameField;
-        private TextField _colorPropertyField;
-        public GradientTextureControlUIElement(List<object> Parameters)
+        public GradientTextureControlUIElement(List<object> parameters)
         {
-            _textureNameField = new TextField("Texture name");
-            _colorPropertyField = new TextField("Color property");
+            var textureNameField = new TextField("Texture name");
+            var colorPropertyField = new TextField("Color property");
 
-            if (Parameters.Count != 2)
+            if (parameters.Count != 2)
             {
-                Parameters.Clear();
-                Parameters.Add("");
-                Parameters.Add("");
+                parameters.Clear();
+                parameters.Add("");
+                parameters.Add("");
             }
             else
             {
-                if (!(Parameters[0] is string))
-                    Parameters[0] = "";
-                if (!(Parameters[1] is string))
-                    Parameters[1] = "";
+                if (!(parameters[0] is string))
+                    parameters[0] = "";
+                if (!(parameters[1] is string))
+                    parameters[1] = "";
             }
 
-            _textureNameField.SetValueWithoutNotify((string)Parameters[0]);
-            _colorPropertyField.SetValueWithoutNotify((string)Parameters[1]);
-            _textureNameField.RegisterValueChangedCallback(e => Parameters[0] = e.newValue);
-            _colorPropertyField.RegisterValueChangedCallback(e => Parameters[1] = e.newValue);
+            textureNameField.SetValueWithoutNotify((string)parameters[0]);
+            colorPropertyField.SetValueWithoutNotify((string)parameters[1]);
+            textureNameField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
+            colorPropertyField.RegisterValueChangedCallback(e => parameters[1] = e.newValue);
 
-            Add(_textureNameField);
-            Add(_colorPropertyField);
+            Add(textureNameField);
+            Add(colorPropertyField);
         }
     }
 }

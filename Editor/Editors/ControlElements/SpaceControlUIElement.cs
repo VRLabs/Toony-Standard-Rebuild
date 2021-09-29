@@ -6,27 +6,26 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public class SpaceControlUIElement : VisualElement
     {
-        private IntegerField _spaceField;
-        public SpaceControlUIElement(List<object> Parameters)
+        public SpaceControlUIElement(List<object> parameters)
         {
-            _spaceField = new IntegerField("Space");
+            var spaceField = new IntegerField("Space");
 
-            if (Parameters.Count != 1)
+            if (parameters.Count != 1)
             {
-                Parameters.Clear();
-                Parameters.Add(0);
+                parameters.Clear();
+                parameters.Add(0);
             }
-            else if (!(Parameters[0] is int))
+            else if (!(parameters[0] is int))
             {
-                Parameters[0] = 0;
+                parameters[0] = 0;
             }
 
             //var controlsList = new ObjectInspectorList<Template, ControlUI>("Controls", ElementTemplate);
 
-            _spaceField.SetValueWithoutNotify((int)Parameters[0]);
-            _spaceField.RegisterValueChangedCallback(e => Parameters[0] = e.newValue);
+            spaceField.SetValueWithoutNotify((int)parameters[0]);
+            spaceField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
 
-            Add(_spaceField);
+            Add(spaceField);
         }
     }
 }

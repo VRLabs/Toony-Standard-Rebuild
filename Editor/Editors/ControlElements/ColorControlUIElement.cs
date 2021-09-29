@@ -1,39 +1,36 @@
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 using System.Collections.Generic;
 
 namespace VRLabs.ToonyStandardRebuild
 {
     public class ColorControlUIElement : VisualElement
     {
-        private TextField _parameterNameField;
-        private Toggle _showAlphaField;
-        public ColorControlUIElement(List<object> Parameters)
+        public ColorControlUIElement(List<object> parameters)
         {
-            _parameterNameField = new TextField("Parameter name");
-            _showAlphaField = new Toggle("Show alpha");
+            var parameterNameField = new TextField("Parameter name");
+            var showAlphaField = new Toggle("Show alpha");
 
-            if (Parameters.Count != 2)
+            if (parameters.Count != 2)
             {
-                Parameters.Clear();
-                Parameters.Add("");
-                Parameters.Add(true);
+                parameters.Clear();
+                parameters.Add("");
+                parameters.Add(true);
             }
             else
             {
-                if (!(Parameters[0] is string))
-                    Parameters[0] = "";
-                if (!(Parameters[1] is bool))
-                    Parameters[1] = true;
+                if (!(parameters[0] is string))
+                    parameters[0] = "";
+                if (!(parameters[1] is bool))
+                    parameters[1] = true;
             }
 
-            _parameterNameField.SetValueWithoutNotify((string)Parameters[0]);
-            _showAlphaField.SetValueWithoutNotify((bool)Parameters[1]);
-            _parameterNameField.RegisterValueChangedCallback(e => Parameters[0] = e.newValue);
-            _showAlphaField.RegisterValueChangedCallback(e => Parameters[1] = e.newValue);
+            parameterNameField.SetValueWithoutNotify((string)parameters[0]);
+            showAlphaField.SetValueWithoutNotify((bool)parameters[1]);
+            parameterNameField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
+            showAlphaField.RegisterValueChangedCallback(e => parameters[1] = e.newValue);
 
-            Add(_parameterNameField);
-            Add(_showAlphaField);
+            Add(parameterNameField);
+            Add(showAlphaField);
         }
     }
 }

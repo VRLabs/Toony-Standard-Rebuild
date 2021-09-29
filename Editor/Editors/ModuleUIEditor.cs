@@ -29,9 +29,9 @@ namespace VRLabs.ToonyStandardRebuild
 
         private ObjectField _modularShaderField;
         private ObjectField _shaderModuleField;
-        private ObjectInspectorList<SectionUIElement.Template, SectionUI> _sectionsList;
+        private ObjectInspectorList<SectionUI> _sectionsList;
 
-        private bool currentSelectorUsed;
+        private bool _currentSelectorUsed;
 
         private ModuleUI _ui;
 
@@ -53,38 +53,30 @@ namespace VRLabs.ToonyStandardRebuild
             _modularShaderField.objectType = typeof(ModularShader);
             _modularShaderField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>
             {
-                if (e.newValue != null)
-                    serializedData = ((ModularShader)e.newValue).AdditionalSerializedData;
-                else
-                    serializedData = null;
-
-
+                serializedData = e.newValue != null ? ((ModularShader)e.newValue).AdditionalSerializedData : null;
+                
                 if (_shaderModuleField.value != null)
                     _shaderModuleField.SetValueWithoutNotify(null);
 
-                currentSelectorUsed = false;
+                _currentSelectorUsed = false;
                 OpenData(serializedData, e.newValue);
             });
 
             _shaderModuleField.objectType = typeof(ShaderModule);
             _shaderModuleField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>
             {
-                if (e.newValue != null)
-                    serializedData = ((ShaderModule)e.newValue).AdditionalSerializedData;
-                else
-                    serializedData = null;
+                serializedData = e.newValue != null ? ((ShaderModule)e.newValue).AdditionalSerializedData : null;
 
                 if (_modularShaderField.value != null)
                     _modularShaderField.SetValueWithoutNotify(null);
 
-                currentSelectorUsed = true;
+                _currentSelectorUsed = true;
                 OpenData(serializedData, e.newValue);
             });
 
-            _sectionsList = new ObjectInspectorList<SectionUIElement.Template, SectionUI>("Sections", SectionUIElement.ElementTemplate);
+            _sectionsList = new ObjectInspectorList<SectionUI>("Sections", SectionUIElement.ElementTemplate);
             _sectionsList.SetEnabled(false);
             var topElement = new VisualElement();
-
             topElement.style.flexDirection = FlexDirection.Row;
             topElement.style.minHeight = 20;
 
@@ -112,33 +104,25 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void SaveData()
         {
-            if (!currentSelectorUsed && _modularShaderField.value != null)
+            if (!_currentSelectorUsed && _modularShaderField.value != null)
             {
                 SerializedUIData data = new SerializedUIData();
                 data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
                 foreach (var reference in unityObjectReferences)
-                {
-                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _))
-                        data.unityGUIDReferences.Add(guid);
-                    else
-                        data.unityGUIDReferences.Add("");
-                }
+                    data.unityGUIDReferences.Add(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _) ? guid : "");
+                
                 ((ModularShader)_modularShaderField.value).AdditionalSerializedData = JsonUtility.ToJson(data);
                 EditorUtility.SetDirty(_modularShaderField.value);
                 AssetDatabase.SaveAssets();
             }
 
-            if (currentSelectorUsed && _shaderModuleField.value != null)
+            if (_currentSelectorUsed && _shaderModuleField.value != null)
             {
                 SerializedUIData data = new SerializedUIData();
                 data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
                 foreach (var reference in unityObjectReferences)
-                {
-                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _))
-                        data.unityGUIDReferences.Add(guid);
-                    else
-                        data.unityGUIDReferences.Add("");
-                }
+                    data.unityGUIDReferences.Add(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _) ? guid : "");
+                
                 ((ShaderModule)_shaderModuleField.value).AdditionalSerializedData = JsonUtility.ToJson(data);
                 EditorUtility.SetDirty(_modularShaderField.value);
                 AssetDatabase.SaveAssets();
@@ -171,14 +155,14 @@ namespace VRLabs.ToonyStandardRebuild
                 _ui = SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
             }
 
-            if (!currentSelectorUsed && newValue != null)
+            if (!_currentSelectorUsed && newValue != null)
             {
                 _ui.Name = newValue.name;
                 enableSectionList = true;
                 _sectionsList.Items = _ui.Sections;
             }
 
-            if (currentSelectorUsed && newValue != null)
+            if (_currentSelectorUsed && newValue != null)
             {
                 _ui.Name = newValue.name;
                 enableSectionList = true;

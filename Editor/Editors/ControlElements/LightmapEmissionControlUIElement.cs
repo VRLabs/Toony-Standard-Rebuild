@@ -1,16 +1,15 @@
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 using System.Collections.Generic;
 
 namespace VRLabs.ToonyStandardRebuild
 {
     public class LightmapEmissionControlUIElement : VisualElement
     {
-        public LightmapEmissionControlUIElement(List<object> Parameters)
+        public LightmapEmissionControlUIElement(List<object> parameters)
         {
-            if (Parameters.Count != 0)
+            if (parameters.Count != 0)
             {
-                Parameters.Clear();
+                parameters.Clear();
             }
         }
     }

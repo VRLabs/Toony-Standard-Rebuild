@@ -1,9 +1,5 @@
-using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
-using System.Reflection;
-using System;
 
 namespace VRLabs.ToonyStandardRebuild
 {

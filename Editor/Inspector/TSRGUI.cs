@@ -156,15 +156,15 @@ namespace VRLabs.ToonyStandardRebuild
             LoadModuleLocalization(loadedControls, modulePath);
         }
 
-        private static ModuleUI LoadSerializedData(string serialziedData)
+        private static ModuleUI LoadSerializedData(string serializedData)
         {
-            if (string.IsNullOrWhiteSpace(serialziedData))
+            if (string.IsNullOrWhiteSpace(serializedData))
             {
                 return new ModuleUI();
             }
             else
             {
-                var data = JsonUtility.FromJson<SerializedUIData>(serialziedData);
+                var data = JsonUtility.FromJson<SerializedUIData>(serializedData);
                 List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
                 foreach (var guid in data.unityGUIDReferences)
                 {
@@ -498,7 +498,7 @@ namespace VRLabs.ToonyStandardRebuild
         {
             List<T> assets = new List<T>();
             AssetDatabase.Refresh();
-            string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T).ToString().Replace("UnityEngine.", "")));
+            string[] guids = AssetDatabase.FindAssets($"t:{typeof(T).ToString().Replace("UnityEngine.", "")}");
             for (int i = 0; i < guids.Length; i++)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);

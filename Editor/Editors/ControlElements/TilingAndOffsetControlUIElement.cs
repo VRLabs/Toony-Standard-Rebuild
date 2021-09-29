@@ -1,31 +1,29 @@
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
 using System.Collections.Generic;
 
 namespace VRLabs.ToonyStandardRebuild
 {
     public class TilingAndOffsetControlUIElement : VisualElement
     {
-        private TextField _textureNameField;
-        public TilingAndOffsetControlUIElement(List<object> Parameters)
+        public TilingAndOffsetControlUIElement(List<object> parameters)
         {
-            _textureNameField = new TextField("Texture name");
+            var textureNameField = new TextField("Texture name");
 
-            if (Parameters.Count != 1)
+            if (parameters.Count != 1)
             {
-                Parameters.Clear();
-                Parameters.Add("");
+                parameters.Clear();
+                parameters.Add("");
             }
             else
             {
-                if (!(Parameters[0] is string))
-                    Parameters[0] = "";
+                if (!(parameters[0] is string))
+                    parameters[0] = "";
             }
 
-            _textureNameField.SetValueWithoutNotify((string)Parameters[0]);
-            _textureNameField.RegisterValueChangedCallback(e => Parameters[0] = e.newValue);
+            textureNameField.SetValueWithoutNotify((string)parameters[0]);
+            textureNameField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
 
-            Add(_textureNameField);
+            Add(textureNameField);
         }
     }
 }

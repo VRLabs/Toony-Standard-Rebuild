@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace VRLabs.ToonyStandardRebuild
 {
-    public interface IVisualElementTemplate<T>
+    public interface IVisualElementTemplate<in T>
     {
         VisualElement CreateVisualElementForObject(T obj);
     }
     // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
-    public class ObjectInspectorList<TElement, TValue> : VisualElement where TElement : IVisualElementTemplate<TValue> where TValue : new()
+    public class ObjectInspectorList<TValue> : VisualElement where TValue : new()
     {
         Foldout _listContainer;
         Button _addButton;
@@ -27,7 +25,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        private bool _showElementsButtons;
+        private bool _showElementsButtons = false;
 
 
         public ObjectInspectorList(string label, IVisualElementTemplate<TValue> template)
@@ -98,20 +96,14 @@ namespace VRLabs.ToonyStandardRebuild
         public void MoveUpItem(int index)
         {
             if (_items != null && index > 0)
-            {
                 (_items[index - 1], _items[index]) = (_items[index], _items[index - 1]);
-                //_items.serializedObject.ApplyModifiedProperties();
-            }
             UpdateList();
         }
 
         public void MoveDownItem(int index)
         {
             if (_items != null && index < _items.Count - 1)
-            {
                 (_items[index + 1], _items[index]) = (_items[index], _items[index + 1]);
-                //_items.serializedObject.ApplyModifiedProperties();
-            }
             UpdateList();
         }
 
