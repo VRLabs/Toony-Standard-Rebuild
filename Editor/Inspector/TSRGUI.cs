@@ -14,6 +14,19 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public class TSRGUI : ShaderGUI, ISimpleShaderInspector
     {
+        private class ShaderPropertyDefaults
+        {
+            public List<ShaderProperty<float>> Floats;
+            public List<ShaderProperty<Color>> Colors;
+            public List<ShaderProperty<Texture>> Textures;
+
+            public ShaderPropertyDefaults()
+            {
+                Floats = new List<ShaderProperty<float>>();
+                Colors = new List<ShaderProperty<Color>>();
+                Textures = new List<ShaderProperty<Texture>>();
+            }
+        }
         // Array containing all found languages for a specific GUI.
         private string[] _languages;
         // String containing the selected language.
@@ -42,7 +55,10 @@ namespace VRLabs.ToonyStandardRebuild
         private Texture2D _logo = (Texture2D)Resources.Load("TSR/Logo");
         private List<string> _startupErrors;
         private Dictionary<string, List<SimpleControl>> _controlsByModule;
+        private Dictionary<OrderedSection, ShaderPropertyDefaults> _sectionDefaults;
         private OrderedSectionGroup _mainOrderedSection;
+        private string _mainSectionLocalizationModulePath;
+        
         private MaterialProperty[] _props;
         private MaterialEditor _materialEditor;
         private GUIStyle _aboutLabelStyle;
@@ -71,6 +87,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _startupErrors = new List<string>();
                 Controls = new List<SimpleControl>();
                 _controlsByModule = new Dictionary<string, List<SimpleControl>>();
+                _sectionDefaults = new Dictionary<OrderedSection, ShaderPropertyDefaults>();
                 Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
                 Shader = Materials[0].shader;
                 ModularShader = FindAssetsByType<ModularShader>().FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
@@ -83,7 +100,11 @@ namespace VRLabs.ToonyStandardRebuild
                     Start();
                     Controls.SetInspector(this);
                     _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
-                    Controls.FetchProperties(properties);
+                    Controls.FetchProperties(properties, out List<string> missingProperties);
+                    foreach (string missingProperty in missingProperties)
+                    {
+                        _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
+                    }
                     //StartChecks(materialEditor);
                 }
                 _isFirstLoop = false;
@@ -108,6 +129,17 @@ namespace VRLabs.ToonyStandardRebuild
                 DrawGUI(materialEditor, properties);
                 if (ContainsNonAnimatableProperties)
                     SSIHelper.UpdateNonAnimatableProperties(_nonAnimatablePropertyControls, materialEditor, NeedsNonAnimatableUpdate);
+
+                foreach (OrderedSection section in _mainOrderedSection.Controls)
+                {
+                    if (!section.HasActivatePropertyUpdated || section.Enabled) continue;
+                    foreach (var value in _sectionDefaults[section].Floats)
+                        Materials.SetFloat(value.PropertyName, value.Value);
+                    foreach (var value in _sectionDefaults[section].Colors)
+                        Materials.SetColor(value.PropertyName, value.Value);
+                    foreach (var value in _sectionDefaults[section].Textures)
+                        Materials.SetTexture(value.PropertyName, value.Value);
+                }
             }
 
             Footer();
@@ -117,10 +149,11 @@ namespace VRLabs.ToonyStandardRebuild
         private void Start()
         {
             _mainOrderedSection = this.AddOrderedSectionGroup("MainGroup");
-
             string modularShaderPath = AssetDatabase.GetAssetPath(ModularShader);
 
             LoadLocalizationSettings(modularShaderPath);
+            
+            _mainSectionLocalizationModulePath = modularShaderPath;
 
             if (File.Exists(modularShaderPath))
                 LoadUIModule(ModularShader, modularShaderPath);
@@ -145,6 +178,7 @@ namespace VRLabs.ToonyStandardRebuild
             ModuleUI module = LoadSerializedData(modularShader.AdditionalSerializedData);
             List<SimpleControl> loadedControls = LoadControls(module);
             _controlsByModule.Add(modulePath, loadedControls);
+            LoadMainOrderedSectionLocalization();
             LoadModuleLocalization(loadedControls, modulePath);
         }
 
@@ -200,18 +234,24 @@ namespace VRLabs.ToonyStandardRebuild
                         try
                         {
                             FindProperty(moduleSection.ActivatePropertyName, _props);
-                            section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName).Alias(moduleSection.SectionName);
+                            section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName, moduleSection.EnableValue).Alias(moduleSection.SectionName);
                             loadedControls.Add(section);
+                            _sectionDefaults.Add(section, new ShaderPropertyDefaults());
                         }
                         catch (ArgumentException)
                         {
                             _startupErrors.Add($"Module {module.Name}: section \"{moduleSection.SectionName}\" declares a non existent property \"{moduleSection.ActivatePropertyName}\"");
+                            continue;
                         }
                     }
                 }
 
                 foreach (var sectionControl in moduleSection.Controls)
                     LoadControl(section, sectionControl, loadedControls);
+                
+                _sectionDefaults[section].Floats.AddRange(moduleSection.FloatProperties);
+                _sectionDefaults[section].Colors.AddRange(moduleSection.ColorProperties);
+                _sectionDefaults[section].Textures.AddRange(moduleSection.TextureProperties);
             }
 
             return loadedControls;
@@ -442,6 +482,17 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }
+        
+        private void LoadMainOrderedSectionLocalization()
+        {
+            string localizationPath = $"{Path.GetDirectoryName(_mainSectionLocalizationModulePath)}/Localization";
+            if (!Directory.Exists(localizationPath))
+                Directory.CreateDirectory(localizationPath);
+            if (File.Exists($"{localizationPath}/{_selectedLanguage}.json"))
+                _mainOrderedSection.ApplyLocalization($"{localizationPath}/{_selectedLanguage}.json", true);
+            else
+                _mainOrderedSection.ApplyLocalization($"{localizationPath}/English.json", true);
+        }
 
         private void LoadModuleLocalization(List<SimpleControl> loadedControls, string modulePath)
         {
@@ -449,7 +500,7 @@ namespace VRLabs.ToonyStandardRebuild
             if (!Directory.Exists(localizationPath))
                 Directory.CreateDirectory(localizationPath);
             if (File.Exists($"{localizationPath}/{_selectedLanguage}.json"))
-                loadedControls.ApplyLocalization($"{localizationPath}/{_selectedLanguage}.json");
+                loadedControls.ApplyLocalization($"{localizationPath}/{_selectedLanguage}.json", true);
             else
                 loadedControls.ApplyLocalization($"{localizationPath}/English.json", true);
         }
@@ -467,7 +518,7 @@ namespace VRLabs.ToonyStandardRebuild
                     Directory.CreateDirectory(_settingsPath);
             }
 
-            // Get Settings (or create if file is missing.  
+            // Get Settings (or create if file is missing).  
             string settingsPath = $"{_settingsPath}/{Path.GetFileNameWithoutExtension(baseModularShaderPath)}.json";
             if (File.Exists(settingsPath))
             {

@@ -26,15 +26,26 @@ namespace VRLabs.ToonyStandardRebuild
         }
 
         private bool _showElementsButtons = false;
+        
+        public InspectorListItem<TValue> draggedElement { get; set; }
+        public bool _highlightDrops;
+
+        private List<VisualElement> _drops;
+
+        private VisualElement _currentDrop;
 
 
         public ObjectInspectorList(string label, IVisualElementTemplate<TValue> template)
         {
+            _drops = new List<VisualElement>();
             _template = template;
             _listContainer = new Foldout();
             _listContainer.text = label;
             _listContainer.contentContainer.AddToClassList("inspector-list-container");
             _listContainer.value = true;
+            _listContainer.RegisterCallback<MouseUpEvent>(e => Drop());
+            _listContainer.RegisterCallback<MouseLeaveEvent>(e => Drop());
+            
             _addButton = new Button(AddItem);
             _addButton.text = "Add";
             _addButton.AddToClassList("inspector-list-add-button");
@@ -45,47 +56,93 @@ namespace VRLabs.ToonyStandardRebuild
             styleSheets.Add(styleSheet);
         }
 
-        // Get the reference to the bound serialized object.
-        /*public override void HandleEvent(EventBase evt)
+        private void Drop()
         {
-            var type = evt.GetType(); //SerializedObjectBindEvent is internal, so need to use reflection here
-            if ((type.Name == "SerializedPropertyBindEvent") && !string.IsNullOrWhiteSpace(bindingPath))
+            if (draggedElement == null) return;
+            draggedElement.RemoveFromClassList("inspector-list-drag-enabled");
+
+            if (_highlightDrops)
             {
-                var obj = type.GetProperty("bindProperty")?.GetValue(evt) as SerializedProperty;
-                _array = obj;
-                if (obj != null)
+                DeHighlightDrops();
+                int dropIndex = _drops.IndexOf(_currentDrop);
+
+                if (dropIndex == -1)
                 {
-                    if (_hasFoldingBeenForced) obj.isExpanded = _listContainer.value;
-                    else _listContainer.value = obj.isExpanded;
+                    draggedElement = null;
+                    return;
                 }
-                // Updating it twice here doesn't cause an issue.
+
+                if (dropIndex > draggedElement.index) dropIndex--;
+                TValue item = _items[draggedElement.index];
+                _items.RemoveAt(draggedElement.index);
+                _items.Insert(dropIndex, item);
                 UpdateList();
             }
-            base.HandleEvent(evt);
-        }*/
+            draggedElement = null;
+        }
+        
+        public void HighlightDrops()
+        {
+            foreach (var item in _drops)
+                item.AddToClassList("inspector-list-drop-area-highlight");
+
+            _highlightDrops = true;
+        }
+
+        public void DeHighlightDrops()
+        {
+            foreach (var item in _drops)
+                item.RemoveFromClassList("inspector-list-drop-area-highlight");
+
+            _highlightDrops = false;
+        }
 
         // Refresh/recreate the list.
         public void UpdateList()
         {
             _listContainer.Clear();
+            _drops.Clear();
 
             if (_items != null)
             {
+                CreateDrop();
                 for (int i = 0; i < _items.Count; i++)
                 {
                     int index = i;
                     var element = _template.CreateVisualElementForObject(_items[i]);
-                    var item = new InspectorListItem(element, _items.Count, index, _showElementsButtons);
+                    var item = new InspectorListItem<TValue>(this, element, _items.Count, index, _showElementsButtons);
                     item.removeButton.RegisterCallback<PointerUpEvent>((_) => RemoveItem(index));
                     item.upButton.RegisterCallback<PointerUpEvent>((_) => MoveUpItem(index));
                     item.downButton.RegisterCallback<PointerUpEvent>((_) => MoveDownItem(index));
                     _listContainer.Add(item);
+                    CreateDrop();
                 }
             }
             if (enabledSelf)
                 _listContainer.Add(_addButton);
         }
 
+        private void CreateDrop()
+        {
+            VisualElement dropArea = new VisualElement();
+            dropArea.AddToClassList("inspector-list-drop-area");
+            dropArea.RegisterCallback<MouseEnterEvent>(e =>
+            {
+                if (!_highlightDrops) return;
+                dropArea.AddToClassList("inspector-list-drop-area-selected");
+                _currentDrop = dropArea;
+            });
+            dropArea.RegisterCallback<MouseLeaveEvent>(e =>
+            {
+                if (!_highlightDrops) return;
+                dropArea.RemoveFromClassList("inspector-list-drop-area-selected");
+                if (_currentDrop == dropArea) _currentDrop = null;
+            });
+
+            _listContainer.Add(dropArea);
+            _drops.Add(dropArea);
+        }
+        
         // Remove an item and refresh the list
         public void RemoveItem(int index)
         {
@@ -117,14 +174,40 @@ namespace VRLabs.ToonyStandardRebuild
         }
     }
 
-    public class InspectorListItem : VisualElement
+    public class InspectorListItem<T> : VisualElement where T : new()
     {
         public Button removeButton;
         public Button upButton;
         public Button downButton;
-        public InspectorListItem(VisualElement element, int listSize, int index, bool showButtonsText)
+        
+        public VisualElement dragArea;
+        
+        public int index;
+
+        private ObjectInspectorList<T> _list;
+        public InspectorListItem(ObjectInspectorList<T> list, VisualElement element, int listSize, int index, bool showButtonsText)
         {
+            this.index = index;
+            _list = list;
             AddToClassList("inspector-list-item-container");
+            
+            dragArea = new VisualElement();
+            dragArea.AddToClassList("inspector-list-drag-handle");
+            
+            dragArea.RegisterCallback<MouseDownEvent>(e =>
+            {
+                if (_list.draggedElement == this)
+                {
+                    e.StopImmediatePropagation();
+                    return;
+                }
+                else
+                {
+                    _list.draggedElement = this;
+                    _list.HighlightDrops();
+                    this.AddToClassList("inspector-list-drag-enabled");
+                }
+            });
 
             VisualElement buttonsArea = new VisualElement();
 
@@ -169,6 +252,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
             element.AddToClassList("inspector-list-item");
 
+            Add(dragArea);
             Add(element);
             Add(buttonsArea);
 

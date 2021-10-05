@@ -32,6 +32,43 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                     con.GetControlList().FetchProperties(properties);
             }
         }
+        
+        /// <summary>
+        /// Fetches properties for all the given controls.
+        /// </summary>
+        /// <param name="controls">Controls needing to fetch properties.</param>
+        /// <param name="properties">Property array to fetch properties from.</param>
+        /// <param name="missingProperties">(Out) Properties defined in the inspector that are missing in the shader</param>
+        public static void FetchProperties(this IEnumerable<SimpleControl> controls, MaterialProperty[] properties, out List<string> missingProperties)
+        {
+            var errs = new List<string>();
+            foreach (var control in controls)
+            {
+                if (control is PropertyControl pr)
+                {
+                    pr.FetchProperty(properties);
+                    if(pr.Property == null && !pr.PropertyName.Equals("SSI_UNUSED_PROP"))
+                        errs.Add(pr.PropertyName);
+                }
+
+                if (control is IAdditionalProperties add)
+                {
+                    foreach (var t in add.AdditionalProperties)
+                    {
+                        t.FetchProperty(properties);
+                        if(t.Property == null)
+                            errs.Add(t.PropertyName);
+                    }
+                }
+
+                if (control is IControlContainer con)
+                {
+                    con.GetControlList().FetchProperties(properties, out List<string> ms);
+                    errs.AddRange(ms);
+                }
+            }
+            missingProperties = errs;
+        }
 
         /// <summary>
         /// Set the inspector of each control of the list.
@@ -58,6 +95,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
         /// <returns>The material property with the wanted name.</returns>
         internal static int FindPropertyIndex(string propertyName, MaterialProperty[] properties, bool propertyIsMandatory = false)
         {
+            if (!string.IsNullOrWhiteSpace(propertyName) && propertyName.Equals("SSI_UNUSED_PROP")) return -1;
+            
             for (int i = 0; i < properties.Length; i++)
                 if (properties[i] != null && properties[i].name == propertyName)
                     return i;

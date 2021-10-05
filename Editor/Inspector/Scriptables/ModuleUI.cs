@@ -22,16 +22,33 @@ namespace VRLabs.ToonyStandardRebuild
     {
         public string SectionName;
         public string ActivatePropertyName;
-        public float ActivateValue;
+        public float EnableValue;
+        public float DisableValue;
         public List<ControlUI> Controls;
+        
+        public List<ShaderProperty<float>> FloatProperties;
+        public List<ShaderProperty<Color>> ColorProperties;
+        public List<ShaderProperty<Texture>> TextureProperties;
 
         public SectionUI()
         {
             SectionName = "";
             ActivatePropertyName = "";
-            ActivateValue = 0;
+            EnableValue = 1;
+            DisableValue = 0;
             Controls = new List<ControlUI>();
+            FloatProperties = new List<ShaderProperty<float>>();
+            ColorProperties = new List<ShaderProperty<Color>>();
+            TextureProperties = new List<ShaderProperty<Texture>>();
         }
+
+        
+    }
+
+    public class ShaderProperty<T>
+    {
+        public string PropertyName;
+        public T Value;
     }
 
     public class ControlUI

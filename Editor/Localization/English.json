@@ -3,7 +3,27 @@
         {
             "Name": "Stencil Options",
             "DisplayName": "Stencil Options",
-            "Tooltip": ""
+            "Tooltip": "Stencil related options for the material"
+        },
+        {
+            "Name": "Stencil ID",
+            "DisplayName": "Stencil ID (0-255)",
+            "Tooltip": "ID for the stencil operation"
+        },
+        {
+            "Name": "Stencil comparison",
+            "DisplayName": "Stencil comparison",
+            "Tooltip": "Type of comparison done"
+        },
+        {
+            "Name": "Stencil operation",
+            "DisplayName": "Stencil operation",
+            "Tooltip": "Operation done in case the stencil comparison returns true"
+        },
+        {
+            "Name": "MainGroup",
+            "DisplayName": "Add",
+            "Tooltip": "Add a section of options"
         }
     ]
 }
