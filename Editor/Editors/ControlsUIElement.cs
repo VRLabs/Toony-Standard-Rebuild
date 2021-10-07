@@ -100,7 +100,9 @@ namespace VRLabs.ToonyStandardRebuild
                 case ControlType.LightmapEmissionControl:
                     _specificControlUI = new LightmapEmissionControlUIElement(obj.Parameters);
                     break;
-                case ControlType.EnumControl:
+                case ControlType.ListSelectorControl:
+                    _specificControlUI = new ListSelectorControlUIElement(obj.Parameters);
+                    break;
                 case ControlType.VertexStreamsControl:
                 default:
                     _specificControlUI = new VisualElement();

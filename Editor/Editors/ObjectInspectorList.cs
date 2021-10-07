@@ -11,6 +11,12 @@ namespace VRLabs.ToonyStandardRebuild
     // Shamelessly taken from here: https://forum.unity.com/threads/custom-bindableelement.989693/    
     public class ObjectInspectorList<TValue> : VisualElement where TValue : new()
     {
+        public bool IsFoldoutOpen
+        {
+            get => _listContainer.value;
+            set => _listContainer.value = value;
+        }
+        
         Foldout _listContainer;
         Button _addButton;
         private IVisualElementTemplate<TValue> _template;

@@ -1,6 +1,21 @@
 {
     "Properties": [
         {
+            "Name": "Blend Mode",
+            "DisplayName": "Blend Mode",
+            "Tooltip": "Blend state \n\nOpaque: Opaque object \n\nCutout: Opaque object with cutout parts decided by the alpha channel of the main texture\n\nFade: Transparent object that does completely fade out at 0 opacity \n\nTransparent: Transparent object that is still visible at 0 opacity due to the fresnel effect, more realistic than fade \n\nDither: uses a dithering pattern to simulate transparent objects"
+        },
+        {
+            "Name": "Cull Mode",
+            "DisplayName": "Cull Mode",
+            "Tooltip": "Controls which face of the mesh is rendered \n\nOff: Double sided \n\nFront: Single sided (internal parts showing) \n\nBack: Single sided"
+        },
+        {
+            "Name": "Main",
+            "DisplayName": "Main",
+            "Tooltip": "Main settings of the shader"
+        },
+        {
             "Name": "Stencil Options",
             "DisplayName": "Stencil Options",
             "Tooltip": "Stencil related options for the material"

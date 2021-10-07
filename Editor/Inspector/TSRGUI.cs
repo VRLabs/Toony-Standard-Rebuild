@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -9,24 +10,13 @@ using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.OdinSerializer;
 using System.Text;
+using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
+using Debug = UnityEngine.Debug;
 
 namespace VRLabs.ToonyStandardRebuild
 {
     public class TSRGUI : ShaderGUI, ISimpleShaderInspector
     {
-        private class ShaderPropertyDefaults
-        {
-            public List<ShaderProperty<float>> Floats;
-            public List<ShaderProperty<Color>> Colors;
-            public List<ShaderProperty<Texture>> Textures;
-
-            public ShaderPropertyDefaults()
-            {
-                Floats = new List<ShaderProperty<float>>();
-                Colors = new List<ShaderProperty<Color>>();
-                Textures = new List<ShaderProperty<Texture>>();
-            }
-        }
         // Array containing all found languages for a specific GUI.
         private string[] _languages;
         // String containing the selected language.
@@ -55,8 +45,9 @@ namespace VRLabs.ToonyStandardRebuild
         private Texture2D _logo = (Texture2D)Resources.Load("TSR/Logo");
         private List<string> _startupErrors;
         private Dictionary<string, List<SimpleControl>> _controlsByModule;
-        private Dictionary<OrderedSection, ShaderPropertyDefaults> _sectionDefaults;
+        private Dictionary<OrderedSection, UpdateData> _sectionDefaults;
         private OrderedSectionGroup _mainOrderedSection;
+        private ControlContainer _staticSections;
         private string _mainSectionLocalizationModulePath;
         
         private MaterialProperty[] _props;
@@ -70,12 +61,16 @@ namespace VRLabs.ToonyStandardRebuild
         private static Vector2 _firstSettingsViewPosition;
         private static Vector2 _secondSettingsViewPosition;
 
+        private static List<ModularShader> _loadedShaders;
+
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
         {
             _props = properties;
             _materialEditor = materialEditor;
             if (_isFirstLoop)
             {
+                //Stopwatch watch = new Stopwatch();
+                //watch.Start();
                 DefaultBgColor = GUI.backgroundColor;
 
                 _aboutLabelStyle = new GUIStyle(EditorStyles.miniLabel);
@@ -87,17 +82,36 @@ namespace VRLabs.ToonyStandardRebuild
                 _startupErrors = new List<string>();
                 Controls = new List<SimpleControl>();
                 _controlsByModule = new Dictionary<string, List<SimpleControl>>();
-                _sectionDefaults = new Dictionary<OrderedSection, ShaderPropertyDefaults>();
+                _sectionDefaults = new Dictionary<OrderedSection, UpdateData>();
                 Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
                 Shader = Materials[0].shader;
-                ModularShader = FindAssetsByType<ModularShader>().FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
+                /*watch.Stop();
+                Debug.Log($"Time spent for initial bs: {watch.ElapsedTicks} ticks");
+                watch.Restart();*/
+                ModularShader first = null;
+                int attempts = 0;
+                if (_loadedShaders == null) _loadedShaders = FindAssetsByType<ModularShader>().ToList();
+                while (first == null && attempts < 2)
+                {
+                    attempts++;
+                    first = _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
+
+                }
+                
+                ModularShader = first;
+                /*watch.Stop();
+                Debug.Log($"Time spent finding the modular shader: {watch.ElapsedTicks} ticks");*/
                 if (ModularShader == null)
                 {
                     _startupErrors.Add("The modular shader asset has not been found for this shader, this inspector works only on Toony Standard RE:Build generated shaders");
                 }
                 else
                 {
+                    //watch.Restart();
                     Start();
+                    /*watch.Stop();
+                    Debug.Log($"Time spent on start function: {watch.ElapsedTicks} ticks");
+                    watch.Restart();*/
                     Controls.SetInspector(this);
                     _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
                     Controls.FetchProperties(properties, out List<string> missingProperties);
@@ -105,7 +119,8 @@ namespace VRLabs.ToonyStandardRebuild
                     {
                         _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
                     }
-                    //StartChecks(materialEditor);
+                    /*watch.Stop();
+                    Debug.Log($"Time spent on loading properties of SSI controls: {watch.ElapsedTicks} ticks");*/
                 }
                 _isFirstLoop = false;
             }
@@ -133,12 +148,7 @@ namespace VRLabs.ToonyStandardRebuild
                 foreach (OrderedSection section in _mainOrderedSection.Controls)
                 {
                     if (!section.HasActivatePropertyUpdated || section.Enabled) continue;
-                    foreach (var value in _sectionDefaults[section].Floats)
-                        Materials.SetFloat(value.PropertyName, value.Value);
-                    foreach (var value in _sectionDefaults[section].Colors)
-                        Materials.SetColor(value.PropertyName, value.Value);
-                    foreach (var value in _sectionDefaults[section].Textures)
-                        Materials.SetTexture(value.PropertyName, value.Value);
+                    _sectionDefaults[section].UpdateMaterials(Materials);
                 }
             }
 
@@ -148,6 +158,7 @@ namespace VRLabs.ToonyStandardRebuild
         // Contains the ui loading system for shader and modules
         private void Start()
         {
+            _staticSections = this.AddControlContainer();
             _mainOrderedSection = this.AddOrderedSectionGroup("MainGroup");
             string modularShaderPath = AssetDatabase.GetAssetPath(ModularShader);
 
@@ -221,37 +232,54 @@ namespace VRLabs.ToonyStandardRebuild
             var loadedControls = new List<SimpleControl>();
             foreach (var moduleSection in module.Sections)
             {
-                var section = _mainOrderedSection.Controls.FirstOrDefault(x => x.ControlAlias.Equals(moduleSection.SectionName));
-                if (section == null)
+                if (moduleSection.IsPermanent)
                 {
-                    if (string.IsNullOrEmpty(moduleSection.ActivatePropertyName))
+                    var section = (Section)_staticSections.Controls.FirstOrDefault(x => x.ControlAlias.Equals(moduleSection.SectionName));
+                    if (section == null)
                     {
-                        _startupErrors.Add($"Module {module.Name}: section \"{moduleSection.SectionName}\" does not declare a property to use and " +
-                            "it's the first module declaring this section. All modules that declare a section first need to declare a property to define when to activate it");
+                        section = _staticSections.AddSection().Alias(moduleSection.SectionName);
+                        loadedControls.Add(section);
                     }
-                    else
-                    {
-                        try
-                        {
-                            FindProperty(moduleSection.ActivatePropertyName, _props);
-                            section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName, moduleSection.EnableValue).Alias(moduleSection.SectionName);
-                            loadedControls.Add(section);
-                            _sectionDefaults.Add(section, new ShaderPropertyDefaults());
-                        }
-                        catch (ArgumentException)
-                        {
-                            _startupErrors.Add($"Module {module.Name}: section \"{moduleSection.SectionName}\" declares a non existent property \"{moduleSection.ActivatePropertyName}\"");
-                            continue;
-                        }
-                    }
-                }
 
-                foreach (var sectionControl in moduleSection.Controls)
-                    LoadControl(section, sectionControl, loadedControls);
-                
-                _sectionDefaults[section].Floats.AddRange(moduleSection.FloatProperties);
-                _sectionDefaults[section].Colors.AddRange(moduleSection.ColorProperties);
-                _sectionDefaults[section].Textures.AddRange(moduleSection.TextureProperties);
+                    foreach (var sectionControl in moduleSection.Controls)
+                        LoadControl(section, sectionControl, loadedControls);
+                }
+                else
+                {
+                    var section = _mainOrderedSection.Controls.FirstOrDefault(x => x.ControlAlias.Equals(moduleSection.SectionName));
+                    if (section == null)
+                    {
+                        if (string.IsNullOrEmpty(moduleSection.ActivatePropertyName))
+                        {
+                            _startupErrors.Add($"Module {module.Name}: section \"{moduleSection.SectionName}\" does not declare a property to use and " +
+                                "it's the first module declaring this section. All modules that declare a section first need to declare a property to define when to activate it");
+                        }
+                        else
+                        {
+                            try
+                            {
+                                FindProperty(moduleSection.ActivatePropertyName, _props);
+                                section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName, moduleSection.EnableValue).Alias(moduleSection.SectionName);
+                                loadedControls.Add(section);
+                                _sectionDefaults.Add(section, new UpdateData());
+                            }
+                            catch (ArgumentException)
+                            {
+                                _startupErrors.Add($"Module {module.Name}: section \"{moduleSection.SectionName}\" declares a non existent property \"{moduleSection.ActivatePropertyName}\"");
+                                continue;
+                            }
+                        }
+                    }
+
+                    foreach (var sectionControl in moduleSection.Controls)
+                        LoadControl(section, sectionControl, loadedControls);
+                    
+                    _sectionDefaults[section].FloatProperties.AddRange(moduleSection.OnSectionDisableData.FloatProperties);
+                    _sectionDefaults[section].ColorProperties.AddRange(moduleSection.OnSectionDisableData.ColorProperties);
+                    _sectionDefaults[section].TextureProperties.AddRange(moduleSection.OnSectionDisableData.TextureProperties);
+                    _sectionDefaults[section].Keywords.AddRange(moduleSection.OnSectionDisableData.Keywords);
+                    _sectionDefaults[section].OverrideTags.AddRange(moduleSection.OnSectionDisableData.OverrideTags);
+                }
             }
 
             return loadedControls;
@@ -478,7 +506,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Toony Standard Restitched test1", _aboutLabelStyle, GUILayout.Height(26));
+            GUILayout.Label("Toony Standard RE:Build test1", _aboutLabelStyle, GUILayout.Height(26));
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }
