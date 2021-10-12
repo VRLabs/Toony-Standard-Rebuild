@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VertFragData
   Name: Vertex and fragment data
-  Version: 0.1
+  Version: 1.0
   Author: VRLabs
-  Description: 
+  Description: Base structures for the vertex and fragment functions
   RequiredIncludes: []
   Enabled:
     Name: 
@@ -42,3 +42,4 @@ MonoBehaviour:
     NeedsVariant: 0
     TemplateKeywords: []
   Functions: []
+  AdditionalSerializedData: 

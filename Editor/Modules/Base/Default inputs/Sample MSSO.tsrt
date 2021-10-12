@@ -1,0 +1,5 @@
+void SampleMSSO()
+{
+    Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TRANSFORM_TEX(FragData.uv, _MSSO));
+	Occlusion = lerp(1,Msso.a, _Occlusion);	
+}

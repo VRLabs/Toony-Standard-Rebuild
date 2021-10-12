@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: BaseData
   Name: Base Data
-  Version: 0.1
+  Version: 1.0
   Author: VRLabs
+  Description: Base Data given by the shader in the fragment pass
   RequiredIncludes: []
   Enabled:
     Name: 
@@ -40,22 +41,30 @@ MonoBehaviour:
     ShaderFunctionCode: {fileID: -544282384758852595, guid: fc2a71a56ac739640938c4dee36612f4,
       type: 3}
     UsedVariables:
-    - Name: Normals
-      Type: float3
+    - Name: NormalMap
+      Type: 6
+      CustomType: 
     - Name: NormalDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: LightDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: ViewDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: TangentDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: BitangentDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: HalfDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: ReflectDir
-      Type: float3
+      Type: 6
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   - Name: GetLightData
@@ -65,27 +74,38 @@ MonoBehaviour:
       type: 3}
     UsedVariables:
     - Name: LightAttenuation
-      Type: float
+      Type: 4
+      CustomType: 
     - Name: Lightmap
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: LightmapDirection
-      Type: float4
+      Type: 7
+      CustomType: 
     - Name: DynamicLightmap
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: DynamicLightmapDirection
-      Type: float4
+      Type: 7
+      CustomType: 
     - Name: SpecLightColor
-      Type: float4
+      Type: 7
+      CustomType: 
     - Name: LightColor
-      Type: float4
+      Type: 7
+      CustomType: 
     - Name: LightDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: IndirectDiffuse
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: NormalDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: _DirectLightMode
-      Type: float
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   - Name: GetDotProducts
@@ -95,22 +115,32 @@ MonoBehaviour:
       type: 3}
     UsedVariables:
     - Name: NormalDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: LightDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: ViewDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: HalfDir
-      Type: float3
+      Type: 6
+      CustomType: 
     - Name: UnmaxedNdotL
-      Type: float
+      Type: 4
+      CustomType: 
     - Name: NdotL
-      Type: float
+      Type: 4
+      CustomType: 
     - Name: NdotV
-      Type: float
+      Type: 4
+      CustomType: 
     - Name: NdotH
-      Type: float
+      Type: 4
+      CustomType: 
     - Name: LdotH
-      Type: float
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
+  AdditionalSerializedData: 

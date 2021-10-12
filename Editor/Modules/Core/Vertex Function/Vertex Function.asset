@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VertexFunction
   Name: Vertex Function
-  Version: 0.1
+  Version: 1.0
   Author: VRLabs
-  Description: 
+  Description: Vertex function
   RequiredIncludes: []
   Enabled:
     Name: 
@@ -36,3 +36,4 @@ MonoBehaviour:
     NeedsVariant: 0
     TemplateKeywords: []
   Functions: []
+  AdditionalSerializedData: 

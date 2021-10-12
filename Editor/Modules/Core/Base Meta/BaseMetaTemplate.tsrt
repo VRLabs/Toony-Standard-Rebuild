@@ -1,0 +1,60 @@
+#include "UnityCG.cginc"
+#include "UnityStandardUtils.cginc"
+#include "UnityMetaPass.cginc"
+
+struct VertexData 
+{
+	float4 vertex : POSITION;
+	float2 uv : TEXCOORD0;
+	float2 uv1 : TEXCOORD1;
+	float2 uv2 : TEXCOORD2;
+};
+
+struct FragmentData 
+{
+	float4 pos : SV_POSITION;
+	float2 uv  : TEXCOORD0;
+	float2 uv1 : TEXCOORD1;
+	float2 uv2 : TEXCOORD2;
+	#K#META_FRAGMENT_DATA;
+};
+
+FragmentData FragData;
+float3 Albedo;
+float3 Emission;
+float3 Specular;
+float Roughness;
+#K#META_VARIABLES
+
+#K#META_CODE
+
+FragmentData  Vertex (VertexData v) 
+{
+	FragmentData  i;
+	i.pos = UnityMetaVertexPosition(v.vertex, v.uv1.xy, v.uv2.xy, unity_LightmapST, unity_DynamicLightmapST);
+	i.uv  = v.uv;
+	i.uv1 = v.uv1;
+	i.uv2 = v.uv2;
+	#K#META_VERTEX_FUNCTION
+	
+	return i;
+}
+
+float4 Fragment (FragmentData i) : SV_TARGET 
+{
+	FragData = i;
+	UnityMetaInput surfaceData;
+	UNITY_INITIALIZE_OUTPUT(UnityMetaInput, surfaceData);
+
+	Albedo = 0;
+	Emission = 0;
+	Specular = 0;
+	Roughness = 1;
+
+	#K#META_FRAGMENT_FUNCTION
+
+	surfaceData.Emission = Emission;
+	surfaceData.Albedo = Albedo + Specular * Roughness * Roughness;
+	surfaceData.SpecularColor = Specular;
+	return UnityMetaFragment(surfaceData);
+}

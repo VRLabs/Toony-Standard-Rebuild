@@ -109,9 +109,9 @@ namespace VRLabs.ToonyStandardRebuild
                     _parameters.Clear();
                     _parameters.Add(null);
                     _parameters.Add("");
-                    _parameters.Add(_textureNameField.text);
-                    _parameters.Add(_firstExtraField.text);
-                    _parameters.Add(_secondExtraField.text);
+                    _parameters.Add(_textureNameField.value);
+                    _parameters.Add(_firstExtraField.value);
+                    _parameters.Add(_secondExtraField.value);
                 }
 
                 _computeSettingsLabel.text = _computeSetting;
@@ -130,9 +130,9 @@ namespace VRLabs.ToonyStandardRebuild
                 if (resetArray)
                 {
                     _parameters.Clear();
-                    _parameters.Add(_textureNameField.text);
-                    _parameters.Add(_firstExtraField.text);
-                    _parameters.Add(_secondExtraField.text);
+                    _parameters.Add(_textureNameField.value);
+                    _parameters.Add(_firstExtraField.value);
+                    _parameters.Add(_secondExtraField.value);
                 }
 
                 _textureNameField.RegisterValueChangedCallback(SetStringParam0);

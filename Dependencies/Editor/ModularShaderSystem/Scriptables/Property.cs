@@ -27,7 +27,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         public string DefaultValue; 
         public List<string> Attributes;
 
-        public Variable ToVariable()
+        /*public Variable ToVariable()
         {
             Variable variable = new Variable();
             variable.Name = Name;
@@ -47,7 +47,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             }
 
             return variable;
-        }
+        }*/
 
         public override bool Equals(object obj)
         {

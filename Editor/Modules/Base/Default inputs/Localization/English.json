@@ -1,0 +1,79 @@
+{
+    "Properties": [
+        {
+            "Name": "MSSO",
+            "DisplayName": "MSSO",
+            "Tooltip": "MSSO mask, contains multiple textures masks in each channel:\n\n-Metallic: how metallic the object is\n-Smoothness: how smooth the object it\n-Specular: how much reflective the object is (when not metallic)\n-Occlusion: occlusion mask\n\nYou can use the merger to generate this texture from separate texture masks"
+        },
+        {
+            "Name": "MSSO_GeneratorOpen",
+            "DisplayName": "Open Merger",
+            "Tooltip": "Open a merger to generate a MSSO Texture"
+        },
+        {
+            "Name": "MSSO_GeneratorSaveButton",
+            "DisplayName": "Generate Texture",
+            "Tooltip": "Generate and assigns the MSSO texture"
+        },
+        {
+            "Name": "MSSO_GeneratorCancelButton",
+            "DisplayName": "Cancel",
+            "Tooltip": "Cancel the operation and closes the generator"
+        },
+        {
+            "Name": "MSSO_GeneratorTextureSize",
+            "DisplayName": "Size",
+            "Tooltip": "Size of the generated texture"
+        },
+        {
+            "Name": "MSSO_TextureInvert",
+            "DisplayName": "Invert",
+            "Tooltip": "Invert output of channel"
+        },
+        {
+            "Name": "MSSO_Input1",
+            "DisplayName": "Metallic",
+            "Tooltip": "Metallic mask"
+        },
+        {
+            "Name": "MSSO_Input2",
+            "DisplayName": "Smoothness",
+            "Tooltip": "Smoothness mask"
+        },
+        {
+            "Name": "MSSO_Input3",
+            "DisplayName": "Specular",
+            "Tooltip": "Specular mask (how much is reflected when not metallic)"
+        },
+        {
+            "Name": "MSSO_Input4",
+            "DisplayName": "Occlusion",
+            "Tooltip": "Occlusion mask"
+        },
+        {
+            "Name": "Occlusion",
+            "DisplayName": "Occlusion",
+            "Tooltip": "Occlusion intensity"
+        },
+        {
+            "Name": "Alpha Cutoff group",
+            "DisplayName": "Alpha Cutoff group",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Alpha Cutoff",
+            "DisplayName": "Alpha Cutoff",
+            "Tooltip": "Transparency threshold to cut out"
+        },
+        {
+            "Name": "Albedo",
+            "DisplayName": "Albedo",
+            "Tooltip": "Albedo (RGB channels) and transparency (A channel)"
+        },
+        {
+            "Name": "Normal map",
+            "DisplayName": "Normal",
+            "Tooltip": "Normal map"
+        }
+    ]
+}

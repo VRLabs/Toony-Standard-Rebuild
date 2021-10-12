@@ -79,8 +79,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e66ce777bcc13c546ba94135b9e5b188, type: 2}
   - {fileID: 11400000, guid: 0de1fc82dd8efba4aa505b29f993fb6c, type: 2}
   - {fileID: 11400000, guid: 001953108dd6577448489c1e83e63c7d, type: 2}
+  - {fileID: 11400000, guid: 9d4d6aeab19c6914b8e5362a6e842d88, type: 2}
   - {fileID: 11400000, guid: 59e7502c70c2463408763c21e3633b04, type: 2}
-  AdditionalModules: []
+  AdditionalModules:
+  - {fileID: 11400000, guid: 09364b4f1ff9ff54a8b9f40e4b743314, type: 2}
+  - {fileID: 11400000, guid: b3e1ddc08b08fff438b3053dc5d72876, type: 2}
+  - {fileID: 11400000, guid: 8c03862b78fe12b488fb26022a92b62e, type: 2}
   LockBaseModules: 0
   LastGeneratedShaders:
   - {fileID: 4800000, guid: 854a2294bb3904740920fa97af7a7696, type: 3}
@@ -94,7 +98,7 @@ MonoBehaviour:
     \"ActivatePropertyName\": \"\",\r\n                \"EnableValue\": 1,\r\n               
     \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
     \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
-    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 2,\r\n                   
+    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 3,\r\n                   
     \"$rcontent\": [\r\n                        {\r\n                           
     \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
     Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Blend Mode\",\r\n                           
@@ -491,90 +495,102 @@ MonoBehaviour:
     {\r\n                                \"$id\": 87,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 88,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Top Space\",\r\n                            \"ControlType\": 0,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 89,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 90,\r\n                                        \"$type\": \"18|System.Int32,
+    mscorlib\",\r\n                                        20\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 91,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
-    \"OnSectionDisableData\": {\r\n                    \"$id\": 88,\r\n                   
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 92,\r\n                   
     \"$type\": 9,\r\n                    \"FloatProperties\": {\r\n                       
-    \"$id\": 89,\r\n                        \"$type\": 10,\r\n                       
+    \"$id\": 93,\r\n                        \"$type\": 10,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
-    \"$id\": 90,\r\n                        \"$type\": 12,\r\n                       
+    \"$id\": 94,\r\n                        \"$type\": 12,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 91,\r\n                        \"$type\": 13,\r\n                       
+    \"$id\": 95,\r\n                        \"$type\": 13,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 92,\r\n                        \"$type\": 14,\r\n                       
+    \"$id\": 96,\r\n                        \"$type\": 14,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 93,\r\n                        \"$type\": 16,\r\n                       
+    \"$id\": 97,\r\n                        \"$type\": 16,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"RenderQueue\": 0\r\n               
-    }\r\n            },\r\n            {\r\n                \"$id\": 94,\r\n               
+    }\r\n            },\r\n            {\r\n                \"$id\": 98,\r\n               
     \"$type\": 2,\r\n                \"SectionName\": \"Stencil Options\",\r\n               
     \"IsPermanent\": false,\r\n                \"ActivatePropertyName\": \"_StencilSection\",\r\n               
     \"EnableValue\": 1,\r\n                \"DisableValue\": 0,\r\n               
-    \"Controls\": {\r\n                    \"$id\": 95,\r\n                    \"$type\":
+    \"Controls\": {\r\n                    \"$id\": 99,\r\n                    \"$type\":
     3,\r\n                    \"$rlength\": 3,\r\n                    \"$rcontent\":
-    [\r\n                        {\r\n                            \"$id\": 96,\r\n                           
+    [\r\n                        {\r\n                            \"$id\": 100,\r\n                           
     \"$type\": 4,\r\n                            \"Name\": \"Stencil ID\",\r\n                           
     \"ControlType\": 2,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 97,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 98,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_StencilID\"\r\n                                   
-    }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 99,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 100,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Stencil comparison\",\r\n                            \"ControlType\":
-    2,\r\n                            \"Parameters\": {\r\n                               
     \"$id\": 101,\r\n                                \"$type\": 5,\r\n                               
     \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
     {\r\n                                        \"$id\": 102,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_StencilComp\"\r\n                                   
+    \"$type\": 6,\r\n                                        \"_StencilID\"\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
     \"Controls\": {\r\n                                \"$id\": 103,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
     \"$id\": 104,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Stencil operation\",\r\n                            \"ControlType\":
+    \"Name\": \"Stencil comparison\",\r\n                            \"ControlType\":
     2,\r\n                            \"Parameters\": {\r\n                               
     \"$id\": 105,\r\n                                \"$type\": 5,\r\n                               
     \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
     {\r\n                                        \"$id\": 106,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_StencilOp\"\r\n                                   
+    \"$type\": 6,\r\n                                        \"_StencilComp\"\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
     \"Controls\": {\r\n                                \"$id\": 107,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 108,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Stencil operation\",\r\n                            \"ControlType\":
+    2,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 109,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 110,\r\n                                       
+    \"$type\": 6,\r\n                                        \"_StencilOp\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 111,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
-    \"OnSectionDisableData\": {\r\n                    \"$id\": 108,\r\n                   
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 112,\r\n                   
     \"$type\": 9,\r\n                    \"FloatProperties\": {\r\n                       
-    \"$id\": 109,\r\n                        \"$type\": 10,\r\n                       
+    \"$id\": 113,\r\n                        \"$type\": 10,\r\n                       
     \"$rlength\": 3,\r\n                        \"$rcontent\": [\r\n                           
-    {\r\n                                \"$id\": 110,\r\n                               
+    {\r\n                                \"$id\": 114,\r\n                               
     \"$type\": 11,\r\n                                \"Name\": \"_StencilID\",\r\n                               
     \"Value\": 0\r\n                            },\r\n                           
-    {\r\n                                \"$id\": 111,\r\n                               
+    {\r\n                                \"$id\": 115,\r\n                               
     \"$type\": 11,\r\n                                \"Name\": \"_StencilComp\",\r\n                               
     \"Value\": 0\r\n                            },\r\n                           
-    {\r\n                                \"$id\": 112,\r\n                               
+    {\r\n                                \"$id\": 116,\r\n                               
     \"$type\": 11,\r\n                                \"Name\": \"_StencilOp\",\r\n                               
     \"Value\": 0\r\n                            }\r\n                        ]\r\n                   
     },\r\n                    \"ColorProperties\": {\r\n                        \"$id\":
-    113,\r\n                        \"$type\": 12,\r\n                        \"$rlength\":
+    117,\r\n                        \"$type\": 12,\r\n                        \"$rlength\":
     0,\r\n                        \"$rcontent\": [\r\n                        ]\r\n                   
     },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 114,\r\n                        \"$type\": 13,\r\n                       
+    \"$id\": 118,\r\n                        \"$type\": 13,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 115,\r\n                        \"$type\": 14,\r\n                       
+    \"$id\": 119,\r\n                        \"$type\": 14,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 116,\r\n                        \"$type\": 16,\r\n                       
+    \"$id\": 120,\r\n                        \"$type\": 16,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"RenderQueue\": 0\r\n               
     }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'

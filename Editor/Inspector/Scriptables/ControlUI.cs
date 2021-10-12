@@ -27,7 +27,7 @@ namespace VRLabs.ToonyStandardRebuild
         {
             switch (ControlType)
             {
-                case ControlType.ControlContainer:
+                case ControlType.ConditionalControlContainer:
                 case ControlType.ToggleListControl:
                 case ControlType.KeywordToggleListControl:
                     return true;
@@ -64,7 +64,7 @@ namespace VRLabs.ToonyStandardRebuild
                     if (Parameters.Count < 3 || !(Parameters[0] is string) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string))
                         throw new TypeAccessException("The parameter given was not of the right type");
-                    return parentControl.AddTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name);
+                    return parentControl.AddTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowUvOptions(true);
                 case ControlType.TextureGeneratorControl:
                     if (Parameters.Count < 5 || !(Parameters[0] is ComputeShader) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string) ||
@@ -75,20 +75,30 @@ namespace VRLabs.ToonyStandardRebuild
                             throw new TypeAccessException("The parameter given was not of the right type");
                     }
                     if (Parameters.Count < 5)
-                        return parentControl.AddTextureGeneratorControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name);
+                        return parentControl.AddTextureGeneratorControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowUvOptions(true);
                     else
-                        return parentControl.AddTextureGeneratorControl((ComputeShader)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3], (string)Parameters[4]).Alias(Name);
+                        return parentControl.AddTextureGeneratorControl((ComputeShader)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3], (string)Parameters[4]).Alias(Name).SetShowUvOptions(true);
                 case ControlType.GradientTextureControl:
-                    if (Parameters.Count < 2 || !(Parameters[0] is string) ||
-                        !(Parameters[1] is string))
-                        throw new TypeAccessException("The parameter given was not of the right type");
-                    return parentControl.AddGradientTextureControl((string)Parameters[0], (string)Parameters[1]).Alias(Name);
+                    if (Parameters.Count < 4 || !(Parameters[0] is string) ||
+                        !(Parameters[1] is string) || !(Parameters[2] is string) ||
+                        !(Parameters[3] is string))
+                    {
+                        if (Parameters.Count < 2 || !(Parameters[0] is string) ||
+                            !(Parameters[1] is string))
+                            throw new TypeAccessException("The parameter given was not of the right type");
+                    }
+                    if (Parameters.Count < 4)
+                        return parentControl.AddGradientTextureControl((string)Parameters[0], (string)Parameters[1]).Alias(Name);
+                    else
+                        return parentControl.AddGradientTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3]).Alias(Name);
                 case ControlType.TilingAndOffsetControl:
                     if (Parameters.Count < 1 || !(Parameters[0] is string))
                         throw new TypeAccessException("The parameter given was not of the right type");
                     return parentControl.AddTilingAndOffsetControl((string)Parameters[0]).Alias(Name);
-                case ControlType.ControlContainer:
-                    return parentControl.AddControlContainer().Alias(Name);
+                case ControlType.ConditionalControlContainer:
+                    if (Parameters.Count < 2 || !(Parameters[0] is string) || !(Parameters[1] is float))
+                        throw new TypeAccessException("The parameter given was not of the right type");
+                    return parentControl.AddConditionalControlContainer((string)Parameters[0], (float)Parameters[1]).Alias(Name).SetIndent(true);
                 case ControlType.ListSelectorControl:
                     if (Parameters.Count < 2 || !(Parameters[0] is string) ||
                         !(Parameters[1] is List<ListSelectorControl.ListSelectorItem>))
@@ -133,7 +143,7 @@ namespace VRLabs.ToonyStandardRebuild
         TextureGeneratorControl,
         GradientTextureControl,
         TilingAndOffsetControl,
-        ControlContainer,
+        ConditionalControlContainer,
         ListSelectorControl,
         ToggleControl,
         ToggleListControl,

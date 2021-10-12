@@ -82,8 +82,8 @@ namespace VRLabs.ToonyStandardRebuild
                 case ControlType.TilingAndOffsetControl:
                     _specificControlUI = new TilingAndOffsetControlUIElement(obj.Parameters);
                     break;
-                case ControlType.ControlContainer:
-                    _specificControlUI = new ControlContainerUIElement(obj.Controls);
+                case ControlType.ConditionalControlContainer:
+                    _specificControlUI = new ConditionalControlContainerUIElement(obj.Parameters, obj.Controls);
                     break;
                 case ControlType.ToggleControl:
                     _specificControlUI = new ToggleControlUIElement(obj.Parameters);

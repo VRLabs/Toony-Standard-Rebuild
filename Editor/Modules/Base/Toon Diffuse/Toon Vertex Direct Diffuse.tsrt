@@ -1,0 +1,47 @@
+float3 RampDotLVertLight(float3 normal, float3 worldPos, float occlusion)
+{
+    //from Shade4PointLights function to get NdotL + attenuation
+    float4 toLightX = unity_4LightPosX0 - worldPos.x;
+    float4 toLightY = unity_4LightPosY0 - worldPos.y;
+    float4 toLightZ = unity_4LightPosZ0 - worldPos.z;
+    float4 lengthSq = 0;
+    lengthSq += toLightX * toLightX;
+    lengthSq += toLightY * toLightY;
+    lengthSq += toLightZ * toLightZ;
+    float4 ndl = 0;
+    ndl += toLightX * normal.x;
+    ndl += toLightY * normal.y;
+    ndl += toLightZ * normal.z;
+    // correct NdotL
+    float4 corr = rsqrt(lengthSq);
+    ndl =  ndl * corr;
+    //attenuation
+    float4 atten = 1.0 / (1.0 + lengthSq * unity_4LightAtten0);
+    float4 atten2 = saturate(1 - (lengthSq * unity_4LightAtten0 / 25));
+    atten = min(atten, atten2 * atten2);
+
+    //ramp calculation for all 4 vertex lights
+    float offset = _RampOffset + (occlusion * _OcclusionOffsetIntensity) - _OcclusionOffsetIntensity;
+    //Calculating ramp uvs based on offset
+    float newMin = max(offset, 0);
+    float newMax = max(offset + 1, 0);
+    float4 rampUv = remap(ndl, float4(-1,-1,-1,-1), float4(1,1,1,1), float4(newMin, newMin, newMin, newMin), float4(newMax, newMax, newMax, newMax));
+    float intensity = max(_ShadowIntensity, 0.001);
+    float3 rmin = remap(_RampMin, 0, 1, 1-intensity, 1);
+    float3 ramp = remap(remap(UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv.x, rampUv.x)).rgb * _RampColor.rgb, float3(0, 0, 0), float3(1, 1, 1), 1 - intensity, float3(1, 1, 1)), rmin, 1, 0, 1).rgb * unity_LightColor[0].rgb * atten.r;
+    ramp +=       remap(remap(UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv.y, rampUv.y)).rgb * _RampColor.rgb, float3(0, 0, 0), float3(1, 1, 1), 1 - intensity, float3(1, 1, 1)), rmin, 1, 0, 1).rgb * unity_LightColor[1].rgb * atten.g;
+    ramp +=       remap(remap(UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv.z, rampUv.z)).rgb * _RampColor.rgb, float3(0, 0, 0), float3(1, 1, 1), 1 - intensity, float3(1, 1, 1)), rmin, 1, 0, 1).rgb * unity_LightColor[2].rgb * atten.b;
+    ramp +=       remap(remap(UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv.w, rampUv.w)).rgb * _RampColor.rgb, float3(0, 0, 0), float3(1, 1, 1), 1 - intensity, float3(1, 1, 1)), rmin, 1, 0, 1).rgb * unity_LightColor[3].rgb * atten.a;
+    
+    return ramp;
+}
+
+// Get the vertex diffuse contribution using a toon ramp
+void GetToonVertexDiffuse()
+{
+    VertexDirectDiffuse = 0;
+    #if defined(VERTEXLIGHT_ON)
+        VertexDirectDiffuse = RampDotLVertLight(NormalDir, FragData.worldPos, Occlusion);
+        VertexDirectDiffuse *= Albedo;
+    #endif
+}

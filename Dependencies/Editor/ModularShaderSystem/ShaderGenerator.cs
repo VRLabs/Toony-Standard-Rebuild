@@ -273,16 +273,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foreach (var variable in functions
                 .Where(x => x.VariableKeywords.Any(y => y.Equals(keyword)) || (isDefaultKeyword && x.VariableKeywords.Count == 0))
                 .SelectMany(x => x.UsedVariables)
-                .Concat(variantEnabledModules
-                    .Where(x => x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name) && !x.Templates.Any(y => y.NeedsVariant))
-                    .Select(x => x.Enabled.ToVariable()))
                 .Distinct()
                 .OrderBy(x => x.Type))
             {
-                if (variable.Type.Equals("sampler2D") || variable.Type.Equals("Texture2D"))
-                    variablesDeclaration.AppendLine($"{variable.Type} {variable.Name}; float4 {variable.Name}_ST;");
-                else
-                    variablesDeclaration.AppendLine($"{variable.Type} {variable.Name};");
+                variablesDeclaration.AppendLine(variable.GetDefinition());
             }
 
             MatchCollection m = Regex.Matches(shaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
@@ -292,7 +286,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
         private static void WriteShaderFunctions(StringBuilder shaderFile, List<ShaderFunction> functions)
         {
-            foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")))
+            foreach (var function in functions.Where(x => x.AppendAfter.StartsWith("#K#")).OrderBy(x => x.Priority))
             {
                 if (!shaderFile.Contains(function.AppendAfter)) continue;
 
@@ -357,6 +351,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             {
                 foreach (var template in module.Templates)
                 {
+                    if (template.Template == null) continue;
                     bool hasEnabler = !string.IsNullOrWhiteSpace(module.Enabled.Name);
                     bool isEnablerVariant = _variantEnablerNames.Contains(module.Enabled.Name);
                     var tmp = new StringBuilder();

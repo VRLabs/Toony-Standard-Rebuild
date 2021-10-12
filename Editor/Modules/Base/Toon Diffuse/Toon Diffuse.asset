@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6eb4885991aef4bb8e8696cd587c3d, type: 3}
+  m_Name: Toon Diffuse
+  m_EditorClassIdentifier: 
+  Id: ToonDiffuse
+  Name: Toon Diffuse
+  Version: 1.0
+  Author: VRLabs
+  Description: The toon way of doing diffuse calculations
+  RequiredIncludes: []
+  Enabled:
+    Name: _DirectLightMode
+    DisplayName: Direct Light Mode
+    Type: Float
+    DefaultValue: 0.0
+    Attributes: []
+    EnableValue: 1
+  Properties:
+  - Name: _Ramp
+    DisplayName: Toon Ramp
+    Type: 2D
+    DefaultValue: '"white" {}'
+    Attributes: []
+  - Name: _RampOffset
+    DisplayName: Ramp Offset
+    Type: Range(-1, 1)
+    DefaultValue: 0
+    Attributes: []
+  - Name: _ShadowIntensity
+    DisplayName: Shadow intensity
+    Type: Range(0, 1)
+    DefaultValue: 0.6
+    Attributes: []
+  - Name: _OcclusionOffsetIntensity
+    DisplayName: Occlusion Offset Intensity
+    Type: Range(0, 1)
+    DefaultValue: 0
+    Attributes: []
+  - Name: _RampMin
+    DisplayName: Ramp Min
+    Type: Color
+    DefaultValue: (0.003921569, 0.003921569, 0.003921569, 0.003921569)
+    Attributes: []
+  - Name: _RampColor
+    DisplayName: Ramp Color
+    Type: Color
+    DefaultValue: (1, 1, 1, 1)
+    Attributes: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates: []
+  Functions:
+  - Name: GetToonDiffuse
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 150
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 721741ec8668e2a47b4bee499d8ff4af,
+      type: 3}
+    UsedVariables:
+    - Name: DirectDiffuse
+      Type: 6
+      CustomType: 
+    - Name: Albedo
+      Type: 6
+      CustomType: 
+    - Name: IndirectDiffuse
+      Type: 6
+      CustomType: 
+    - Name: LightColor
+      Type: 7
+      CustomType: 
+    - Name: NdotL
+      Type: 4
+      CustomType: 
+    - Name: Occlusion
+      Type: 4
+      CustomType: 
+    - Name: RampAttenuation
+      Type: 4
+      CustomType: 
+    - Name: _RampOffset
+      Type: 4
+      CustomType: 
+    - Name: _ShadowIntensity
+      Type: 4
+      CustomType: 
+    - Name: _OcclusionOffsetIntensity
+      Type: 4
+      CustomType: 
+    - Name: _Ramp
+      Type: 17
+      CustomType: 
+    - Name: _RampColor
+      Type: 7
+      CustomType: 
+    - Name: _RampMin
+      Type: 6
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: GetToonVertexDiffuse
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 151
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 22acaa724b2655b4ea7ef8d69cb6f331,
+      type: 3}
+    UsedVariables:
+    - Name: VertexDirectDiffuse
+      Type: 6
+      CustomType: 
+    - Name: Albedo
+      Type: 6
+      CustomType: 
+    - Name: NormalDir
+      Type: 6
+      CustomType: 
+    - Name: Occlusion
+      Type: 7
+      CustomType: 
+    - Name: _ShadowIntensity
+      Type: 4
+      CustomType: 
+    - Name: _RampOffset
+      Type: 4
+      CustomType: 
+    - Name: _OcclusionOffsetIntensity
+      Type: 4
+      CustomType: 
+    - Name: _Ramp
+      Type: 17
+      CustomType: 
+    - Name: _RampColor
+      Type: 7
+      CustomType: 
+    - Name: _RampMin
+      Type: 6
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
+    Assembly-CSharp-Editor\",\r\n    \"Name\": \"Toon Diffuse\",\r\n    \"Sections\":
+    {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
+    \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
+    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, Assembly-CSharp-Editor\",\r\n               
+    \"SectionName\": \"Toon Diffuse\",\r\n                \"IsPermanent\": false,\r\n               
+    \"ActivatePropertyName\": \"_DirectLightMode\",\r\n                \"EnableValue\":
+    1,\r\n                \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
+    \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 4,\r\n                   
+    \"$rcontent\": [\r\n                        {\r\n                           
+    \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Toon ramp\",\r\n                           
+    \"ControlType\": 7,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 4,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 6,\r\n                                        \"$type\": \"6|System.String,
+    mscorlib\",\r\n                                        \"_Ramp\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 7,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_RampMin\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 8,\r\n                                       
+    \"$type\": 6,\r\n                                        \"\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 9,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_RampColor\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 10,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 11,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Ramp offset\",\r\n                            \"ControlType\": 2,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 12,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 13,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_RampOffset\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 14,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 15,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Shadow intensity\",\r\n                            \"ControlType\":
+    2,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 16,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 17,\r\n                                       
+    \"$type\": 6,\r\n                                        \"_ShadowIntensity\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 18,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 19,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Occlusion offset intensity\",\r\n                            \"ControlType\":
+    2,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 20,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 21,\r\n                                       
+    \"$type\": 6,\r\n                                        \"_OcclusionOffsetIntensity\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 22,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        }\r\n                    ]\r\n                },\r\n               
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 23,\r\n                   
+    \"$type\": \"7|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
+    \"FloatProperties\": {\r\n                        \"$id\": 24,\r\n                       
+    \"$type\": \"8|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
+    \"$id\": 25,\r\n                        \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
+    \"$id\": 26,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
+    \"$id\": 27,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
+    \"$id\": 28,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
+    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'

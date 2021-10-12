@@ -13,6 +13,18 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             control.ShowAlphaValue = property;
             return control;
         }
+        
+        public static ConditionalControlContainer AddConditionalControlContainer(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String conditionalProperty, System.Single enableValue)
+        {
+            var control = new ConditionalControlContainer(conditionalProperty, enableValue);
+            container.AddControl(control);
+            return control;
+        }
+        public static T SetIndent<T>(this T control, System.Boolean property) where T : ConditionalControlContainer
+        {
+            control.Indent = property;
+            return control;
+        }
 
         public static ControlContainer AddControlContainer(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container)
         {
@@ -31,6 +43,12 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         public static GradientTextureControl AddGradientTextureControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, System.String colorPropertyName = null)
         {
             var control = new GradientTextureControl(propertyName, colorPropertyName);
+            container.AddControl(control);
+            return control;
+        }
+        public static GradientTextureControl AddGradientTextureControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName,System.String minColorPropertyName, System.String maxColorPropertyName, System.String colorPropertyName = null)
+        {
+            var control = new GradientTextureControl(propertyName, minColorPropertyName, maxColorPropertyName, colorPropertyName);
             container.AddControl(control);
             return control;
         }

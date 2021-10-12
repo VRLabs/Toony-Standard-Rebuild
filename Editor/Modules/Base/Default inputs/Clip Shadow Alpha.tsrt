@@ -1,0 +1,11 @@
+void ClipShadowAlpha()
+{
+    #if defined(_ALPHATEST_ON)
+        clip(Albedo.a - _Cutoff);
+    #else 
+        #if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
+            float dither = tex3D(_DitherMaskLOD, float3(FragData.pos.xy * 0.25, Albedo.a * 0.9375)).a; //Dither16x16Bayer(FragData.pos.xy * 0.25) * Albedo.a;
+            clip(dither-0.01);
+        #endif
+    #endif
+}

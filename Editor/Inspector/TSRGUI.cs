@@ -117,7 +117,7 @@ namespace VRLabs.ToonyStandardRebuild
                     Controls.FetchProperties(properties, out List<string> missingProperties);
                     foreach (string missingProperty in missingProperties)
                     {
-                        _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
+                        if(!missingProperty.Equals("")) _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
                     }
                     /*watch.Stop();
                     Debug.Log($"Time spent on loading properties of SSI controls: {watch.ElapsedTicks} ticks");*/
@@ -126,7 +126,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
             else
             {
-                Controls.FetchProperties(properties);
+                if (!_showSettingsGUI) Controls.FetchProperties(properties);
             }
             Header();
 
@@ -375,6 +375,9 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
                 ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
+
+                EditorUtility.SetDirty(ModularShader);
+                
                 Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
             }
             if (GUILayout.Button("Reset changes"))
@@ -476,6 +479,10 @@ namespace VRLabs.ToonyStandardRebuild
                 {
                     _usedModules = null;
                     _availableModules = null;
+                }
+                else
+                {
+                    _isFirstLoop = true;
                 }
             }
             EditorGUILayout.EndHorizontal();

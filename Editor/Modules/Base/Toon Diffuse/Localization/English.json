@@ -1,0 +1,64 @@
+{
+    "Properties": [
+        {
+            "Name": "Toon Diffuse",
+            "DisplayName": "Toon Diffuse",
+            "Tooltip": "Toon Diffuse section"
+        },
+        {
+            "Name": "Toon ramp",
+            "DisplayName": "Toon ramp",
+            "Tooltip": "Texture used as gradient for the toon ramp"
+        },
+        {
+            "Name": "Toon ramp_GradientOpenEditor",
+            "DisplayName": "Open gradient editor",
+            "Tooltip": "Open a gradient editor for the current texture"
+        },
+        {
+            "Name": "Toon ramp_GradientColorLabel",
+            "DisplayName": "Color",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Toon ramp_GradientTimeLabel",
+            "DisplayName": "Time",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Toon ramp_GradientRampSizeLabel",
+            "DisplayName": "Texture width",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Toon ramp_GradientBlendModeLabel",
+            "DisplayName": "Blend mode",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Toon ramp_GradientSaveButton",
+            "DisplayName": "Save",
+            "Tooltip": "Save and apply texture"
+        },
+        {
+            "Name": "Toon ramp_GradientCancelButton",
+            "DisplayName": "Cancel",
+            "Tooltip": "Cancel operation and close gradient editor"
+        },
+        {
+            "Name": "Ramp offset",
+            "DisplayName": "Ramp offset",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Shadow intensity",
+            "DisplayName": "Shadow intensity",
+            "Tooltip": "Applies an offset that shifts the gradient texture"
+        },
+        {
+            "Name": "Occlusion offset intensity",
+            "DisplayName": "Occlusion offset intensity",
+            "Tooltip": "Uses the occlusion mask to offset the ramp in certain places"
+        }
+    ]
+}

@@ -124,7 +124,7 @@ namespace VRLabs.ToonyStandardRebuild
                     data.unityGUIDReferences.Add(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _) ? guid : "");
                 
                 ((ShaderModule)_shaderModuleField.value).AdditionalSerializedData = JsonUtility.ToJson(data);
-                EditorUtility.SetDirty(_modularShaderField.value);
+                EditorUtility.SetDirty(_shaderModuleField.value);
                 AssetDatabase.SaveAssets();
             }
         }

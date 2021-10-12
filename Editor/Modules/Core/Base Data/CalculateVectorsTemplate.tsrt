@@ -29,7 +29,7 @@ void GetDirectionVectors()
     NormalDir    = normalize(FragData.normal);
     TangentDir   = normalize(UnityObjectToWorldDir(FragData.tangentDir.xyz));
     BitangentDir = normalize(cross(NormalDir, TangentDir) * FragData.tangentDir.w * unity_WorldTransformParams.w);
-    CalculateNormals(NormalDir, TangentDir, BitangentDir, Normals);
+    CalculateNormals(NormalDir, TangentDir, BitangentDir, NormalMap);
     LightDir     = normalize(UnityWorldSpaceLightDir(FragData.worldPos));
     ViewDir      = normalize(UnityWorldSpaceViewDir(FragData.worldPos));
     ReflectDir   = reflect(-ViewDir, NormalDir);

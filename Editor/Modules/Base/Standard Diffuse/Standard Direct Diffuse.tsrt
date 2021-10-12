@@ -1,0 +1,24 @@
+inline half Pow5 (half x)
+{
+    return x*x * x*x * x;
+}
+
+//unity's base diffuse based on disney implementation
+float DisneyDiffuse(half perceptualRoughness)
+{
+    float fd90 = 0.5 + 2 * LdotH * LdotH * perceptualRoughness;
+    // Two schlick fresnel term
+    float lightScatter   = (1 + (fd90 - 1) * Pow5(1 - NdotL));
+    float viewScatter    = (1 + (fd90 - 1) * Pow5(1 - NdotV));
+
+    return lightScatter * viewScatter;
+}
+
+// Get the direct diffuse contribution using disney's diffuse implementation
+void GetPBRDiffuse()
+{
+    DirectDiffuse = 0;
+    float ramp = DisneyDiffuse(Roughness) * NdotL;
+    DirectDiffuse = Albedo * (LightColor.rgb * LightColor.a * ramp + IndirectDiffuse);
+    Attenuation = ramp;
+}

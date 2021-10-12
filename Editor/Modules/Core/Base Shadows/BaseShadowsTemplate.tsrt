@@ -1,15 +1,5 @@
 #include "UnityCG.cginc"
 
-//float4 _Color;
-//sampler2D _MainTex;
-//float4 _MainTex_ST;
-//float _Cutoff;
-sampler3D _DitherMaskLOD;
-float4 FinalColor;
-#K#SHADOW_VARIABLES
-
-#K#SHADOW_CODE
-
 struct VertexData 
 {
 	float4 position : POSITION;
@@ -31,11 +21,10 @@ struct VertexOutput
 struct FragmentData 
 {
 	#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
-		UNITY_VPOS_TYPE vpos : VPOS;
+		UNITY_VPOS_TYPE pos : VPOS;
 	#else
 		float4 position : SV_POSITION;
 	#endif
-	
 	#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 		float2 uv : TEXCOORD0;
 	#endif
@@ -44,34 +33,35 @@ struct FragmentData
 	#endif
 };
 
+sampler3D _DitherMaskLOD;
+FragmentData FragData;
+#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
+#K#SHADOW_VARIABLES
+
+#K#SHADOW_CODE
+#endif
+
 VertexOutput  Vertex (VertexData v) 
 {
 	VertexOutput  i;
 	#if defined(SHADOWS_CUBE)
 		i.position = UnityObjectToClipPos(v.position);
-		i.lightVec =
-		mul(unity_ObjectToWorld, v.position).xyz - _LightPositionRange.xyz;
+		i.lightVec = mul(unity_ObjectToWorld, v.position).xyz - _LightPositionRange.xyz;
 	#else
 		i.position = UnityClipSpaceShadowCasterPos(v.position.xyz, v.normal);
 		i.position = UnityApplyLinearShadowBias(i.position);
 	#endif
 	#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
-		i.uv = v.uv // TRANSFORM_TEX(v.uv, _MainTex);
+		i.uv = v.uv;
 	#endif
 	return i;
 }
 
 float4 Fragment (FragmentData i) : SV_TARGET 
 {
-	/*#if defined(_ALPHATEST_ON) 
-		float alpha = tex2D(_MainTex, i.uv.xy).a*_Color.a;
-		clip(alpha - _Cutoff);
-	#endif
-
-	#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
-		float alpha = tex2D(_MainTex, i.uv.xy).a*_Color.a;
-		float dither = tex3D(_DitherMaskLOD, float3(i.vpos.xy * .25, alpha * 0.9375)).a;
-		clip(dither - 0.01);
+	FragData = i;
+	#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
+		#K#SHADOW_FRAGMENT_FUNCTION
 	#endif
 
 	#if defined(SHADOWS_CUBE)
@@ -80,11 +70,5 @@ float4 Fragment (FragmentData i) : SV_TARGET
 		return UnityEncodeCubeShadowDepth(depth);
 	#else
 		return 0;
-	#endif*/
-
-    FinalColor = float4(0,0,0,0);
-
-    #K#SHADOW_FRAGMENT
-
-    return FinalColor;
+	#endif
 }

@@ -1,0 +1,59 @@
+inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax) 
+{
+    return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+}
+inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax) 
+{
+    return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+}
+inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax) 
+{
+    return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+}
+inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax) 
+{
+    return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+}
+
+float4 RampDotL()
+{
+    //Adding the occlusion into the offset of the ramp
+    float offset = _RampOffset + ( Occlusion * _OcclusionOffsetIntensity) - _OcclusionOffsetIntensity;
+    //Calculating ramp uvs based on offset
+    float newMin = max(offset, 0);
+    float newMax = max(offset + 1, 0);
+    float rampUv = remap(NdotL, -1, 1, newMin, newMax);
+    float3 ramp = UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv, rampUv)).rgb;
+    //Adding the color and remapping it based on the shadow intensity stored into the alpha channel of the ramp color
+    ramp *= _RampColor.rgb;
+    float intensity = max(_ShadowIntensity, 0.001);
+    ramp = remap(ramp, float3(0, 0, 0), float3(1, 1, 1), 1 - intensity, float3(1, 1, 1));
+
+    //getting the modified ramp for highlights and all lights that are not directional
+    float3 rmin = remap(_RampMin, 0, 1, 1-intensity, 1);
+    float3 rampA = remap(ramp, rmin, 1, 0, 1);
+    float rampGrey = max(max(rampA.r, rampA.g), rampA.b);
+    #if defined(DIRECTIONAL) || defined(DIRECTIONAL_COOKIE) 
+        return float4(ramp,rampGrey); 
+    #else
+        return float4(rampA,rampGrey);
+    #endif
+    
+}
+
+void GetToonDiffuse()
+{
+    DirectDiffuse = 0;
+
+    //toon version of the NdotL for the direct light
+    float4 ramp = RampDotL();
+    Attenuation = ramp.a;
+
+    //diffuse color
+    #if defined(DIRECTIONAL) || defined(DIRECTIONAL_COOKIE) 
+        DirectDiffuse = Albedo * ramp.rgb * (LightColor.rgb + IndirectDiffuse);
+    #else
+        DirectDiffuse = Albedo * ramp.rgb * LightColor.rgb * LightColor.a;
+    #endif
+
+}

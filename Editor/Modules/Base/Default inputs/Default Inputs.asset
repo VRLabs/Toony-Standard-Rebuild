@@ -1,0 +1,334 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6eb4885991aef4bb8e8696cd587c3d, type: 3}
+  m_Name: Default Inputs
+  m_EditorClassIdentifier: 
+  Id: DefaultInputs
+  Name: Default Inputs
+  Version: 1.0
+  Author: VRLabs
+  Description: Default inputs used by the standard modules available in Toony Standartd
+    RE:Build
+  RequiredIncludes: []
+  Enabled:
+    Name: 
+    DisplayName: 
+    Type: 
+    DefaultValue: 
+    Attributes: []
+    EnableValue: 0
+  Properties:
+  - Name: _MainTex
+    DisplayName: Main texture
+    Type: 2D
+    DefaultValue: '"white" {}'
+    Attributes: []
+  - Name: _Color
+    DisplayName: Albedo color
+    Type: Color
+    DefaultValue: (0, 0, 0, 0)
+    Attributes: []
+  - Name: _BumpMap
+    DisplayName: Normal map
+    Type: 2D
+    DefaultValue: '"bump" {}'
+    Attributes: []
+  - Name: _BumpScale
+    DisplayName: Normal map scale
+    Type: Float
+    DefaultValue: 1
+    Attributes: []
+  - Name: _Cutoff
+    DisplayName: Alpha Cutoff
+    Type: Range(0, 1)
+    DefaultValue: 0.5
+    Attributes: []
+  - Name: _MSSO
+    DisplayName: MSSO
+    Type: 2D
+    DefaultValue: '"white" {}'
+    Attributes: []
+  - Name: _Occlusion
+    DisplayName: Occlusion
+    Type: Range(0, 1)
+    DefaultValue: 1
+    Attributes: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates:
+  - Template: {fileID: -544282384758852595, guid: f19678c2236a5464898f1aab451daaa2,
+      type: 3}
+    Keywords:
+    - DEFAULT_VARIABLES
+    NeedsVariant: 0
+    TemplateKeywords: []
+  Functions:
+  - Name: SampleAlbedo
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 25
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _MainTex_ST
+      Type: 7
+      CustomType: 
+    - Name: _Color
+      Type: 7
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: ClipAlpha
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 50
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 27b6b5526be75a048ba4ce2feda72a11,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: SampleNormal
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 60
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 60aecbfb99f27744c9fa3f56cf5c05ba,
+      type: 3}
+    UsedVariables:
+    - Name: NormalMap
+      Type: 6
+      CustomType: 
+    - Name: _BumpMap
+      Type: 18
+      CustomType: 
+    - Name: _BumpMap_ST
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _BumpScale
+      Type: 4
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: SampleMSSO
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 80
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
+      type: 3}
+    UsedVariables:
+    - Name: _MSSO
+      Type: 18
+      CustomType: 
+    - Name: _MSSO_ST
+      Type: 7
+      CustomType: 
+    - Name: Msso
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _Occlusion
+      Type: 4
+      CustomType: 
+    - Name: Occlusion
+      Type: 4
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: SampleAlbedo
+    AppendAfter: '#K#META_FRAGMENT_FUNCTION'
+    Priority: 25
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
+      type: 3}
+    UsedVariables:
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _MainTex_ST
+      Type: 7
+      CustomType: 
+    - Name: _Color
+      Type: 7
+      CustomType: 
+    VariableKeywords:
+    - META_VARIABLES
+    CodeKeywords:
+    - META_CODE
+  - Name: SampleAlbedo
+    AppendAfter: '#K#SHADOW_FRAGMENT_FUNCTION'
+    Priority: 25
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _MainTex_ST
+      Type: 7
+      CustomType: 
+    - Name: _Color
+      Type: 7
+      CustomType: 
+    VariableKeywords:
+    - SHADOW_VARIABLES
+    CodeKeywords:
+    - SHADOW_CODE
+  - Name: ClipShadowAlpha
+    AppendAfter: '#K#SHADOW_FRAGMENT_FUNCTION'
+    Priority: 50
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: d42d3cc3908d8a844bae7699efb0aff9,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    - Name: _Cutoff
+      Type: 4
+      CustomType: 
+    VariableKeywords:
+    - SHADOW_VARIABLES
+    CodeKeywords:
+    - SHADOW_CODE
+  AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
+    Assembly-CSharp-Editor\",\r\n    \"Name\": \"Default Inputs\",\r\n    \"Sections\":
+    {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
+    \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
+    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, Assembly-CSharp-Editor\",\r\n               
+    \"SectionName\": \"Main\",\r\n                \"IsPermanent\": true,\r\n               
+    \"ActivatePropertyName\": \"\",\r\n                \"EnableValue\": 1,\r\n               
+    \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
+    \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 5,\r\n                   
+    \"$rcontent\": [\r\n                        {\r\n                           
+    \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
+    Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Albedo\",\r\n                           
+    \"ControlType\": 5,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 3,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 6,\r\n                                        \"$type\": \"6|System.String,
+    mscorlib\",\r\n                                        \"_MainTex\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 7,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_Color\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 8,\r\n                                       
+    \"$type\": 6,\r\n                                        \"\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 9,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 10,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Alpha Cutoff group\",\r\n                            \"ControlType\":
+    9,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 11,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 2,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 12,\r\n                                       
+    \"$type\": 6,\r\n                                        \"_Mode\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 13,\r\n                                        \"$type\": \"7|System.Single,
+    mscorlib\",\r\n                                        1\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 14,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 1,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 15,\r\n                                        \"$type\": 4,\r\n                                       
+    \"Name\": \"Alpha Cutoff\",\r\n                                        \"ControlType\":
+    2,\r\n                                        \"Parameters\": {\r\n                                           
+    \"$id\": 16,\r\n                                            \"$type\": 5,\r\n                                           
+    \"$rlength\": 1,\r\n                                            \"$rcontent\":
+    [\r\n                                                {\r\n                                                   
+    \"$id\": 17,\r\n                                                    \"$type\":
+    6,\r\n                                                    \"_Cutoff\"\r\n                                               
+    }\r\n                                            ]\r\n                                       
+    },\r\n                                        \"Controls\": {\r\n                                           
+    \"$id\": 18,\r\n                                            \"$type\": 3,\r\n                                           
+    \"$rlength\": 0,\r\n                                            \"$rcontent\":
+    [\r\n                                            ]\r\n                                       
+    }\r\n                                    }\r\n                               
+    ]\r\n                            }\r\n                        },\r\n                       
+    {\r\n                            \"$id\": 19,\r\n                           
+    \"$type\": 4,\r\n                            \"Name\": \"Normal map\",\r\n                           
+    \"ControlType\": 5,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 20,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 3,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 21,\r\n                                       
+    \"$type\": 6,\r\n                                        \"_BumpMap\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 22,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_BumpScale\"\r\n                                    },\r\n                                   
+    $iref:8\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 23,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 24,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"MSSO\",\r\n                            \"ControlType\": 6,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 25,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 3,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 26,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_MSSO\"\r\n                                    },\r\n                                   
+    $iref:8,\r\n                                    $iref:8\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 27,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 28,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Occlusion\",\r\n                            \"ControlType\": 2,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 29,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 30,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_Occlusion\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 31,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        }\r\n                    ]\r\n                },\r\n               
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 32,\r\n                   
+    \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
+    \"FloatProperties\": {\r\n                        \"$id\": 33,\r\n                       
+    \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
+    \"$id\": 34,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
+    \"$id\": 35,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
+    \"$id\": 36,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
+    \"$id\": 37,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
+    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
+    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'

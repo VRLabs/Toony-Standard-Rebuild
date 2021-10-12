@@ -1,0 +1,4 @@
+void SampleAlbedo()
+{
+    Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+}
