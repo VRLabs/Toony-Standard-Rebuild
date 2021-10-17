@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
 using VRLabs.ToonyStandardRebuild.SSICustomControls;
@@ -36,7 +37,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        public SimpleControl CreateControl(IControlContainer parentControl)
+        public SimpleControl CreateControl(IControlContainer parentControl, ModularShader modularShader)
         {
             if (string.IsNullOrWhiteSpace(Name))
                 throw new NullReferenceException("The name is empty");
@@ -104,6 +105,10 @@ namespace VRLabs.ToonyStandardRebuild
                         !(Parameters[1] is List<ListSelectorControl.ListSelectorItem>))
                         throw new TypeAccessException("The parameter given was not of the right type");
                     return parentControl.AddListSelectorControl((string)Parameters[0], (List<ListSelectorControl.ListSelectorItem>)Parameters[1]).Alias(Name);
+                case ControlType.ModuleSelectorControl:
+                    if (Parameters.Count < 1 || !(Parameters[0] is string))
+                        throw new TypeAccessException("The parameter given was not of the right type");
+                    return parentControl.AddModuleSelectorControl((string)Parameters[0], modularShader).Alias(Name);
                 case ControlType.ToggleControl:
                     if (Parameters.Count < 3 || !(Parameters[0] is string) ||
                         !(Parameters[1] is float) || !(Parameters[2] is float))
@@ -145,6 +150,7 @@ namespace VRLabs.ToonyStandardRebuild
         TilingAndOffsetControl,
         ConditionalControlContainer,
         ListSelectorControl,
+        ModuleSelectorControl,
         ToggleControl,
         ToggleListControl,
         KeywordToggleControl,

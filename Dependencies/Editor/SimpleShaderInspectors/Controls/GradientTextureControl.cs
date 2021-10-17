@@ -123,30 +123,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         /// </summary>
         /// <param name="propertyName">Name of the gradient texture property.</param>
         /// <param name="colorPropertyName">Name of the relative color property (default: null).</param>
-        public GradientTextureControl(string propertyName, string colorPropertyName = null) : base(propertyName)
+        public GradientTextureControl(string propertyName, string colorPropertyName = null) : this(propertyName, null, null, colorPropertyName)
         {
-            AdditionalProperties = new AdditionalProperty[1];
-            AdditionalProperties[0] = new AdditionalProperty(colorPropertyName);
-            if (!string.IsNullOrWhiteSpace(colorPropertyName))
-            {
-                _hasExtra1 = true;
-            }
-            GradientButtonStyle = Styles.Bubble;
-            GradientEditorStyle = Styles.TextureBoxHeavyBorder;
-            GradientSaveButtonStyle = Styles.Bubble;
-            ShowUvOptions = false;
-
-            GradientButtonColor = Color.white;
-            GradientEditorColor = Color.white;
-            GradientSaveButtonColor = Color.white;
-
-            //Gradient editor default settings.
-            _gradient = new GradientTexture(1024);
-            _rampWidth = GradientWidth.L_1024;
-            _blendMode = GradientBlendMode.Linear;
-            _previousTextures = null;
-
-            this.InitializeLocalizationWithNames(_contentNames);
         }
 
         /// <summary>
@@ -168,7 +146,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 _hasMinValue = true;
             if (!string.IsNullOrWhiteSpace(maxColorPropertyName))
                 _hasMaxValue = true;
-            
+
             GradientButtonStyle = Styles.Bubble;
             GradientEditorStyle = Styles.TextureBoxHeavyBorder;
             GradientSaveButtonStyle = Styles.Bubble;
@@ -194,8 +172,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         protected override void ControlGUI(MaterialEditor materialEditor)
         {
             EditorGUI.BeginChangeCheck();
-            if (ShowUvOptions)
-                EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginHorizontal();
             
             if (_hasExtra1)
                 materialEditor.TexturePropertySingleLine(Content, Property, AdditionalProperties[0].Property);
@@ -207,23 +184,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 GUI.backgroundColor = UVButtonColor;
                 _isUVButtonPressed = EditorGUILayout.Toggle(_isUVButtonPressed, UVButtonStyle, GUILayout.Width(14.0f), GUILayout.Height(14.0f));
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                EditorGUILayout.EndHorizontal();
-                if (_isUVButtonPressed)
-                {
-                    GUI.backgroundColor = UVAreaColor;
-                    EditorGUILayout.BeginVertical(UVAreaStyle);
-                    GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                    EditorGUI.indentLevel++;
-                    materialEditor.TextureScaleOffsetProperty(Property);
-                    EditorGUI.indentLevel--;
-                    EditorGUILayout.EndVertical();
-                }
             }
-            HasPropertyUpdated = EditorGUI.EndChangeCheck();
-
-            if (HasPropertyUpdated && (_hasMinValue || _hasMaxValue))
-                UpdateMinMaxProperties();
-
             if (!_isGradientEditorOpen)
             {
                 GUI.backgroundColor = GradientButtonColor;
@@ -242,6 +203,24 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 }
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
             }
+
+            EditorGUILayout.EndHorizontal();
+            
+            HasPropertyUpdated = EditorGUI.EndChangeCheck();
+            
+            if (_isUVButtonPressed)
+            {
+                GUI.backgroundColor = UVAreaColor;
+                EditorGUILayout.BeginVertical(UVAreaStyle);
+                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
+                EditorGUI.indentLevel++;
+                materialEditor.TextureScaleOffsetProperty(Property);
+                EditorGUI.indentLevel--;
+                EditorGUILayout.EndVertical();
+            }
+
+            if (HasPropertyUpdated && (_hasMinValue || _hasMaxValue))
+                UpdateMinMaxProperties();
 
             if (_isGradientEditorOpen)
             {

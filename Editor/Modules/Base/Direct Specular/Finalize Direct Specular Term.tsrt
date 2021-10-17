@@ -1,0 +1,16 @@
+inline half3 FresnelTerm (half3 F0, half cosA)
+{
+    half t = Pow5 (1 - cosA);   // ala Schlick interpoliation
+    return F0 + (1-F0) * t;
+}
+
+void FinalizeDirectSpecularTerm()
+{
+    DirectSpecular = GFS * NDF;
+    #ifdef UNITY_COLORSPACE_GAMMA
+        DirectSpecular = sqrt(max(1e-4h, DirectSpecular));
+    #endif   
+    DirectSpecular = max(0, DirectSpecular * Attenuation);
+    DirectSpecular *= any(SpecularColor) ? 1.0 : 0.0;
+    DirectSpecular *= FresnelTerm(SpecularColor, LdotH);
+}

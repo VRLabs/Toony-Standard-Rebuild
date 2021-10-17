@@ -1,0 +1,4 @@
+void AddStandardDiffuse()
+{
+    FinalColor.rgb += Diffuse + VertexDirectDiffuse;
+}

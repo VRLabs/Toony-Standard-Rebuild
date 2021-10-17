@@ -175,6 +175,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         /// <returns>A new <see cref="TextureGeneratorControl"/> object.</returns>
         public TextureGeneratorControl(ComputeShader compute, string computeOptionsJson, string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : base(propertyName, extraPropertyName1, extraPropertyName2)
         {
+            _customInlineContent = true;
             _resolution = Resolution.M_512x512;
             _result = new RenderTexture((int)_resolution, (int)_resolution, 32, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB)
             {
@@ -235,6 +236,25 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         protected override void ControlGUI(MaterialEditor materialEditor)
         {
             DrawTextureSingleLine(materialEditor);
+            
+            if (_isGeneratorOpen)
+            {
+                GUI.backgroundColor = GeneratorColor;
+                EditorGUILayout.BeginHorizontal();
+                int previousIndent = EditorGUI.indentLevel;
+                GUILayout.Space(EditorGUI.indentLevel * 15);
+                EditorGUI.indentLevel = 0;
+                EditorGUILayout.BeginVertical(GeneratorStyle);
+                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
+                DrawGenerator();
+                EditorGUILayout.EndVertical();
+                EditorGUI.indentLevel = previousIndent;
+                EditorGUILayout.EndHorizontal();
+            }
+        }
+
+        protected override void DrawSideContent(MaterialEditor materialEditor)
+        {
             if (!_isGeneratorOpen)
             {
                 GUI.backgroundColor = GeneratorButtonColor;
@@ -243,15 +263,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                     _isGeneratorOpen = true;
                 }
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-            }
-
-            if (_isGeneratorOpen)
-            {
-                GUI.backgroundColor = GeneratorColor;
-                EditorGUILayout.BeginVertical(GeneratorStyle);
-                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                DrawGenerator();
-                EditorGUILayout.EndVertical();
             }
         }
 

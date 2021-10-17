@@ -36,7 +36,7 @@ MonoBehaviour:
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 0b31b282b688f6e4cb80c76ec2540dd2,
       type: 3}
     UsedVariables:
-    - Name: DirectDiffuse
+    - Name: Diffuse
       Type: 6
       CustomType: 
     - Name: Albedo
@@ -78,6 +78,20 @@ MonoBehaviour:
       Type: 6
       CustomType: 
     - Name: NormalDir
+      Type: 6
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: AddStandardDiffuse
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 390
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 78d10ee50bebff7429073505b49aca5b,
+      type: 3}
+    UsedVariables:
+    - Name: Diffuse
+      Type: 6
+      CustomType: 
+    - Name: VertexDirectDiffuse
       Type: 6
       CustomType: 
     VariableKeywords: []

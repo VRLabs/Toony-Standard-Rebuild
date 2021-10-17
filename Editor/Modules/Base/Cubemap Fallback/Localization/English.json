@@ -1,0 +1,19 @@
+{
+    "Properties": [
+        {
+            "Name": "Cubemap fallback",
+            "DisplayName": "Cubemap fallback",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Fallback Cubemap",
+            "DisplayName": "Fallback Cubemap",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Fallback Cubemap",
+            "DisplayName": "Fallback Cubemap",
+            "Tooltip": ""
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+float sqr(float x) { return x*x; }
+
+float GTR2_aniso(float NdotH, float HdotX, float HdotY, float ax, float ay)
+{
+    return 1 / (UNITY_PI * ax*ay * sqr( sqr(HdotX/ax) + sqr(HdotY/ay) + NdotH*NdotH ));
+}
+
+float smithG_GGX_aniso(float NdotV, float VdotX, float VdotY, float ax, float ay)
+{
+    return 1 / (NdotV + sqrt( sqr(VdotX*ax) + sqr(VdotY*ay) + sqr(NdotV) ));
+}
+
+
+float3 GetModifiedTangent(float3 tangentTS, float3 tangentDir)
+    {
+        float3x3 worldToTangent;
+        worldToTangent[0] = float3(1, 0, 0);
+        worldToTangent[1] = float3(0, 1, 0);
+        worldToTangent[2] = float3(0, 0, 1); 
+
+        float3 tangentTWS = mul(tangentTS, worldToTangent);
+        float3 fTangent;
+        if (tangentTS.z < 1)
+        tangentDir = tangentTS;
+        else
+        tangentDir = tangentDir;
+        
+        return tangentDir;
+    }
+
+void AnisotropicDirectSpecular()
+{
+    float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TRANSFORM_TEX(FragData.uv, _TangentMap));
+        
+    float anisotropy = tangentTS.a * _Anisotropy;
+    float3 tangent = GetModifiedTangent(tangentTS.rgb, TangentDir);
+
+    float3  anisotropyDirection = anisotropy >= 0.0 ? BitangentDir : TangentDir;
+    float3  anisotropicTangent  = cross(anisotropyDirection, ViewDir);
+    float3  anisotropicNormal   = cross(anisotropicTangent, anisotropyDirection);
+    float   bendFactor          = abs(anisotropy) * saturate(1 - (Pow5(1 - SquareRoughness)));
+    float3  bentNormal          = normalize(lerp(NormalDir, anisotropicNormal, bendFactor));
+    ReflectDir = reflect(-ViewDir, bentNormal);
+
+    float TdotH = dot(tangent, HalfDir);
+    float TdotL = dot(tangent, LightDir);
+    float BdotH = dot(BitangentDir, HalfDir);
+    float BdotL = dot(BitangentDir, LightDir);
+    float TdotV = dot(ViewDir, tangent);
+    float BdotV = dot(ViewDir, BitangentDir);
+
+    //float aspect = sqrt(1-anisotropy*.9);
+    //float ax = max(.005, SquareRoughness / aspect);
+    //float ay = max(.005, SquareRoughness * aspect);
+    float ax = max(SquareRoughness * (1.0 + anisotropy), 0.005);
+    float ay = max(SquareRoughness * (1.0 - anisotropy), 0.005);
+
+
+    NDF = GTR2_aniso(NdotH, TdotH, BdotH, ax, ay) * UNITY_PI;
+    
+    GFS  = smithG_GGX_aniso(NdotL, TdotL, BdotL, ax, ay);
+    GFS *= smithG_GGX_aniso(NdotV, TdotV, BdotV, ax, ay);
+
+    
+    //NDF = GTR2(NdotH, SquareRoughness) * UNITY_PI;
+    //GFS = smithG_GGX(max(NdotL,lerp(0.3,0,SquareRoughness)), Roughness) * smithG_GGX(NdotV, Roughness);
+}

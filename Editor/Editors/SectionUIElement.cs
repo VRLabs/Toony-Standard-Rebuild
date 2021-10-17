@@ -23,7 +23,7 @@ namespace VRLabs.ToonyStandardRebuild
         private FloatField _enableValueField;
         private FloatField _disableValueField;
         private ObjectInspectorList<ControlUI> _controlsList;
-        private ChangedDataUIElement _onDisableValues;
+        private UpdateDataUIElement _onDisableValues;
 
         public SectionUIElement()
         {
@@ -34,7 +34,7 @@ namespace VRLabs.ToonyStandardRebuild
             _disableValueField = new FloatField("Disable value");
             _controlsList = new ObjectInspectorList<ControlUI>("Controls", ControlsUIElement.ElementTemplate);
 
-            _onDisableValues = new ChangedDataUIElement { FoldoutText = "On disable" };
+            _onDisableValues = new UpdateDataUIElement { FoldoutText = "On disable" };
 
             Add(_sectionNameField);
             Add(_isPermanentToggle);

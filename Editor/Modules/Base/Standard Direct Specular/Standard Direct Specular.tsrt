@@ -1,0 +1,19 @@
+float GTR2(float NdotH, float a)
+{
+    float a2 = a*a;
+    float t = 1 + (a2-1)*NdotH*NdotH;
+    return a2 / (UNITY_PI * t*t + 1e-7f);
+}
+
+float smithG_GGX(float NdotV, float alphaG)
+{
+    float a = alphaG*alphaG;
+    float b = NdotV*NdotV;
+    return 1 / (NdotV + sqrt(a + b - a*b));
+}
+
+void StandardDirectSpecular()
+{
+    NDF = GTR2(NdotH, SquareRoughness) * UNITY_PI;
+    GFS = smithG_GGX(max(NdotL,lerp(0.3,0,SquareRoughness)), Roughness) * smithG_GGX(NdotV, Roughness);
+}

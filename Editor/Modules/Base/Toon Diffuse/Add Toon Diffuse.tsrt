@@ -1,0 +1,4 @@
+void AddToonDiffuse()
+{
+    FinalColor.rgb += Diffuse + VertexDirectDiffuse;
+}

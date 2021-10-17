@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace VRLabs.ToonyStandardRebuild
 {
-    public class ChangedDataUIElement : VisualElement
+    public class UpdateDataUIElement : VisualElement
     {
         public string FoldoutText
         {
@@ -21,8 +21,9 @@ namespace VRLabs.ToonyStandardRebuild
         private ObjectInspectorList<UpdateProp<string>> _overrideTags;
 
         private IntegerField _renderQueue;
+        private Toggle _enableRenderQueueField;
 
-        public ChangedDataUIElement()
+        public UpdateDataUIElement()
         {
             _changedSet = new Foldout();
 
@@ -31,6 +32,7 @@ namespace VRLabs.ToonyStandardRebuild
             _textures = new ObjectInspectorList<UpdateProp<Texture>>("Textures", DisabledParameterElement<Texture>.ElementTemplate);
             _keywords = new ObjectInspectorList<UpdateProp<bool>>("Keywords", DisabledParameterElement<bool>.ElementTemplate);
             _overrideTags = new ObjectInspectorList<UpdateProp<string>>("Override Tags", DisabledParameterElement<string>.ElementTemplate);
+            _enableRenderQueueField = new Toggle("Override Render Queue");
             _renderQueue = new IntegerField("Render Queue");
                 
             _changedSet.Add(_floats);
@@ -38,6 +40,7 @@ namespace VRLabs.ToonyStandardRebuild
             _changedSet.Add(_textures);
             _changedSet.Add(_keywords);
             _changedSet.Add(_overrideTags);
+            _changedSet.Add(_enableRenderQueueField);
             _changedSet.Add(_renderQueue);
             
             Add(_changedSet);
@@ -64,8 +67,17 @@ namespace VRLabs.ToonyStandardRebuild
             _keywords.Items = obj.Keywords;
             _overrideTags.Items = obj.OverrideTags;
 
+            _enableRenderQueueField.SetValueWithoutNotify(obj.SetRenderQueue);
+            _enableRenderQueueField.RegisterValueChangedCallback(e =>
+            {
+                obj.SetRenderQueue = e.newValue;
+                _renderQueue.style.display = e.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+            });
+            
             _renderQueue.SetValueWithoutNotify(obj.RenderQueue);
             _renderQueue.RegisterValueChangedCallback(e => obj.RenderQueue = e.newValue);
+            
+            _renderQueue.style.display = _enableRenderQueueField.value ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
 }

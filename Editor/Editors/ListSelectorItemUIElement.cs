@@ -20,13 +20,13 @@ namespace VRLabs.ToonyStandardRebuild
 
         private TextField _itemNameField;
         private IntegerField _elementValueField;
-        private ChangedDataUIElement _onSelectValues;
+        private UpdateDataUIElement _onSelectValues;
 
         public ListSelectorItemUIElement()
         {
             _itemNameField = new TextField("Element name");
             _elementValueField = new IntegerField("Element value");
-            _onSelectValues = new ChangedDataUIElement { FoldoutText = "On select" };
+            _onSelectValues = new UpdateDataUIElement { FoldoutText = "On select" };
 
             Add(_itemNameField);
             Add(_elementValueField);

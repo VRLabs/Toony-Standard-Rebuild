@@ -66,7 +66,7 @@ MonoBehaviour:
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 721741ec8668e2a47b4bee499d8ff4af,
       type: 3}
     UsedVariables:
-    - Name: DirectDiffuse
+    - Name: Diffuse
       Type: 6
       CustomType: 
     - Name: Albedo
@@ -141,6 +141,20 @@ MonoBehaviour:
       Type: 7
       CustomType: 
     - Name: _RampMin
+      Type: 6
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: AddToonDiffuse
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 390
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 96966eed90c69d54f88518fdd499cb35,
+      type: 3}
+    UsedVariables:
+    - Name: VertexDirectDiffuse
+      Type: 6
+      CustomType: 
+    - Name: Diffuse
       Type: 6
       CustomType: 
     VariableKeywords: []

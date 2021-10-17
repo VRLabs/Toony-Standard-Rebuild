@@ -13,6 +13,7 @@ namespace VRLabs.ToonyStandardRebuild
         public List<UpdateProp<bool>> Keywords;
         public List<UpdateProp<string>> OverrideTags;
 
+        public bool SetRenderQueue;
         public int RenderQueue;
 
         public UpdateData()
@@ -40,7 +41,8 @@ namespace VRLabs.ToonyStandardRebuild
             foreach (var value in OverrideTags)
                 enumerable.SetOverrideTag(value.Name, value.Value);
             
-            enumerable.SetRenderQueue(RenderQueue);
+            if(SetRenderQueue)
+                enumerable.SetRenderQueue(RenderQueue);
         }
     }
 }

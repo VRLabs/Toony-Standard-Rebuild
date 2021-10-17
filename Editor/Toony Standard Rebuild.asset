@@ -85,6 +85,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09364b4f1ff9ff54a8b9f40e4b743314, type: 2}
   - {fileID: 11400000, guid: b3e1ddc08b08fff438b3053dc5d72876, type: 2}
   - {fileID: 11400000, guid: 8c03862b78fe12b488fb26022a92b62e, type: 2}
+  - {fileID: 11400000, guid: 4fc39861506ba32418589a689bbbbc74, type: 2}
+  - {fileID: 11400000, guid: 5d9b1f41f9e987a4b92014617303379a, type: 2}
+  - {fileID: 11400000, guid: 2a1474649a9923443b8e9c6a629e5d91, type: 2}
+  - {fileID: 11400000, guid: e92b870a515fc36489ddad79a989fefd, type: 2}
+  - {fileID: 11400000, guid: 55db9f1d0443cee489437d6194e23a41, type: 2}
   LockBaseModules: 0
   LastGeneratedShaders:
   - {fileID: 4800000, guid: 854a2294bb3904740920fa97af7a7696, type: 3}
@@ -192,13 +197,15 @@ MonoBehaviour:
     \"Name\": \"RenderType\",\r\n                                                               
     \"Value\": null\r\n                                                           
     }\r\n                                                        ]\r\n                                                   
-    },\r\n                                                    \"RenderQueue\": -1\r\n                                               
-    }\r\n                                            },\r\n                                           
-    {\r\n                                                \"$id\": 23,\r\n                                               
-    \"$type\": 8,\r\n                                                \"Name\": \"Cutout\",\r\n                                               
-    \"Index\": 1,\r\n                                                \"PropsOnSelected\":
-    {\r\n                                                    \"$id\": 24,\r\n                                                   
-    \"$type\": 9,\r\n                                                    \"FloatProperties\":
+    },\r\n                                                    \"SetRenderQueue\":
+    true,\r\n                                                    \"RenderQueue\":
+    -1\r\n                                                }\r\n                                           
+    },\r\n                                            {\r\n                                               
+    \"$id\": 23,\r\n                                                \"$type\": 8,\r\n                                               
+    \"Name\": \"Cutout\",\r\n                                                \"Index\":
+    1,\r\n                                                \"PropsOnSelected\": {\r\n                                                   
+    \"$id\": 24,\r\n                                                    \"$type\":
+    9,\r\n                                                    \"FloatProperties\":
     {\r\n                                                        \"$id\": 25,\r\n                                                       
     \"$type\": 10,\r\n                                                        \"$rlength\":
     3,\r\n                                                        \"$rcontent\":
@@ -263,13 +270,15 @@ MonoBehaviour:
     \"Name\": \"RenderType\",\r\n                                                               
     \"Value\": \"TransparentCutout\"\r\n                                                           
     }\r\n                                                        ]\r\n                                                   
-    },\r\n                                                    \"RenderQueue\": 2450\r\n                                               
-    }\r\n                                            },\r\n                                           
-    {\r\n                                                \"$id\": 38,\r\n                                               
-    \"$type\": 8,\r\n                                                \"Name\": \"Fade\",\r\n                                               
-    \"Index\": 2,\r\n                                                \"PropsOnSelected\":
-    {\r\n                                                    \"$id\": 39,\r\n                                                   
-    \"$type\": 9,\r\n                                                    \"FloatProperties\":
+    },\r\n                                                    \"SetRenderQueue\":
+    true,\r\n                                                    \"RenderQueue\":
+    2450\r\n                                                }\r\n                                           
+    },\r\n                                            {\r\n                                               
+    \"$id\": 38,\r\n                                                \"$type\": 8,\r\n                                               
+    \"Name\": \"Fade\",\r\n                                                \"Index\":
+    2,\r\n                                                \"PropsOnSelected\": {\r\n                                                   
+    \"$id\": 39,\r\n                                                    \"$type\":
+    9,\r\n                                                    \"FloatProperties\":
     {\r\n                                                        \"$id\": 40,\r\n                                                       
     \"$type\": 10,\r\n                                                        \"$rlength\":
     3,\r\n                                                        \"$rcontent\":
@@ -334,10 +343,12 @@ MonoBehaviour:
     \"Name\": \"RenderType\",\r\n                                                               
     \"Value\": \"Transparent\"\r\n                                                           
     }\r\n                                                        ]\r\n                                                   
-    },\r\n                                                    \"RenderQueue\": 3000\r\n                                               
-    }\r\n                                            },\r\n                                           
-    {\r\n                                                \"$id\": 53,\r\n                                               
-    \"$type\": 8,\r\n                                                \"Name\": \"Transparent\",\r\n                                               
+    },\r\n                                                    \"SetRenderQueue\":
+    true,\r\n                                                    \"RenderQueue\":
+    3000\r\n                                                }\r\n                                           
+    },\r\n                                            {\r\n                                               
+    \"$id\": 53,\r\n                                                \"$type\": 8,\r\n                                               
+    \"Name\": \"Transparent\",\r\n                                               
     \"Index\": 3,\r\n                                                \"PropsOnSelected\":
     {\r\n                                                    \"$id\": 54,\r\n                                                   
     \"$type\": 9,\r\n                                                    \"FloatProperties\":
@@ -405,13 +416,15 @@ MonoBehaviour:
     \"Name\": \"RenderType\",\r\n                                                               
     \"Value\": \"Transparent\"\r\n                                                           
     }\r\n                                                        ]\r\n                                                   
-    },\r\n                                                    \"RenderQueue\": 3000\r\n                                               
-    }\r\n                                            },\r\n                                           
-    {\r\n                                                \"$id\": 68,\r\n                                               
-    \"$type\": 8,\r\n                                                \"Name\": \"Dither\",\r\n                                               
-    \"Index\": 4,\r\n                                                \"PropsOnSelected\":
-    {\r\n                                                    \"$id\": 69,\r\n                                                   
-    \"$type\": 9,\r\n                                                    \"FloatProperties\":
+    },\r\n                                                    \"SetRenderQueue\":
+    true,\r\n                                                    \"RenderQueue\":
+    3000\r\n                                                }\r\n                                           
+    },\r\n                                            {\r\n                                               
+    \"$id\": 68,\r\n                                                \"$type\": 8,\r\n                                               
+    \"Name\": \"Dither\",\r\n                                                \"Index\":
+    4,\r\n                                                \"PropsOnSelected\": {\r\n                                                   
+    \"$id\": 69,\r\n                                                    \"$type\":
+    9,\r\n                                                    \"FloatProperties\":
     {\r\n                                                        \"$id\": 70,\r\n                                                       
     \"$type\": 10,\r\n                                                        \"$rlength\":
     3,\r\n                                                        \"$rcontent\":
@@ -476,11 +489,12 @@ MonoBehaviour:
     \"Name\": \"RenderType\",\r\n                                                               
     \"Value\": \"TransparentCutout\"\r\n                                                           
     }\r\n                                                        ]\r\n                                                   
-    },\r\n                                                    \"RenderQueue\": 2450\r\n                                               
-    }\r\n                                            }\r\n                                       
-    ]\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 83,\r\n                               
+    },\r\n                                                    \"SetRenderQueue\":
+    true,\r\n                                                    \"RenderQueue\":
+    2450\r\n                                                }\r\n                                           
+    }\r\n                                        ]\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 83,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
@@ -524,22 +538,23 @@ MonoBehaviour:
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
     \"$id\": 97,\r\n                        \"$type\": 16,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": 0\r\n               
-    }\r\n            },\r\n            {\r\n                \"$id\": 98,\r\n               
-    \"$type\": 2,\r\n                \"SectionName\": \"Stencil Options\",\r\n               
-    \"IsPermanent\": false,\r\n                \"ActivatePropertyName\": \"_StencilSection\",\r\n               
-    \"EnableValue\": 1,\r\n                \"DisableValue\": 0,\r\n               
-    \"Controls\": {\r\n                    \"$id\": 99,\r\n                    \"$type\":
-    3,\r\n                    \"$rlength\": 3,\r\n                    \"$rcontent\":
-    [\r\n                        {\r\n                            \"$id\": 100,\r\n                           
-    \"$type\": 4,\r\n                            \"Name\": \"Stencil ID\",\r\n                           
-    \"ControlType\": 2,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 101,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 102,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_StencilID\"\r\n                                   
-    }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 103,\r\n                               
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": 0\r\n                }\r\n            },\r\n            {\r\n               
+    \"$id\": 98,\r\n                \"$type\": 2,\r\n                \"SectionName\":
+    \"Stencil Options\",\r\n                \"IsPermanent\": false,\r\n               
+    \"ActivatePropertyName\": \"_StencilSection\",\r\n                \"EnableValue\":
+    1,\r\n                \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
+    \"$id\": 99,\r\n                    \"$type\": 3,\r\n                    \"$rlength\":
+    3,\r\n                    \"$rcontent\": [\r\n                        {\r\n                           
+    \"$id\": 100,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Stencil ID\",\r\n                            \"ControlType\": 2,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 101,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 102,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_StencilID\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 103,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
@@ -592,5 +607,6 @@ MonoBehaviour:
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
     \"$id\": 120,\r\n                        \"$type\": 16,\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": 0\r\n               
-    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": 0\r\n                }\r\n            }\r\n        ]\r\n   
+    }\r\n}","unityGUIDReferences":[]}'

@@ -209,6 +209,28 @@ MonoBehaviour:
     - SHADOW_VARIABLES
     CodeKeywords:
     - SHADOW_CODE
+  - Name: PremultiplyAlpha
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 140
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: ca001ddb7678c74498660162fc98bcf6,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  - Name: AddAlpha
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 399
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 293c1e1a90233b54dbcf200faf05b8a7,
+      type: 3}
+    UsedVariables:
+    - Name: Albedo
+      Type: 7
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
     Assembly-CSharp-Editor\",\r\n    \"Name\": \"Default Inputs\",\r\n    \"Sections\":
     {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,

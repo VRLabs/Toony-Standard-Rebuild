@@ -1,0 +1,4 @@
+void AddDirectSpecular()
+{
+    FinalColor.rgb += DirectSpecular * SpecLightColor.rgb * SpecLightColor.a;
+}

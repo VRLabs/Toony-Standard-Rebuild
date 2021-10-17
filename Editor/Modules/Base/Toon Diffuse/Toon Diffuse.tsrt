@@ -22,7 +22,7 @@ float4 RampDotL()
     //Calculating ramp uvs based on offset
     float newMin = max(offset, 0);
     float newMax = max(offset + 1, 0);
-    float rampUv = remap(NdotL, -1, 1, newMin, newMax);
+    float rampUv = remap(UnmaxedNdotL, -1, 1, newMin, newMax);
     float3 ramp = UNITY_SAMPLE_TEX2D(_Ramp, float2(rampUv, rampUv)).rgb;
     //Adding the color and remapping it based on the shadow intensity stored into the alpha channel of the ramp color
     ramp *= _RampColor.rgb;
@@ -43,7 +43,7 @@ float4 RampDotL()
 
 void GetToonDiffuse()
 {
-    DirectDiffuse = 0;
+    Diffuse = 0;
 
     //toon version of the NdotL for the direct light
     float4 ramp = RampDotL();
@@ -51,9 +51,9 @@ void GetToonDiffuse()
 
     //diffuse color
     #if defined(DIRECTIONAL) || defined(DIRECTIONAL_COOKIE) 
-        DirectDiffuse = Albedo * ramp.rgb * (LightColor.rgb + IndirectDiffuse);
+        Diffuse = Albedo * ramp.rgb * (LightColor.rgb + IndirectDiffuse);
     #else
-        DirectDiffuse = Albedo * ramp.rgb * LightColor.rgb * LightColor.a;
+        Diffuse = Albedo * ramp.rgb * LightColor.rgb * LightColor.a;
     #endif
 
 }

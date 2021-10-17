@@ -1,0 +1,14 @@
+{
+    "Properties": [
+        {
+            "Name": "Indirect override",
+            "DisplayName": "Indirect override",
+            "Tooltip": "Override probe with the fallback in any case"
+        },
+        {
+            "Name": "Indirect fallback mode",
+            "DisplayName": "Indirect fallback mode",
+            "Tooltip": "Mode of the indirect fallback, when set to None nothing will be used as a fallback, and in case \"Indirect override\" is active, it will completely remove the probe"
+        }
+    ]
+}

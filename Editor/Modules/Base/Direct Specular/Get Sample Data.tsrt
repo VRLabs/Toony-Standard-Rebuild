@@ -1,0 +1,9 @@
+void GetSampleData()
+{
+    Metallic = Msso.r * _Metallic;
+	Glossiness = Msso.g * _Glossiness;
+	Specular = Msso.b * _Specular;
+
+    Roughness = 1 - Glossiness;
+    SquareRoughness = max(Roughness * Roughness, 0.002);
+}

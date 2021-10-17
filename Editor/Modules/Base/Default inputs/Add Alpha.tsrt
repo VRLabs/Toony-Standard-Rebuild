@@ -1,0 +1,4 @@
+void AddAlpha()
+{
+    FinalColor.a = Albedo.a;
+}

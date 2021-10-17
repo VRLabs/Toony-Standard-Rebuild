@@ -273,6 +273,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foreach (var variable in functions
                 .Where(x => x.VariableKeywords.Any(y => y.Equals(keyword)) || (isDefaultKeyword && x.VariableKeywords.Count == 0))
                 .SelectMany(x => x.UsedVariables)
+                .Concat(variantEnabledModules
+                    .Where(x => x.Enabled != null && !string.IsNullOrWhiteSpace(x.Enabled.Name) && !x.Templates.Any(y => y.NeedsVariant))
+                    .Select(x => x.Enabled.ToVariable()))
                 .Distinct()
                 .OrderBy(x => x.Type))
             {

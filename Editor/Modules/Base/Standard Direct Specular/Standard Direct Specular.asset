@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6eb4885991aef4bb8e8696cd587c3d, type: 3}
+  m_Name: Standard Direct Specular
+  m_EditorClassIdentifier: 
+  Id: StandardDirectSpecular
+  Name: Standard Specular
+  Version: 1.0
+  Author: VRLabs
+  Description: Standard Direct Specular
+  RequiredIncludes: []
+  Enabled:
+    Name: _SpecularMode
+    DisplayName: Specular Mode
+    Type: Float
+    DefaultValue: 0.0
+    Attributes: []
+    EnableValue: 0
+  Properties: []
+  ModuleDependencies:
+  - CoreSpecular
+  IncompatibleWith: []
+  Templates: []
+  Functions:
+  - Name: StandardDirectSpecular
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 200
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: a58b64455dce6974abb5ad82673dfa40,
+      type: 3}
+    UsedVariables:
+    - Name: Roughness
+      Type: 4
+      CustomType: 
+    - Name: SquareRoughness
+      Type: 4
+      CustomType: 
+    - Name: NdotL
+      Type: 4
+      CustomType: 
+    - Name: NdotH
+      Type: 4
+      CustomType: 
+    - Name: NdotV
+      Type: 4
+      CustomType: 
+    - Name: NDF
+      Type: 6
+      CustomType: 
+    - Name: GFS
+      Type: 4
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
+  AdditionalSerializedData: 

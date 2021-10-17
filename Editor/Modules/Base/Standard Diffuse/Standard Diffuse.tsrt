@@ -17,8 +17,8 @@ float DisneyDiffuse(half perceptualRoughness)
 // Get the direct diffuse contribution using disney's diffuse implementation
 void GetPBRDiffuse()
 {
-    DirectDiffuse = 0;
+    Diffuse = 0;
     float ramp = DisneyDiffuse(Roughness) * NdotL;
-    DirectDiffuse = Albedo * (LightColor.rgb * LightColor.a * ramp + IndirectDiffuse);
+    Diffuse = Albedo * (LightColor.rgb * LightColor.a * ramp + IndirectDiffuse);
     Attenuation = ramp;
 }

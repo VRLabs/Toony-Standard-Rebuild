@@ -103,6 +103,9 @@ namespace VRLabs.ToonyStandardRebuild
                 case ControlType.ListSelectorControl:
                     _specificControlUI = new ListSelectorControlUIElement(obj.Parameters);
                     break;
+                case ControlType.ModuleSelectorControl:
+                    _specificControlUI = new ModuleSelectorControlUIElement(obj.Parameters);
+                    break;
                 case ControlType.VertexStreamsControl:
                 default:
                     _specificControlUI = new VisualElement();

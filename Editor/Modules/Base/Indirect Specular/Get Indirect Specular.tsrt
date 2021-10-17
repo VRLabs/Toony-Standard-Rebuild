@@ -1,0 +1,66 @@
+struct Unity_GlossyEnvironmentData
+{
+    // - Deferred case have one cubemap
+    // - Forward case can have two blended cubemap (unusual should be deprecated).
+
+    // Surface properties use for cubemap integration
+    half    roughness; // CAUTION: This is perceptualRoughness but because of compatibility this name can't be change :(
+    half3   reflUVW;
+};
+half perceptualRoughnessToMipmapLevel(half perceptualRoughness)
+{
+    return perceptualRoughness * UNITY_SPECCUBE_LOD_STEPS;
+}
+
+
+half4 Unity_GlossyEnvironment (UNITY_ARGS_TEXCUBE(tex), half4 hdr, Unity_GlossyEnvironmentData glossIn)
+{
+    half perceptualRoughness = glossIn.roughness /* perceptualRoughness */ ;
+
+    // TODO: CAUTION: remap from Morten may work only with offline convolution, see impact with runtime convolution!
+    // For now disabled
+    #if 0
+        float m = PerceptualRoughnessToRoughness(perceptualRoughness); // m is the real roughness parameter
+        const float fEps = 1.192092896e-07F;        // smallest such that 1.0+FLT_EPSILON != 1.0  (+1e-4h is NOT good here. is visibly very wrong)
+        float n =  (2.0/max(fEps, m*m))-2.0;        // remap to spec power. See eq. 21 in --> https://dl.dropboxusercontent.com/u/55891920/papers/mm_brdf.pdf
+
+        n /= 4;                                     // remap from n_dot_h formulatino to n_dot_r. See section "Pre-convolved Cube Maps vs Path Tracers" --> https://s3.amazonaws.com/docs.knaldtech.com/knald/1.0.0/lys_power_drops.html
+
+        perceptualRoughness = pow( 2/(n+2), 0.25);      // remap back to square root of real roughness (0.25 include both the sqrt root of the conversion and sqrt for going from roughness to perceptualRoughness)
+    #else
+        // MM: came up with a surprisingly close approximation to what the #if 0'ed out code above does.
+        perceptualRoughness = perceptualRoughness*(1.7 - 0.7*perceptualRoughness);
+    #endif
+
+
+    half mip = perceptualRoughnessToMipmapLevel(perceptualRoughness);
+    half3 R = glossIn.reflUVW;
+    half4 rgbm = UNITY_SAMPLE_TEXCUBE_LOD(tex, R, mip);
+
+    return float4(DecodeHDR(rgbm, hdr),rgbm.a);
+}
+
+inline half3 FresnelLerp (half3 F0, half3 F90, half cosA)
+{
+    half t = Pow5 (1 - cosA);   // ala Schlick interpoliation
+    return lerp (F0, F90, t);
+}
+
+void GetIndirectSpecular()
+{
+    Unity_GlossyEnvironmentData envData;
+    envData.roughness = Roughness;
+    envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube0_ProbePosition, unity_SpecCube0_BoxMin, unity_SpecCube0_BoxMax);
+    float4 indirectSpecularRGBA = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE(unity_SpecCube0), unity_SpecCube0_HDR, envData);
+    IndirectSpecular =  indirectSpecularRGBA.rgb;
+    if ((_IndirectFallbackMode > 0 && indirectSpecularRGBA.a == 0) || (_IndirectOverride > 0))
+    {
+        //using the fake specular probe toned down based on the average light, it's not phisically accurate
+        //but having a probe that reflects arbitrary stuff isn't accurate to begin with
+        half lightColGrey = max((LightColor.r + LightColor.g + LightColor.b) / 3, (IndirectDiffuse.r + IndirectDiffuse.g + IndirectDiffuse.b) / 3);
+        IndirectSpecular = CustomIndirect * min(lightColGrey, 1);
+    }
+
+    float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
+    IndirectSpecular *= FresnelLerp(SpecularColor, grazingTerm, NdotV);
+}

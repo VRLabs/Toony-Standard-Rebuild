@@ -287,7 +287,7 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls)
         {
-            var newControl = sectionControl.CreateControl(control);
+            var newControl = sectionControl.CreateControl(control, ModularShader);
             loadedControls.Add(newControl);
 
             if (sectionControl.CouldHaveControls() && newControl is IControlContainer container)

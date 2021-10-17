@@ -1,0 +1,4 @@
+void GetFallbackCubemap()
+{
+    CustomIndirect = texCUBElod(_FallbackCubemap, half4(ReflectDir.xyz, remap(SquareRoughness, 1, 0, 5, 0))).rgb;
+}

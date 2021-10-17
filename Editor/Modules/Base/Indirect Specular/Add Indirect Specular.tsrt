@@ -1,0 +1,4 @@
+void AddIndirectSpecular()
+{
+    FinalColor.rgb += IndirectSpecular * Occlusion;
+}

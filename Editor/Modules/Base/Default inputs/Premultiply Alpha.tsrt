@@ -1,0 +1,6 @@
+void PremultiplyAlpha()
+{
+    #if defined(_ALPHAPREMULTIPLY_ON)
+        Albedo.rgb *= Albedo.a;
+    #endif
+}

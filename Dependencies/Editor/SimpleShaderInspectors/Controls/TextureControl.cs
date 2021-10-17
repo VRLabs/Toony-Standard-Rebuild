@@ -43,6 +43,14 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         /// True if the control had the second extra property, false otherwise.
         /// </value>
         protected bool _hasExtra2 = false;
+        
+        /// <summary>
+        /// Indicates if controls inheriting from this one have something to display inlined with the texture.
+        /// </summary>
+        /// <value>
+        /// True if the control has something to inline to the texture, false otherwise.
+        /// </value>
+        protected bool _customInlineContent = false;
 
         /// <summary>
         /// Indicates if the uv button is pressed and the tiling and offset area is visible.
@@ -152,7 +160,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         protected void DrawTextureSingleLine(MaterialEditor materialEditor)
         {
             EditorGUI.BeginChangeCheck();
-            if (ShowUvOptions)
+            if (ShowUvOptions || _customInlineContent)
                 EditorGUILayout.BeginHorizontal();
             
             if (_hasExtra2)
@@ -170,24 +178,35 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             {
                 materialEditor.TexturePropertySingleLine(Content, Property);
             }
+
+            if (_customInlineContent)
+                DrawSideContent(materialEditor);
             if (ShowUvOptions)
             {
                 GUI.backgroundColor = UVButtonColor;
-                _isUVButtonPressed = EditorGUILayout.Toggle(_isUVButtonPressed, UVButtonStyle, GUILayout.Width(16.0f), GUILayout.Height(16.0f));
+                _isUVButtonPressed = EditorGUILayout.Toggle(_isUVButtonPressed, UVButtonStyle, GUILayout.Width(19.0f), GUILayout.Height(19.0f));
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                EditorGUILayout.EndHorizontal();
-                if (_isUVButtonPressed)
-                {
-                    GUI.backgroundColor = UVAreaColor;
-                    EditorGUILayout.BeginVertical(UVAreaStyle);
-                    GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                    EditorGUI.indentLevel++;
-                    materialEditor.TextureScaleOffsetProperty(Property);
-                    EditorGUI.indentLevel--;
-                    EditorGUILayout.EndVertical();
-                }
             }
+            if (ShowUvOptions || _customInlineContent)
+                EditorGUILayout.EndHorizontal();
+            
             HasPropertyUpdated = EditorGUI.EndChangeCheck();
+            
+            if (_isUVButtonPressed)
+            {
+                GUI.backgroundColor = UVAreaColor;
+                EditorGUILayout.BeginVertical(UVAreaStyle);
+                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
+                EditorGUI.indentLevel++;
+                materialEditor.TextureScaleOffsetProperty(Property);
+                EditorGUI.indentLevel--;
+                EditorGUILayout.EndVertical();
+            }
+        }
+
+        protected virtual void DrawSideContent(MaterialEditor materialEditor)
+        {
+            
         }
     }
 }
