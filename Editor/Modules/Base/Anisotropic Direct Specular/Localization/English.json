@@ -1,0 +1,54 @@
+{
+    "Properties": [
+        {
+            "Name": "Anisotropic",
+            "DisplayName": "Anisotropic",
+            "Tooltip": "Level of Aniso"
+        },
+        {
+            "Name": "Tangent Map",
+            "DisplayName": "Tangent/Anisotropic Map",
+            "Tooltip": "Tangent map (RGB), Anisotropic map (A)"
+        },
+        {
+            "Name": "Tangent Map_GeneratorOpen",
+            "DisplayName": "Open Generator",
+            "Tooltip": "Open the texture generator"
+        },
+        {
+            "Name": "Tangent Map_GeneratorSaveButton",
+            "DisplayName": "Save",
+            "Tooltip": "Save and applies the texture"
+        },
+        {
+            "Name": "Tangent Map_GeneratorCancelButton",
+            "DisplayName": "Cancel",
+            "Tooltip": "Cancel the operation and closes the generator"
+        },
+        {
+            "Name": "Tangent Map_GeneratorTextureSize",
+            "DisplayName": "Texture Size",
+            "Tooltip": "Texture Size"
+        },
+        {
+            "Name": "Tangent Map_TextureInvert",
+            "DisplayName": "Invert",
+            "Tooltip": "Invert texture"
+        },
+        {
+            "Name": "Tangent Map_Input1",
+            "DisplayName": "Tangent (RGB)",
+            "Tooltip": "Tangent map used, takes the rgb values"
+        },
+        {
+            "Name": "Tangent Map_Input2",
+            "DisplayName": "Anisotropic",
+            "Tooltip": "Anisotropic map used, will be put as alpha"
+        },
+        {
+            "Name": "Anisotropy",
+            "DisplayName": "Anisotropy",
+            "Tooltip": ""
+        }
+    ]
+}
