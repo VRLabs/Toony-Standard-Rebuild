@@ -485,7 +485,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     if (line.StartsWith("}"))
                         tabs--;
                     finalFile.AppendLineTabbed(tabs, line);
-                    if (line.StartsWith("{"))
+                    if (line.StartsWith("{") || line.EndsWith("{"))
                         tabs++;
                 }
             }

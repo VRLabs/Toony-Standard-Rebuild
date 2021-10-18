@@ -28,10 +28,18 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
 
         public EnableProperty(string name, int enableValue) : this(name, name, enableValue){}
-        
+
         bool IEquatable<EnableProperty>.Equals(EnableProperty other)
         {
             return Equals(other);
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj is Property other)
+                return Name == other.Name;
+
+            return false;
         }
 
         public static bool operator == (EnableProperty left, EnableProperty right)

@@ -34,7 +34,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             return variable;
         }
-        
+
         public override bool Equals(object obj)
         {
             if (obj is Property other)
@@ -63,6 +63,5 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             int hashCode = (Name != null ? Name.GetHashCode() : 0);
             return hashCode;
         }
-        
     }
 }
