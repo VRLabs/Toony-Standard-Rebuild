@@ -125,6 +125,55 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             return dependencies.Count > 0 ? VerificationResponse.MissingDependencies : VerificationResponse.NoIssues;
         }
+        
+        public static List<string> CheckShaderIssues(ModularShader shader)
+        {
+            List<string> errors = new List<string>();
+            var modules = FindAllModules(shader);
+
+            for (int i = 0; i < modules.Count; i++)
+            {
+                var dependencies = new List<string>(modules[i].ModuleDependencies);
+                for (int j = 0; j < modules.Count; j++)
+                {
+                    if (modules[j].IncompatibleWith.Any(x => x.Equals(modules[i].Id))) 
+                        errors.Add($"Module \"{modules[j].Name}\" is incompatible with module \"{modules[i].name}\".");
+                    
+                    if (i != j && modules[i].Id.Equals(modules[j].Id))
+                        errors.Add($"Module \"{modules[i].Name}\" is duplicate.");
+                    
+                    if (dependencies.Contains(modules[j].Id))
+                        dependencies.Remove(modules[j].Id);
+                }
+                for (int j = 0; j < dependencies.Count; j++)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
+            }
+            return errors;
+        }
+        
+        public static List<string> CheckShaderIssues(List<ShaderModule> modules)
+        {
+            List<string> errors = new List<string>();
+
+            for (int i = 0; i < modules.Count; i++)
+            {
+                var dependencies = new List<string>(modules[i].ModuleDependencies);
+                for (int j = 0; j < modules.Count; j++)
+                {
+                    if (modules[j].IncompatibleWith.Any(x => x.Equals(modules[i].Id))) 
+                        errors.Add($"Module \"{modules[j].Name}\" is incompatible with module \"{modules[i].name}\".");
+                    
+                    if (i != j && modules[i].Id.Equals(modules[j].Id))
+                        errors.Add($"Module \"{modules[i].Name}\" is duplicate.");
+                    
+                    if (dependencies.Contains(modules[j].Id))
+                        dependencies.Remove(modules[j].Id);
+                }
+                for (int j = 0; j < dependencies.Count; j++)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
+            }
+            return errors;
+        }
 
         public static List<ShaderModule> FindAllModules(ModularShader shader)
         {

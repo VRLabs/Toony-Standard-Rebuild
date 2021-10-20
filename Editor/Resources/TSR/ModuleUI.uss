@@ -1,11 +1,6 @@
 .texture-generation-compute-json
 {
     white-space: normal;
-    background-color: rgba(42,42,42,1);
-    border-left-color: rgba(33,33,33,1);
-    border-right-color: rgba(33,33,33,1);
-    border-top-color: rgba(13,13,13,1);
-    border-bottom-color: rgba(33,33,33,1);
     border-radius: 3px;
     margin-left: 4px;
     margin-right: 8px;

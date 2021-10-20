@@ -37,7 +37,7 @@ MonoBehaviour:
     DefaultValue: 0.0
     Attributes: []
   ModuleDependencies:
-  - CoreDirectSpecular
+  - CoreSpecular
   IncompatibleWith: []
   Templates: []
   Functions:

@@ -35,6 +35,9 @@ namespace VRLabs.ToonyStandardRebuild
             _computeSettingsLabelLabel.style.borderTopWidth = 4;
             _computeSettingsLabel = new Label();
             _computeSettingsLabel.AddToClassList("texture-generation-compute-json");
+            _computeSettingsLabel.AddToClassList("unity-base-text-field__input");
+            _computeSettingsLabel.AddToClassList("unity-text-field__input");
+            _computeSettingsLabel.AddToClassList("unity-base-field__input");
             customCompute.value = parameters.Count == 5;
 
             if (parameters.Count == 3)

@@ -10,6 +10,7 @@ using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.OdinSerializer;
 using System.Text;
+using UnityEditorInternal;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
 using Debug = UnityEngine.Debug;
 
@@ -57,6 +58,10 @@ namespace VRLabs.ToonyStandardRebuild
 
         private List<ShaderModule> _availableModules;
         private List<ShaderModule> _usedModules;
+        private ReorderableList _availableModulesList;
+        private ReorderableList _usedModulesList;
+        private ShaderModule _lastSelectedModule;
+        private List<string> _moduleErrors;
 
         private static Vector2 _firstSettingsViewPosition;
         private static Vector2 _secondSettingsViewPosition;
@@ -305,6 +310,61 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void DrawSettingsGUI()
         {
+            ReinitializeListsIfNeeded();
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Create new base"))
+            {
+                
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space(4);
+            DrawModuleSelectorsArea();
+
+            if (_moduleErrors?.Count > 0)
+            {
+                EditorGUILayout.Space(4);
+                foreach (string moduleError in _moduleErrors)
+                    EditorGUILayout.HelpBox(moduleError, MessageType.Error);
+            }
+            
+            EditorGUILayout.Space(8);
+            DrawInfoArea();
+            EditorGUILayout.Space(30);
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Regenerate shader"))
+            {
+                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
+                Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\"");
+            }
+            GUILayout.FlexibleSpace();
+            EditorGUI.BeginDisabledGroup(_moduleErrors?.Count > 0);
+            if (GUILayout.Button("Apply module changes"))
+            {
+                ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
+                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
+
+                EditorUtility.SetDirty(ModularShader);
+                
+                Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
+            }
+            EditorGUI.EndDisabledGroup();
+            if (GUILayout.Button("Reset changes"))
+            {
+                _usedModules = null;
+                _usedModulesList = null;
+                _availableModules = null;
+                _availableModulesList = null;
+                _lastSelectedModule = null;
+                _moduleErrors = null;
+                _materialEditor.Repaint();
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        private void ReinitializeListsIfNeeded()
+        {
             if (_availableModules == null)
             {
                 _availableModules = FindAssetsByType<ShaderModule>()
@@ -317,122 +377,124 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 _usedModules = new List<ShaderModule>(ModularShader.AdditionalModules);
             }
-            EditorGUILayout.HelpBox("Work in progress", MessageType.Warning);
 
+            if (_usedModulesList == null)
+            {
+                _usedModulesList = new ReorderableList(_usedModules, typeof(ShaderModule), true, false, false, false);
+                _usedModulesList.headerHeight = 1;
+                _usedModulesList.footerHeight = 1;
+                _usedModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    if (index >= _usedModules.Count) return;
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _usedModules[index].Name);
+                    if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "A"))
+                    {
+                        _availableModules.Add(_usedModules[index]);
+                        _usedModules.Remove(_usedModules[index]);
+                        _moduleErrors = ShaderGenerator.CheckShaderIssues(ModularShader.BaseModules.Concat(_usedModules).ToList());
+                        _materialEditor.Repaint();
+                    }
+
+                    if (isFocused && index < _usedModules.Count && _lastSelectedModule != _usedModules[index])
+                    {
+                        _lastSelectedModule = _usedModules[index];
+                    }
+                };
+            }
+
+            if (_availableModulesList == null)
+            {
+                _availableModulesList = new ReorderableList(_availableModules, typeof(ShaderModule), true, false, false, false);
+                _availableModulesList.headerHeight = 1;
+                _availableModulesList.footerHeight = 1;
+                _availableModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    if (index >= _availableModules.Count) return;
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _availableModules[index].Name);
+                    if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "B"))
+                    {
+                        _usedModules.Add(_availableModules[index]);
+                        _availableModules.Remove(_availableModules[index]);
+                        _moduleErrors = ShaderGenerator.CheckShaderIssues(ModularShader.BaseModules.Concat(_usedModules).ToList());
+                        _materialEditor.Repaint();
+                    }
+
+                    if (isFocused && index < _availableModules.Count && _lastSelectedModule != _availableModules[index])
+                    {
+                        _lastSelectedModule = _availableModules[index];
+                    }
+                };
+            }
+        }
+
+        private void DrawModuleSelectorsArea()
+        {
             float tabWidth = EditorGUIUtility.currentViewWidth / 2 - 20;
             EditorGUILayout.BeginHorizontal();
 
             EditorGUILayout.BeginVertical(GUILayout.MinWidth(tabWidth));
-            GUILayout.Label("Enabled Modules");
-            _firstSettingsViewPosition = EditorGUILayout.BeginScrollView(_firstSettingsViewPosition, Styles.BoxHeavyBorder, GUILayout.MaxHeight(200), GUILayout.MinHeight(20));
-            for (int index = 0; index < _usedModules.Count; index++)
-            {
-                ShaderModule module = _usedModules[index];
-                int r = DrawModuleLine(module, true);
-                if (r == 0)
-                    continue;
-
-                MoveModuleInList(_usedModules, index, r);
-                _materialEditor.Repaint();
-                //GUILayout.Label(module.Name);
-            }
-
+            EditorGUILayout.BeginVertical("RL Header", GUILayout.MinWidth(tabWidth));
+            GUILayout.Label("Active Modules");
+            EditorGUILayout.EndVertical();
+            _firstSettingsViewPosition = EditorGUILayout.BeginScrollView(_firstSettingsViewPosition, GUILayout.MaxHeight(Math.Min(200, _usedModules.Count * 21 + 8)));
+            _usedModulesList.DoLayoutList();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space(4);
 
             EditorGUILayout.BeginVertical(GUILayout.MinWidth(tabWidth));
+            EditorGUILayout.BeginVertical("RL Header", GUILayout.MinWidth(tabWidth));
             GUILayout.Label("Available Modules");
-            _secondSettingsViewPosition = EditorGUILayout.BeginScrollView(_secondSettingsViewPosition, Styles.BoxHeavyBorder, GUILayout.MaxHeight(200), GUILayout.MinHeight(20));
-            for (int index = 0; index < _availableModules.Count; index++)
-            {
-                ShaderModule module = _availableModules[index];
-                int r = DrawModuleLine(module, false);
-                if (r == 0)
-                    continue;
-
-                MoveModuleInList(_availableModules, index, r);
-                _materialEditor.Repaint();
-                //GUILayout.Label(module.Name);
-            }
-
+            EditorGUILayout.EndVertical();
+            _secondSettingsViewPosition = EditorGUILayout.BeginScrollView(_secondSettingsViewPosition, GUILayout.MaxHeight(Math.Min(200, _availableModules.Count * 21 + 8)));
+            _availableModulesList.DoLayoutList();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.Space(4);
-
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Regenerate shader"))
-            {
-                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
-                Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\"");
-            }
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Apply module changes"))
-            {
-                ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
-                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
-
-                EditorUtility.SetDirty(ModularShader);
-                
-                Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
-            }
-            if (GUILayout.Button("Reset changes"))
-            {
-                _availableModules = FindAssetsByType<ShaderModule>()
-                    .Where(x => ModularShader.BaseModules.All(y => y != x) &&
-                                ModularShader.AdditionalModules.All(y => y != x))
-                    .ToList();
-                _usedModules = new List<ShaderModule>(ModularShader.AdditionalModules);
-            }
-            EditorGUILayout.EndHorizontal();
         }
 
-        private int DrawModuleLine(ShaderModule module, bool enabledModule)
+        private void DrawInfoArea()
         {
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label(module.Name);
-            GUILayout.FlexibleSpace();
-            int i = 0;
-            if (enabledModule)
+            if (_lastSelectedModule != null)
             {
-                if (GUILayout.Button("", Styles.UpIcon, GUILayout.Width(20.0f), GUILayout.Height(20.0f)))
-                {
-                    i = -1;
-                }
-                if (GUILayout.Button("", Styles.DownIcon, GUILayout.Width(20.0f), GUILayout.Height(20.0f)))
-                {
-                    i = 1;
-                }
-                if (GUILayout.Button("A"))
-                {
-                    _availableModules.Add(module);
-                    _usedModules.Remove(module);
-                    _materialEditor.Repaint();
-                }
-            }
-            else
-            {
-                if (GUILayout.Button("B"))
-                {
-                    _availableModules.Remove(module);
-                    _usedModules.Add(module);
-                    _materialEditor.Repaint();
-                }
-            }
-            EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginVertical(Styles.BoxHeavyBorder);
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label(_lastSelectedModule.Name, EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
+                GUILayout.Label($"({_lastSelectedModule.Id})", EditorStyles.miniLabel);
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.Space(3);
+                GUILayout.Label(_lastSelectedModule.Description, EditorStyles.wordWrappedLabel);
+                EditorGUILayout.Space(5);
 
-            return i;
-        }
+                if (_lastSelectedModule.ModuleDependencies.Count > 0)
+                {
+                    GUILayout.Label("Requires:", EditorStyles.boldLabel);
+                    foreach (var s in _lastSelectedModule.ModuleDependencies)
+                        GUILayout.Label(s);
+                    EditorGUILayout.Space(3);
+                }
 
-        private void MoveModuleInList(List<ShaderModule> modules, int i, int posMov)
-        {
-            if (posMov + i >= modules.Count || posMov + i < 0)
-                return;
-            (modules[i + posMov], modules[i]) = (modules[i], modules[i + posMov]);
+                if (_lastSelectedModule.IncompatibleWith.Count > 0)
+                {
+                    GUILayout.Label("Incompatible With:", EditorStyles.boldLabel);
+                    foreach (var s in _lastSelectedModule.IncompatibleWith)
+                        GUILayout.Label(s);
+                }
+
+                EditorGUILayout.Space(3);
+
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("Author:", EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
+                GUILayout.Label(_lastSelectedModule.Author, GUILayout.Height(14));
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("Version:", EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
+                GUILayout.Label(_lastSelectedModule.Version, GUILayout.Height(14));
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndVertical();
+            }
         }
 
         private void Header()
@@ -478,7 +540,11 @@ namespace VRLabs.ToonyStandardRebuild
                 if (_showSettingsGUI)
                 {
                     _usedModules = null;
+                    _usedModulesList = null;
                     _availableModules = null;
+                    _availableModulesList = null;
+                    _lastSelectedModule = null;
+                    _moduleErrors = null;
                 }
                 else
                 {
