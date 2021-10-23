@@ -22,7 +22,7 @@ struct FragmentData
 FragmentData FragData;
 float3 Albedo;
 float3 Emission;
-float3 Specular;
+float3 SpecularColor;
 float Roughness;
 #K#META_VARIABLES
 
@@ -48,13 +48,13 @@ float4 Fragment (FragmentData i) : SV_TARGET
 
 	Albedo = 0;
 	Emission = 0;
-	Specular = 0;
+	SpecularColor = 0;
 	Roughness = 1;
 
 	#K#META_FRAGMENT_FUNCTION
 
 	surfaceData.Emission = Emission;
-	surfaceData.Albedo = Albedo + Specular * Roughness * Roughness;
-	surfaceData.SpecularColor = Specular;
+	surfaceData.Albedo = Albedo + SpecularColor * Roughness * Roughness;
+	surfaceData.SpecularColor = SpecularColor;
 	return UnityMetaFragment(surfaceData);
 }

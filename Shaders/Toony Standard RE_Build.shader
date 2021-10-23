@@ -125,9 +125,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float NdotV;
 			float NdotH;
 			float LdotH;
-			float _BumpScale;
 			float _Occlusion;
 			float Occlusion;
+			float _BumpScale;
 			float Roughness;
 			float Attenuation;
 			float RampAttenuation;
@@ -175,9 +175,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float4 Albedo;
 			float4 _MainTex_ST;
 			float4 _Color;
-			float4 _BumpMap_ST;
 			float4 _MSSO_ST;
 			float4 Msso;
+			float4 _BumpMap_ST;
 			float4 _RampColor;
 			float4 _SpecularTintTexture_ST;
 			float4 _SpecularTint;
@@ -185,8 +185,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 			samplerCUBE _FallbackCubemap;
 			UNITY_DECLARE_TEX2D(_MainTex);
 			UNITY_DECLARE_TEX2D(_Ramp);
-			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_MSSO);
+			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
@@ -937,9 +937,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float NdotV;
 			float NdotH;
 			float LdotH;
-			float _BumpScale;
 			float _Occlusion;
 			float Occlusion;
+			float _BumpScale;
 			float Roughness;
 			float Attenuation;
 			float RampAttenuation;
@@ -987,9 +987,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float4 Albedo;
 			float4 _MainTex_ST;
 			float4 _Color;
-			float4 _BumpMap_ST;
 			float4 _MSSO_ST;
 			float4 Msso;
+			float4 _BumpMap_ST;
 			float4 _RampColor;
 			float4 _SpecularTintTexture_ST;
 			float4 _SpecularTint;
@@ -997,8 +997,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 			samplerCUBE _FallbackCubemap;
 			UNITY_DECLARE_TEX2D(_MainTex);
 			UNITY_DECLARE_TEX2D(_Ramp);
-			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_MSSO);
+			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
@@ -1837,19 +1837,67 @@ Shader "VRLabs/Toony Standard RE:Build"
 			FragmentData FragData;
 			float3 Albedo;
 			float3 Emission;
-			float3 Specular;
+			float3 SpecularColor;
 			float Roughness;
+			float _Occlusion;
+			float Occlusion;
+			float _Metallic;
+			float Metallic;
+			float _Glossiness;
+			float Glossiness;
+			float _Specular;
+			float Specular;
+			float SquareRoughness;
+			float _ReplaceSpecular;
+			float OneMinusReflectivity;
 			float _DirectLightMode;
 			float _EnableSpecular;
 			float _SpecularMode;
 			float _IndirectFallbackMode;
 			float4 _MainTex_ST;
 			float4 _Color;
+			float4 _MSSO_ST;
+			float4 Msso;
+			float4 _SpecularTintTexture_ST;
+			float4 _SpecularTint;
 			UNITY_DECLARE_TEX2D(_MainTex);
+			UNITY_DECLARE_TEX2D_NOSAMPLER(_MSSO);
+			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			
 			void SampleAlbedo()
 			{
 				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+			}
+			void SampleMSSO()
+			{
+				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TRANSFORM_TEX(FragData.uv, _MSSO));
+				Occlusion = lerp(1,Msso.a, _Occlusion);
+			}
+			void GetSampleData()
+			{
+				Metallic = Msso.r * _Metallic;
+				Glossiness = Msso.g * _Glossiness;
+				Specular = Msso.b * _Specular;
+				
+				Roughness = 1 - Glossiness;
+				SquareRoughness = max(Roughness * Roughness, 0.002);
+			}
+			void SetupAlbedoAndSpecColor()
+			{
+				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TRANSFORM_TEX(FragData.uv, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
+				
+				float sp = Specular * 0.08;
+				SpecularColor = lerp(float3(sp, sp, sp), Albedo.rgb, Metallic);
+				if(_ReplaceSpecular == 1)
+				{
+					SpecularColor = specularTint;
+				}
+				else
+				{
+					SpecularColor *= specularTint;
+				}
+				OneMinusReflectivity = (1 - sp) - (Metallic * (1 - sp));
+				Albedo.rgb *= OneMinusReflectivity;
 			}
 			
 			FragmentData  Vertex (VertexData v)
@@ -1871,14 +1919,23 @@ Shader "VRLabs/Toony Standard RE:Build"
 				
 				Albedo = 0;
 				Emission = 0;
-				Specular = 0;
+				SpecularColor = 0;
 				Roughness = 1;
 				
 				SampleAlbedo();
+				SampleMSSO();
+				if(_EnableSpecular == 1)
+				{
+					GetSampleData();
+				}
+				if(_EnableSpecular == 1)
+				{
+					SetupAlbedoAndSpecColor();
+				}
 				
 				surfaceData.Emission = Emission;
-				surfaceData.Albedo = Albedo + Specular * Roughness * Roughness;
-				surfaceData.SpecularColor = Specular;
+				surfaceData.Albedo = Albedo + SpecularColor * Roughness * Roughness;
+				surfaceData.SpecularColor = SpecularColor;
 				return UnityMetaFragment(surfaceData);
 			}
 			
