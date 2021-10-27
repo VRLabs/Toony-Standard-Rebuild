@@ -92,6 +92,32 @@ MonoBehaviour:
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []
+  - Name: SampleMSSO
+    AppendAfter: '#K#FRAGMENT_FUNCTION'
+    Priority: 80
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
+      type: 3}
+    UsedVariables:
+    - Name: _MSSO
+      Type: 18
+      CustomType: 
+    - Name: _MSSO_ST
+      Type: 7
+      CustomType: 
+    - Name: Msso
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _Occlusion
+      Type: 4
+      CustomType: 
+    - Name: Occlusion
+      Type: 4
+      CustomType: 
+    VariableKeywords: []
+    CodeKeywords: []
   - Name: ClipAlpha
     AppendAfter: '#K#FRAGMENT_FUNCTION'
     Priority: 50
@@ -122,32 +148,6 @@ MonoBehaviour:
       Type: 17
       CustomType: 
     - Name: _BumpScale
-      Type: 4
-      CustomType: 
-    VariableKeywords: []
-    CodeKeywords: []
-  - Name: SampleMSSO
-    AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 80
-    ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
-      type: 3}
-    UsedVariables:
-    - Name: _MSSO
-      Type: 18
-      CustomType: 
-    - Name: _MSSO_ST
-      Type: 7
-      CustomType: 
-    - Name: Msso
-      Type: 7
-      CustomType: 
-    - Name: _MainTex
-      Type: 17
-      CustomType: 
-    - Name: _Occlusion
-      Type: 4
-      CustomType: 
-    - Name: Occlusion
       Type: 4
       CustomType: 
     VariableKeywords: []
@@ -231,6 +231,34 @@ MonoBehaviour:
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []
+  - Name: SampleMSSO
+    AppendAfter: '#K#META_FRAGMENT_FUNCTION'
+    Priority: 80
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
+      type: 3}
+    UsedVariables:
+    - Name: _MSSO
+      Type: 18
+      CustomType: 
+    - Name: _MSSO_ST
+      Type: 7
+      CustomType: 
+    - Name: Msso
+      Type: 7
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    - Name: _Occlusion
+      Type: 4
+      CustomType: 
+    - Name: Occlusion
+      Type: 4
+      CustomType: 
+    VariableKeywords:
+    - META_VARIABLES
+    CodeKeywords:
+    - META_CODE
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
     Assembly-CSharp-Editor\",\r\n    \"Name\": \"Default Inputs\",\r\n    \"Sections\":
     {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,

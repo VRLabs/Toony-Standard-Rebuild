@@ -175,6 +175,71 @@ MonoBehaviour:
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []
+  - Name: GetSampleData
+    AppendAfter: '#K#META_FRAGMENT_FUNCTION'
+    Priority: 81
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 5266799106ec3a448beda8ceaf1449a6,
+      type: 3}
+    UsedVariables:
+    - Name: _Metallic
+      Type: 4
+      CustomType: 
+    - Name: Metallic
+      Type: 4
+      CustomType: 
+    - Name: _Glossiness
+      Type: 4
+      CustomType: 
+    - Name: Glossiness
+      Type: 4
+      CustomType: 
+    - Name: _Specular
+      Type: 4
+      CustomType: 
+    - Name: Specular
+      Type: 4
+      CustomType: 
+    - Name: SquareRoughness
+      Type: 4
+      CustomType: 
+    VariableKeywords:
+    - META_VARIABLES
+    CodeKeywords:
+    - META_CODE
+  - Name: SetupAlbedoAndSpecColor
+    AppendAfter: '#K#META_FRAGMENT_FUNCTION'
+    Priority: 130
+    ShaderFunctionCode: {fileID: -544282384758852595, guid: 2935111bc248ff64b8a1ddc4310271a7,
+      type: 3}
+    UsedVariables:
+    - Name: Metallic
+      Type: 4
+      CustomType: 
+    - Name: Specular
+      Type: 4
+      CustomType: 
+    - Name: _SpecularTintTexture
+      Type: 18
+      CustomType: 
+    - Name: _SpecularTintTexture_ST
+      Type: 7
+      CustomType: 
+    - Name: _SpecularTint
+      Type: 7
+      CustomType: 
+    - Name: _ReplaceSpecular
+      Type: 4
+      CustomType: 
+    - Name: OneMinusReflectivity
+      Type: 4
+      CustomType: 
+    - Name: _MainTex
+      Type: 17
+      CustomType: 
+    VariableKeywords:
+    - META_VARIABLES
+    CodeKeywords:
+    - META_CODE
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
     Assembly-CSharp-Editor\",\r\n    \"Name\": \"Core Specular\",\r\n    \"Sections\":
     {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
