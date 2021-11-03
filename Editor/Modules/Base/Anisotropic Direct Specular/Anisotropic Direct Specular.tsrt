@@ -21,11 +21,11 @@ float3 GetModifiedTangent(float3 tangentTS, float3 tangentDir)
         float3 tangentTWS = mul(tangentTS, worldToTangent);
         float3 fTangent;
         if (tangentTS.z < 1)
-        tangentDir = tangentTS;
+        fTangent = tangentTWS;
         else
-        tangentDir = tangentDir;
+        fTangent = tangentDir;
         
-        return tangentDir;
+        return fTangent;
     }
 
 void AnisotropicDirectSpecular()

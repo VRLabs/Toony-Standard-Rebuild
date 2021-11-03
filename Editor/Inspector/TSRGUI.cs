@@ -29,6 +29,7 @@ namespace VRLabs.ToonyStandardRebuild
         private string _settingsPath;
         // Bool that determines if the current OnGUI call is the first one or not.
         private bool _isFirstLoop = true;
+        private bool _isOptimisedShader;
 
         private bool ContainsNonAnimatableProperties => _nonAnimatablePropertyControls.Count > 0;
 
@@ -96,14 +97,37 @@ namespace VRLabs.ToonyStandardRebuild
                 ModularShader first = null;
                 int attempts = 0;
                 if (_loadedShaders == null) _loadedShaders = FindAssetsByType<ModularShader>().ToList();
-                while (first == null && attempts < 2)
+                string shaderName = null;
+                if (Materials[0].shader.name.Length > 35 && Materials[0].shader.name.Substring(Materials[0].shader.name.Length - 35, 3).Equals("-g-"))
                 {
-                    attempts++;
-                    first = _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
-
+                    shaderName = Materials[0].shader.name.Substring(0, Materials[0].shader.name.Length - 35);
+                    if (shaderName.StartsWith("Hidden/")) 
+                        shaderName = shaderName.Substring(7);
                 }
-                
-                ModularShader = first;
+
+                if (string.IsNullOrEmpty(shaderName))
+                {
+                    while (first == null && attempts < 2)
+                    {
+                        attempts++;
+                        first = _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
+                    }
+
+                    ModularShader = first;
+                    _isOptimisedShader = false;
+                }
+                else
+                {
+                    while (first == null && attempts < 2)
+                    {
+                        attempts++;
+                        first = _loadedShaders.FirstOrDefault(x => x.ShaderPath.Equals(shaderName));
+                    }
+
+                    ModularShader = first;
+                    _isOptimisedShader = true;
+                }
+
                 /*watch.Stop();
                 Debug.Log($"Time spent finding the modular shader: {watch.ElapsedTicks} ticks");*/
                 if (ModularShader == null)
@@ -138,6 +162,10 @@ namespace VRLabs.ToonyStandardRebuild
             if (_showSettingsGUI)
             {
                 DrawSettingsGUI();
+            }
+            else if (_isOptimisedShader)
+            {
+                EditorGUILayout.HelpBox("This shader is in an optimised state, and settings cannot be edited", MessageType.Warning);
             }
             else if (_startupErrors.Count > 0)
             {
@@ -310,57 +338,79 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void DrawSettingsGUI()
         {
-            ReinitializeListsIfNeeded();
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Create new base"))
+            if (ModularShader != null && !_isOptimisedShader)
             {
-                
-            }
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space(4);
-            DrawModuleSelectorsArea();
+                ReinitializeListsIfNeeded();
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                /*if (GUILayout.Button("Create new base"))
+                {
 
-            if (_moduleErrors?.Count > 0)
-            {
+                }*/
+
+                EditorGUILayout.EndHorizontal();
                 EditorGUILayout.Space(4);
-                foreach (string moduleError in _moduleErrors)
-                    EditorGUILayout.HelpBox(moduleError, MessageType.Error);
-            }
-            
-            EditorGUILayout.Space(8);
-            DrawInfoArea();
-            EditorGUILayout.Space(30);
+                DrawModuleSelectorsArea();
 
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Regenerate shader"))
-            {
-                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
-                Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\"");
-            }
-            GUILayout.FlexibleSpace();
-            EditorGUI.BeginDisabledGroup(_moduleErrors?.Count > 0);
-            if (GUILayout.Button("Apply module changes"))
-            {
-                ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
-                ShaderGenerator.GenerateMainShader(Path.GetDirectoryName(_path), ModularShader);
+                if (_moduleErrors?.Count > 0)
+                {
+                    EditorGUILayout.Space(4);
+                    foreach (string moduleError in _moduleErrors)
+                        EditorGUILayout.HelpBox(moduleError, MessageType.Error);
+                }
 
-                EditorUtility.SetDirty(ModularShader);
-                
-                Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
+                EditorGUILayout.Space(8);
+                DrawInfoArea();
+                EditorGUILayout.Space(30);
+
+                EditorGUILayout.BeginHorizontal();
+                if (GUILayout.Button("Regenerate shader"))
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
+                    stopwatch.Stop();
+                    Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
+                }
+
+                if (GUILayout.Button("Generate Optimised shader"))
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Shaders");
+                    ShaderGenerator.GenerateMinimalShader("Assets/VRLabs/GeneratedAssets/Shaders", ModularShader, Materials);
+                    stopwatch.Stop();
+                    Debug.Log($"Toony Standard RE:Build: generated optimised shader for \"{Materials.Length}\" material{(Materials.Length > 1 ? "s" : "")} in {stopwatch.ElapsedMilliseconds}ms");
+                    _isFirstLoop = true;
+                    _showSettingsGUI = false;
+                }
+
+                GUILayout.FlexibleSpace();
+                EditorGUI.BeginDisabledGroup(_moduleErrors?.Count > 0);
+                if (GUILayout.Button("Apply module changes"))
+                {
+                    ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
+                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
+
+                    EditorUtility.SetDirty(ModularShader);
+
+                    Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
+                }
+
+                EditorGUI.EndDisabledGroup();
+                if (GUILayout.Button("Reset changes"))
+                {
+                    _usedModules = null;
+                    _usedModulesList = null;
+                    _availableModules = null;
+                    _availableModulesList = null;
+                    _lastSelectedModule = null;
+                    _moduleErrors = null;
+                    _materialEditor.Repaint();
+                }
+
+                EditorGUILayout.EndHorizontal();
             }
-            EditorGUI.EndDisabledGroup();
-            if (GUILayout.Button("Reset changes"))
-            {
-                _usedModules = null;
-                _usedModulesList = null;
-                _availableModules = null;
-                _availableModulesList = null;
-                _lastSelectedModule = null;
-                _moduleErrors = null;
-                _materialEditor.Repaint();
-            }
-            EditorGUILayout.EndHorizontal();
         }
 
         private void ReinitializeListsIfNeeded()
@@ -520,7 +570,8 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Label($"Modular shader loaded: {ModularShader.Name}");
+            if( ModularShader != null) GUILayout.Label($"Modular shader loaded: {ModularShader.Name}");
+            else  GUILayout.Label($"Modular shader loaded: ");
             GUILayout.FlexibleSpace();
             // Draw the language selector only if there is more than 1 language available.
             if (_languages?.Length > 1)

@@ -606,9 +606,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 				worldToTangent[2] = float3(0, 0, 1);
 				
 				float3 tangentTWS = mul(tangentTS, worldToTangent);
-				float3 fTangent;
 				if (tangentTS.z < 1)
-				tangentDir = tangentTS;
+				tangentDir = tangentTWS;
 				else
 				tangentDir = tangentDir;
 				

@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: The toon way of doing diffuse calculations
-  RequiredIncludes: []
   Enabled:
     Name: _DirectLightMode
     DisplayName: Direct Light Mode
@@ -104,6 +103,9 @@ MonoBehaviour:
       CustomType: 
     - Name: _RampMin
       Type: 6
+      CustomType: 
+    - Name: Attenuation
+      Type: 4
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []
