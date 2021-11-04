@@ -66,25 +66,65 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     Guid = guid
                 });
             }
+
+            contexts.GenerateMinimalShaders();
+        }
+        
+        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            var modules = FindAllModules(shader);
+            var possibleVariants = GetMinimalVariants(modules, materials);
+            var contexts = new List<ShaderContext>();
             
+            foreach (var (variant, material) in possibleVariants)
+            {
+                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(material, out string guid, out long  _);
+                contexts.Add(new ShaderContext
+                {
+                    Shader = shader,
+                    ActiveEnablers = variant,
+                    FilePath = path,
+                    OptimizedShader = true,
+                    Material = material,
+                    Guid = guid
+                });
+            }
+
+            return contexts;
+        }
+
+        public static void GenerateMinimalShaders(this List<ShaderContext> contexts)
+        {
+            if (contexts == null || contexts.Count == 0) return;
+            
+            EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "generating shader files", 1 / (contexts.Count + 3));
             contexts.AsParallel().ForAll(x => x.GenerateShader());
             try
             {
                 AssetDatabase.StartAssetEditing();
+                int i = 0;
                 foreach (var context in contexts)
-                    File.WriteAllText($"{path}/" + context.VariantFileName, context.ShaderFile.ToString());
+                {
+                    EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "Saving " + context.VariantFileName, 1 + i / (contexts.Count + 3));
+                    File.WriteAllText($"{context.FilePath}/" + context.VariantFileName, context.ShaderFile.ToString());
+                    i++;
+                }
             }
             finally
             {
+                EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "waiting for unity to compile shaders", contexts.Count - 2 / (contexts.Count + 3));
+                // To make sure the AssetDatabase doesn't break out
                 AssetDatabase.StopAssetEditing();
             }
 
+            EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
             foreach (var context in contexts)
             {
                 context.Material.shader = Shader.Find(context.ShaderName);
             }
             
             AssetDatabase.Refresh();
+            EditorUtility.ClearProgressBar();
         }
 
         private static List<Dictionary<string, int>> GetShaderVariants(List<ShaderModule> modules)
@@ -170,7 +210,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             return isAllZeroes ? "" : b.ToString();
         }
 
-        private class ShaderContext
+        public class ShaderContext
         {
             public ModularShader Shader;
             public Dictionary<string, int> ActiveEnablers;
