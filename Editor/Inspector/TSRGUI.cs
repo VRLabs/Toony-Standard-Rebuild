@@ -96,7 +96,7 @@ namespace VRLabs.ToonyStandardRebuild
                 watch.Restart();*/
                 ModularShader first = null;
                 int attempts = 0;
-                if (_loadedShaders == null) _loadedShaders = FindAssetsByType<ModularShader>().ToList();
+                if (_loadedShaders == null) _loadedShaders = TSRHelper.FindAssetsByType<ModularShader>().ToList();
                 string shaderName = null;
                 if (Materials[0].shader.name.Length > 35 && Materials[0].shader.name.Substring(Materials[0].shader.name.Length - 35, 3).Equals("-g-"))
                 {
@@ -424,7 +424,7 @@ namespace VRLabs.ToonyStandardRebuild
         {
             if (_availableModules == null)
             {
-                _availableModules = FindAssetsByType<ShaderModule>()
+                _availableModules = TSRHelper.FindAssetsByType<ShaderModule>()
                     .Where(x => ModularShader.BaseModules.All(y => y != x) &&
                                 ModularShader.AdditionalModules.All(y => y != x))
                     .ToList();
@@ -703,23 +703,6 @@ namespace VRLabs.ToonyStandardRebuild
         public void AddControl(SimpleControl control) => Controls.Add(control);
 
         public IEnumerable<SimpleControl> GetControlList() => Controls;
-
-        private static T[] FindAssetsByType<T>() where T : UnityEngine.Object
-        {
-            List<T> assets = new List<T>();
-            AssetDatabase.Refresh();
-            string[] guids = AssetDatabase.FindAssets($"t:{typeof(T).ToString().Replace("UnityEngine.", "")}");
-            for (int i = 0; i < guids.Length; i++)
-            {
-                string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
-                T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
-                if (asset != null)
-                {
-                    assets.Add(asset);
-                }
-            }
-            return assets.ToArray();
-        }
     }
 
     [Serializable]
