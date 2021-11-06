@@ -190,6 +190,27 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
+			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline half Pow5 (half x)
+			{
+				return x*x * x*x * x;
+			}
+			
 			void SampleAlbedo()
 			{
 				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
@@ -399,11 +420,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 				Albedo.rgb *= Albedo.a;
 				#endif
 			}
-			inline half Pow5 (half x)
-			{
-				return x*x * x*x * x;
-			}
-			
 			//unity's base diffuse based on disney implementation
 			float DisneyDiffuse(half perceptualRoughness)
 			{
@@ -423,23 +439,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 				Diffuse = Albedo * (LightColor.rgb * LightColor.a * ramp + IndirectDiffuse);
 				Attenuation = ramp;
 			}
-			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			
 			float4 RampDotL()
 			{
 				//Adding the occlusion into the offset of the ramp
@@ -606,12 +605,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 				worldToTangent[2] = float3(0, 0, 1);
 				
 				float3 tangentTWS = mul(tangentTS, worldToTangent);
+				float3 fTangent;
 				if (tangentTS.z < 1)
-				tangentDir = tangentTWS;
+				fTangent = tangentTWS;
 				else
-				tangentDir = tangentDir;
+				fTangent = tangentDir;
 				
-				return tangentDir;
+				return fTangent;
 			}
 			
 			void AnisotropicDirectSpecular()
@@ -1001,6 +1001,27 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
+			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline half Pow5 (half x)
+			{
+				return x*x * x*x * x;
+			}
+			
 			void SampleAlbedo()
 			{
 				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
@@ -1210,11 +1231,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 				Albedo.rgb *= Albedo.a;
 				#endif
 			}
-			inline half Pow5 (half x)
-			{
-				return x*x * x*x * x;
-			}
-			
 			//unity's base diffuse based on disney implementation
 			float DisneyDiffuse(half perceptualRoughness)
 			{
@@ -1234,23 +1250,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 				Diffuse = Albedo * (LightColor.rgb * LightColor.a * ramp + IndirectDiffuse);
 				Attenuation = ramp;
 			}
-			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
-			{
-				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
-			}
-			
 			float4 RampDotL()
 			{
 				//Adding the occlusion into the offset of the ramp
@@ -1419,11 +1418,11 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float3 tangentTWS = mul(tangentTS, worldToTangent);
 				float3 fTangent;
 				if (tangentTS.z < 1)
-				tangentDir = tangentTS;
+				fTangent = tangentTWS;
 				else
-				tangentDir = tangentDir;
+				fTangent = tangentDir;
 				
-				return tangentDir;
+				return fTangent;
 			}
 			
 			void AnisotropicDirectSpecular()
@@ -1743,6 +1742,27 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float4 _Color;
 			UNITY_DECLARE_TEX2D(_MainTex);
 			
+			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline half Pow5 (half x)
+			{
+				return x*x * x*x * x;
+			}
+			
 			void SampleAlbedo()
 			{
 				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
@@ -1862,6 +1882,27 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D(_MainTex);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_MSSO);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
+			
+			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
+			{
+				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+			}
+			inline half Pow5 (half x)
+			{
+				return x*x * x*x * x;
+			}
 			
 			void SampleAlbedo()
 			{
