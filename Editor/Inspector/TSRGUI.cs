@@ -96,7 +96,7 @@ namespace VRLabs.ToonyStandardRebuild
                 watch.Restart();*/
                 ModularShader first = null;
                 int attempts = 0;
-                if (_loadedShaders == null) _loadedShaders = TSRHelper.FindAssetsByType<ModularShader>().ToList();
+                if (_loadedShaders == null) _loadedShaders = TSRUtilities.FindAssetsByType<ModularShader>().ToList();
                 string shaderName = null;
                 if (Materials[0].shader.name.Length > 35 && Materials[0].shader.name.Substring(Materials[0].shader.name.Length - 35, 3).Equals("-g-"))
                 {
@@ -424,7 +424,7 @@ namespace VRLabs.ToonyStandardRebuild
         {
             if (_availableModules == null)
             {
-                _availableModules = TSRHelper.FindAssetsByType<ShaderModule>()
+                _availableModules = TSRUtilities.FindAssetsByType<ShaderModule>()
                     .Where(x => ModularShader.BaseModules.All(y => y != x) &&
                                 ModularShader.AdditionalModules.All(y => y != x))
                     .ToList();
@@ -617,19 +617,19 @@ namespace VRLabs.ToonyStandardRebuild
         {
             GUILayout.Space(14);
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(new GUIContent(Styles.SSILogoDark, "Check the official GitHub!"), "label", GUILayout.Width(32), GUILayout.Height(32)))
+            if (GUILayout.Button(new GUIContent(Styles.SSILogoDark, "Check the official GitHub"), "label", GUILayout.Width(32), GUILayout.Height(32)))
             {
-                Application.OpenURL("https://github.com/Cibbi/Toony-standard");
+                Application.OpenURL(TSRConstants.GITHUB_LINK);
             }
             EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
-            if (GUILayout.Button(new GUIContent(Styles.SSILogoLight, "Join our discord!"), "label", GUILayout.Width(32), GUILayout.Height(32)))
+            if (GUILayout.Button(new GUIContent(Styles.SSILogoLight, "Check out Discord"), "label", GUILayout.Width(32), GUILayout.Height(32)))
             {
-                Application.OpenURL("https://discord.gg/THPSWpP");
+                Application.OpenURL(TSRConstants.DISCORD_LINK);
             }
             EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
-            if (GUILayout.Button(new GUIContent(Styles.SSILogoDark, "Want to gift me pizza every month? Become a patron!"), "label", GUILayout.Width(32), GUILayout.Height(32)))
+            if (GUILayout.Button(new GUIContent(Styles.SSILogoDark, "Become a patron"), "label", GUILayout.Width(32), GUILayout.Height(32)))
             {
-                Application.OpenURL("https://www.patreon.com/Cibbi");
+                Application.OpenURL(TSRConstants.PATREON_LINK);
             }
             EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
 
@@ -637,7 +637,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Toony Standard RE:Build test1", _aboutLabelStyle, GUILayout.Height(26));
+            GUILayout.Label(TSRConstants.TSR_VERSION, _aboutLabelStyle, GUILayout.Height(26));
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

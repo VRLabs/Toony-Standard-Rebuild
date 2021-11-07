@@ -20,7 +20,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Shaders");
                 Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Materials");
-                var loadedShaders = TSRHelper.FindAssetsByType<ModularShader>().ToList();
+                var loadedShaders = TSRUtilities.FindAssetsByType<ModularShader>().ToList();
                 var renderers = avatarGameObject.GetComponentsInChildren<Renderer>(true);
                 var materialByGuid = new Dictionary<string, Material>();
                 foreach (Renderer renderer in renderers)
@@ -83,7 +83,7 @@ namespace VRLabs.ToonyStandardRebuild
                 if (!(Object.FindObjectsOfType(typeof(VRC_SceneDescriptor)) is VRC_SceneDescriptor[] descriptors) || descriptors.Length <= 0) return true;
                 
                 var renderers = Object.FindObjectsOfType<Renderer>();
-                var loadedShaders = TSRHelper.FindAssetsByType<ModularShader>().ToList();
+                var loadedShaders = TSRUtilities.FindAssetsByType<ModularShader>().ToList();
                 GenerateMaterialsInRenderers(renderers, loadedShaders);
 
                 return true;

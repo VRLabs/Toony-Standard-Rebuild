@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace VRLabs.ToonyStandardRebuild
 {
-    public static class TSRHelper
+    public static class TSRUtilities
     {
         public static T[] FindAssetsByType<T>() where T : UnityEngine.Object
         {
@@ -15,9 +15,7 @@ namespace VRLabs.ToonyStandardRebuild
                 string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
                 T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
                 if (asset != null)
-                {
                     assets.Add(asset);
-                }
             }
             return assets.ToArray();
         }
