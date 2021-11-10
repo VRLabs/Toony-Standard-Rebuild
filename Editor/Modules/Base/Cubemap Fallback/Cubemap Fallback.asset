@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Cubemap as a fallback probe
-  RequiredIncludes: []
   Enabled:
     Name: _IndirectFallbackMode
     DisplayName: Indirect Fallback Mode
@@ -38,7 +37,7 @@ MonoBehaviour:
   Functions:
   - Name: GetFallbackCubemap
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 240
+    Queue: 240
     ShaderFunctionCode: {fileID: -544282384758852595, guid: abe3992b5383503478dccb4dd968287c,
       type: 3}
     UsedVariables:

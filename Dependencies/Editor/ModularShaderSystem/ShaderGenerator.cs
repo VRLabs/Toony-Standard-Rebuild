@@ -113,7 +113,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             finally
             {
                 EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "waiting for unity to compile shaders", contexts.Count - 2 / (contexts.Count + 3));
-                // To make sure the AssetDatabase doesn't break out
                 AssetDatabase.StopAssetEditing();
             }
 
@@ -334,19 +333,18 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 ShaderFile.AppendLine("{");
 
                 ShaderFile.AppendLine(Shader.ShaderTemplate.Template);
-                
-                if (Shader.UseTemplatesForProperties)
-                {
-                    if (Shader.ShaderPropertiesTemplate != null)
-                        ShaderFile.AppendLine(Shader.ShaderPropertiesTemplate.Template);
 
-                    ShaderFile.AppendLine($"#K#{MSSConstants.TEMPLATE_PROPERTIES_KEYWORD}");
-                }
+                Dictionary<ModuleTemplate, ShaderModule> moduleByTemplate = new Dictionary<ModuleTemplate, ShaderModule>();
+                Dictionary<(string, string), string> convertedKeyword = new Dictionary<(string, string), string>();
+                int InstanceCounter = 0;
 
                 foreach (var module in _modules)
-                {
                     foreach (var template in module.Templates)
+                        moduleByTemplate.Add(template, module);
+
+                    foreach (var template in _modules.SelectMany(x => x.Templates).OrderBy(x => x.Queue))
                     {
+                        var module = moduleByTemplate[template];
                         if (template.Template == null) continue;
                         bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
                         bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
@@ -365,22 +363,40 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                             tmp.AppendLine(template.Template.ToString());
                             tmp.AppendLine("}");
                         }
+                        
+                        MatchCollection mki = Regex.Matches(tmp.ToString(), @"#KI#\S*", RegexOptions.Multiline);
+                        for (int i = mki.Count - 1; i >= 0; i--)
+                        {
+                            string newKeyword;
+                            if (convertedKeyword.TryGetValue((module.Id, mki[i].Value), out string replacedKeyword))
+                            {
+                                newKeyword = replacedKeyword;
+                            }
+                            else
+                            {
+                                newKeyword = $"{mki[i].Value}{InstanceCounter++}";
+                                convertedKeyword.Add((module.Id, mki[i].Value), newKeyword);
+                            }
+                            tmp.Replace(mki[i].Value, newKeyword);
+                        }
 
                         foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                         {
-                            MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{keyword}\s", RegexOptions.Multiline);
+                            MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{keyword}(\s|$)", RegexOptions.Multiline);
                             for (int i = m.Count - 1; i >= 0; i--)
                                 ShaderFile.Insert(m[i].Index, tmp.ToString());
 
-                            m = Regex.Matches(ShaderFile.ToString(), $@"#KI#{keyword}\s", RegexOptions.Multiline);
-                            for (int i = m.Count - 1; i >= 0; i--)
-                                ShaderFile.Insert(m[i].Index, tmp.ToString());
+                            if (convertedKeyword.TryGetValue((module.Id, $@"#KI#{keyword}"), out string replacedKeyword))
+                            {
+                                m = Regex.Matches(ShaderFile.ToString(), $@"{replacedKeyword}(\s|$)", RegexOptions.Multiline);
+                                for (int i = m.Count - 1; i >= 0; i--)
+                                    ShaderFile.Insert(m[i].Index, tmp.ToString());   
+                            }
                         }
                     }
-                    MatchCollection mki = Regex.Matches(ShaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
-                    for (int i = mki.Count - 1; i >= 0; i--)
-                        ShaderFile.Replace(mki[i].Value, "");
-                }
+                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#\S*", RegexOptions.Multiline);
+                    for (int i = mkr.Count - 1; i >= 0; i--)
+                        ShaderFile.Replace(mkr[i].Value, "");
                 
                 ShaderFile.AppendLine("}");
             }
@@ -457,7 +473,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             private void WriteFunctionCallSequence(StringBuilder callSequence, string appendAfter)
             {
-                foreach (var function in _functions.Where(x => x.AppendAfter.Equals(appendAfter)).OrderBy(x => x.Priority))
+                foreach (var function in _functions.Where(x => x.AppendAfter.Equals(appendAfter)).OrderBy(x => x.Queue))
                 {
                     _reorderedFunctions.Add(function);
                     ShaderModule module = _modulesByFunctions[function];

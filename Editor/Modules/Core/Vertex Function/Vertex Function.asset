@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Vertex function
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -34,6 +33,7 @@ MonoBehaviour:
     Keywords:
     - VERTEX_FUNCTION
     NeedsVariant: 0
+    Queue: 100
     TemplateKeywords: []
   Functions: []
   AdditionalSerializedData: 

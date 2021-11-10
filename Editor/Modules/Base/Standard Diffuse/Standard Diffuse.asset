@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: The standard way of doing diffuse calculations
-  RequiredIncludes: []
   Enabled:
     Name: _DirectLightMode
     DisplayName: Direct Light Mode
@@ -32,7 +31,7 @@ MonoBehaviour:
   Functions:
   - Name: GetPBRDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 150
+    Queue: 150
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 0b31b282b688f6e4cb80c76ec2540dd2,
       type: 3}
     UsedVariables:
@@ -67,7 +66,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: GetPBRVertexDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 151
+    Queue: 151
     ShaderFunctionCode: {fileID: -544282384758852595, guid: b1b2f157d42bd69429a2f3250d1a7d7a,
       type: 3}
     UsedVariables:
@@ -84,7 +83,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: AddStandardDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 390
+    Queue: 390
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 78d10ee50bebff7429073505b49aca5b,
       type: 3}
     UsedVariables:

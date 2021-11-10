@@ -61,7 +61,7 @@ MonoBehaviour:
   Functions:
   - Name: GetToonDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 150
+    Queue: 150
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 721741ec8668e2a47b4bee499d8ff4af,
       type: 3}
     UsedVariables:
@@ -111,7 +111,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: GetToonVertexDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 151
+    Queue: 151
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 22acaa724b2655b4ea7ef8d69cb6f331,
       type: 3}
     UsedVariables:
@@ -149,7 +149,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: AddToonDiffuse
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 390
+    Queue: 390
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 96966eed90c69d54f88518fdd499cb35,
       type: 3}
     UsedVariables:

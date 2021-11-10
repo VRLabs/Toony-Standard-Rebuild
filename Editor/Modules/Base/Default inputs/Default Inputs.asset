@@ -18,7 +18,6 @@ MonoBehaviour:
   Author: VRLabs
   Description: Default inputs used by the standard modules available in Toony Standartd
     RE:Build
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -70,11 +69,12 @@ MonoBehaviour:
     Keywords:
     - DEFAULT_VARIABLES
     NeedsVariant: 0
+    Queue: 100
     TemplateKeywords: []
   Functions:
   - Name: SampleAlbedo
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 25
+    Queue: 25
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
       type: 3}
     UsedVariables:
@@ -94,7 +94,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: SampleMSSO
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 80
+    Queue: 80
     ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
       type: 3}
     UsedVariables:
@@ -120,7 +120,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: ClipAlpha
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 50
+    Queue: 50
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 27b6b5526be75a048ba4ce2feda72a11,
       type: 3}
     UsedVariables:
@@ -131,7 +131,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: SampleNormal
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 60
+    Queue: 60
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 60aecbfb99f27744c9fa3f56cf5c05ba,
       type: 3}
     UsedVariables:
@@ -154,7 +154,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: SampleAlbedo
     AppendAfter: '#K#META_FRAGMENT_FUNCTION'
-    Priority: 25
+    Queue: 25
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
       type: 3}
     UsedVariables:
@@ -173,7 +173,7 @@ MonoBehaviour:
     - META_CODE
   - Name: SampleAlbedo
     AppendAfter: '#K#SHADOW_FRAGMENT_FUNCTION'
-    Priority: 25
+    Queue: 25
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 6afdc9cbd3842ae4ca1737a5cf280c48,
       type: 3}
     UsedVariables:
@@ -195,7 +195,7 @@ MonoBehaviour:
     - SHADOW_CODE
   - Name: ClipShadowAlpha
     AppendAfter: '#K#SHADOW_FRAGMENT_FUNCTION'
-    Priority: 50
+    Queue: 50
     ShaderFunctionCode: {fileID: -544282384758852595, guid: d42d3cc3908d8a844bae7699efb0aff9,
       type: 3}
     UsedVariables:
@@ -211,7 +211,7 @@ MonoBehaviour:
     - SHADOW_CODE
   - Name: PremultiplyAlpha
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 140
+    Queue: 140
     ShaderFunctionCode: {fileID: -544282384758852595, guid: ca001ddb7678c74498660162fc98bcf6,
       type: 3}
     UsedVariables:
@@ -222,7 +222,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: AddAlpha
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 399
+    Queue: 399
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 293c1e1a90233b54dbcf200faf05b8a7,
       type: 3}
     UsedVariables:
@@ -233,7 +233,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: SampleMSSO
     AppendAfter: '#K#META_FRAGMENT_FUNCTION'
-    Priority: 80
+    Queue: 80
     ShaderFunctionCode: {fileID: -544282384758852595, guid: ab8a98ffb4eda884583be4c1c26fbf1d,
       type: 3}
     UsedVariables:

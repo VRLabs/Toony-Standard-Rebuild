@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Base indirect specular calculation
-  RequiredIncludes: []
   Enabled:
     Name: _EnableSpecular
     DisplayName: Enable Specular
@@ -43,7 +42,7 @@ MonoBehaviour:
   Functions:
   - Name: GetIndirectSpecular
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 250
+    Queue: 250
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 2b5216d9905fe0f48b3fdb7e7899aeda,
       type: 3}
     UsedVariables:
@@ -87,7 +86,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: AddIndirectSpecular
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 392
+    Queue: 392
     ShaderFunctionCode: {fileID: -544282384758852595, guid: cb1b3c28deedce2408a6d5cc7009301a,
       type: 3}
     UsedVariables:

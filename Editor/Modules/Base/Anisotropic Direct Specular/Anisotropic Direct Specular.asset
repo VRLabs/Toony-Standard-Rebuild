@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Anisotropic version for the direct specular calculation
-  RequiredIncludes: []
   Enabled:
     Name: _SpecularMode
     DisplayName: Specular Mode
@@ -43,7 +42,7 @@ MonoBehaviour:
   Functions:
   - Name: AnisotropicDirectSpecular
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 200
+    Queue: 200
     ShaderFunctionCode: {fileID: -544282384758852595, guid: c00ba2c7f6115874dbe37357466cff86,
       type: 3}
     UsedVariables:

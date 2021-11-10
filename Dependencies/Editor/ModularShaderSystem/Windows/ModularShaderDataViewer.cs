@@ -91,7 +91,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 name.RemoveFromHierarchy();
                 _functionsFoldout.Add(p);
 
-                foreach (ShaderFunction function in functionsGroup.OrderBy(x => x.Priority))
+                foreach (ShaderFunction function in functionsGroup.OrderBy(x => x.Queue))
                     CreateFunctionsHierarchy(functions, function, foldout);   
                 
             }
@@ -133,7 +133,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         
         private void CreateFunctionsHierarchy(List<ShaderFunction> functions, ShaderFunction function, VisualElement parent)
         {
-            var subFunctions = functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority).ToList();
+            var subFunctions = functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Queue).ToList();
             if (subFunctions.Count > 0)
             {
                 VisualElement p = _functionViewUxml.CloneTree();
@@ -142,10 +142,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 var foldout = p.Q<Foldout>("FoldoutArea");
                 foldout.text = function.Name;
                 name.RemoveFromHierarchy();
-                priority.text = function.Priority.ToString();
+                priority.text = function.Queue.ToString();
                 parent.Add(p);
                 
-                foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Priority))
+                foreach (var fn in functions.Where(x => x.AppendAfter.Equals(function.Name)).OrderBy(x => x.Queue))
                     CreateFunctionsHierarchy(functions, fn, foldout);
             }
             else
@@ -156,7 +156,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 var foldout = p.Q<Foldout>("FoldoutArea");
                 foldout.RemoveFromHierarchy();
                 name.text = function.Name;
-                priority.text = function.Priority.ToString();
+                priority.text = function.Queue.ToString();
                 
                 parent.Add(p);
             }

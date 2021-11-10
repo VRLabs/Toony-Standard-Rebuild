@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Base Data given by the shader in the fragment pass
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -37,7 +36,7 @@ MonoBehaviour:
   Functions:
   - Name: GetDirectionVectors
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 100
+    Queue: 100
     ShaderFunctionCode: {fileID: -544282384758852595, guid: fc2a71a56ac739640938c4dee36612f4,
       type: 3}
     UsedVariables:
@@ -69,7 +68,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: GetLightData
     AppendAfter: GetDirectionVectors
-    Priority: 100
+    Queue: 100
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 372e4061fb1c29844a81dcbbe00e91f3,
       type: 3}
     UsedVariables:
@@ -110,7 +109,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: GetDotProducts
     AppendAfter: GetLightData
-    Priority: 100
+    Queue: 100
     ShaderFunctionCode: {fileID: -544282384758852595, guid: fb856aeddb8f4b94aa705eb5032d8fd6,
       type: 3}
     UsedVariables:

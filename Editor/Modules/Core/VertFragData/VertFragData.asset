@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Base structures for the vertex and fragment functions
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -34,12 +33,14 @@ MonoBehaviour:
     Keywords:
     - VERTEX_DATA
     NeedsVariant: 0
+    Queue: 100
     TemplateKeywords: []
   - Template: {fileID: -544282384758852595, guid: 11f1579ab09273b4f9401aec7e7da860,
       type: 3}
     Keywords:
     - FRAGMENT_DATA
     NeedsVariant: 0
+    Queue: 100
     TemplateKeywords: []
   Functions: []
   AdditionalSerializedData: 

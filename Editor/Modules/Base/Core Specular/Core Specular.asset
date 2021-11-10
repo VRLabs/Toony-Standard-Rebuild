@@ -20,7 +20,6 @@ MonoBehaviour:
 
     Contains the
     base setup for pbr specular values and direct specular calculation.'
-  RequiredIncludes: []
   Enabled:
     Name: _EnableSpecular
     DisplayName: Enable Specular
@@ -70,7 +69,7 @@ MonoBehaviour:
   Functions:
   - Name: GetSampleData
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 81
+    Queue: 81
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 5266799106ec3a448beda8ceaf1449a6,
       type: 3}
     UsedVariables:
@@ -102,7 +101,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: SetupAlbedoAndSpecColor
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 130
+    Queue: 130
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 2935111bc248ff64b8a1ddc4310271a7,
       type: 3}
     UsedVariables:
@@ -140,7 +139,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: FinalizeDirectSpecularTerm
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 210
+    Queue: 210
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 5fd3f42afe9d7be49b104b8d21ab26ce,
       type: 3}
     UsedVariables:
@@ -163,7 +162,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: AddDirectSpecular
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 391
+    Queue: 391
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 47199406df399184c8a8eeac00635d56,
       type: 3}
     UsedVariables:
@@ -177,7 +176,7 @@ MonoBehaviour:
     CodeKeywords: []
   - Name: GetSampleData
     AppendAfter: '#K#META_FRAGMENT_FUNCTION'
-    Priority: 81
+    Queue: 81
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 5266799106ec3a448beda8ceaf1449a6,
       type: 3}
     UsedVariables:
@@ -208,7 +207,7 @@ MonoBehaviour:
     - META_CODE
   - Name: SetupAlbedoAndSpecColor
     AppendAfter: '#K#META_FRAGMENT_FUNCTION'
-    Priority: 130
+    Queue: 130
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 2935111bc248ff64b8a1ddc4310271a7,
       type: 3}
     UsedVariables:

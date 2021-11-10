@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Template for the main and add passes
-  RequiredIncludes: []
   Enabled:
     Name: 
     DisplayName: 
@@ -35,6 +34,7 @@ MonoBehaviour:
     - MAIN_PASS
     - ADD_PASS
     NeedsVariant: 0
+    Queue: 100
     TemplateKeywords: []
   Functions: []
   AdditionalSerializedData: 

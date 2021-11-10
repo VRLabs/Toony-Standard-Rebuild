@@ -17,7 +17,6 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Standard Direct Specular
-  RequiredIncludes: []
   Enabled:
     Name: _SpecularMode
     DisplayName: Specular Mode
@@ -33,7 +32,7 @@ MonoBehaviour:
   Functions:
   - Name: StandardDirectSpecular
     AppendAfter: '#K#FRAGMENT_FUNCTION'
-    Priority: 200
+    Queue: 200
     ShaderFunctionCode: {fileID: -544282384758852595, guid: a58b64455dce6974abb5ad82673dfa40,
       type: 3}
     UsedVariables:

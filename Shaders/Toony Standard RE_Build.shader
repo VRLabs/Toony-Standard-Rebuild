@@ -194,18 +194,22 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline half Pow5 (half x)
 			{
 				return x*x * x*x * x;
@@ -1005,18 +1009,22 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline half Pow5 (half x)
 			{
 				return x*x * x*x * x;
@@ -1746,18 +1754,22 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline half Pow5 (half x)
 			{
 				return x*x * x*x * x;
@@ -1887,18 +1899,22 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float2 remap(float2 value, float2 oldMin, float2 oldMax, float2 newMin, float2 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float3 remap(float3 value, float3 oldMin, float3 oldMax, float3 newMin, float3 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline float4 remap(float4 value, float4 oldMin, float4 oldMax, float4 newMin, float4 newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
 			}
+			
 			inline half Pow5 (half x)
 			{
 				return x*x * x*x * x;
