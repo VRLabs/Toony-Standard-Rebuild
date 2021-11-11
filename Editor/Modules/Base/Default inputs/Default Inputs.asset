@@ -61,8 +61,7 @@ MonoBehaviour:
     Type: Range(0, 1)
     DefaultValue: 1
     Attributes: []
-  ModuleDependencies:
-  - DefaultInputs
+  ModuleDependencies: []
   IncompatibleWith: []
   Templates:
   - Template: {fileID: -544282384758852595, guid: f19678c2236a5464898f1aab451daaa2,

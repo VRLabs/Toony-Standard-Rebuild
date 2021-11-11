@@ -36,7 +36,7 @@ MonoBehaviour:
     DefaultValue: 0
     Attributes: []
   ModuleDependencies:
-  - CoreSpecular
+  - VRLabs.TSRBase.CoreSpecular
   IncompatibleWith: []
   Templates: []
   Functions:
