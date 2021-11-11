@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6eb4885991aef4bb8e8696cd587c3d, type: 3}
   m_Name: Toon Diffuse
   m_EditorClassIdentifier: 
-  Id: ToonDiffuse
+  Id: VRLabs.TSRBase.ToonDiffuse
   Name: Toon Diffuse
   Version: 1.0
   Author: VRLabs
