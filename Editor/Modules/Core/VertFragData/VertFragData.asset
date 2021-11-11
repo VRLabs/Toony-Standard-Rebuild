@@ -33,14 +33,14 @@ MonoBehaviour:
     Keywords:
     - VERTEX_DATA
     NeedsVariant: 0
-    Queue: 100
+    Queue: 150
     TemplateKeywords: []
   - Template: {fileID: -544282384758852595, guid: 11f1579ab09273b4f9401aec7e7da860,
       type: 3}
     Keywords:
     - FRAGMENT_DATA
     NeedsVariant: 0
-    Queue: 100
+    Queue: 160
     TemplateKeywords: []
   Functions: []
   AdditionalSerializedData: 

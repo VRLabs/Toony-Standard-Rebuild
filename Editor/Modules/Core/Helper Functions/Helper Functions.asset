@@ -35,7 +35,7 @@ MonoBehaviour:
     - SHADOW_CODE
     - META_CODE
     NeedsVariant: 0
-    Queue: 100
+    Queue: 300
     TemplateKeywords: []
   Functions: []
   AdditionalSerializedData: 
