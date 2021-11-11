@@ -51,11 +51,15 @@ namespace VRLabs.ToonyStandardRebuild
         private OrderedSectionGroup _mainOrderedSection;
         private ControlContainer _staticSections;
         private string _mainSectionLocalizationModulePath;
-        
+
+        private Dictionary<string, int> _enablers;
+        private int[] _previousEnablerValues;
+
         private MaterialProperty[] _props;
         private MaterialEditor _materialEditor;
         private GUIStyle _aboutLabelStyle;
         private bool _showSettingsGUI;
+        private bool _updateShowSettingsGUI;
 
         private List<ShaderModule> _availableModules;
         private List<ShaderModule> _usedModules;
@@ -75,8 +79,6 @@ namespace VRLabs.ToonyStandardRebuild
             _materialEditor = materialEditor;
             if (_isFirstLoop)
             {
-                //Stopwatch watch = new Stopwatch();
-                //watch.Start();
                 DefaultBgColor = GUI.backgroundColor;
 
                 _aboutLabelStyle = new GUIStyle(EditorStyles.miniLabel);
@@ -91,56 +93,45 @@ namespace VRLabs.ToonyStandardRebuild
                 _sectionDefaults = new Dictionary<OrderedSection, UpdateData>();
                 Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
                 Shader = Materials[0].shader;
-                /*watch.Stop();
-                Debug.Log($"Time spent for initial bs: {watch.ElapsedTicks} ticks");
-                watch.Restart();*/
-                ModularShader first = null;
-                int attempts = 0;
+
                 if (_loadedShaders == null) _loadedShaders = TSRUtilities.FindAssetsByType<ModularShader>().ToList();
                 string shaderName = null;
-                if (Materials[0].shader.name.Length > 35 && Materials[0].shader.name.Substring(Materials[0].shader.name.Length - 35, 3).Equals("-g-"))
+                _isOptimisedShader = false;
+                if (Shader.name.Length > 35 && Shader.name.Substring(Materials[0].shader.name.Length - 35, 3).Equals("-g-"))
                 {
                     shaderName = Materials[0].shader.name.Substring(0, Materials[0].shader.name.Length - 35);
                     if (shaderName.StartsWith("Hidden/")) 
                         shaderName = shaderName.Substring(7);
+                    _isOptimisedShader = true;
+                }
+                
+                if (string.IsNullOrEmpty(shaderName))
+                {
+                    if (Shader.name.Contains("-v-"))
+                    {
+                        if (Shader.name.StartsWith("Hidden/")) 
+                            shaderName = Shader.name.Substring(7);
+
+                        shaderName = shaderName.Replace(shaderName.Substring(shaderName.IndexOf("-v-", StringComparison.Ordinal)), "");
+                    }
                 }
 
                 if (string.IsNullOrEmpty(shaderName))
                 {
-                    while (first == null && attempts < 2)
-                    {
-                        attempts++;
-                        first = _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
-                    }
-
-                    ModularShader = first;
-                    _isOptimisedShader = false;
+                    ModularShader = _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader));
                 }
                 else
                 {
-                    while (first == null && attempts < 2)
-                    {
-                        attempts++;
-                        first = _loadedShaders.FirstOrDefault(x => x.ShaderPath.Equals(shaderName));
-                    }
-
-                    ModularShader = first;
-                    _isOptimisedShader = true;
+                    ModularShader = _loadedShaders.FirstOrDefault(x => x.ShaderPath.Equals(shaderName));
                 }
 
-                /*watch.Stop();
-                Debug.Log($"Time spent finding the modular shader: {watch.ElapsedTicks} ticks");*/
                 if (ModularShader == null)
                 {
                     _startupErrors.Add("The modular shader asset has not been found for this shader, this inspector works only on Toony Standard RE:Build generated shaders");
                 }
                 else
                 {
-                    //watch.Restart();
                     Start();
-                    /*watch.Stop();
-                    Debug.Log($"Time spent on start function: {watch.ElapsedTicks} ticks");
-                    watch.Restart();*/
                     Controls.SetInspector(this);
                     _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
                     Controls.FetchProperties(properties, out List<string> missingProperties);
@@ -148,8 +139,6 @@ namespace VRLabs.ToonyStandardRebuild
                     {
                         if(!missingProperty.Equals("")) _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
                     }
-                    /*watch.Stop();
-                    Debug.Log($"Time spent on loading properties of SSI controls: {watch.ElapsedTicks} ticks");*/
                 }
                 _isFirstLoop = false;
             }
@@ -190,9 +179,12 @@ namespace VRLabs.ToonyStandardRebuild
                     if (!section.HasActivatePropertyUpdated || section.Enabled) continue;
                     _sectionDefaults[section].UpdateMaterials(Materials);
                 }
+                CheckIfShaderSwapNeeded();
             }
 
             Footer();
+
+            UpdateShowSettingsUI();
         }
 
         // Contains the ui loading system for shader and modules
@@ -209,11 +201,20 @@ namespace VRLabs.ToonyStandardRebuild
             if (File.Exists(modularShaderPath))
                 LoadUIModule(ModularShader, modularShaderPath);
 
+            _enablers = new Dictionary<string, int>();
+
             foreach (ShaderModule shaderModule in ModularShader.BaseModules)
             {
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
                 if (File.Exists(modulePath))
                     LoadUIModule(shaderModule, modulePath);
+                
+                if (shaderModule == null || shaderModule.Enabled == null || 
+                    string.IsNullOrWhiteSpace(shaderModule.Enabled.Name) || 
+                    !(shaderModule.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
+                
+                if (!_enablers.ContainsKey(shaderModule.Enabled.Name))
+                    _enablers.Add(shaderModule.Enabled.Name, (int)Materials[0].GetFloat(shaderModule.Enabled.Name));
             }
 
             foreach (ShaderModule shaderModule in ModularShader.AdditionalModules)
@@ -221,7 +222,28 @@ namespace VRLabs.ToonyStandardRebuild
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
                 if (File.Exists(modulePath))
                     LoadUIModule(shaderModule, modulePath);
+                
+                if (shaderModule == null || shaderModule.Enabled == null || 
+                    string.IsNullOrWhiteSpace(shaderModule.Enabled.Name) || 
+                    !(shaderModule.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
+                
+                if (!_enablers.ContainsKey(shaderModule.Enabled.Name))
+                    _enablers.Add(shaderModule.Enabled.Name, (int)Materials[0].GetFloat(shaderModule.Enabled.Name));
             }
+            
+            _previousEnablerValues = new int[_enablers.Count];
+            var keys = _enablers.Keys.ToArray();
+            for (int i = 0; i < _enablers.Count; i++)
+                _previousEnablerValues[i] = _enablers[keys[i]];
+            
+            string variantName = ShaderGenerator.GetVariantCode(_enablers);
+            string shaderName = !string.IsNullOrEmpty(variantName) ? $"Hidden/{ModularShader.ShaderPath}-v{variantName}" : $"{ModularShader.ShaderPath}";
+
+            if (Materials[0].shader == Shader.Find(shaderName)) return;
+            
+            //TODO: make a simpleShaderInspectors method to set multiple materials at once
+            foreach (Material material in Materials)
+                material.shader = Shader.Find(shaderName);
         }
 
         private void LoadUIModule(ModularShader modularShader, string modulePath)
@@ -396,12 +418,15 @@ namespace VRLabs.ToonyStandardRebuild
                 EditorGUI.BeginDisabledGroup(_moduleErrors?.Count > 0);
                 if (GUILayout.Button("Apply module changes"))
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
                     ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
 
                     EditorUtility.SetDirty(ModularShader);
 
-                    Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\"");
+                    stopwatch.Stop();
+                    Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{ModularShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
                 }
 
                 EditorGUI.EndDisabledGroup();
@@ -594,20 +619,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
             if (GUILayout.Button("", Styles.GearIcon, GUILayout.Width(22), GUILayout.Height(22)))
             {
-                _showSettingsGUI = !_showSettingsGUI;
-                if (_showSettingsGUI)
-                {
-                    _usedModules = null;
-                    _usedModulesList = null;
-                    _availableModules = null;
-                    _availableModulesList = null;
-                    _lastSelectedModule = null;
-                    _moduleErrors = null;
-                }
-                else
-                {
-                    _isFirstLoop = true;
-                }
+                _updateShowSettingsGUI = true;
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
@@ -640,6 +652,47 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.Label(TSRConstants.TSR_VERSION, _aboutLabelStyle, GUILayout.Height(26));
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
+        }
+        
+        // Check if there's a need to swap shader with a variant
+        private void CheckIfShaderSwapNeeded()
+        {
+            int[] currentValues = new int[_enablers.Count];
+
+            var keys = _enablers.Keys.ToArray();
+            for (int i = 0; i < _enablers.Count; i++)
+                currentValues[i] = _enablers[keys[i]] = (int)Materials[0].GetFloat(keys[i]);
+
+            if (currentValues.SequenceEqual(_previousEnablerValues)) return;
+            
+            _previousEnablerValues = currentValues;
+            string variantName = ShaderGenerator.GetVariantCode(_enablers);
+            string shaderName = !string.IsNullOrEmpty(variantName) ? $"Hidden/{ModularShader.ShaderPath}-v{variantName}" : $"{ModularShader.ShaderPath}";
+            
+            //TODO: make a simpleShaderInspectors method to set multiple materials at once
+            foreach (Material material in Materials)
+                material.shader = Shader.Find(shaderName);
+        }
+        
+        private void UpdateShowSettingsUI()
+        {
+            if (!_updateShowSettingsGUI) return;
+            
+            _updateShowSettingsGUI = false;
+            _showSettingsGUI = !_showSettingsGUI;
+            if (_showSettingsGUI)
+            {
+                _usedModules = null;
+                _usedModulesList = null;
+                _availableModules = null;
+                _availableModulesList = null;
+                _lastSelectedModule = null;
+                _moduleErrors = null;
+            }
+            else
+            {
+                _isFirstLoop = true;
+            }
         }
         
         private void LoadMainOrderedSectionLocalization()
