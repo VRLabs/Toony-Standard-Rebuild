@@ -38,6 +38,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 		_IndirectFallbackMode("Indirect Fallback Mode", Float) = 0.0
 		_IndirectOverride("Indirect Override", Float) = 0.0
 		_FallbackCubemap("Fallback Cubemap", Cube) = ""{}
+		[IntRange] _OutlineStencilID("Stencil ID (0-255)", Range(0, 255)) = 0
+		[Enum(UnityEngine.Rendering.CompareFunction)] _OutlineStencilComp("Stencil Comparison", Int) = 0
+		[Enum(UnityEngine.Rendering.StencilOp)] _OutlineStencilOp("Stencil Operation", Int) = 0
+		_OutlineWidthMap("Outline Thickness Map", 2D) = "white" {}
+		[IntRange] _OutlineWidth("Outline Width", Range(0, 10)) = 0
+		[IntRange] _OutlineOffsetX("Outline Offset X", Range(-10, 10)) = 0
+		[IntRange] _OutlineOffsetY("Outline Offset Y", Range(-10, 10)) = 0
+		_OutlineTexture("Outline Texture", 2D) = "white" {}
+		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
+		_IsOutlineEmissive("Emissive Outline", Float) = 0
+		_OutlinesEnabled("Outlines Enabled", Float) = 0.0
 	}
 	SubShader
 	{

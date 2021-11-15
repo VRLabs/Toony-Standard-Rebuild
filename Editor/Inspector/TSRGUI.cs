@@ -639,6 +639,7 @@ namespace VRLabs.ToonyStandardRebuild
         {
             GUILayout.Space(14);
             GUILayout.BeginHorizontal();
+            /*
             if (GUILayout.Button(new GUIContent(Styles.SSILogoDark, "Check the official GitHub"), "label", GUILayout.Width(32), GUILayout.Height(32)))
             {
                 Application.OpenURL(TSRConstants.GITHUB_LINK);
@@ -653,7 +654,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 Application.OpenURL(TSRConstants.PATREON_LINK);
             }
-            EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);
+            EditorGUIUtility.AddCursorRect(GUILayoutUtility.GetLastRect(), MouseCursor.Link);*/
 
             GUILayout.FlexibleSpace();
 
