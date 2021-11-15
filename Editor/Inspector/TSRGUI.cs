@@ -364,14 +364,14 @@ namespace VRLabs.ToonyStandardRebuild
             if (ModularShader != null && !_isOptimisedShader)
             {
                 ReinitializeListsIfNeeded();
-                EditorGUILayout.BeginHorizontal();
+                /*EditorGUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                /*if (GUILayout.Button("Create new base"))
+                if (GUILayout.Button("Create new base"))
                 {
 
-                }*/
+                }
 
-                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal();*/
                 EditorGUILayout.Space(4);
                 DrawModuleSelectorsArea();
 
@@ -402,6 +402,21 @@ namespace VRLabs.ToonyStandardRebuild
                 {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
+
+                    var removedEnablerValues = ModularShader.AdditionalModules.Where(x => !_usedModules.Contains(x) && x.Enabled.EnableValue != 0).Select(x => x.Enabled).ToList();
+                    if (removedEnablerValues.Count > 0)
+                    {
+                        var materials = TSRUtilities.FindAssetsByType<Material>().Where(x => ModularShader.LastGeneratedShaders.Contains(x.shader)).ToArray();
+
+                        foreach (Material material in materials)
+                        {
+                            foreach (EnableProperty property in removedEnablerValues.Where(property => Math.Abs(material.GetFloat(property.Name) - property.EnableValue) < 0.01))
+                                material.SetFloat(property.Name, 0);
+
+                            EditorUtility.SetDirty(material);
+                        }
+                    }
+
                     ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
                     ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
 
