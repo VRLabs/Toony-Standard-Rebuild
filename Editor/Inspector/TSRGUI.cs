@@ -148,21 +148,14 @@ namespace VRLabs.ToonyStandardRebuild
             }
             Header();
 
-            if (_showSettingsGUI)
-            {
-                DrawSettingsGUI();
-            }
-            else if (_isOptimisedShader)
+            if (_isOptimisedShader)
             {
                 EditorGUILayout.HelpBox("This shader is in an optimised state, and settings cannot be edited", MessageType.Warning);
-                if (GUILayout.Button("Revert to main shader"))
-                {
-                    foreach (Material material in Materials)
-                        material.shader = Shader.Find(ModularShader.ShaderPath);
-                    
-                    _isFirstLoop = true;
-                }
             }
+            else if (_showSettingsGUI)
+            {
+                DrawSettingsGUI();
+            } 
             else if (_startupErrors.Count > 0)
             {
                 foreach (string error in _startupErrors)
@@ -403,18 +396,6 @@ namespace VRLabs.ToonyStandardRebuild
                     Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
                 }
 
-                if (GUILayout.Button("Generate Optimised shader"))
-                {
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Shaders");
-                    ShaderGenerator.GenerateMinimalShader("Assets/VRLabs/GeneratedAssets/Shaders", ModularShader, Materials);
-                    stopwatch.Stop();
-                    Debug.Log($"Toony Standard RE:Build: generated optimised shader for {Materials.Length} material{(Materials.Length > 1 ? "s" : "")} in {stopwatch.ElapsedMilliseconds}ms");
-                    _isFirstLoop = true;
-                    _showSettingsGUI = false;
-                }
-
                 GUILayout.FlexibleSpace();
                 EditorGUI.BeginDisabledGroup(_moduleErrors?.Count > 0);
                 if (GUILayout.Button("Apply module changes"))
@@ -624,6 +605,34 @@ namespace VRLabs.ToonyStandardRebuild
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
+
+            if (!_isOptimisedShader)
+            {
+                if (GUILayout.Button("Generate Optimised shader"))
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Shaders");
+                    ShaderGenerator.GenerateMinimalShader("Assets/VRLabs/GeneratedAssets/Shaders", ModularShader, Materials);
+                    stopwatch.Stop();
+                    Debug.Log($"Toony Standard RE:Build: generated optimised shader for {Materials.Length} material{(Materials.Length > 1 ? "s" : "")} in {stopwatch.ElapsedMilliseconds}ms");
+                    _isFirstLoop = true;
+                    _showSettingsGUI = false;
+                }
+
+                EditorGUILayout.Space();
+            }
+            else
+            {
+                //TODO: use SSI implementation for multiple shader swaps
+                if (GUILayout.Button("Revert to main shader"))
+                {
+                    foreach (Material material in Materials)
+                        material.shader = Shader.Find(ModularShader.ShaderPath);
+                    
+                    _isFirstLoop = true;
+                }
+            }
         }
 
         private void Footer()
