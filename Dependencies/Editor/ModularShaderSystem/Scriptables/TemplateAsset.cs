@@ -18,8 +18,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
         public TemplateAsset() : this("") { }
 
-        public override string ToString() => Template;
-
         [MenuItem("Assets/Create/" + MSSConstants.CREATE_PATH + "/Template", priority = 9)]
         private static void CreateTemplate()
         {

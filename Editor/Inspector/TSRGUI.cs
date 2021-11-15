@@ -239,6 +239,7 @@ namespace VRLabs.ToonyStandardRebuild
             string variantName = ShaderGenerator.GetVariantCode(_enablers);
             string shaderName = !string.IsNullOrEmpty(variantName) ? $"Hidden/{ModularShader.ShaderPath}-v{variantName}" : $"{ModularShader.ShaderPath}";
 
+            if (_isOptimisedShader) return;
             if (Materials[0].shader == Shader.Find(shaderName)) return;
             
             //TODO: make a simpleShaderInspectors method to set multiple materials at once
@@ -657,6 +658,7 @@ namespace VRLabs.ToonyStandardRebuild
         // Check if there's a need to swap shader with a variant
         private void CheckIfShaderSwapNeeded()
         {
+            if (_isOptimisedShader) return;
             int[] currentValues = new int[_enablers.Count];
 
             var keys = _enablers.Keys.ToArray();
