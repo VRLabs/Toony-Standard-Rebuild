@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
 using VRLabs.ToonyStandardRebuild.SSICustomControls;
-using Chainables = VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Chainables;
 
 namespace VRLabs.ToonyStandardRebuild
 {
@@ -47,6 +47,10 @@ namespace VRLabs.ToonyStandardRebuild
                     return parentControl.AddLabelControl(Name);
                 case ControlType.SpaceControl:
                     return parentControl.AddSpaceControl(Parameters.Count < 1 || !(Parameters[0] is int a) ? 0 : a);
+                case ControlType.HelpBoxControl:
+                    if (Parameters.Count < 2 || !(Parameters[0] is MessageType) || !(Parameters[1] is bool))
+                        throw new TypeAccessException("The parameter given was not of the right type");
+                    return parentControl.AddHelpBoxControl(Name).SetBoxType((MessageType)Parameters[0]).SetIsWideBox((bool)Parameters[1]);
                 case ControlType.PropertyControl:
                     if (Parameters.Count < 1 || !(Parameters[0] is string))
                         throw new TypeAccessException("The parameter given was not of the right type");
@@ -139,23 +143,24 @@ namespace VRLabs.ToonyStandardRebuild
     
     public enum ControlType
     {
-        SpaceControl,
-        LabelControl,
-        PropertyControl,
-        ColorControl,
-        VectorControl,
-        TextureControl,
-        TextureGeneratorControl,
-        GradientTextureControl,
-        TilingAndOffsetControl,
-        ConditionalControlContainer,
-        ListSelectorControl,
-        ModuleSelectorControl,
-        ToggleControl,
-        ToggleListControl,
-        KeywordToggleControl,
-        KeywordToggleListControl,
-        LightmapEmissionControl,
-        VertexStreamsControl
+        SpaceControl = 0,
+        LabelControl = 1,
+        HelpBoxControl = 18,
+        PropertyControl = 2,
+        ColorControl = 3,
+        VectorControl = 4,
+        TextureControl = 5,
+        TextureGeneratorControl = 6,
+        GradientTextureControl = 7,
+        TilingAndOffsetControl = 8,
+        ConditionalControlContainer = 9,
+        ListSelectorControl = 10,
+        ModuleSelectorControl = 11,
+        ToggleControl = 12,
+        ToggleListControl = 13,
+        KeywordToggleControl = 14,
+        KeywordToggleListControl = 15,
+        LightmapEmissionControl = 16,
+        VertexStreamsControl = 17
     }
 }

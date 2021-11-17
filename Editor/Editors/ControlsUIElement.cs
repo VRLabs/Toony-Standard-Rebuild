@@ -61,6 +61,9 @@ namespace VRLabs.ToonyStandardRebuild
                 case ControlType.LabelControl:
                     _specificControlUI = new LabelControlUIElement(obj.Parameters);
                     break;
+                case ControlType.HelpBoxControl:
+                    _specificControlUI = new HelpBoxControlUIElement(obj.Parameters);
+                    break;
                 case ControlType.PropertyControl:
                     _specificControlUI = new PropetyControlUIElement(obj.Parameters);
                     break;
