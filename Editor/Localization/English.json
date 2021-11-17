@@ -1,6 +1,11 @@
 {
     "Properties": [
         {
+            "Name": "Stencil Options_Path",
+            "DisplayName": "Advanced",
+            "Tooltip": ""
+        },
+        {
             "Name": "Albedo",
             "DisplayName": "Albedo",
             "Tooltip": ""

@@ -6,22 +6,6 @@ using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Utility;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
-    /// <summary>
-    /// Control that handles a gradient texture with a gradient editor included.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// This advanced control is a <see cref="TextureControl"/> specialized for gradient textures. It embeds an editor for generating or modifying gradients into textures,
-    /// enabling the user to create and previewing gradients in real time without leaving the inspector.
-    /// </para>
-    /// <para>It can also include a color property.</para>
-    /// </remarks>
-    /// <example>
-    /// Example usage:
-    /// <code>
-    /// this.AddGradientTextureControl("_exampleGradientTexture", "_ExampleColor");
-    /// </code>
-    /// </example>
     public class GradientTextureControl : TextureControl, IAdditionalLocalization
     {
         private GradientTexture _gradient;
@@ -50,90 +34,24 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             "GradientCancelButton"
         };
 
-        /// <summary>
-        /// Style used to display the gradient editor button.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used.
-        /// </value>
         [Chainable] public GUIStyle GradientButtonStyle { get; set; }
         
-        /// <summary>
-        /// Style used to display the gradient editor save button.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used.
-        /// </value>
         [Chainable] public GUIStyle GradientSaveButtonStyle { get; set; }
         
-        /// <summary>
-        /// Style used to display the gradient editor background.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used.
-        /// </value>
         [Chainable] public GUIStyle GradientEditorStyle { get; set; }
 
-        /// <summary>
-        /// Background color used to display the gradient editor button.
-        /// </summary>
-        /// <value>
-        /// Color used.
-        /// </value>
         [Chainable] public Color GradientButtonColor { get; set; }
         
-        /// <summary>
-        /// Background color used to display the gradient editor save button.
-        /// </summary>
-        /// <value>
-        /// Color used.
-        /// </value>
         [Chainable] public Color GradientSaveButtonColor { get; set; }
         
-        /// <summary>
-        /// Background color used to display the gradient editor background.
-        /// </summary>
-        /// <value>
-        /// Color used.
-        /// </value>
         [Chainable] public Color GradientEditorColor { get; set; }
 
-        /// <summary>
-        /// Implementation of <see cref="IAdditionalLocalization"/> for the additional localization strings.
-        /// </summary>
-        /// <value>
-        /// Array of <see cref="AdditionalLocalization"/> objects. 
-        /// </value>
-        /// <remarks>
-        /// The localized content array will have the following object names:
-        /// <list type="bullet">
-        /// <item> <term>[0]: </term> <description>GradientOpenEditor</description> </item>
-        /// <item> <term>[1]: </term> <description>GradientColorLabel</description> </item>
-        /// <item> <term>[2]: </term> <description>GradientTimeLabel</description> </item>
-        /// <item> <term>[3]: </term> <description>GradientRampSizeLabel</description> </item>
-        /// <item> <term>[4]: </term> <description>GradientBlendModeLabel</description> </item>
-        /// <item> <term>[5]: </term> <description>GradientSaveButton</description> </item>
-        /// <item> <term>[6]: </term> <description>GradientCancelButton</description> </item>
-        /// </list>
-        /// </remarks>
         public AdditionalLocalization[] AdditionalContent { get; set; }
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// <param name="propertyName">Name of the gradient texture property.</param>
-        /// <param name="colorPropertyName">Name of the relative color property (default: null).</param>
         public GradientTextureControl(string propertyName, string colorPropertyName = null) : this(propertyName, null, null, colorPropertyName)
         {
         }
-
-        /// <summary>
-        /// Constructor with additional min and max texture color properties.
-        /// </summary>
-        /// <param name="propertyName">Name of the gradient texture property.</param>
-        /// <param name="minColorPropertyName">Minimum color of the gradient.</param>
-        /// <param name="maxColorPropertyName">Maximum color of the gradient.</param>
-        /// <param name="colorPropertyName">Name of the relative color property (default: null).</param>
+        
         public GradientTextureControl(string propertyName, string minColorPropertyName, string maxColorPropertyName, string colorPropertyName = null) : base(propertyName)
         {
             AdditionalProperties = new AdditionalProperty[3];
@@ -141,22 +59,23 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             AdditionalProperties[1] = new AdditionalProperty(minColorPropertyName);
             AdditionalProperties[2] = new AdditionalProperty(maxColorPropertyName);
             if (!string.IsNullOrWhiteSpace(colorPropertyName))
-                _hasExtra1 = true;
+                HasExtra1 = true;
             if (!string.IsNullOrWhiteSpace(minColorPropertyName))
                 _hasMinValue = true;
             if (!string.IsNullOrWhiteSpace(maxColorPropertyName))
                 _hasMaxValue = true;
-
+            
+            Controls = new List<SimpleControl>();
+            
             GradientButtonStyle = Styles.Bubble;
             GradientEditorStyle = Styles.TextureBoxHeavyBorder;
             GradientSaveButtonStyle = Styles.Bubble;
-            ShowUvOptions = false;
+            ShowTilingAndOffset = false;
 
             GradientButtonColor = Color.white;
             GradientEditorColor = Color.white;
             GradientSaveButtonColor = Color.white;
 
-            //Gradient editor default settings.
             _gradient = new GradientTexture(1024);
             _rampWidth = GradientWidth.L_1024;
             _blendMode = GradientBlendMode.Linear;
@@ -165,26 +84,23 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             this.InitializeLocalizationWithNames(_contentNames);
         }
 
-        /// <summary>
-        /// Draws the control represented by this object.
-        /// </summary>
-        /// <param name="materialEditor">Material editor.</param>
         protected override void ControlGUI(MaterialEditor materialEditor)
         {
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.BeginHorizontal();
             
-            if (_hasExtra1)
+            if (HasExtra1)
                 materialEditor.TexturePropertySingleLine(Content, Property, AdditionalProperties[0].Property);
             else
                 materialEditor.TexturePropertySingleLine(Content, Property);
             
-            if (ShowUvOptions)
+            if (ShowTilingAndOffset || Controls.Count > 0)
             {
-                GUI.backgroundColor = UVButtonColor;
-                _isUVButtonPressed = EditorGUILayout.Toggle(_isUVButtonPressed, UVButtonStyle, GUILayout.Width(14.0f), GUILayout.Height(14.0f));
+                GUI.backgroundColor = OptionsButtonColor;
+                IsOptionsButtonPressed = EditorGUILayout.Toggle(IsOptionsButtonPressed, OptionsButtonStyle, GUILayout.Width(19.0f), GUILayout.Height(19.0f));
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
             }
+            
             if (!_isGradientEditorOpen)
             {
                 GUI.backgroundColor = GradientButtonColor;
@@ -196,42 +112,58 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                         _previousTextures[i] = (Texture2D)Inspector.Materials[i].GetTexture(PropertyName);
                     
                     Selection.selectionChanged += ResetGradientTexture;
-                    if (_previousTextures[0] != null)
+                    if (_previousTextures != null)
                         TranslateTextureToGradient(_previousTextures[0]);
-                    
+
                     Property.textureValue = _gradient.GetTexture();
                 }
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
             }
-
-            EditorGUILayout.EndHorizontal();
             
             HasPropertyUpdated = EditorGUI.EndChangeCheck();
             
-            if (_isUVButtonPressed)
+            EditorGUILayout.EndHorizontal();
+            
+            if (IsOptionsButtonPressed)
             {
-                GUI.backgroundColor = UVAreaColor;
-                EditorGUILayout.BeginVertical(UVAreaStyle);
+                GUI.backgroundColor = OptionsAreaColor;
+                EditorGUILayout.BeginHorizontal();
+                int previousIndent = EditorGUI.indentLevel;
+                GUILayout.Space(EditorGUI.indentLevel * 15);
+                EditorGUI.indentLevel = 0;
+                EditorGUILayout.BeginVertical(OptionsAreaStyle);
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
                 EditorGUI.indentLevel++;
-                materialEditor.TextureScaleOffsetProperty(Property);
+                if (ShowTilingAndOffset)
+                    materialEditor.TextureScaleOffsetProperty(Property);
+                foreach (var control in Controls)
+                    control.DrawControl(materialEditor);
                 EditorGUI.indentLevel--;
                 EditorGUILayout.EndVertical();
+                EditorGUI.indentLevel = previousIndent;
+                EditorGUILayout.EndHorizontal();
             }
-
+            
             if (HasPropertyUpdated && (_hasMinValue || _hasMaxValue))
                 UpdateMinMaxProperties();
 
             if (_isGradientEditorOpen)
             {
+                
                 GUI.backgroundColor = GradientEditorColor;
+                EditorGUILayout.BeginHorizontal();
+                int previousIndent = EditorGUI.indentLevel;
+                GUILayout.Space(EditorGUI.indentLevel * 15);
+                EditorGUI.indentLevel = 0;
                 EditorGUILayout.BeginVertical(GradientEditorStyle);
                 GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
                 DrawGradientEditor(materialEditor);
                 EditorGUILayout.EndVertical();
+                EditorGUI.indentLevel = previousIndent;
+                EditorGUILayout.EndHorizontal();
             }
         }
-
+        
         private void UpdateMinMaxProperties()
         {
             Texture2D ramp = (Texture2D)Property.textureValue;
@@ -260,7 +192,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             }
 
             bool textureGamma = ramp.IsSrgb();
-            if (_hasExtra1)
+            if (HasExtra1)
             {
                 bool colorGamma = AdditionalProperties[0].Property.flags != MaterialProperty.PropFlags.HDR;
                 if ( colorGamma && !textureGamma)
@@ -348,9 +280,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             if (!col.Equals(_gradient.Keys[_selectedKeyIndex].Color))
                 _gradient.UpdateKeyColor(_selectedKeyIndex, col);
 
-            float time = EditorGUILayout.FloatField(_gradient.Keys[_selectedKeyIndex].Time);
-            if (time != _gradient.Keys[_selectedKeyIndex].Time)
-                _gradient.UpdateKeyTime(_selectedKeyIndex, time);
+            float time = (float)Math.Round(EditorGUILayout.FloatField(_gradient.Keys[_selectedKeyIndex].Time), 3);
+            if (Math.Abs(time - _gradient.Keys[_selectedKeyIndex].Time) > 0.0001)
+                _selectedKeyIndex = _gradient.UpdateKeyTime(_selectedKeyIndex, time);
 
             _rampWidth = (GradientWidth)EditorGUILayout.EnumPopup(_rampWidth);
             if ((int)_rampWidth != _gradient.GetTexture().width)
@@ -390,18 +322,13 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             EditorGUILayout.EndHorizontal();
         }
 
-        /// <summary>
-        /// Handles mouse and keyboard events
-        /// </summary>
         private void HandleEvents(MaterialEditor materialEditor)
         {
             bool repaint = false;
 
             Event guiEvent = Event.current;
-            // Check when left mouse down
             if (guiEvent.type == EventType.MouseDown && guiEvent.button == 0)
             {
-                // Check if selecting a keyframe
                 for (int i = 0; i < _keyRects.Length; i++)
                 {
                     if (_keyRects[i].Contains(guiEvent.mousePosition))
@@ -413,7 +340,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                         break;
                     }
                 }
-                // Creates a new keyframe if not selected one
                 if (!_mouseIsDownOverKey && _keySelectionAreaRect.Contains(guiEvent.mousePosition))
                 {
                     float keytime = Mathf.InverseLerp(_gradientPreviewRect.x, _gradientPreviewRect.xMax, guiEvent.mousePosition.x);
@@ -423,20 +349,17 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 }
             }
 
-            // Check left mouse up
             if (guiEvent.type == EventType.MouseUp && guiEvent.button == 0)
             {
                 _mouseIsDownOverKey = false;
             }
 
-            // Check if mouse is dragging
             if (_mouseIsDownOverKey && guiEvent.type == EventType.MouseDrag && guiEvent.button == 0)
             {
                 float keytime = Mathf.InverseLerp(_gradientPreviewRect.x, _gradientPreviewRect.xMax, guiEvent.mousePosition.x);
                 _selectedKeyIndex = _gradient.UpdateKeyTime(_selectedKeyIndex, keytime);
                 repaint = true;
             }
-            // Check if using the delete key
             if (guiEvent.keyCode == KeyCode.Delete && guiEvent.type == EventType.KeyDown)
             {
                 _gradient.RemoveKey(_selectedKeyIndex);
@@ -453,6 +376,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 
         private void TranslateTextureToGradient(Texture2D texture)
         {
+            if (texture == null) return;
             if (!texture.isReadable)
                 SSIHelper.SetTextureImporterReadable(texture, true);
             
@@ -568,9 +492,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         }
     }
 
-    /// <summary>
-    /// Supported gradient widths
-    /// </summary>
     public enum GradientWidth
     {
         XS_128 = 128,

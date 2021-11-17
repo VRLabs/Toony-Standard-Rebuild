@@ -65,7 +65,7 @@ namespace VRLabs.ToonyStandardRebuild
                     if (Parameters.Count < 3 || !(Parameters[0] is string) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string))
                         throw new TypeAccessException("The parameter given was not of the right type");
-                    return parentControl.AddTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowUvOptions(true);
+                    return parentControl.AddTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowTilingAndOffset(true);
                 case ControlType.TextureGeneratorControl:
                     if (Parameters.Count < 5 || !(Parameters[0] is ComputeShader) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string) ||
@@ -76,9 +76,9 @@ namespace VRLabs.ToonyStandardRebuild
                             throw new TypeAccessException("The parameter given was not of the right type");
                     }
                     if (Parameters.Count < 5)
-                        return parentControl.AddTextureGeneratorControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowUvOptions(true);
+                        return parentControl.AddTextureGeneratorControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowTilingAndOffset(true);
                     else
-                        return parentControl.AddTextureGeneratorControl((ComputeShader)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3], (string)Parameters[4]).Alias(Name).SetShowUvOptions(true);
+                        return parentControl.AddTextureGeneratorControl((ComputeShader)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3], (string)Parameters[4]).Alias(Name).SetShowTilingAndOffset(true);
                 case ControlType.GradientTextureControl:
                     if (Parameters.Count < 4 || !(Parameters[0] is string) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string) ||

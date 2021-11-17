@@ -1,17 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
-    /// <summary>
-    /// Helper class for TextureGeneratorControl.
-    /// </summary>
     public static class TextureGeneratorHelper
     {
-        // Get the kernel and relative inputs from a json string.
         internal static (string, List<ComputeInputBase>) GetInputs(string settingsJson)
         {
             TextureGeneratorSettings settings = JsonUtility.FromJson<TextureGeneratorSettings>(settingsJson);
@@ -40,27 +35,18 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             return (settings.KernelName, inputs);
         }
     }
-    /// <summary>
-    /// Type of input for the texture generator.
-    /// </summary>
     public enum InputType
     {
         Texture,
         Color
     }
 #pragma warning disable 0649 //disabled warning here since the object is serializable and will be serialized by loading json files. 
-    /// <summary>
-    /// Json settings file structure.
-    /// </summary>
     [Serializable]
     internal class TextureGeneratorSettings
     {
         public string KernelName;
         public TextureGeneratorInput[] Inputs;
     }
-    /// <summary>
-    /// Substructure of the Json settings file indicating a single input for the generator.
-    /// </summary>
     [Serializable]
     internal class TextureGeneratorInput
     {
@@ -141,19 +127,19 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                         break;
                 }
             }
-            ComputeInputs.TextureMetadata textureMetadata = new ComputeInputs.TextureMetadata
+            var textureMetadata = new ComputeInputs.TextureMetadata
             {
-                Width = def?.width ?? Texture.width,
-                Height = def?.height ?? Texture.height,
+                Width = def != null ? def.width : Texture.width,
+                Height = def != null ? def.height : Texture.height,
                 SelectedChannel = Channel,
                 Reverse = Invert ? 1 : 0,
                 Gamma = IsGamma()
             };
 
-            ComputeInputs.TextureData textureData = new ComputeInputs.TextureData
+            var textureData = new ComputeInputs.TextureData
             {
                 Name = InputName,
-                Texture = def ?? Texture
+                Texture = def != null ? def : Texture
             };
 
             inputs.Textures.Add(textureData);
@@ -167,7 +153,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             rect.x += 10; rect.y += 5;
             rect.width -= 20; rect.height -= 10;
             Texture = (Texture2D)EditorGUI.ObjectField(rect, Texture, typeof(Texture2D), false);
-            if (UseSpecificChannel) Channel = GUILayout.Toolbar(Channel, new string[] { "R", "G", "B", "A" }); //extraContent[0].Content,
+            if (UseSpecificChannel) Channel = GUILayout.Toolbar(Channel, new[] { "R", "G", "B", "A" }); //extraContent[0].Content,
             if (UseInvert)
             {
                 rect = GUILayoutUtility.GetRect(100, 16);
@@ -203,8 +189,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 
         internal override void AssignInputsToCompute(ComputeInputs inputs, int kernel)
         {
-            //compute.SetTexture(kernel, channelName, Texture);
-            //compute.SetFloat(TextureWidthInputName, Texture.width);
             if (UseColorspace)
             {
                 inputs.Colors.Add(Colorspace == 0 ? Color : Color.gamma);
@@ -219,7 +203,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         {
             GUILayout.Label(name);
             EditorGUILayout.ColorField(Color);
-            if (UseColorspace) Colorspace = GUILayout.Toolbar(Colorspace, new string[] { "Linear", "Gamma" }, EditorStyles.miniLabel); //extraContent[1].Content
+            if (UseColorspace) Colorspace = GUILayout.Toolbar(Colorspace, new [] { "Linear", "Gamma" }, EditorStyles.miniLabel); //extraContent[1].Content
         }
     }
 

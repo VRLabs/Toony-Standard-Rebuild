@@ -13,7 +13,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             control.ShowAlphaValue = property;
             return control;
         }
-        
+
         public static ConditionalControlContainer AddConditionalControlContainer(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String conditionalProperty, System.Single enableValue)
         {
             var control = new ConditionalControlContainer(conditionalProperty, enableValue);
@@ -46,7 +46,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             container.AddControl(control);
             return control;
         }
-        public static GradientTextureControl AddGradientTextureControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName,System.String minColorPropertyName, System.String maxColorPropertyName, System.String colorPropertyName = null)
+        public static GradientTextureControl AddGradientTextureControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, System.String minColorPropertyName, System.String maxColorPropertyName, System.String colorPropertyName = null)
         {
             var control = new GradientTextureControl(propertyName, minColorPropertyName, maxColorPropertyName, colorPropertyName);
             container.AddControl(control);
@@ -80,6 +80,23 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         public static T SetGradientEditorColor<T>(this T control, UnityEngine.Color property) where T : GradientTextureControl
         {
             control.GradientEditorColor = property;
+            return control;
+        }
+
+        public static HelpBoxControl AddHelpBoxControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String alias)
+        {
+            var control = new HelpBoxControl(alias);
+            container.AddControl(control);
+            return control;
+        }
+        public static T SetBoxType<T>(this T control, UnityEditor.MessageType property) where T : HelpBoxControl
+        {
+            control.BoxType = property;
+            return control;
+        }
+        public static T SetIsWideBox<T>(this T control, System.Boolean property) where T : HelpBoxControl
+        {
+            control.IsWideBox = property;
             return control;
         }
 
@@ -129,9 +146,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             container.AddControl(control);
             return control;
         }
-        public static T SetShowUvOptions<T>(this T control, System.Boolean property) where T : TextureControl
+        public static T SetShowTilingAndOffset<T>(this T control, System.Boolean property) where T : TextureControl
         {
-            control.ShowUvOptions = property;
+            control.ShowTilingAndOffset = property;
             return control;
         }
         public static T SetHasHDRColor<T>(this T control, System.Boolean property) where T : TextureControl
@@ -139,24 +156,24 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             control.HasHDRColor = property;
             return control;
         }
-        public static T SetUVButtonStyle<T>(this T control, UnityEngine.GUIStyle property) where T : TextureControl
+        public static T SetOptionsButtonStyle<T>(this T control, UnityEngine.GUIStyle property) where T : TextureControl
         {
-            control.UVButtonStyle = property;
+            control.OptionsButtonStyle = property;
             return control;
         }
-        public static T SetUVAreaStyle<T>(this T control, UnityEngine.GUIStyle property) where T : TextureControl
+        public static T SetOptionsAreaStyle<T>(this T control, UnityEngine.GUIStyle property) where T : TextureControl
         {
-            control.UVAreaStyle = property;
+            control.OptionsAreaStyle = property;
             return control;
         }
-        public static T SetUVButtonColor<T>(this T control, UnityEngine.Color property) where T : TextureControl
+        public static T SetOptionsButtonColor<T>(this T control, UnityEngine.Color property) where T : TextureControl
         {
-            control.UVButtonColor = property;
+            control.OptionsButtonColor = property;
             return control;
         }
-        public static T SetUVAreaColor<T>(this T control, UnityEngine.Color property) where T : TextureControl
+        public static T SetOptionsAreaColor<T>(this T control, UnityEngine.Color property) where T : TextureControl
         {
-            control.UVAreaColor = property;
+            control.OptionsAreaColor = property;
             return control;
         }
 

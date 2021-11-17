@@ -1,52 +1,23 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Utility;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
-    /// <summary>
-    /// Represents a control for a texture property with possibility to inline 2 extra properties. Also includes a texture generator.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// It is a more complex and specialized version of <see cref="TextureControl"/>, where on top of the base functionality of <see cref="TextureControl"/> it also has
-    /// a fuull blown texture generator.
-    /// </para>
-    /// <para>
-    /// When using it right away the texture generator will default to a simple 4 channel merger where for each channel you can select a texture, select which channel of
-    /// the texture use, and use that as the channel for the final generated texture.
-    /// </para>
-    /// <para>
-    /// While this is already a great use of the control and a fairly common one (like merging 4 monochrome texture masks) it is just one possible use,
-    /// since it can load custom <c>compute shaders</c> and relative control input options to go along, enabling you to create your own generator that takes
-    /// your own defined parameters to get a specific output.
-    /// </para>
-    /// </remarks>
-    /// <example>
-    /// Example usage:
-    /// <code>
-    /// // Adds a new texture generator control with a texture and color field, using the default merger for the generator
-    /// this.AddTextureGeneratorControl("_TextureProperty", "_ColorProperty"); 
-    ///
-    /// // Adds a new texture generator control with a texture and color field, using a custom generator
-    /// this.AddTextureGeneratorControl(myCompute, computeInputJson, "_TextureProperty", "_ColorProperty"); 
-    /// </code>
-    /// </example>
     public class TextureGeneratorControl : TextureControl, IAdditionalLocalization
     {
         private readonly AdditionalLocalization[] _baseContent;
         private readonly AdditionalLocalization[] _textureContent;
         private readonly AdditionalLocalization[] _colorContent;
         private readonly AdditionalLocalization[] _namesContent;
-        private bool _isGeneratorOpen = false;
+        private bool _isGeneratorOpen;
         private readonly ComputeShader _compute;
         private readonly string _kernelName;
         private Resolution _resolution;
         private readonly List<ComputeInputBase> _inputs;
         private RenderTexture _result;
         private Texture2D _resultTex;
-        private readonly bool _containsTextures = false;
+        private readonly bool _containsTextures;
 
         private static readonly string[] _baseNames =
                         {
@@ -65,82 +36,24 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             "ColorSpace"            //[0]
         };
 
-        private readonly bool _containsColors = false;
+        private readonly bool _containsColors;
 
-        /// <summary>
-        /// Style for the texture generator button.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used when displaying the generator "open" button.
-        /// </value>
         [Chainable] public GUIStyle GeneratorButtonStyle { get; set; }
         
-        /// <summary>
-        /// Style for the texture generator save button.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used when displaying the generator "save" button.
-        /// </value>
         [Chainable] public GUIStyle GeneratorSaveButtonStyle { get; set; }
 
-        /// <summary>
-        /// Style for the texture generator background.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used when displaying the generator background.
-        /// </value>
         [Chainable] public GUIStyle GeneratorStyle { get; set; }
 
-        /// <summary>
-        /// Style for the generator input background.
-        /// </summary>
-        /// <value>
-        /// GUIStyle used when displaying the background of a generator input field.
-        /// </value>
         [Chainable] public GUIStyle GeneratorInputStyle { get; set; }
 
-        /// <summary>
-        /// Background color for the texture generator button.
-        /// </summary>
-        /// <value>
-        /// Color used when displaying the generator "open" button.
-        /// </value>
         [Chainable] public Color GeneratorButtonColor { get; set; }
 
-        /// <summary>
-        /// Background color for the generator save button.
-        /// </summary>
-        /// <value>
-        /// Color used when displaying the generator "save" button.
-        /// </value>
         [Chainable] public Color GeneratorSaveButtonColor { get; set; }
 
-        /// <summary>
-        /// Background color for the generator background.
-        /// </summary>
-        /// <value>
-        /// Color used when displaying the generator background.
-        /// </value>
         [Chainable] public Color GeneratorColor { get; set; }
 
-        /// <summary>
-        /// Background color for the generator input background.
-        /// </summary>
-        /// <value>
-        /// Color used when displaying the background of a generator input field.
-        /// </value>
         [Chainable] public Color GeneratorInputColor { get; set; }
 
-        /// <summary>
-        /// Additional localization strings. Implementation for <see cref="IAdditionalLocalization"/>.
-        /// </summary>
-        /// <value>
-        /// A list of <see cref="AdditionalLocalization"/> used by the control.
-        /// </value>
-        /// <remarks>
-        /// <para>For this specific control this variable should only be used for reading values and not adding more due to the fact that unlike a usual case scenario,
-        /// here the additional content is stored in multiple variables and put in a single list only when requested by this property.</para>
-        /// </remarks>
         public AdditionalLocalization[] AdditionalContent
         {
             get
@@ -155,27 +68,13 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             }
             set { }
         }
-        /// <summary>
-        /// Default constructor of <see cref="TextureGeneratorControl"/>
-        /// </summary>
-        /// <param name="propertyName">Material property name.</param>
-        /// <param name="extraPropertyName1">First additional material property name. Optional.</param>
-        /// <param name="extraPropertyName2">Second additional material property name. Optional.</param>
-        /// <returns>A new <see cref="TextureGeneratorControl"/> object.</returns>
         public TextureGeneratorControl(string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : this(ComputeShaders.RGBAPacker, ComputeShaders.RGBAPackerSettings, propertyName, extraPropertyName1, extraPropertyName2)
         {
         }
 
-        /// <summary>
-        /// Default constructor of <see cref="TextureGeneratorControl"/>
-        /// </summary>
-        /// <param name="propertyName">Material property name.</param>
-        /// <param name="extraPropertyName1">First additional material property name. Optional.</param>
-        /// <param name="extraPropertyName2">Second additional material property name. Optional.</param>
-        /// <returns>A new <see cref="TextureGeneratorControl"/> object.</returns>
         public TextureGeneratorControl(ComputeShader compute, string computeOptionsJson, string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : base(propertyName, extraPropertyName1, extraPropertyName2)
         {
-            _customInlineContent = true;
+            HasCustomInlineContent = true;
             _resolution = Resolution.M_512x512;
             _result = new RenderTexture((int)_resolution, (int)_resolution, 32, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB)
             {
@@ -216,11 +115,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 
             _baseContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_baseNames);
 
-            // Texture exclusive content
             if (_containsTextures)
                 _textureContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_textureNames);
 
-            // Color exclusive content
             if (_containsTextures)
                 _colorContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_colorNames);
 
@@ -229,14 +126,10 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 _namesContent[i] = new AdditionalLocalization { Name = "Input" + (i + 1) };
         }
 
-        /// <summary>
-        /// Draws the control represented by this object.
-        /// </summary>
-        /// <param name="materialEditor">Material editor.</param>
         protected override void ControlGUI(MaterialEditor materialEditor)
         {
             DrawTextureSingleLine(materialEditor);
-            
+
             if (_isGeneratorOpen)
             {
                 GUI.backgroundColor = GeneratorColor;
@@ -252,7 +145,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 EditorGUILayout.EndHorizontal();
             }
         }
-
+        
         protected override void DrawSideContent(MaterialEditor materialEditor)
         {
             if (!_isGeneratorOpen)
@@ -288,11 +181,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                     }
                 }
 
-                AdditionalLocalization[] selectedArray;
-                if (_inputs[i] is ComputeTextureInput)
-                    selectedArray = _textureContent;
-                else
-                    selectedArray = _colorContent;
+                AdditionalLocalization[] selectedArray = _inputs[i] is ComputeTextureInput ? _textureContent : _colorContent;
                 
                 GUI.backgroundColor = GeneratorInputColor;
                 EditorGUILayout.BeginVertical(GeneratorInputStyle);
@@ -320,7 +209,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             EditorGUILayout.EndHorizontal();
         }
 
-        // Generate the result texture form the generator.
         private void GenerateTexture()
         {
             if (_result.width != (int)_resolution || _result.height != (int)_resolution)
@@ -330,7 +218,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                     enableRandomWrite = true
                 };
                 _result.Create();
-                // 
             }
 
             int kernel = _compute.FindKernel(_kernelName);

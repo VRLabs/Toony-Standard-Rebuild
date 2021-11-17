@@ -1,73 +1,8 @@
 {
     "Properties": [
         {
-            "Name": "Anisotropic",
-            "DisplayName": "Anisotropic",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map",
-            "DisplayName": "Tangent Map",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_GeneratorOpen",
-            "DisplayName": "Tangent Map_GeneratorOpen",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_GeneratorSaveButton",
-            "DisplayName": "Tangent Map_GeneratorSaveButton",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_GeneratorCancelButton",
-            "DisplayName": "Tangent Map_GeneratorCancelButton",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_GeneratorTextureSize",
-            "DisplayName": "Tangent Map_GeneratorTextureSize",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_TextureInvert",
-            "DisplayName": "Tangent Map_TextureInvert",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_Input1",
-            "DisplayName": "Tangent Map_Input1",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Tangent Map_Input2",
-            "DisplayName": "Tangent Map_Input2",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Anisotropy",
-            "DisplayName": "Anisotropy",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Indirect fallback mode",
-            "DisplayName": "Indirect fallback mode",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Indirect override",
-            "DisplayName": "Indirect override",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Cubemap fallback",
-            "DisplayName": "Cubemap fallback",
-            "Tooltip": ""
-        },
-        {
-            "Name": "Fallback Cubemap",
-            "DisplayName": "Fallback Cubemap",
+            "Name": "Specular_Path",
+            "DisplayName": "Lighting",
             "Tooltip": ""
         },
         {

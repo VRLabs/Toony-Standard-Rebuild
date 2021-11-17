@@ -1,16 +1,9 @@
 using UnityEngine;
-using UnityEditor;
 using System;
 using System.Collections.Generic;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
-    /// <summary>
-    /// Class used to save the dictionaries used by the API
-    /// </summary>
-    /// <remarks>
-    /// The API provides dictionaries to store data by identifier up to 30 days, those dictionaries are automatically saved into this asset.
-    /// </remarks>
     public class SerializedDictionaries : ScriptableObject
     {
         [Serializable]
@@ -29,9 +22,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             public long date;
         }
 
-        /// <summary>
-        /// list for the bool dictionary
-        /// </summary>
         public List<BoolItem> boolDictionary;
         public List<IntItem> intDictionary;
 

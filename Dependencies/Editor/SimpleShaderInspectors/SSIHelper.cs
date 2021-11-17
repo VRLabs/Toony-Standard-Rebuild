@@ -4,20 +4,11 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
-using Object = UnityEngine.Object;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
-    /// <summary>
-    /// Static class containing utility functions for Controls and Inspectors.
-    /// </summary>
     public static class SSIHelper
     {
-        /// <summary>
-        /// Fetches properties for all the given controls.
-        /// </summary>
-        /// <param name="controls">Controls needing to fetch properties.</param>
-        /// <param name="properties">Property array to fetch properties from.</param>
         public static void FetchProperties(this IEnumerable<SimpleControl> controls, MaterialProperty[] properties)
         {
             foreach (var control in controls)
@@ -33,13 +24,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                     con.GetControlList().FetchProperties(properties);
             }
         }
-        
-        /// <summary>
-        /// Fetches properties for all the given controls.
-        /// </summary>
-        /// <param name="controls">Controls needing to fetch properties.</param>
-        /// <param name="properties">Property array to fetch properties from.</param>
-        /// <param name="missingProperties">(Out) Properties defined in the inspector that are missing in the shader</param>
+
         public static void FetchProperties(this IEnumerable<SimpleControl> controls, MaterialProperty[] properties, out List<string> missingProperties)
         {
             var errs = new List<string>();
@@ -57,7 +42,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                     foreach (var t in add.AdditionalProperties)
                     {
                         t.FetchProperty(properties);
-                        if(t.Property == null)
+                        if(t.Property == null && t.IsPropertyMandatory)
                             errs.Add(t.PropertyName);
                     }
                 }
@@ -71,12 +56,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             missingProperties = errs;
         }
 
-        /// <summary>
-        /// Set the inspector of each control of the list.
-        /// </summary>
-        /// <param name="controls">Controls this method extends from.</param>
-        /// <param name="inspector">Inspector to set</param>
-        /// <param name="recursive">Is the set recursive to child controls</param>
         public static void SetInspector(this IEnumerable<SimpleControl> controls, ISimpleShaderInspector inspector, bool recursive = true)
         {
             foreach (var control in controls)
@@ -87,13 +66,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
         }
 
-        /// <summary>
-        /// Find a material property from its name.
-        /// </summary>
-        /// <param name="propertyName">Name of the material proeperty.</param>
-        /// <param name="properties">Array of material properties to search from.</param>
-        /// <param name="propertyIsMandatory">Boolean indicating if it's mandatory to find the requested material property</param>
-        /// <returns>The material property with the wanted name.</returns>
         internal static int FindPropertyIndex(string propertyName, MaterialProperty[] properties, bool propertyIsMandatory = false)
         {
             if (!string.IsNullOrWhiteSpace(propertyName) && propertyName.Equals("SSI_UNUSED_PROP")) return -1;
@@ -102,18 +74,12 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                 if (properties[i] != null && properties[i].name == propertyName)
                     return i;
 
-            // We assume all required properties can be found, otherwise something is broken.
             if (propertyIsMandatory)
                 throw new ArgumentException("Could not find MaterialProperty: '" + propertyName + "', Num properties: " + properties.Length);
 
             return -1;
         }
 
-        /// <summary>
-        /// Finds all controls that implement the INonAnimatableProperty interface.
-        /// </summary>
-        /// <param name="controls">Controls to search from</param>
-        /// <returns>An enumerable containing all INonAnimarableProperty instances found</returns>
         public static IEnumerable<INonAnimatableProperty> FindNonAnimatablePropertyControls(this IEnumerable<SimpleControl> controls)
         {
             List<INonAnimatableProperty> nonAnimatablePropertyControls = new List<INonAnimatableProperty>();
@@ -128,12 +94,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             return nonAnimatablePropertyControls;
         }
 
-        /// <summary>
-        /// Updates properties that are set to not be recorded during animation recording.
-        /// </summary>
-        /// <param name="controls">Controls to check.</param>
-        /// <param name="materialEditor">Material editor.</param>
-        /// <param name="updateOutsideAnimation">If the animations will actually be changed outside of animation recording</param>
         public static void UpdateNonAnimatableProperties(IEnumerable<INonAnimatableProperty> controls, MaterialEditor materialEditor, bool updateOutsideAnimation = true)
         {
             List<INonAnimatableProperty> propertiesNeedingUpdate = new List<INonAnimatableProperty>();
@@ -145,7 +105,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 
             if (updateOutsideAnimation)
             {
-                // Reflection bs to get which animation window is recording
                 var editorAssembly = typeof(Editor).Assembly;
                 var windowType = editorAssembly.GetType("UnityEditorInternal.AnimationWindowState");
 
@@ -157,7 +116,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 
                 foreach (var t in windowInstances)
                 {
-                    bool isRecording = (bool)isRecordingProp.GetValue
+                    bool isRecording = isRecordingProp != null && (bool)isRecordingProp.GetValue
                         (t, null);
 
                     if (!isRecording) continue;
@@ -182,12 +141,10 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
             else
             {
-                foreach (var t in propertiesNeedingUpdate)
-                    SetNonAnimatableProperties(materialEditor, propertiesNeedingUpdate);
+                SetNonAnimatableProperties(materialEditor, propertiesNeedingUpdate);
             }
         }
         
-        // TODO: set method private
         public static void SetNonAnimatableProperties(MaterialEditor materialEditor, IEnumerable<INonAnimatableProperty> nonAnimatableProperties)
         {
             foreach(var nonAnimatableProperty in nonAnimatableProperties)
@@ -197,17 +154,11 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
         }
 
-        /// <summary>
-        /// Get a path to save a texture relative to the material.
-        /// </summary>
-        /// <param name="mat">Material.</param>
-        /// <param name="name">Name of the texture.</param>
-        /// <returns>A path for the texture to save.</returns>
         public static string GetTextureDestinationPath(Material mat, string name)
         {
             string path = AssetDatabase.GetAssetPath(mat);
-            path = Directory.GetParent(path).FullName;
-            string pathParent = Directory.GetParent(path).FullName;
+            path = Directory.GetParent(path)?.FullName;
+            string pathParent = Directory.GetParent(path)?.FullName;
 
             if (Directory.Exists(pathParent + "/Textures/"))
                 return pathParent + "/Textures/" + mat.name + name;
@@ -215,45 +166,31 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                 return path + "/" + mat.name + name;
         }
 
-        /// <summary>
-        /// Saves a texture to a specified path.
-        /// </summary>
-        /// <param name="texture">Texture to save.</param>
-        /// <param name="path">path where you want to save the texture.</param>
-        /// <param name="mode">Texture wrap mode (default: Repeat).</param>
         public static void SaveTexture(Texture2D texture, string path, TextureWrapMode mode = TextureWrapMode.Repeat, bool linear = false)
         {
             byte[] bytes = texture.EncodeToPNG();
 
-            System.IO.File.WriteAllBytes(path, bytes);
+            File.WriteAllBytes(path, bytes);
             AssetDatabase.Refresh();
-            path = path.Substring(path.LastIndexOf("Assets"));
+            path = path.Substring(path.LastIndexOf("Assets", StringComparison.Ordinal));
             var t = AssetImporter.GetAtPath(path) as TextureImporter;
-            t.wrapMode = mode;
-            t.isReadable = true;
-            t.sRGBTexture = !linear;
+            if (t != null)
+            {
+                t.wrapMode = mode;
+                t.isReadable = true;
+                t.sRGBTexture = !linear;
+            }
+
             AssetDatabase.ImportAsset(path);
         }
 
-        /// <summary>
-        /// Saves a texture to a specified path, and returns a reference of the new asset.
-        /// </summary>
-        /// <param name="texture">Texture to save.</param>
-        /// <param name="path">path where you want to save the texture.</param>
-        /// <param name="mode">Texture wrap mode (default: Repeat).</param>
-        /// <returns>A Texture2D that references the newly created asset.</returns>
         public static Texture2D SaveAndGetTexture(Texture2D texture, string path, TextureWrapMode mode = TextureWrapMode.Repeat, bool linear = false)
         {
             SaveTexture(texture, path, mode, linear);
-            path = path.Substring(path.LastIndexOf("Assets"));
+            path = path.Substring(path.LastIndexOf("Assets", StringComparison.Ordinal));
             return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
         }
 
-        /// <summary>
-        /// Set the texture readable state.
-        /// </summary>
-        /// <param name="texture">Texture.</param>
-        /// <param name="isReadable">Does the texture need to be readable.</param>
         public static void SetTextureImporterReadable(Texture2D texture, bool isReadable)
         {
             if (texture is null) return;
@@ -265,13 +202,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             tImporter.textureType = TextureImporterType.Default;
             tImporter.isReadable = isReadable;
             AssetDatabase.ImportAsset(assetPath);
-            //AssetDatabase.Refresh();
         }
         
-        /// <summary>
-        /// Check if the texture is in srgb.
-        /// </summary>
-        /// <param name="texture">Texture.</param>
         public static bool IsSrgb(this Texture2D texture)
         {
             switch (texture.graphicsFormat)
@@ -304,11 +236,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
         }
         
-        /// <summary>
-        /// Set the texture alphaIsTransparency value.
-        /// </summary>
-        /// <param name="texture">Texture.</param>
-        /// <param name="alphaIsTransparency">alphaIsTransparency option to set.</param>
         public static void SetTextureImporterAlpha(Texture2D texture, bool alphaIsTransparency)
         {
             if (texture is null) return;

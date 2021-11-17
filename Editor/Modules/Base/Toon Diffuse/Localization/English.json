@@ -1,6 +1,11 @@
 {
     "Properties": [
         {
+            "Name": "Toon Diffuse_Path",
+            "DisplayName": "Lighting",
+            "Tooltip": ""
+        },
+        {
             "Name": "Toon Diffuse",
             "DisplayName": "Toon Diffuse",
             "Tooltip": "Toon Diffuse section"

@@ -1,25 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
-    /// <summary>
-    /// Static helper class used for managing localizations.
-    /// </summary>
     public static class Localization
     {
-        /// <summary>
-        /// Apply Localization strings to a list of controls.
-        /// </summary>
-        /// <param name="controls">Controls to apply a localization</param>
-        /// <param name="localizationFilePath">Path of the localization file</param>
-        /// <param name="writeIfNotFound">Generate empty fields / new localization file if the provided one is missing or incomplete.</param>
-        public static void ApplyLocalization(this IEnumerable<SimpleControl> controls, string localizationFilePath, bool writeIfNotFound = false)
+        public static void ApplyLocalization(this IEnumerable<SimpleControl> controls, string localizationFilePath, bool writeIfNotFound = false, bool recursive = true)
         {
             LocalizationFile localizationFile;
 
@@ -28,7 +17,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             else
                 localizationFile = new LocalizationFile();
 
-            List<PropertyInfo> missingInfo = SetPropertiesLocalization(controls, localizationFile.Properties).ToList();
+            List<PropertyInfo> missingInfo = SetPropertiesLocalization(controls, localizationFile.Properties, recursive).ToList();
 
             if (missingInfo.Count > 0 && writeIfNotFound)
             {
@@ -38,13 +27,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
         }
         
-        /// <summary>
-        /// Apply Localization strings to a control.
-        /// </summary>
-        /// <param name="control">Control to apply a localization</param>
-        /// <param name="localizationFilePath">Path of the localization file</param>
-        /// <param name="writeIfNotFound">Generate empty fields / new localization file if the provided one is missing or incomplete.</param>
-        public static void ApplyLocalization(this SimpleControl control, string localizationFilePath, bool writeIfNotFound = false)
+        public static void ApplyLocalization(this SimpleControl control, string localizationFilePath, bool writeIfNotFound = false, bool recursive = false)
         {
             LocalizationFile localizationFile;
 
@@ -53,7 +36,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             else
                 localizationFile = new LocalizationFile();
 
-            List<PropertyInfo> missingInfo = SetPropertiesLocalization(new []{control}, localizationFile.Properties, false).ToList();
+            List<PropertyInfo> missingInfo = SetPropertiesLocalization(new []{control}, localizationFile.Properties, recursive).ToList();
 
             if (missingInfo.Count > 0 && writeIfNotFound)
             {
@@ -68,8 +51,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             List<PropertyInfo> missingInfo = new List<PropertyInfo>();
             foreach (var control in controls)
             {
-                // Find localization of the control content. 
-                var selectedInfo = propertyInfos.FindPropertyByName(control.ControlAlias);
+                var selectedInfo = propertyInfos.FindPropertyByName(control.ControlAlias) ?? missingInfo.FindPropertyByName(control.ControlAlias);
+
                 if (selectedInfo == null)
                 {
                     selectedInfo = new PropertyInfo
@@ -83,11 +66,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                         missingInfo.Add(selectedInfo);
                 }
                 control.Content = new GUIContent(selectedInfo.DisplayName, selectedInfo.Tooltip);
-
-                switch (control)
-                {
-                    // Find additional content in case it implements the IAdditionalLocalization interface.
-                    case IAdditionalLocalization additional:
+                
+                    if(control is IAdditionalLocalization additional)
                         foreach (var content in additional.AdditionalContent)
                         {
                             string fullName = control.ControlAlias + "_" + content.Name;
@@ -106,13 +86,10 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 
                             content.Content = new GUIContent(extraInfo.DisplayName, extraInfo.Tooltip);
                         }
-                        break;
 
-                    // Recursively set property localization for all properties inside this control if it has the IControlContainer interface.
-                    case IControlContainer container:
+                    if(control is IControlContainer container)
                         if (recursive) missingInfo.AddRange(SetPropertiesLocalization(container.GetControlList(), propertyInfos));
-                        break;
-                }
+                
             }
             return missingInfo;
         }
