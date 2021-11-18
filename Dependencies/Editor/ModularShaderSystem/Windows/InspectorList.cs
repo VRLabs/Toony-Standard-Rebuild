@@ -95,7 +95,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
         public override void HandleEvent(EventBase evt)
         {
-            var type = evt.GetType(); 
+            var type = evt.GetType(); //SerializedObjectBindEvent is internal, so need to use reflection here
             if ((type.Name == "SerializedPropertyBindEvent") && !string.IsNullOrWhiteSpace(bindingPath))
             {
                 var obj = type.GetProperty("bindProperty")?.GetValue(evt) as SerializedProperty;

@@ -1,21 +1,24 @@
-﻿using System.Collections.Generic;
-using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
-using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
-
-namespace VRLabs.ToonyStandardRebuild.SSICustomControls
+﻿namespace VRLabs.ToonyStandardRebuild.SSICustomControls
 {
     public static partial class Chainables
     {
-        public static ListSelectorControl AddListSelectorControl(this IControlContainer container, System.String propertyName, List<ListSelectorControl.ListSelectorItem> items)
+        public static ListSelectorControl AddListSelectorControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, System.Collections.Generic.List<ListSelectorControl.ListSelectorItem> items)
         {
             var control = new ListSelectorControl(propertyName, items);
             container.AddControl(control);
             return control;
         }
-        
-        public static ModuleSelectorControl AddModuleSelectorControl(this IControlContainer container, System.String propertyName, ModularShader shader)
+
+        public static ModuleSelectorControl AddModuleSelectorControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, VRLabs.ToonyStandardRebuild.ModularShaderSystem.ModularShader shader)
         {
             var control = new ModuleSelectorControl(propertyName, shader);
+            container.AddControl(control);
+            return control;
+        }
+
+        public static UVSetSelectorControl AddUVSetSelectorControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, System.Collections.Generic.List<string> items)
+        {
+            var control = new UVSetSelectorControl(propertyName, items);
             container.AddControl(control);
             return control;
         }

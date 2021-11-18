@@ -37,8 +37,9 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        public SimpleControl CreateControl(IControlContainer parentControl, ModularShader modularShader)
+        public SimpleControl CreateControl(IControlContainer parentControl, ModularShader modularShader, out string uvSet)
         {
+            uvSet = null;
             if (string.IsNullOrWhiteSpace(Name))
                 throw new NullReferenceException("The name is empty");
             switch (ControlType)
@@ -66,23 +67,35 @@ namespace VRLabs.ToonyStandardRebuild
                         throw new TypeAccessException("The parameter given was not of the right type");
                     return parentControl.AddVectorControl((string)Parameters[0], (bool)Parameters[1], (bool)Parameters[2], (bool)Parameters[3], (bool)Parameters[4]).Alias(Name);
                 case ControlType.TextureControl:
-                    if (Parameters.Count < 3 || !(Parameters[0] is string) ||
-                        !(Parameters[1] is string) || !(Parameters[2] is string))
+                    if (Parameters.Count < 4 || !(Parameters[0] is string) ||
+                        !(Parameters[1] is string) || !(Parameters[2] is string) ||
+                        !(Parameters[3] is string))
                         throw new TypeAccessException("The parameter given was not of the right type");
+
+                    uvSet = (string)Parameters[3];
                     return parentControl.AddTextureControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowTilingAndOffset(true);
                 case ControlType.TextureGeneratorControl:
-                    if (Parameters.Count < 5 || !(Parameters[0] is ComputeShader) ||
+                    if (Parameters.Count < 6 || !(Parameters[0] is ComputeShader) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string) ||
-                        !(Parameters[3] is string) || !(Parameters[4] is string))
+                        !(Parameters[3] is string) || !(Parameters[4] is string) ||
+                        !(Parameters[5] is string))
                     {
-                        if (Parameters.Count < 3 || !(Parameters[0] is string) ||
-                            !(Parameters[1] is string) || !(Parameters[2] is string))
+                        if (Parameters.Count < 4 || !(Parameters[0] is string) ||
+                            !(Parameters[1] is string) || !(Parameters[2] is string) ||
+                            !(Parameters[3] is string))
                             throw new TypeAccessException("The parameter given was not of the right type");
                     }
-                    if (Parameters.Count < 5)
+
+                    if (Parameters.Count < 6)
+                    {
+                        uvSet = (string)Parameters[3];
                         return parentControl.AddTextureGeneratorControl((string)Parameters[0], (string)Parameters[1], (string)Parameters[2]).Alias(Name).SetShowTilingAndOffset(true);
+                    }
                     else
+                    {
+                        uvSet = (string)Parameters[5];
                         return parentControl.AddTextureGeneratorControl((ComputeShader)Parameters[0], (string)Parameters[1], (string)Parameters[2], (string)Parameters[3], (string)Parameters[4]).Alias(Name).SetShowTilingAndOffset(true);
+                    }
                 case ControlType.GradientTextureControl:
                     if (Parameters.Count < 4 || !(Parameters[0] is string) ||
                         !(Parameters[1] is string) || !(Parameters[2] is string) ||

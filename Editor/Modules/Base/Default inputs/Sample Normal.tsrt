@@ -1,4 +1,4 @@
 void SampleNormal()
 {
-    NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TRANSFORM_TEX(FragData.uv, _BumpMap)), _BumpScale);
+    NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _BumpMap)), _BumpScale);
 }

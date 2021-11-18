@@ -10,8 +10,10 @@ using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.OdinSerializer;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEditorInternal;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
+using VRLabs.ToonyStandardRebuild.SSICustomControls;
 using Debug = UnityEngine.Debug;
 
 namespace VRLabs.ToonyStandardRebuild
@@ -48,6 +50,8 @@ namespace VRLabs.ToonyStandardRebuild
         private List<string> _startupErrors;
         private Dictionary<string, List<SimpleControl>> _controlsByModule;
         private Dictionary<OrderedSection, UpdateData> _sectionDefaults;
+        private Dictionary<string, Dictionary<string, int>> _uvSets;
+        private Dictionary<string, List<string>> _uiUVSets;
         private OrderedSectionGroup _mainOrderedSection;
         private ControlContainer _staticSections;
         private string _mainSectionLocalizationModulePath;
@@ -91,6 +95,9 @@ namespace VRLabs.ToonyStandardRebuild
                 Controls = new List<SimpleControl>();
                 _controlsByModule = new Dictionary<string, List<SimpleControl>>();
                 _sectionDefaults = new Dictionary<OrderedSection, UpdateData>();
+                _uvSets = new Dictionary<string, Dictionary<string, int>>();
+                _uiUVSets = new Dictionary<string, List<string>>();
+                
                 Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
                 Shader = Materials[0].shader;
 
@@ -187,12 +194,17 @@ namespace VRLabs.ToonyStandardRebuild
             _mainOrderedSection = this.AddOrderedSectionGroup("MainGroup");
             string modularShaderPath = AssetDatabase.GetAssetPath(ModularShader);
 
+            var loadedUVControls = new List<(string, UVSetSelectorControl)>();
+
             LoadLocalizationSettings(modularShaderPath);
             
             _mainSectionLocalizationModulePath = modularShaderPath;
 
             if (File.Exists(modularShaderPath))
-                LoadUIModule(ModularShader, modularShaderPath);
+            {
+                LoadUIModule(ModularShader, modularShaderPath, out List<(string, UVSetSelectorControl)> loadedControls);
+                loadedUVControls.AddRange(loadedControls);
+            }
 
             _enablers = new Dictionary<string, int>();
 
@@ -200,7 +212,10 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
                 if (File.Exists(modulePath))
-                    LoadUIModule(shaderModule, modulePath);
+                {
+                    LoadUIModule(shaderModule, modulePath, out List<(string, UVSetSelectorControl)> loadedControls);
+                    loadedUVControls.AddRange(loadedControls);
+                }
                 
                 if (shaderModule == null || shaderModule.Enabled == null || 
                     string.IsNullOrWhiteSpace(shaderModule.Enabled.Name) || 
@@ -214,7 +229,10 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 string modulePath = AssetDatabase.GetAssetPath(shaderModule);
                 if (File.Exists(modulePath))
-                    LoadUIModule(shaderModule, modulePath);
+                {
+                    LoadUIModule(shaderModule, modulePath, out List<(string, UVSetSelectorControl)> loadedControls);
+                    loadedUVControls.AddRange(loadedControls);
+                }
                 
                 if (shaderModule == null || shaderModule.Enabled == null || 
                     string.IsNullOrWhiteSpace(shaderModule.Enabled.Name) || 
@@ -222,6 +240,14 @@ namespace VRLabs.ToonyStandardRebuild
                 
                 if (!_enablers.ContainsKey(shaderModule.Enabled.Name))
                     _enablers.Add(shaderModule.Enabled.Name, (int)Materials[0].GetFloat(shaderModule.Enabled.Name));
+            }
+
+            foreach ((string id, UVSetSelectorControl control) in loadedUVControls)
+            {
+                if (_uiUVSets.TryGetValue(id, out List<string> items))
+                    control.SetNewOptions(items);
+                else
+                    _startupErrors.Add($"UV Set ID \"{id}\" has been declared in a texture control uv but has not been found in the list of available UV Sets");
             }
             
             _previousEnablerValues = new int[_enablers.Count];
@@ -240,24 +266,44 @@ namespace VRLabs.ToonyStandardRebuild
                 material.shader = Shader.Find(shaderName);
         }
 
-        private void LoadUIModule(ModularShader modularShader, string modulePath)
+        private void LoadUIModule(ModularShader modularShader, string modulePath, out List<(string, UVSetSelectorControl)> loadedUVControls)
         {
             ModuleUI module = LoadSerializedData(modularShader.AdditionalSerializedData);
-            List<SimpleControl> loadedControls = LoadControls(module);
+            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, IControlContainer)> uvSetControls);
             _controlsByModule.Add(modulePath, loadedControls);
+            loadedUVControls = new List<(string, UVSetSelectorControl)>();
+            foreach ((string key , IControlContainer uvSetControl)  in uvSetControls)
+            {
+                if (uvSetControl is PropertyControl prop)
+                {
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv1" })).Alias(prop.ControlAlias + "_UV");
+                    _controlsByModule[modulePath].Add(uv);
+                    loadedUVControls.Add((key,uv));
+                }
+            }
             LoadMainOrderedSectionLocalization();
             LoadModuleLocalization(loadedControls, modulePath);
         }
 
-        private void LoadUIModule(ShaderModule shaderModule, string modulePath)
+        private void LoadUIModule(ShaderModule shaderModule, string modulePath, out List<(string, UVSetSelectorControl)> loadedUVControls)
         {
             ModuleUI module = LoadSerializedData(shaderModule.AdditionalSerializedData);
-            List<SimpleControl> loadedControls = LoadControls(module);
+            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, IControlContainer)> uvSetControls);
             _controlsByModule.Add(modulePath, loadedControls);
+            loadedUVControls = new List<(string, UVSetSelectorControl)>();
+            foreach ((string key , IControlContainer uvSetControl)  in uvSetControls)
+            {
+                if (uvSetControl is PropertyControl prop)
+                {
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv1" })).Alias(prop.ControlAlias + "_UV");
+                    _controlsByModule[modulePath].Add(uv);
+                    loadedUVControls.Add((key,uv));
+                }
+            }
             LoadModuleLocalization(loadedControls, modulePath);
         }
 
-        private static ModuleUI LoadSerializedData(string serializedData)
+        internal static ModuleUI LoadSerializedData(string serializedData)
         {
             if (string.IsNullOrWhiteSpace(serializedData))
             {
@@ -283,9 +329,10 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        private List<SimpleControl> LoadControls(ModuleUI module)
+        private List<SimpleControl> LoadControls(ModuleUI module, out List<(string, IControlContainer)> uvSetControls)
         {
             var loadedControls = new List<SimpleControl>();
+            uvSetControls = new List<(string, IControlContainer)>();
             foreach (var moduleSection in module.Sections)
             {
                 if (moduleSection.IsPermanent)
@@ -298,7 +345,7 @@ namespace VRLabs.ToonyStandardRebuild
                     }
 
                     foreach (var sectionControl in moduleSection.Controls)
-                        LoadControl(section, sectionControl, loadedControls);
+                        LoadControl(section, sectionControl, loadedControls, uvSetControls);
                 }
                 else
                 {
@@ -328,8 +375,9 @@ namespace VRLabs.ToonyStandardRebuild
                     }
 
                     foreach (var sectionControl in moduleSection.Controls)
-                        LoadControl(section, sectionControl, loadedControls);
+                        LoadControl(section, sectionControl, loadedControls, uvSetControls);
                     
+                    // Section on disable load
                     _sectionDefaults[section].FloatProperties.AddRange(moduleSection.OnSectionDisableData.FloatProperties);
                     _sectionDefaults[section].ColorProperties.AddRange(moduleSection.OnSectionDisableData.ColorProperties);
                     _sectionDefaults[section].TextureProperties.AddRange(moduleSection.OnSectionDisableData.TextureProperties);
@@ -337,18 +385,51 @@ namespace VRLabs.ToonyStandardRebuild
                     _sectionDefaults[section].OverrideTags.AddRange(moduleSection.OnSectionDisableData.OverrideTags);
                 }
             }
+            
+            // UV set load
+            if (module.UVSets == null) return loadedControls;
+            foreach (UVSet uvSet in module.UVSets)
+            {
+                Dictionary<string, int> uvSetDictionary;
+                List<string> uiUVSet;
+                if (_uvSets.TryGetValue(uvSet.ID, out Dictionary<string, int> foundSet))
+                {
+                    uvSetDictionary = foundSet;
+                    uiUVSet = _uiUVSets[uvSet.ID];
+                }
+                else
+                {
+                    uvSetDictionary = new Dictionary<string, int>();
+                    uiUVSet = new List<string>();
+                    _uvSets.Add(uvSet.ID, uvSetDictionary);
+                    _uiUVSets.Add(uvSet.ID, uiUVSet);
+                }
+
+                foreach (UVItem uvItem in uvSet.Items)
+                {
+                    if (!uvSetDictionary.ContainsKey(uvItem.ID))
+                    {
+                        uvSetDictionary.Add(uvItem.ID, uvSetDictionary.Count);
+                        uiUVSet.Add(uvItem.ID);
+                    }
+                }
+            }
 
             return loadedControls;
         }
 
-        private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls)
+        private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls, List<(string, IControlContainer)> uvSetControls)
         {
-            var newControl = sectionControl.CreateControl(control, ModularShader);
+            var newControl = sectionControl.CreateControl(control, ModularShader, out string uvSet);
+
+            if (!string.IsNullOrWhiteSpace(uvSet) && newControl is IControlContainer ct)
+                uvSetControls.Add((uvSet, ct));
+
             loadedControls.Add(newControl);
 
             if (sectionControl.CouldHaveControls() && newControl is IControlContainer container)
                 foreach (var childControl in sectionControl.Controls)
-                    LoadControl(container, childControl, loadedControls);
+                    LoadControl(container, childControl, loadedControls, uvSetControls);
         }
 
         private void DrawGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
@@ -391,7 +472,7 @@ namespace VRLabs.ToonyStandardRebuild
                 {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
-                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
+                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration, false);
                     stopwatch.Stop();
                     Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
                 }
@@ -418,7 +499,7 @@ namespace VRLabs.ToonyStandardRebuild
                     }
 
                     ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
-                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader);
+                    ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration);
 
                     EditorUtility.SetDirty(ModularShader);
 
@@ -628,7 +709,7 @@ namespace VRLabs.ToonyStandardRebuild
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
                     Directory.CreateDirectory("Assets/VRLabs/GeneratedAssets/Shaders");
-                    ShaderGenerator.GenerateMinimalShader("Assets/VRLabs/GeneratedAssets/Shaders", ModularShader, Materials);
+                    ShaderGenerator.GenerateMinimalShader("Assets/VRLabs/GeneratedAssets/Shaders", ModularShader, Materials, PostGeneration);
                     stopwatch.Stop();
                     Debug.Log($"Toony Standard RE:Build: generated optimised shader for {Materials.Length} material{(Materials.Length > 1 ? "s" : "")} in {stopwatch.ElapsedMilliseconds}ms");
                     _isFirstLoop = true;
@@ -777,6 +858,26 @@ namespace VRLabs.ToonyStandardRebuild
                 _selectedLanguage = settings.SelectedLanguage;
                 _languages = settings.AvailableLanguages;
                 _selectedLanguageIndex = settings.AvailableLanguages.Length - 1;
+            }
+        }
+        
+        public void PostGeneration(StringBuilder shaderFile, ShaderGenerator.ShaderContext context)
+        {
+            MatchCollection m = Regex.Matches(shaderFile.ToString(), @"#K#IDX#.*(?=])", RegexOptions.Multiline);
+
+            for (int i = m.Count - 1; i >= 0; i--)
+            {
+                string uvSets = m[i].Value.Remove(0, 7);
+                string[] pieces = uvSets.Split('#');
+
+                if (pieces.Length != 2) continue;
+                string uvSet = pieces[1];
+
+                Dictionary<string, int> uvSetDictionary = _uvSets.TryGetValue(pieces[0], out Dictionary<string, int> res) ? res : null;
+                if (uvSetDictionary == null) continue;
+                if (!uvSetDictionary.TryGetValue(uvSet, out int value)) continue;
+                
+                shaderFile.Replace(m[i].Value, $"{value}");
             }
         }
 

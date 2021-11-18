@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     public static class ShaderGenerator
     {
         public static void GenerateShader(string path, ModularShader shader, bool hideVariants = false)
+        {
+            GenerateShader(path, shader, null,hideVariants);
+        }
+
+        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = true)
         {
             var modules = FindAllModules(shader);
             
@@ -35,6 +41,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FreshAssets = freshAssets,
                     FilePath = path,
@@ -60,8 +67,13 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foreach (var context in contexts)
                 shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + context.VariantFileName));
         }
-        
+
         public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            GenerateMinimalShader(path, shader, materials, null);
+        }
+
+        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -73,6 +85,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
@@ -83,8 +96,13 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             contexts.GenerateMinimalShaders();
         }
-        
+
         public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials)
+        {
+            return EnqueueShadersToGenerate(path, shader, materials, null);
+        }
+
+        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -96,6 +114,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 contexts.Add(new ShaderContext
                 {
                     Shader = shader,
+                    PostGeneration = postGeneration,
                     ActiveEnablers = variant,
                     FilePath = path,
                     OptimizedShader = true,
@@ -152,6 +171,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             {
                 EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "waiting for unity to compile shaders", contexts.Count - 2 / (contexts.Count + 3));
                 AssetDatabase.StopAssetEditing();
+                AssetDatabase.Refresh();
             }
 
             EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
@@ -160,7 +180,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 context.Material.shader = Shader.Find(context.ShaderName);
             }
             
-            AssetDatabase.Refresh();
             EditorUtility.ClearProgressBar();
         }
 
@@ -265,6 +284,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             public ModularShader Shader;
             public Dictionary<string, int> ActiveEnablers;
             public Dictionary<TemplateAsset, TemplateAsset> FreshAssets;
+            public Action<StringBuilder, ShaderContext> PostGeneration;
             private List<EnableProperty> _liveUpdateEnablers;
             public string FilePath;
             public string VariantFileName;
@@ -336,6 +356,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     ShaderFile.AppendLine($"CustomEditor \"{Shader.CustomEditor}\"");
                 ShaderFile.AppendLine("}");
 
+                PostGeneration?.Invoke(ShaderFile, this);
 
                 MatchCollection m = Regex.Matches(ShaderFile.ToString(), @"#K#.*$", RegexOptions.Multiline);
                 for (int i = m.Count - 1; i >= 0; i--)
@@ -505,7 +526,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                             if (!keywordedCode.ContainsKey(keyword))
                                 keywordedCode.Add(keyword, new StringBuilder());
 
-                            keywordedCode[keyword].AppendLine(freshAsset.Template);
+                            if (freshAsset != null) keywordedCode[keyword].AppendLine(freshAsset.Template);
                         }
                     }
                     else
@@ -513,7 +534,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                         if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_CODE_KEYWORD))
                             keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, new StringBuilder());
                         
-                        keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
+                        if (freshAsset != null) keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
                     }
                 }
 
@@ -604,10 +625,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                         if (line.StartsWith("Properties"))
                         {
                             finalFile.AppendLineTabbed(tabs, line);
-                            string ln = sr.ReadLine()?.Trim();      
-                            finalFile.AppendLineTabbed(tabs, ln);   
+                            string ln = sr.ReadLine()?.Trim();      // When the previous line is the one containing "Properties" we always know 
+                            finalFile.AppendLineTabbed(tabs, ln);   // that the next line is "{" so we just write it down before increasing the tabs
                             tabs++;
-                            while ((ln = sr.ReadLine()) != null)    
+                            while ((ln = sr.ReadLine()) != null)    // we should be escaping this loop way before actually meeting the condition, but you never know
                             {
                                 if (CheckPropertyBlockLine(finalFile, sr, ln, ref tabs, ref deleteEmptyLine))
                                     break;

@@ -1,6 +1,11 @@
 {
     "Properties": [
         {
+            "Name": "Tangent Map_UV",
+            "DisplayName": "UV set",
+            "Tooltip": "UV set for the tangent map"
+        },
+        {
             "Name": "Anisotropic",
             "DisplayName": "Anisotropic",
             "Tooltip": "Level of Aniso"

@@ -1,6 +1,21 @@
 {
     "Properties": [
         {
+            "Name": "Albedo_UV",
+            "DisplayName": "UV set",
+            "Tooltip": "UV set for the Albedo texture"
+        },
+        {
+            "Name": "Normal map_UV",
+            "DisplayName": "UV set",
+            "Tooltip": "UV set for the Normal map"
+        },
+        {
+            "Name": "MSSO_UV",
+            "DisplayName": "UV set",
+            "Tooltip": "UV set for the MSSO texture"
+        },
+        {
             "Name": "MSSO",
             "DisplayName": "MSSO",
             "Tooltip": "MSSO mask, contains multiple textures masks in each channel:\n\n-Metallic: how metallic the object is\n-Smoothness: how smooth the object it\n-Specular: how much reflective the object is (when not metallic)\n-Occlusion: occlusion mask\n\nYou can use the merger to generate this texture from separate texture masks"

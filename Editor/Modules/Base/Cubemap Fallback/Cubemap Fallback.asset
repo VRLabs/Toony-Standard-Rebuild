@@ -87,18 +87,19 @@ MonoBehaviour:
     \"Name\": \"Fallback Cubemap\",\r\n                                        \"ControlType\":
     5,\r\n                                        \"Parameters\": {\r\n                                           
     \"$id\": 10,\r\n                                            \"$type\": 5,\r\n                                           
-    \"$rlength\": 3,\r\n                                            \"$rcontent\":
+    \"$rlength\": 4,\r\n                                            \"$rcontent\":
     [\r\n                                                {\r\n                                                   
     \"$id\": 11,\r\n                                                    \"$type\":
     6,\r\n                                                    \"_FallbackCubemap\"\r\n                                               
     },\r\n                                                {\r\n                                                   
     \"$id\": 12,\r\n                                                    \"$type\":
     6,\r\n                                                    \"\"\r\n                                               
-    },\r\n                                                $iref:12\r\n                                           
-    ]\r\n                                        },\r\n                                       
-    \"Controls\": {\r\n                                            \"$id\": 13,\r\n                                           
-    \"$type\": 3,\r\n                                            \"$rlength\": 0,\r\n                                           
-    \"$rcontent\": [\r\n                                            ]\r\n                                       
+    },\r\n                                                $iref:12,\r\n                                               
+    $iref:12\r\n                                            ]\r\n                                       
+    },\r\n                                        \"Controls\": {\r\n                                           
+    \"$id\": 13,\r\n                                            \"$type\": 3,\r\n                                           
+    \"$rlength\": 0,\r\n                                            \"$rcontent\":
+    [\r\n                                            ]\r\n                                       
     }\r\n                                    }\r\n                               
     ]\r\n                            }\r\n                        }\r\n                   
     ]\r\n                },\r\n                \"OnSectionDisableData\": {\r\n                   
@@ -123,5 +124,6 @@ MonoBehaviour:
     \"$id\": 19,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
-    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": -1\r\n                }\r\n            }\r\n        ]\r\n   
+    },\r\n    \"UVSets\": null\r\n}","unityGUIDReferences":[]}'

@@ -12,13 +12,18 @@ Shader "VRLabs/Toony Standard RE:Build"
 		[Enum(UnityEngine.Rendering.StencilOp)] _StencilOp("Stencil Operation", Int) = 0
 		_StencilSection("Stencil Section Display", Int) = 0
 		_DirectLightMode("Direct Light Mode", Float) = 0.0
+		_UVCount("UV Count", Float) = 0.0
+		_UV1Index("UV1 Index", Float) = 0.0
 		_MainTex("Main texture", 2D) = "white" {}
 		_Color("Albedo color", Color) = (0, 0, 0, 0)
 		_BumpMap("Normal map", 2D) = "bump" {}
 		_BumpScale("Normal map scale", Float) = 1
 		_Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
-		_MSSO("MSSO", 2D) = "white" {}
 		_Occlusion("Occlusion", Range(0, 1)) = 1
+		_MSSO("MSSO", 2D) = "white" {}
+		_MainTex_UV("Main texture UV set", Float) = 0
+		_BumpMap_UV("Bump map UV set", Float) = 0
+		_MSSO_UV("MSSO UV set", Float) = 0
 		_Ramp("Toon Ramp", 2D) = "white" {}
 		_RampOffset("Ramp Offset", Range(-1, 1)) = 0
 		_ShadowIntensity("Shadow intensity", Range(0, 1)) = 0.6
@@ -32,9 +37,11 @@ Shader "VRLabs/Toony Standard RE:Build"
 		_SpecularTint("Specular Tint", Color) = (1, 1, 1, 1)
 		_ReplaceSpecular("Replace Specular", Float) = 0
 		_SpecularMode("Specular Mode", Float) = -1
+		_SpecularTintTexture_UV("Specular Tint UV Set", Float) = 0
 		_EnableSpecular("Enable Specular", Float) = 0.0
 		_TangentMap("Tangent Map", 2D) = "white" {}
 		_Anisotropy("Ansotropy", Range(-1, 1)) = 0
+		_TangentMap_UV("Tangent Map UV", Float) = 0
 		_IndirectFallbackMode("Indirect Fallback Mode", Float) = 0.0
 		_IndirectOverride("Indirect Override", Float) = 0.0
 		_FallbackCubemap("Fallback Cubemap", Cube) = ""{}
@@ -125,9 +132,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float NdotV;
 			float NdotH;
 			float LdotH;
+			float _MainTex_UV;
 			float _Occlusion;
 			float Occlusion;
+			float _MSSO_UV;
 			float _BumpScale;
+			float _BumpMap_UV;
 			float Roughness;
 			float Attenuation;
 			float RampAttenuation;
@@ -143,8 +153,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float SquareRoughness;
 			float _ReplaceSpecular;
 			float OneMinusReflectivity;
+			float _SpecularTintTexture_UV;
 			float GFS;
 			float _Anisotropy;
+			float _TangentMap_UV;
 			float _IndirectFallbackMode;
 			float _IndirectOverride;
 			float _EnableSpecular;
@@ -190,6 +202,19 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
+			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
+			
+			float2 Uvs[16];
+			inline void LoadUV1()
+			{
+				Uvs[0] = FragData.uv;
+			}
+			
+			void LoadUVList()
+			{
+				LoadUV1();
+				
+			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
@@ -215,9 +240,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 				return x*x * x*x * x;
 			}
 			
+			void LoadUVs()
+			{
+				LoadUVList();
+			}
 			void SampleAlbedo()
 			{
-				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TSR_TRANSFORM_TEX(Uvs, _MainTex)) * _Color;
 			}
 			void ClipAlpha()
 			{
@@ -232,11 +261,11 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SampleNormal()
 			{
-				NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TRANSFORM_TEX(FragData.uv, _BumpMap)), _BumpScale);
+				NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _BumpMap)), _BumpScale);
 			}
 			void SampleMSSO()
 			{
-				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TRANSFORM_TEX(FragData.uv, _MSSO));
+				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TSR_TRANSFORM_TEX(Uvs, _MSSO));
 				Occlusion = lerp(1,Msso.a, _Occlusion);
 			}
 			void GetSampleData()
@@ -403,7 +432,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SetupAlbedoAndSpecColor()
 			{
-				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TRANSFORM_TEX(FragData.uv, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
+				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TSR_TRANSFORM_TEX(Uvs, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
 				
 				float sp = Specular * 0.08;
 				SpecularColor = lerp(float3(sp, sp, sp), Albedo.rgb, Metallic);
@@ -620,7 +649,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			void AnisotropicDirectSpecular()
 			{
-				float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TRANSFORM_TEX(FragData.uv, _TangentMap));
+				float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _TangentMap));
 				
 				float anisotropy = tangentTS.a * _Anisotropy;
 				float3 tangent = GetModifiedTangent(tangentTS.rgb, TangentDir);
@@ -790,6 +819,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				FragData = i;
 				FinalColor = float4(0,0,0,0);
 				
+				LoadUVs();
 				SampleAlbedo();
 				ClipAlpha();
 				SampleNormal();
@@ -940,9 +970,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float NdotV;
 			float NdotH;
 			float LdotH;
+			float _MainTex_UV;
 			float _Occlusion;
 			float Occlusion;
+			float _MSSO_UV;
 			float _BumpScale;
+			float _BumpMap_UV;
 			float Roughness;
 			float Attenuation;
 			float RampAttenuation;
@@ -958,8 +991,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float SquareRoughness;
 			float _ReplaceSpecular;
 			float OneMinusReflectivity;
+			float _SpecularTintTexture_UV;
 			float GFS;
 			float _Anisotropy;
+			float _TangentMap_UV;
 			float _IndirectFallbackMode;
 			float _IndirectOverride;
 			float _EnableSpecular;
@@ -1005,6 +1040,19 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
 			
+			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
+			
+			float2 Uvs[16];
+			inline void LoadUV1()
+			{
+				Uvs[0] = FragData.uv;
+			}
+			
+			void LoadUVList()
+			{
+				LoadUV1();
+				
+			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
@@ -1030,9 +1078,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 				return x*x * x*x * x;
 			}
 			
+			void LoadUVs()
+			{
+				LoadUVList();
+			}
 			void SampleAlbedo()
 			{
-				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TSR_TRANSFORM_TEX(Uvs, _MainTex)) * _Color;
 			}
 			void ClipAlpha()
 			{
@@ -1047,11 +1099,11 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SampleNormal()
 			{
-				NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TRANSFORM_TEX(FragData.uv, _BumpMap)), _BumpScale);
+				NormalMap = UnpackScaleNormal(UNITY_SAMPLE_TEX2D_SAMPLER(_BumpMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _BumpMap)), _BumpScale);
 			}
 			void SampleMSSO()
 			{
-				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TRANSFORM_TEX(FragData.uv, _MSSO));
+				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TSR_TRANSFORM_TEX(Uvs, _MSSO));
 				Occlusion = lerp(1,Msso.a, _Occlusion);
 			}
 			void GetSampleData()
@@ -1218,7 +1270,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SetupAlbedoAndSpecColor()
 			{
-				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TRANSFORM_TEX(FragData.uv, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
+				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TSR_TRANSFORM_TEX(Uvs, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
 				
 				float sp = Specular * 0.08;
 				SpecularColor = lerp(float3(sp, sp, sp), Albedo.rgb, Metallic);
@@ -1435,7 +1487,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			void AnisotropicDirectSpecular()
 			{
-				float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TRANSFORM_TEX(FragData.uv, _TangentMap));
+				float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _TangentMap));
 				
 				float anisotropy = tangentTS.a * _Anisotropy;
 				float3 tangent = GetModifiedTangent(tangentTS.rgb, TangentDir);
@@ -1605,6 +1657,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				FragData = i;
 				FinalColor = float4(0,0,0,0);
 				
+				LoadUVs();
 				SampleAlbedo();
 				ClipAlpha();
 				SampleNormal();
@@ -1740,6 +1793,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			sampler3D _DitherMaskLOD;
 			FragmentData FragData;
 			#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
+			float _MainTex_UV;
 			float _Cutoff;
 			float _DirectLightMode;
 			float _EnableSpecular;
@@ -1750,6 +1804,19 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float4 _Color;
 			UNITY_DECLARE_TEX2D(_MainTex);
 			
+			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
+			
+			float2 Uvs[16];
+			inline void LoadUV1()
+			{
+				Uvs[0] = FragData.uv;
+			}
+			
+			void LoadUVList()
+			{
+				LoadUV1();
+				
+			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
@@ -1775,9 +1842,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 				return x*x * x*x * x;
 			}
 			
+			void LoadUVs()
+			{
+				LoadUVList();
+			}
 			void SampleAlbedo()
 			{
-				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TSR_TRANSFORM_TEX(Uvs, _MainTex)) * _Color;
 			}
 			void ClipShadowAlpha()
 			{
@@ -1813,6 +1884,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				FragData = i;
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
+				LoadUVs();
 				SampleAlbedo();
 				ClipShadowAlpha();
 				
@@ -1870,8 +1942,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float3 Emission;
 			float3 SpecularColor;
 			float Roughness;
+			float _MainTex_UV;
 			float _Occlusion;
 			float Occlusion;
+			float _MSSO_UV;
 			float _Metallic;
 			float Metallic;
 			float _Glossiness;
@@ -1881,6 +1955,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float SquareRoughness;
 			float _ReplaceSpecular;
 			float OneMinusReflectivity;
+			float _SpecularTintTexture_UV;
 			float _DirectLightMode;
 			float _EnableSpecular;
 			float _SpecularMode;
@@ -1895,6 +1970,19 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_MSSO);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			
+			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
+			
+			float2 Uvs[16];
+			inline void LoadUV1()
+			{
+				Uvs[0] = FragData.uv;
+			}
+			
+			void LoadUVList()
+			{
+				LoadUV1();
+				
+			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
 			{
 				return (value - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
@@ -1920,13 +2008,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 				return x*x * x*x * x;
 			}
 			
+			void LoadUVs()
+			{
+				LoadUVList();
+			}
 			void SampleAlbedo()
 			{
-				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TRANSFORM_TEX(FragData.uv, _MainTex)) * _Color;
+				Albedo = UNITY_SAMPLE_TEX2D(_MainTex, TSR_TRANSFORM_TEX(Uvs, _MainTex)) * _Color;
 			}
 			void SampleMSSO()
 			{
-				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TRANSFORM_TEX(FragData.uv, _MSSO));
+				Msso = UNITY_SAMPLE_TEX2D_SAMPLER(_MSSO, _MainTex, TSR_TRANSFORM_TEX(Uvs, _MSSO));
 				Occlusion = lerp(1,Msso.a, _Occlusion);
 			}
 			void GetSampleData()
@@ -1940,7 +2032,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SetupAlbedoAndSpecColor()
 			{
-				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TRANSFORM_TEX(FragData.uv, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
+				float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TSR_TRANSFORM_TEX(Uvs, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
 				
 				float sp = Specular * 0.08;
 				SpecularColor = lerp(float3(sp, sp, sp), Albedo.rgb, Metallic);
@@ -1978,6 +2070,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				SpecularColor = 0;
 				Roughness = 1;
 				
+				LoadUVs();
 				SampleAlbedo();
 				SampleMSSO();
 				if(_EnableSpecular == 1)

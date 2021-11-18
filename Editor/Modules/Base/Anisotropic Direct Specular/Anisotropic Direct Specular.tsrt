@@ -30,7 +30,7 @@ float3 GetModifiedTangent(float3 tangentTS, float3 tangentDir)
 
 void AnisotropicDirectSpecular()
 {
-    float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TRANSFORM_TEX(FragData.uv, _TangentMap));
+    float4 tangentTS = UNITY_SAMPLE_TEX2D_SAMPLER(_TangentMap, _MainTex, TSR_TRANSFORM_TEX(Uvs, _TangentMap));
         
     float anisotropy = tangentTS.a * _Anisotropy;
     float3 tangent = GetModifiedTangent(tangentTS.rgb, TangentDir);

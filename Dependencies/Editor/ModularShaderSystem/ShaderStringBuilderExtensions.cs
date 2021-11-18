@@ -55,8 +55,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             if (haystack == null || needle == null)
                 throw new ArgumentNullException();
             if (needle.Length == 0)
-                return 0;
-            if (needle.Length == 1)
+                return 0;//empty strings are everywhere!
+            if (needle.Length == 1)//can't beat just spinning through for it
             {
                 char c = needle[0];
                 for (int idx = 0; idx != haystack.Length; ++idx)
@@ -72,7 +72,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 if (needle[i] == haystack[m + i])
                 {
                     if (i == needle.Length - 1)
-                        return m == needle.Length ? -1 : m;
+                        return m == needle.Length ? -1 : m;//match -1 = failure to find conventional in .NET
                     ++i;
                 }
                 else

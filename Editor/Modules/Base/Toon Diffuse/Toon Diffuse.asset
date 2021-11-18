@@ -252,5 +252,6 @@ MonoBehaviour:
     \"$id\": 28,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
-    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": -1\r\n                }\r\n            }\r\n        ]\r\n   
+    },\r\n    \"UVSets\": null\r\n}","unityGUIDReferences":[]}'

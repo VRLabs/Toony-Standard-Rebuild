@@ -1,6 +1,6 @@
 void SetupAlbedoAndSpecColor()
 {
-    float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TRANSFORM_TEX(FragData.uv, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
+    float3 specularTint = (UNITY_SAMPLE_TEX2D_SAMPLER(_SpecularTintTexture, _MainTex, TSR_TRANSFORM_TEX(Uvs, _SpecularTintTexture)).rgb * _SpecularTint).rgb;
 
     float sp = Specular * 0.08;
     SpecularColor = lerp(float3(sp, sp, sp), Albedo.rgb, Metallic);

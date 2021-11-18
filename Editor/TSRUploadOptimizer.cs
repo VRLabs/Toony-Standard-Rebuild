@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using VRC.SDKBase;
@@ -12,6 +14,7 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public static class TSRUploadOptimizer
     {
+        private static Dictionary<ModularShader, Dictionary<string, Dictionary<string, int>>> _uvSetsPerMaterial;
         public class LockMaterialsOnUpload : IVRCSDKPreprocessAvatarCallback
         {
             public int callbackOrder => 70;
@@ -101,13 +104,71 @@ namespace VRLabs.ToonyStandardRebuild
 
             var contexts = new List<ShaderGenerator.ShaderContext>();
 
+            _uvSetsPerMaterial = new Dictionary<ModularShader, Dictionary<string, Dictionary<string, int>>>();
+            
             foreach (IGrouping<ModularShader, Material> material in materials)
             {
-                if (material.Key != null)
-                    contexts.AddRange(ShaderGenerator.EnqueueShadersToGenerate("Assets/VRLabs/GeneratedAssets/Shaders", material.Key, material.AsEnumerable()));
+                if (material.Key == null) continue;
+                if (_uvSetsPerMaterial.ContainsKey(material.Key)) continue;
+                
+                var modules = new List<ModuleUI>();
+                
+                contexts.AddRange(ShaderGenerator.EnqueueShadersToGenerate("Assets/VRLabs/GeneratedAssets/Shaders", material.Key, material.AsEnumerable(), PostGeneration));
+                modules.Add(TSRGUI.LoadSerializedData(material.Key.AdditionalSerializedData));
+                foreach (var shaderModule in ShaderGenerator.FindAllModules(material.Key))
+                    modules.Add(TSRGUI.LoadSerializedData(shaderModule.AdditionalSerializedData));
+                   
+                var uvSets = LoadUvSet(modules);
+                _uvSetsPerMaterial.Add(material.Key, uvSets);
             }
 
             contexts.GenerateMinimalShaders();
+            _uvSetsPerMaterial = null;
+        }
+
+        private static Dictionary<string, Dictionary<string, int>> LoadUvSet(List<ModuleUI> modules)
+        {
+            var uvSets = new Dictionary<string, Dictionary<string, int>>();
+            foreach (UVSet uvSet in modules.SelectMany(module => module.UVSets))
+            {
+                Dictionary<string, int> uvSetDictionary;
+                if (uvSets.TryGetValue(uvSet.ID, out Dictionary<string, int> foundSet))
+                {
+                    uvSetDictionary = foundSet;
+                }
+                else
+                {
+                    uvSetDictionary = new Dictionary<string, int>();
+                    uvSets.Add(uvSet.ID, uvSetDictionary);
+                }
+
+                foreach (UVItem uvItem in uvSet.Items)
+                    if (!uvSetDictionary.ContainsKey(uvItem.ID))
+                        uvSetDictionary.Add(uvItem.ID, uvSetDictionary.Count - 1);
+            }
+
+            return uvSets;
+        }
+
+        public static void PostGeneration(StringBuilder shaderFile, ShaderGenerator.ShaderContext context)
+        {
+            Dictionary<string, Dictionary<string, int>> uvSetsDictionary = _uvSetsPerMaterial[context.Shader];
+            MatchCollection m = Regex.Matches(shaderFile.ToString(), @"#K#IDX#.*(?=])", RegexOptions.Multiline);
+
+            for (int i = m.Count - 1; i >= 0; i--)
+            {
+                string uvSets = m[i].Value.Remove(0, 7);
+                string[] pieces = uvSets.Split('#');
+
+                if (pieces.Length != 2) continue;
+                string uvSet = pieces[1];
+
+                Dictionary<string, int> uvSetDictionary = uvSetsDictionary.TryGetValue(pieces[0], out Dictionary<string, int> res) ? res : null;
+                if (uvSetDictionary == null) continue;
+                if (!uvSetDictionary.TryGetValue(uvSet, out int value)) continue;
+                
+                shaderFile.Replace(m[i].Value, $"{value}");
+            }
         }
     }
 }

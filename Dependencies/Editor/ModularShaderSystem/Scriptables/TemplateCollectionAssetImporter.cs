@@ -52,7 +52,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             }
             
             
-            ctx.AddObjectToAsset("Collection", subAsset/*, icon*/); 
+            ctx.AddObjectToAsset("Collection", subAsset/*, icon*/); //TODO: add asset icon here
             ctx.SetMainObject(subAsset);
         }
 
@@ -61,7 +61,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             var templateAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             templateAsset.Template = builder.ToString();
             templateAsset.name = name;
-            ctx.AddObjectToAsset(name, templateAsset /*, icon*/); 
+            ctx.AddObjectToAsset(name, templateAsset /*, icon*/); //TODO: add asset icon here
             asset.Templates.Add(templateAsset);
         }
 

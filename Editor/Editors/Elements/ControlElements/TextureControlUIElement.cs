@@ -10,10 +10,12 @@ namespace VRLabs.ToonyStandardRebuild
             var textureNameField = new TextField("Texture name");
             var firstExtraField = new TextField("First extra property");
             var secondExtraField = new TextField("Second extra property");
+            var uvSetField = new TextField("UV Set ID");
 
-            if (parameters.Count != 3)
+            if (parameters.Count != 4)
             {
                 parameters.Clear();
+                parameters.Add("");
                 parameters.Add("");
                 parameters.Add("");
                 parameters.Add("");
@@ -26,18 +28,23 @@ namespace VRLabs.ToonyStandardRebuild
                     parameters[1] = "";
                 if (!(parameters[2] is string))
                     parameters[2] = "";
+                if (!(parameters[3] is string))
+                    parameters[3] = "";
             }
 
             textureNameField.SetValueWithoutNotify((string)parameters[0]);
             firstExtraField.SetValueWithoutNotify((string)parameters[1]);
             secondExtraField.SetValueWithoutNotify((string)parameters[2]);
+            uvSetField.SetValueWithoutNotify((string)parameters[3]);
             textureNameField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
             firstExtraField.RegisterValueChangedCallback(e => parameters[1] = e.newValue);
             secondExtraField.RegisterValueChangedCallback(e => parameters[2] = e.newValue);
+            uvSetField.RegisterValueChangedCallback(e => parameters[3] = e.newValue);
 
             Add(textureNameField);
             Add(firstExtraField);
             Add(secondExtraField);
+            Add(uvSetField);
         }
     }
 }

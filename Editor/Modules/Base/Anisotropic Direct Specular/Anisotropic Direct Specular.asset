@@ -35,6 +35,11 @@ MonoBehaviour:
     Type: Range(-1, 1)
     DefaultValue: 0
     Attributes: []
+  - Name: _TangentMap_UV
+    DisplayName: Tangent Map UV
+    Type: Float
+    DefaultValue: 0
+    Attributes: []
   ModuleDependencies:
   - VRLabs.TSRBase.CoreSpecular
   IncompatibleWith: []
@@ -97,6 +102,9 @@ MonoBehaviour:
     - Name: GFS
       Type: 4
       CustomType: 
+    - Name: _TangentMap_UV
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
@@ -130,7 +138,7 @@ MonoBehaviour:
     \"Name\": \"Tangent Map\",\r\n                                        \"ControlType\":
     6,\r\n                                        \"Parameters\": {\r\n                                           
     \"$id\": 10,\r\n                                            \"$type\": 5,\r\n                                           
-    \"$rlength\": 5,\r\n                                            \"$rcontent\":
+    \"$rlength\": 6,\r\n                                            \"$rcontent\":
     [\r\n                                                $eref:0,\r\n                                               
     {\r\n                                                    \"$id\": 11,\r\n                                                   
     \"$type\": 6,\r\n                                                    \"{\\n 
@@ -145,48 +153,52 @@ MonoBehaviour:
     },\r\n                                                {\r\n                                                   
     \"$id\": 13,\r\n                                                    \"$type\":
     6,\r\n                                                    \"\"\r\n                                               
-    },\r\n                                                $iref:13\r\n                                           
-    ]\r\n                                        },\r\n                                       
-    \"Controls\": {\r\n                                            \"$id\": 14,\r\n                                           
-    \"$type\": 3,\r\n                                            \"$rlength\": 0,\r\n                                           
-    \"$rcontent\": [\r\n                                            ]\r\n                                       
+    },\r\n                                                $iref:13,\r\n                                               
+    {\r\n                                                    \"$id\": 14,\r\n                                                   
+    \"$type\": 6,\r\n                                                    \"BASESET\"\r\n                                               
+    }\r\n                                            ]\r\n                                       
+    },\r\n                                        \"Controls\": {\r\n                                           
+    \"$id\": 15,\r\n                                            \"$type\": 3,\r\n                                           
+    \"$rlength\": 0,\r\n                                            \"$rcontent\":
+    [\r\n                                            ]\r\n                                       
     }\r\n                                    },\r\n                                   
-    {\r\n                                        \"$id\": 15,\r\n                                       
+    {\r\n                                        \"$id\": 16,\r\n                                       
     \"$type\": 4,\r\n                                        \"Name\": \"Anisotropy\",\r\n                                       
     \"ControlType\": 2,\r\n                                        \"Parameters\":
-    {\r\n                                            \"$id\": 16,\r\n                                           
+    {\r\n                                            \"$id\": 17,\r\n                                           
     \"$type\": 5,\r\n                                            \"$rlength\": 1,\r\n                                           
     \"$rcontent\": [\r\n                                                {\r\n                                                   
-    \"$id\": 17,\r\n                                                    \"$type\":
+    \"$id\": 18,\r\n                                                    \"$type\":
     6,\r\n                                                    \"_Anisotropy\"\r\n                                               
     }\r\n                                            ]\r\n                                       
     },\r\n                                        \"Controls\": {\r\n                                           
-    \"$id\": 18,\r\n                                            \"$type\": 3,\r\n                                           
+    \"$id\": 19,\r\n                                            \"$type\": 3,\r\n                                           
     \"$rlength\": 0,\r\n                                            \"$rcontent\":
     [\r\n                                            ]\r\n                                       
     }\r\n                                    }\r\n                               
     ]\r\n                            }\r\n                        }\r\n                   
     ]\r\n                },\r\n                \"OnSectionDisableData\": {\r\n                   
-    \"$id\": 19,\r\n                    \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData,
+    \"$id\": 20,\r\n                    \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData,
     Assembly-CSharp-Editor\",\r\n                    \"FloatProperties\": {\r\n                       
-    \"$id\": 20,\r\n                        \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
+    \"$id\": 21,\r\n                        \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
-    \"$id\": 21,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    \"$id\": 22,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 22,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    \"$id\": 23,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 23,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    \"$id\": 24,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 24,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    \"$id\": 25,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
-    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":["af8d55d9d58d7a64da83f8664fa76072"]}'
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": -1\r\n                }\r\n            }\r\n        ]\r\n   
+    },\r\n    \"UVSets\": null\r\n}","unityGUIDReferences":["af8d55d9d58d7a64da83f8664fa76072"]}'

@@ -51,15 +51,30 @@ MonoBehaviour:
     Type: Range(0, 1)
     DefaultValue: 0.5
     Attributes: []
+  - Name: _Occlusion
+    DisplayName: Occlusion
+    Type: Range(0, 1)
+    DefaultValue: 1
+    Attributes: []
   - Name: _MSSO
     DisplayName: MSSO
     Type: 2D
     DefaultValue: '"white" {}'
     Attributes: []
-  - Name: _Occlusion
-    DisplayName: Occlusion
-    Type: Range(0, 1)
-    DefaultValue: 1
+  - Name: _MainTex_UV
+    DisplayName: Main texture UV set
+    Type: Float
+    DefaultValue: 0
+    Attributes: []
+  - Name: _BumpMap_UV
+    DisplayName: Bump map UV set
+    Type: Float
+    DefaultValue: 0
+    Attributes: []
+  - Name: _MSSO_UV
+    DisplayName: MSSO UV set
+    Type: Float
+    DefaultValue: 0
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []
@@ -90,6 +105,9 @@ MonoBehaviour:
     - Name: _Color
       Type: 7
       CustomType: 
+    - Name: _MainTex_UV
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   - Name: SampleMSSO
@@ -114,6 +132,9 @@ MonoBehaviour:
       Type: 4
       CustomType: 
     - Name: Occlusion
+      Type: 4
+      CustomType: 
+    - Name: _MSSO_UV
       Type: 4
       CustomType: 
     VariableKeywords: []
@@ -150,6 +171,9 @@ MonoBehaviour:
     - Name: _BumpScale
       Type: 4
       CustomType: 
+    - Name: _BumpMap_UV
+      Type: 4
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   - Name: SampleAlbedo
@@ -166,6 +190,9 @@ MonoBehaviour:
       CustomType: 
     - Name: _Color
       Type: 7
+      CustomType: 
+    - Name: _MainTex_UV
+      Type: 4
       CustomType: 
     VariableKeywords:
     - META_VARIABLES
@@ -188,6 +215,9 @@ MonoBehaviour:
       CustomType: 
     - Name: _Color
       Type: 7
+      CustomType: 
+    - Name: _MainTex_UV
+      Type: 4
       CustomType: 
     VariableKeywords:
     - SHADOW_VARIABLES
@@ -255,6 +285,9 @@ MonoBehaviour:
     - Name: Occlusion
       Type: 4
       CustomType: 
+    - Name: _MSSO_UV
+      Type: 4
+      CustomType: 
     VariableKeywords:
     - META_VARIABLES
     CodeKeywords:
@@ -275,7 +308,7 @@ MonoBehaviour:
     Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Albedo\",\r\n                           
     \"ControlType\": 5,\r\n                            \"Parameters\": {\r\n                               
     \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
-    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 3,\r\n                               
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 4,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
     \"$id\": 6,\r\n                                        \"$type\": \"6|System.String,
     mscorlib\",\r\n                                        \"_MainTex\"\r\n                                   
@@ -284,101 +317,110 @@ MonoBehaviour:
     \"_Color\"\r\n                                    },\r\n                                   
     {\r\n                                        \"$id\": 8,\r\n                                       
     \"$type\": 6,\r\n                                        \"\"\r\n                                   
-    }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 9,\r\n                               
+    },\r\n                                    {\r\n                                       
+    \"$id\": 9,\r\n                                        \"$type\": 6,\r\n                                       
+    \"BASESET\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 10,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 10,\r\n                            \"$type\": 4,\r\n                           
+    \"$id\": 11,\r\n                            \"$type\": 4,\r\n                           
     \"Name\": \"Alpha Cutoff group\",\r\n                            \"ControlType\":
     9,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 11,\r\n                                \"$type\": 5,\r\n                               
+    \"$id\": 12,\r\n                                \"$type\": 5,\r\n                               
     \"$rlength\": 2,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 12,\r\n                                       
+    {\r\n                                        \"$id\": 13,\r\n                                       
     \"$type\": 6,\r\n                                        \"_Mode\"\r\n                                   
     },\r\n                                    {\r\n                                       
-    \"$id\": 13,\r\n                                        \"$type\": \"7|System.Single,
+    \"$id\": 14,\r\n                                        \"$type\": \"7|System.Single,
     mscorlib\",\r\n                                        1\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 14,\r\n                               
+    \"Controls\": {\r\n                                \"$id\": 15,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 1,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 15,\r\n                                        \"$type\": 4,\r\n                                       
+    \"$id\": 16,\r\n                                        \"$type\": 4,\r\n                                       
     \"Name\": \"Alpha Cutoff\",\r\n                                        \"ControlType\":
     2,\r\n                                        \"Parameters\": {\r\n                                           
-    \"$id\": 16,\r\n                                            \"$type\": 5,\r\n                                           
+    \"$id\": 17,\r\n                                            \"$type\": 5,\r\n                                           
     \"$rlength\": 1,\r\n                                            \"$rcontent\":
     [\r\n                                                {\r\n                                                   
-    \"$id\": 17,\r\n                                                    \"$type\":
+    \"$id\": 18,\r\n                                                    \"$type\":
     6,\r\n                                                    \"_Cutoff\"\r\n                                               
     }\r\n                                            ]\r\n                                       
     },\r\n                                        \"Controls\": {\r\n                                           
-    \"$id\": 18,\r\n                                            \"$type\": 3,\r\n                                           
+    \"$id\": 19,\r\n                                            \"$type\": 3,\r\n                                           
     \"$rlength\": 0,\r\n                                            \"$rcontent\":
     [\r\n                                            ]\r\n                                       
     }\r\n                                    }\r\n                               
     ]\r\n                            }\r\n                        },\r\n                       
-    {\r\n                            \"$id\": 19,\r\n                           
+    {\r\n                            \"$id\": 20,\r\n                           
     \"$type\": 4,\r\n                            \"Name\": \"Normal map\",\r\n                           
     \"ControlType\": 5,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 20,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 3,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 21,\r\n                                       
+    \"$id\": 21,\r\n                                \"$type\": 5,\r\n                               
+    \"$rlength\": 4,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 22,\r\n                                       
     \"$type\": 6,\r\n                                        \"_BumpMap\"\r\n                                   
     },\r\n                                    {\r\n                                       
-    \"$id\": 22,\r\n                                        \"$type\": 6,\r\n                                       
+    \"$id\": 23,\r\n                                        \"$type\": 6,\r\n                                       
     \"_BumpScale\"\r\n                                    },\r\n                                   
-    $iref:8\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 23,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 24,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"MSSO\",\r\n                            \"ControlType\": 6,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 25,\r\n                               
-    \"$type\": 5,\r\n                                \"$rlength\": 3,\r\n                               
-    \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 26,\r\n                                        \"$type\": 6,\r\n                                       
-    \"_MSSO\"\r\n                                    },\r\n                                   
-    $iref:8,\r\n                                    $iref:8\r\n                               
+    $iref:8,\r\n                                    {\r\n                                       
+    \"$id\": 24,\r\n                                        \"$type\": 6,\r\n                                       
+    \"BASESET\"\r\n                                    }\r\n                               
     ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 27,\r\n                               
+    {\r\n                                \"$id\": 25,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 28,\r\n                            \"$type\": 4,\r\n                           
+    \"$id\": 26,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"MSSO\",\r\n                            \"ControlType\": 6,\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 27,\r\n                               
+    \"$type\": 5,\r\n                                \"$rlength\": 4,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 28,\r\n                                        \"$type\": 6,\r\n                                       
+    \"_MSSO\"\r\n                                    },\r\n                                   
+    $iref:8,\r\n                                    $iref:8,\r\n                                   
+    {\r\n                                        \"$id\": 29,\r\n                                       
+    \"$type\": 6,\r\n                                        \"BASESET\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 30,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 31,\r\n                            \"$type\": 4,\r\n                           
     \"Name\": \"Occlusion\",\r\n                            \"ControlType\": 2,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 29,\r\n                               
+    \"Parameters\": {\r\n                                \"$id\": 32,\r\n                               
     \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 30,\r\n                                        \"$type\": 6,\r\n                                       
+    \"$id\": 33,\r\n                                        \"$type\": 6,\r\n                                       
     \"_Occlusion\"\r\n                                    }\r\n                               
     ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 31,\r\n                               
+    {\r\n                                \"$id\": 34,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
-    \"OnSectionDisableData\": {\r\n                    \"$id\": 32,\r\n                   
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 35,\r\n                   
     \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
-    \"FloatProperties\": {\r\n                        \"$id\": 33,\r\n                       
+    \"FloatProperties\": {\r\n                        \"$id\": 36,\r\n                       
     \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
-    \"$id\": 34,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    \"$id\": 37,\r\n                        \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 35,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    \"$id\": 38,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 36,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    \"$id\": 39,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 37,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    \"$id\": 40,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
-    ]\r\n                    },\r\n                    \"RenderQueue\": -1\r\n               
-    }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
+    ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
+    \"RenderQueue\": -1\r\n                }\r\n            }\r\n        ]\r\n   
+    },\r\n    \"UVSets\": null\r\n}","unityGUIDReferences":[]}'

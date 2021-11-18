@@ -9,8 +9,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     {
         public string Name;
         public string DisplayName;
-        public string Type; 
-        public string DefaultValue; 
+        public string Type; //Check if the content is valid
+        public string DefaultValue; //Check if the content is right for the type
         public List<string> Attributes;
 
         public virtual Variable ToVariable()

@@ -30,6 +30,7 @@ namespace VRLabs.ToonyStandardRebuild
         private ObjectField _modularShaderField;
         private ObjectField _shaderModuleField;
         private ObjectInspectorList<SectionUI> _sectionsList;
+        private ObjectInspectorList<UVSet> _uvSetList;
 
         private bool _currentSelectorUsed;
 
@@ -76,6 +77,8 @@ namespace VRLabs.ToonyStandardRebuild
 
             _sectionsList = new ObjectInspectorList<SectionUI>("Sections", SectionUIElement.ElementTemplate);
             _sectionsList.SetEnabled(false);
+            _uvSetList = new ObjectInspectorList<UVSet>("UV Sets", UVSetUIElement.ElementTemplate);
+            _uvSetList.SetEnabled(false);
             var topElement = new VisualElement();
             topElement.style.flexDirection = FlexDirection.Row;
             topElement.style.minHeight = 20;
@@ -96,6 +99,7 @@ namespace VRLabs.ToonyStandardRebuild
             var view = new ScrollView(ScrollViewMode.Vertical);
             view.style.flexGrow = 1;
             view.Add(_sectionsList);
+            view.Add(_uvSetList);
             bottomElement.Add(saveButton);
             _root.Add(topElement);
             _root.Add(view);
@@ -160,6 +164,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _ui.Name = newValue.name;
                 enableSectionList = true;
                 _sectionsList.Items = _ui.Sections;
+                _uvSetList.Items = _ui.UVSets;
             }
 
             if (_currentSelectorUsed && newValue != null)
@@ -167,10 +172,13 @@ namespace VRLabs.ToonyStandardRebuild
                 _ui.Name = newValue.name;
                 enableSectionList = true;
                 _sectionsList.Items = _ui.Sections;
+                _uvSetList.Items = _ui.UVSets;
             }
 
             _sectionsList.SetEnabled(enableSectionList);
             _sectionsList.UpdateList();
+            _uvSetList.SetEnabled(enableSectionList);
+            _uvSetList.UpdateList();
         }
     }
 }
