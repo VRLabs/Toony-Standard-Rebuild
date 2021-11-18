@@ -47,6 +47,7 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
         {
             int selected = _previousIndex;
             if(_previousIndex != (int)Property.floatValue || selected == -1)  selected = (int)Property.floatValue;
+            if (_options.Length <= selected) Property.floatValue = selected = 0;
             EditorGUI.BeginChangeCheck();
             EditorGUI.showMixedValue = Property.hasMixedValue;
             selected = EditorGUILayout.Popup(Content, selected, _options);

@@ -1,0 +1,4 @@
+inline void LoadUV0()
+{
+    Uvs[#K#IDX#BASESET#UV0] = FragData.uv;
+}

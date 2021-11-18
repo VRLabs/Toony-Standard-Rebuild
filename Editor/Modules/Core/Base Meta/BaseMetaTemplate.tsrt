@@ -8,6 +8,7 @@ struct VertexData
 	float2 uv : TEXCOORD0;
 	float2 uv1 : TEXCOORD1;
 	float2 uv2 : TEXCOORD2;
+	float2 uv3 : TEXCOORD3;
 };
 
 struct FragmentData 
@@ -16,6 +17,7 @@ struct FragmentData
 	float2 uv  : TEXCOORD0;
 	float2 uv1 : TEXCOORD1;
 	float2 uv2 : TEXCOORD2;
+	float2 uv3 : TEXCOORD3;
 	#K#META_FRAGMENT_DATA;
 };
 
@@ -35,6 +37,7 @@ FragmentData  Vertex (VertexData v)
 	i.uv  = v.uv;
 	i.uv1 = v.uv1;
 	i.uv2 = v.uv2;
+	i.uv3 = v.uv3;
 	#K#META_VERTEX_FUNCTION
 	
 	return i;

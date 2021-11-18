@@ -89,6 +89,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv         : TEXCOORD0;
 				float2 uv1        : TEXCOORD1;
 				float2 uv2        : TEXCOORD2;
+				float2 uv3        : TEXCOORD3;
 				float3 normal     : NORMAL;
 				float4 tangentDir : TANGENT;
 				
@@ -102,16 +103,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv         : TEXCOORD0;
 				float2 uv1        : TEXCOORD1;
 				float2 uv2        : TEXCOORD2;
-				float3 worldPos   : TEXCOORD3;
+				float2 uv3        : TEXCOORD3;
+				float3 worldPos   : TEXCOORD4;
 				
-				UNITY_SHADOW_COORDS(4)
-				UNITY_FOG_COORDS(5)
+				UNITY_SHADOW_COORDS(5)
+				UNITY_FOG_COORDS(6)
 				
 				#if defined(LIGHTMAP_ON)
-				float2 lightmapUV : TEXCOORD6;
+				float2 lightmapUV : TEXCOORD7;
 				#endif
 				#if defined(DYNAMICLIGHTMAP_ON)
-				float2 dynamicLightmapUV : TEXCOORD7;
+				float2 dynamicLightmapUV : TEXCOORD8;
 				#endif
 				
 			};
@@ -205,14 +207,14 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
 			float2 Uvs[16];
-			inline void LoadUV1()
+			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
 			}
 			
 			void LoadUVList()
 			{
-				LoadUV1();
+				LoadUV0();
 				
 			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
@@ -799,6 +801,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				i.uv         = v.uv;
 				i.uv1        = v.uv1;
 				i.uv2        = v.uv2;
+				i.uv3        = v.uv3;
 				
 				UNITY_TRANSFER_SHADOW(i, v.uv);
 				UNITY_TRANSFER_FOG(i, i.pos);
@@ -927,6 +930,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv         : TEXCOORD0;
 				float2 uv1        : TEXCOORD1;
 				float2 uv2        : TEXCOORD2;
+				float2 uv3        : TEXCOORD3;
 				float3 normal     : NORMAL;
 				float4 tangentDir : TANGENT;
 				
@@ -940,16 +944,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv         : TEXCOORD0;
 				float2 uv1        : TEXCOORD1;
 				float2 uv2        : TEXCOORD2;
-				float3 worldPos   : TEXCOORD3;
+				float2 uv3        : TEXCOORD3;
+				float3 worldPos   : TEXCOORD4;
 				
-				UNITY_SHADOW_COORDS(4)
-				UNITY_FOG_COORDS(5)
+				UNITY_SHADOW_COORDS(5)
+				UNITY_FOG_COORDS(6)
 				
 				#if defined(LIGHTMAP_ON)
-				float2 lightmapUV : TEXCOORD6;
+				float2 lightmapUV : TEXCOORD7;
 				#endif
 				#if defined(DYNAMICLIGHTMAP_ON)
-				float2 dynamicLightmapUV : TEXCOORD7;
+				float2 dynamicLightmapUV : TEXCOORD8;
 				#endif
 				
 			};
@@ -1043,14 +1048,14 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
 			float2 Uvs[16];
-			inline void LoadUV1()
+			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
 			}
 			
 			void LoadUVList()
 			{
-				LoadUV1();
+				LoadUV0();
 				
 			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
@@ -1637,6 +1642,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				i.uv         = v.uv;
 				i.uv1        = v.uv1;
 				i.uv2        = v.uv2;
+				i.uv3        = v.uv3;
 				
 				UNITY_TRANSFER_SHADOW(i, v.uv);
 				UNITY_TRANSFER_FOG(i, i.pos);
@@ -1762,6 +1768,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float4 position : POSITION;
 				float3 normal : NORMAL;
 				float2 uv : TEXCOORD0;
+				float2 uv1 : TEXCOORD1;
+				float2 uv2 : TEXCOORD2;
+				float2 uv3 : TEXCOORD3;
 			};
 			
 			struct VertexOutput
@@ -1769,9 +1778,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float4 position : SV_POSITION;
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				float2 uv : TEXCOORD0;
+				float2 uv1 : TEXCOORD1;
+				float2 uv2 : TEXCOORD2;
+				float2 uv3 : TEXCOORD3;
 				#endif
 				#if defined(SHADOWS_CUBE)
-				float3 lightVec : TEXCOORD1;
+				float3 lightVec : TEXCOORD4;
 				#endif
 			};
 			
@@ -1784,9 +1796,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 				#endif
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				float2 uv : TEXCOORD0;
+				float2 uv1 : TEXCOORD1;
+				float2 uv2 : TEXCOORD2;
+				float2 uv3 : TEXCOORD3;
 				#endif
 				#if defined(SHADOWS_CUBE)
-				float3 lightVec : TEXCOORD1;
+				float3 lightVec : TEXCOORD4;
 				#endif
 			};
 			
@@ -1807,14 +1822,14 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
 			float2 Uvs[16];
-			inline void LoadUV1()
+			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
 			}
 			
 			void LoadUVList()
 			{
-				LoadUV1();
+				LoadUV0();
 				
 			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
@@ -1876,6 +1891,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 				#endif
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				i.uv = v.uv;
+				i.uv1 = v.uv1;
+				i.uv2 = v.uv2;
+				i.uv3 = v.uv3;
 				#endif
 				return i;
 			}
@@ -1926,6 +1944,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
 				float2 uv2 : TEXCOORD2;
+				float2 uv3 : TEXCOORD3;
 			};
 			
 			struct FragmentData
@@ -1934,6 +1953,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv  : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
 				float2 uv2 : TEXCOORD2;
+				float2 uv3 : TEXCOORD3;
 				
 			};
 			
@@ -1973,14 +1993,14 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
 			float2 Uvs[16];
-			inline void LoadUV1()
+			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
 			}
 			
 			void LoadUVList()
 			{
-				LoadUV1();
+				LoadUV0();
 				
 			}
 			inline float remap(float value, float oldMin, float oldMax, float newMin, float newMax)
@@ -2055,6 +2075,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				i.uv  = v.uv;
 				i.uv1 = v.uv1;
 				i.uv2 = v.uv2;
+				i.uv3 = v.uv3;
 				
 				return i;
 			}

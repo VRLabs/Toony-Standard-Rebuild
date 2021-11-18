@@ -52,6 +52,7 @@ namespace VRLabs.ToonyStandardRebuild
         private Dictionary<OrderedSection, UpdateData> _sectionDefaults;
         private Dictionary<string, Dictionary<string, int>> _uvSets;
         private Dictionary<string, List<string>> _uiUVSets;
+        private Dictionary<string, string> _uvPropsSet;
         private OrderedSectionGroup _mainOrderedSection;
         private ControlContainer _staticSections;
         private string _mainSectionLocalizationModulePath;
@@ -97,6 +98,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _sectionDefaults = new Dictionary<OrderedSection, UpdateData>();
                 _uvSets = new Dictionary<string, Dictionary<string, int>>();
                 _uiUVSets = new Dictionary<string, List<string>>();
+                _uvPropsSet = new Dictionary<string, string>();
                 
                 Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
                 Shader = Materials[0].shader;
@@ -245,9 +247,17 @@ namespace VRLabs.ToonyStandardRebuild
             foreach ((string id, UVSetSelectorControl control) in loadedUVControls)
             {
                 if (_uiUVSets.TryGetValue(id, out List<string> items))
+                {
                     control.SetNewOptions(items);
+                    if (_uvPropsSet.TryGetValue(control.PropertyName, out string s) && !s.Equals(id))
+                        _startupErrors.Add($"UV property \"{control.PropertyName}\" has been assigned 2 different UV sets \"{s}\" and \"{id}\", this is not allowed");
+                    else
+                        _uvPropsSet.Add(control.PropertyName, id);
+                }
                 else
+                {
                     _startupErrors.Add($"UV Set ID \"{id}\" has been declared in a texture control uv but has not been found in the list of available UV Sets");
+                }
             }
             
             _previousEnablerValues = new int[_enablers.Count];
@@ -295,7 +305,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 if (uvSetControl is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv1" })).Alias(prop.ControlAlias + "_UV");
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).Alias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
                     loadedUVControls.Add((key,uv));
                 }
@@ -410,7 +420,7 @@ namespace VRLabs.ToonyStandardRebuild
                     if (!uvSetDictionary.ContainsKey(uvItem.ID))
                     {
                         uvSetDictionary.Add(uvItem.ID, uvSetDictionary.Count);
-                        uiUVSet.Add(uvItem.ID);
+                        uiUVSet.Add(uvItem.Name);
                     }
                 }
             }
@@ -485,22 +495,40 @@ namespace VRLabs.ToonyStandardRebuild
                     stopwatch.Start();
 
                     var removedEnablerValues = ModularShader.AdditionalModules.Where(x => !_usedModules.Contains(x) && x.Enabled.EnableValue != 0).Select(x => x.Enabled).ToList();
-                    if (removedEnablerValues.Count > 0)
-                    {
-                        var materials = TSRUtilities.FindAssetsByType<Material>().Where(x => ModularShader.LastGeneratedShaders.Contains(x.shader)).ToArray();
+                    ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
 
-                        foreach (Material material in materials)
+                    bool refreshMaterialsUVSet = false;
+                    var newUvSets = TSRUtilities.LoadUvSet(ModularShader);
+
+                    foreach (KeyValuePair<string,Dictionary<string,int>> uvSet in newUvSets)
+                    {
+                        if (!_uvSets.TryGetValue(uvSet.Key, out Dictionary<string, int> oldSet)) continue;
+                        if (uvSet.Value.Count >= oldSet.Count) continue;
+                        refreshMaterialsUVSet = true;
+                        break;
+                    }
+
+                    _uvSets = newUvSets;
+                    
+                    var materials = TSRUtilities.FindAssetsByType<Material>().Where(x => ModularShader.LastGeneratedShaders.Contains(x.shader)).ToArray();
+
+                    foreach (Material material in materials)
+                    {
+                        if (refreshMaterialsUVSet)
+                        {
+                            foreach (KeyValuePair<string, string> valuePair in _uvPropsSet.Where(valuePair => material.GetFloat(valuePair.Key) >= _uvSets[valuePair.Value].Count))
+                                material.SetFloat(valuePair.Key, 0);
+                        }
+                        
+                        if (removedEnablerValues.Count > 0)
                         {
                             foreach (EnableProperty property in removedEnablerValues.Where(property => Math.Abs(material.GetFloat(property.Name) - property.EnableValue) < 0.01))
                                 material.SetFloat(property.Name, 0);
-
-                            EditorUtility.SetDirty(material);
                         }
-                    }
 
-                    ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
+                        EditorUtility.SetDirty(material);
+                    } 
                     ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration);
-
                     EditorUtility.SetDirty(ModularShader);
 
                     stopwatch.Stop();

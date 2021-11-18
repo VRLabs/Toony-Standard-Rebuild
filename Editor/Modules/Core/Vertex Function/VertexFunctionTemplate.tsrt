@@ -5,6 +5,7 @@ i.tangentDir = v.tangentDir;
 i.uv         = v.uv;
 i.uv1        = v.uv1;
 i.uv2        = v.uv2;
+i.uv3        = v.uv3;
 
 UNITY_TRANSFER_SHADOW(i, v.uv);
 UNITY_TRANSFER_FOG(i, i.pos);

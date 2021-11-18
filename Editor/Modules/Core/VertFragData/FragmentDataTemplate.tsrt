@@ -4,14 +4,15 @@ float4 tangentDir : TANGENT;
 float2 uv         : TEXCOORD0;
 float2 uv1        : TEXCOORD1;
 float2 uv2        : TEXCOORD2;
-float3 worldPos   : TEXCOORD3;
+float2 uv3        : TEXCOORD3;
+float3 worldPos   : TEXCOORD4;
 
-UNITY_SHADOW_COORDS(4)
-UNITY_FOG_COORDS(5)
+UNITY_SHADOW_COORDS(5)
+UNITY_FOG_COORDS(6)
 
 #if defined(LIGHTMAP_ON)
-    float2 lightmapUV : TEXCOORD6;
+    float2 lightmapUV : TEXCOORD7;
 #endif
 #if defined(DYNAMICLIGHTMAP_ON)
-    float2 dynamicLightmapUV : TEXCOORD7;
+    float2 dynamicLightmapUV : TEXCOORD8;
 #endif

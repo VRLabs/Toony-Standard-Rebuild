@@ -110,44 +110,14 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 if (material.Key == null) continue;
                 if (_uvSetsPerMaterial.ContainsKey(material.Key)) continue;
-                
-                var modules = new List<ModuleUI>();
-                
                 contexts.AddRange(ShaderGenerator.EnqueueShadersToGenerate("Assets/VRLabs/GeneratedAssets/Shaders", material.Key, material.AsEnumerable(), PostGeneration));
-                modules.Add(TSRGUI.LoadSerializedData(material.Key.AdditionalSerializedData));
-                foreach (var shaderModule in ShaderGenerator.FindAllModules(material.Key))
-                    modules.Add(TSRGUI.LoadSerializedData(shaderModule.AdditionalSerializedData));
                    
-                var uvSets = LoadUvSet(modules);
+                var uvSets = TSRUtilities.LoadUvSet(material.Key);
                 _uvSetsPerMaterial.Add(material.Key, uvSets);
             }
 
             contexts.GenerateMinimalShaders();
             _uvSetsPerMaterial = null;
-        }
-
-        private static Dictionary<string, Dictionary<string, int>> LoadUvSet(List<ModuleUI> modules)
-        {
-            var uvSets = new Dictionary<string, Dictionary<string, int>>();
-            foreach (UVSet uvSet in modules.SelectMany(module => module.UVSets))
-            {
-                Dictionary<string, int> uvSetDictionary;
-                if (uvSets.TryGetValue(uvSet.ID, out Dictionary<string, int> foundSet))
-                {
-                    uvSetDictionary = foundSet;
-                }
-                else
-                {
-                    uvSetDictionary = new Dictionary<string, int>();
-                    uvSets.Add(uvSet.ID, uvSetDictionary);
-                }
-
-                foreach (UVItem uvItem in uvSet.Items)
-                    if (!uvSetDictionary.ContainsKey(uvItem.ID))
-                        uvSetDictionary.Add(uvItem.ID, uvSetDictionary.Count - 1);
-            }
-
-            return uvSets;
         }
 
         public static void PostGeneration(StringBuilder shaderFile, ShaderGenerator.ShaderContext context)

@@ -49,7 +49,7 @@ MonoBehaviour:
     Queue: 105
     TemplateKeywords: []
   Functions:
-  - Name: LoadUV1
+  - Name: LoadUV0
     AppendAfter: '#K#BASE_UV_SET_CODE'
     Queue: 100
     ShaderFunctionCode: {fileID: -544282384758852595, guid: 78b5b6ee2b0953a4ba3e504f217b0050,
@@ -107,6 +107,6 @@ MonoBehaviour:
     Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 1,\r\n                   
     \"$rcontent\": [\r\n                        {\r\n                           
     \"$id\": 5,\r\n                            \"$type\": \"5|VRLabs.ToonyStandardRebuild.UVItem,
-    Assembly-CSharp-Editor\",\r\n                            \"ID\": \"UV1\",\r\n                           
-    \"Name\": \"uv1\"\r\n                        }\r\n                    ]\r\n               
+    Assembly-CSharp-Editor\",\r\n                            \"ID\": \"UV0\",\r\n                           
+    \"Name\": \"uv0\"\r\n                        }\r\n                    ]\r\n               
     }\r\n            }\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'
