@@ -21,8 +21,9 @@ namespace VRLabs.ToonyStandardRebuild
         [MenuItem("VRLabs/Toony Standard RE:Build/Edit UI For module")]
         public static void ShowExample()
         {
-            ModuleUIEditor wnd = GetWindow<ModuleUIEditor>();
-            wnd.titleContent = new GUIContent("Module UI editor");
+            ModuleUIEditor window = GetWindow<ModuleUIEditor>();
+            window.titleContent = new GUIContent("Module UI editor");
+            window.Show();
         }
 
         private VisualElement _root;

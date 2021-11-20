@@ -52,5 +52,25 @@ namespace VRLabs.ToonyStandardRebuild
 
             return uvSets;
         }
+        
+        public static void TSRPostGeneration(StringBuilder shaderFile, Dictionary<string, Dictionary<string, int>> sets)
+        {
+            MatchCollection m = Regex.Matches(shaderFile.ToString(), @"#K#IDX#.*(?=])", RegexOptions.Multiline);
+
+            for (int i = m.Count - 1; i >= 0; i--)
+            {
+                string uvSets = m[i].Value.Remove(0, 7);
+                string[] pieces = uvSets.Split('#');
+
+                if (pieces.Length != 2) continue;
+                string uvSet = pieces[1];
+
+                Dictionary<string, int> uvSetDictionary = sets.TryGetValue(pieces[0], out Dictionary<string, int> res) ? res : null;
+                if (uvSetDictionary == null) continue;
+                if (!uvSetDictionary.TryGetValue(uvSet, out int value)) continue;
+
+                shaderFile.Replace(m[i].Value, $"{value}");
+            }
+        }
     }
 }
