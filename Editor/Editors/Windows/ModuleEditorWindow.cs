@@ -40,8 +40,6 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void CreateGUI()
         {
-            TSRUtilities.FindAssetsByType<ModularShader>();
-            
             _root = rootVisualElement;
             
             var modularShaderField = new ObjectField();
@@ -143,7 +141,7 @@ namespace VRLabs.ToonyStandardRebuild
             EditorGUILayout.EndHorizontal();
         }
         
-         private void ReinitializeListsIfNeeded()
+        private void ReinitializeListsIfNeeded()
         {
             if (_availableModules == null)
             {
@@ -166,7 +164,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _usedModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
                     if (index >= _usedModules.Count) return;
-                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _usedModules[index].Name);
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), _usedModules[index].Name);
                     /*if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "►"))
                     {
                         _availableModules.Add(_usedModules[index]);
@@ -190,7 +188,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _availableModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
                     if (index >= _availableModules.Count) return;
-                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _availableModules[index].Name);
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), _availableModules[index].Name);
                     /*if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "◄"))
                     {
                         _usedModules.Add(_availableModules[index]);
@@ -227,7 +225,7 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("◁", GUILayout.Height(30)))
             {
-                if (_availableModulesList.index >= 0)
+                if (_availableModulesList.index >= 0 && _availableModulesList.index < _availableModulesList.count)
                 {
                     _usedModules.Add(_availableModules[_availableModulesList.index]);
                     _availableModules.Remove(_availableModules[_availableModulesList.index]);
@@ -239,7 +237,7 @@ namespace VRLabs.ToonyStandardRebuild
             
             if (GUILayout.Button("▷", GUILayout.Height(30)))
             {
-                if (_usedModulesList.index >= 0)
+                if (_usedModulesList.index >= 0 && _usedModulesList.index < _usedModulesList.count)
                 {
                     _availableModules.Add(_usedModules[_usedModulesList.index]);
                     _usedModules.Remove(_usedModules[_usedModulesList.index]);

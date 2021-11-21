@@ -34,6 +34,7 @@ namespace VRLabs.ToonyStandardRebuild
 
         // Bool that determines if the current OnGUI call is the first one or not.
         private bool _isFirstLoop = true;
+        private bool _refreshModules = true;
         private bool _isOptimisedShader;
 
         // Array containing all found languages for a specific GUI.
@@ -87,6 +88,8 @@ namespace VRLabs.ToonyStandardRebuild
         {
             _props = properties;
             _materialEditor = materialEditor;
+            if (Materials != null && Shader != Materials[0].shader) _isFirstLoop = _refreshModules = true;
+            
             if (_isFirstLoop)
             {
                 InitializeFields(materialEditor);
@@ -199,6 +202,14 @@ namespace VRLabs.ToonyStandardRebuild
             ModularShader = string.IsNullOrEmpty(shaderName) ? 
                 _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader)) : 
                 _loadedShaders.FirstOrDefault(x => x.ShaderPath.Equals(shaderName));
+
+            if (ModularShader != null) return;
+            
+            _loadedShaders = TSRUtilities.FindAssetsByType<ModularShader>().ToList();
+            ModularShader = string.IsNullOrEmpty(shaderName) ? 
+                _loadedShaders.FirstOrDefault(x => x.LastGeneratedShaders.Contains(Shader)) : 
+                _loadedShaders.FirstOrDefault(x => x.ShaderPath.Equals(shaderName));
+            
         }
 
         // Contains the ui loading system for shader and modules
@@ -206,17 +217,19 @@ namespace VRLabs.ToonyStandardRebuild
         {
             // Initialize main sections containers
             _staticSections = this.AddControlContainer();
+            _mainSectionLocalizationModulePath = AssetDatabase.GetAssetPath(ModularShader);
+            _path = AssetDatabase.GetAssetPath(Shader);
+            _settingsPath = $"{Path.GetDirectoryName(_mainSectionLocalizationModulePath)}/Settings";
             _mainOrderedSection = this.AddOrderedSectionGroup("MainGroup");
             
-            string modularShaderPath = AssetDatabase.GetAssetPath(ModularShader);
             var loadedUVControls = new List<(string, UVSetSelectorControl)>();
-            LoadLocalizationSettings(modularShaderPath);
-            _mainSectionLocalizationModulePath = modularShaderPath;
+            LoadLocalizationSettings(_mainSectionLocalizationModulePath);
+            
 
             // Load main UIModule from the modular shader
-            if (File.Exists(modularShaderPath))
+            if (File.Exists(_mainSectionLocalizationModulePath))
             {
-                LoadUIModule(ModularShader, modularShaderPath, out List<(string, UVSetSelectorControl)> loadedControls);
+                LoadUIModule(ModularShader, _mainSectionLocalizationModulePath, out List<(string, UVSetSelectorControl)> loadedControls);
                 loadedUVControls.AddRange(loadedControls);
             }
             _enablers = new Dictionary<string, int>();
@@ -463,15 +476,18 @@ namespace VRLabs.ToonyStandardRebuild
             if (ModularShader == null || _isOptimisedShader) return;
             
             ReinitializeListsIfNeeded();
-            /*EditorGUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Create new base"))
-                {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Create new variation"))
+            {
+                var window = ScriptableObject.CreateInstance<NewShaderVariationWindow>();
+                window.titleContent = new GUIContent("TSR New Variation");
+                window.shader = ModularShader;
+                window.Show();
+            }
 
-                }
-
-                EditorGUILayout.EndHorizontal();*/
-            EditorGUILayout.Space(4);
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space(8);
             DrawModuleSelectorsArea();
 
             if (_moduleErrors?.Count > 0)
@@ -561,7 +577,7 @@ namespace VRLabs.ToonyStandardRebuild
 
         private void ReinitializeListsIfNeeded()
         {
-            if (_availableModules == null)
+            if (_availableModules == null || _refreshModules)
             {
                 _availableModules = TSRUtilities.FindAssetsByType<ShaderModule>()
                     .Where(x => ModularShader.BaseModules.All(y => y != x) &&
@@ -569,12 +585,12 @@ namespace VRLabs.ToonyStandardRebuild
                     .ToList();
             }
 
-            if (_usedModules == null)
+            if (_usedModules == null || _refreshModules)
             {
                 _usedModules = new List<ShaderModule>(ModularShader.AdditionalModules);
             }
 
-            if (_usedModulesList == null)
+            if (_usedModulesList == null || _refreshModules)
             {
                 _usedModulesList = new ReorderableList(_usedModules, typeof(ShaderModule), true, false, false, false);
                 _usedModulesList.headerHeight = 1;
@@ -582,7 +598,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _usedModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
                     if (index >= _usedModules.Count) return;
-                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _usedModules[index].Name);
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), _usedModules[index].Name);
                     /*if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "►"))
                     {
                         _availableModules.Add(_usedModules[index]);
@@ -598,7 +614,7 @@ namespace VRLabs.ToonyStandardRebuild
                 };
             }
 
-            if (_availableModulesList == null)
+            if (_availableModulesList == null || _refreshModules)
             {
                 _availableModulesList = new ReorderableList(_availableModules, typeof(ShaderModule), true, false, false, false);
                 _availableModulesList.headerHeight = 1;
@@ -606,7 +622,7 @@ namespace VRLabs.ToonyStandardRebuild
                 _availableModulesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
                     if (index >= _availableModules.Count) return;
-                    GUI.Label(new Rect(rect.x, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight), _availableModules[index].Name);
+                    GUI.Label(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), _availableModules[index].Name);
                     /*if (GUI.Button(new Rect(rect.x + rect.width - 15, rect.y + 1, 20, EditorGUIUtility.singleLineHeight + 1), "◄"))
                     {
                         _usedModules.Add(_availableModules[index]);
@@ -621,6 +637,8 @@ namespace VRLabs.ToonyStandardRebuild
                     }
                 };
             }
+
+            _refreshModules = false;
         }
 
         private void DrawModuleSelectorsArea()
@@ -643,7 +661,7 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("◁", GUILayout.Height(30)))
             {
-                if (_availableModulesList.index >= 0)
+                if (_availableModulesList.index >= 0 && _availableModulesList.index < _availableModulesList.count)
                 {
                     _usedModules.Add(_availableModules[_availableModulesList.index]);
                     _availableModules.Remove(_availableModules[_availableModulesList.index]);
@@ -655,7 +673,7 @@ namespace VRLabs.ToonyStandardRebuild
             
             if (GUILayout.Button("▷", GUILayout.Height(30)))
             {
-                if (_usedModulesList.index >= 0)
+                if (_usedModulesList.index >= 0 && _usedModulesList.index < _usedModulesList.count)
                 {
                     _availableModules.Add(_usedModules[_usedModulesList.index]);
                     _usedModules.Remove(_usedModules[_usedModulesList.index]);
