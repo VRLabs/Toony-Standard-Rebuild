@@ -271,11 +271,23 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             if ((object)asset == null) return;
             if (dictionary.ContainsKey(asset)) return;
             string assetPath = AssetDatabase.GetAssetPath(asset);
-            dictionary.Add(asset, AssetDatabase.LoadAssetAtPath<TemplateAsset>(assetPath));
+            var genericAsset = AssetDatabase.LoadMainAssetAtPath(assetPath);
+            TemplateAsset template = null;
+            switch (genericAsset)
+            {
+                case TemplateCollectionAsset collection:
+                    template = collection.Templates.FirstOrDefault(x => x.name.Equals(asset.name));
+                    break;
+                case TemplateAsset t:
+                    template = t;
+                    break;
+            }
+            dictionary.Add(asset, template);
         }
         
         private static TemplateAsset GetTemplate(this Dictionary<TemplateAsset, TemplateAsset> dictionary, TemplateAsset asset)
         {
+            if ((object)asset == null) return null;
             return dictionary.TryGetValue(asset, out TemplateAsset result) ? result : null;
         }
 

@@ -1,0 +1,277 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+{
+    public class TemplateGraph : IModularShaderDebuggerTab
+    {
+        public VisualElement TabContainer { get; set; }
+        public string TabName { get; set; }
+
+        public TemplateGraphView _graph;
+
+        public TemplateGraph()
+        {
+            TabName = "Template graph";
+            TabContainer = new VisualElement();
+            TabContainer.StretchToParentSize();
+            var styleSheet = Resources.Load<StyleSheet>(MSSConstants.RESOURCES_FOLDER + "/MSSUIElements/TemplateGraphStyle");
+            TabContainer.styleSheets.Add(styleSheet);
+
+        }
+        
+        public void UpdateTab(ModularShader shader)
+        {
+            TabContainer.Clear();
+            if (shader == null) return;
+            _graph = new TemplateGraphView();
+            
+            _graph.AddBaseTemplateNode("Shader", shader.ShaderTemplate);
+
+            if (shader.UseTemplatesForProperties)
+            {
+                var keywords = new []{"#K#" + MSSConstants.TEMPLATE_PROPERTIES_KEYWORD};
+                _graph.AddBaseTemplateNode("ShaderPropertiesRoot", new TemplateAsset{ Template = "", Keywords = keywords, name = "Properties Template Root"});
+                if (shader.ShaderPropertiesTemplate != null) _graph.AddTemplateNode("ShaderPropertiesTemplate", shader.ShaderTemplate, keywords);
+                
+            }
+            
+            var moduleByTemplate = new Dictionary<ModuleTemplate, ShaderModule>();
+            foreach (var module in shader.BaseModules.Concat(shader.AdditionalModules))
+            foreach (var template in module.Templates)
+                moduleByTemplate.Add(template, module);
+            
+            foreach (var template in  shader.BaseModules.Concat(shader.AdditionalModules).SelectMany(x => x.Templates).OrderBy(x => x.Queue))
+            {
+                if (template.Template == null) continue;
+               var module = moduleByTemplate[template];
+                _graph.AddTemplateNode(module.Id, template);
+            }
+            
+            _graph.ScheduleNodesPositionReset();
+            
+            TabContainer.Add(_graph);
+        }
+    }
+
+    public class TemplateGraphView : GraphView
+    {
+        public List<TemplateNode> Nodes;
+        public List<TemplateNode> BaseNodes;
+        
+        private static TextPopup _popup;
+
+        public TemplateGraphView()
+        {
+            Nodes = new List<TemplateNode>();
+            BaseNodes = new List<TemplateNode>();
+            
+            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            this.AddManipulator(new ContentDragger());
+            var grid = new GridBackground();
+
+            Insert(0, grid);
+            grid.StretchToParentSize();
+
+            this.StretchToParentSize();
+        }
+
+        public void AddBaseTemplateNode(string moduleId, TemplateAsset template)
+        {
+            var baseNode = new TemplateNode(moduleId, template, "");
+            AddElement(baseNode);
+            Nodes.Add(baseNode);
+            BaseNodes.Add(baseNode);
+        }
+
+        public void AddTemplateNode(string moduleId, ModuleTemplate template)
+        {
+            
+            var tempList = new List<TemplateNode>();
+            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, template.Keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            {
+                var node = new TemplateNode(moduleId, template, key);
+                AddElement(node);
+                tempList.Add(node);
+                LinkTemplateNodes(parent, node, key);
+            }
+            Nodes.AddRange(tempList);
+        }
+        
+        public void AddTemplateNode(string moduleId, TemplateAsset template, string[] keywords)
+        {
+            var tempList = new List<TemplateNode>();
+            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            {
+                var node = new TemplateNode(moduleId, template, key);
+                AddElement(node);
+                tempList.Add(node);
+                LinkTemplateNodes(parent, node, key);
+            }
+            Nodes.AddRange(tempList);
+        }
+
+        public void ScheduleNodesPositionReset()
+        {
+            RegisterCallback<GeometryChangedEvent>(GeometryChangedCallback);
+        }
+
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            var items = evt.menu.MenuItems();
+            for (int i = 0; i < items.Count; i++)
+                evt.menu.RemoveItemAt(0);
+
+            if (evt.target is TemplateNode node)
+            {
+                evt.menu.InsertAction(0,"View template code", action =>
+                {
+                    if (_popup != null) _popup.Close();
+                    _popup = ScriptableObject.CreateInstance<TextPopup>();
+                     _popup.Text = node.TemplateAsset.Template;
+                    var position = GUIUtility.GUIToScreenRect(node.worldBound);
+                    int lineCount =   _popup.Text == null ? 5 :  _popup.Text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Length;
+                    _popup.ShowAsDropDown(position, new Vector2(600, Math.Min(lineCount * 16, 800)));
+                });
+            }
+        }
+        
+        private void GeometryChangedCallback(GeometryChangedEvent evt)
+        {
+            UnregisterCallback<GeometryChangedEvent>(GeometryChangedCallback);
+
+            if(BaseNodes.Count == 0) return;
+            
+            float top = 0;
+            foreach (TemplateNode node in BaseNodes)
+                top += node.Reposition(2, top, 100*(Nodes.Count/70 + 1));
+
+            var newPosition = new Vector3(BaseNodes[0].style.left.value.value + viewport.resolvedStyle.width/2 - BaseNodes[0].resolvedStyle.width/2, 
+                -BaseNodes[0].style.top.value.value + viewport.resolvedStyle.height/2 - BaseNodes[0].resolvedStyle.height/2, 
+                viewTransform.position.z);
+            viewTransform.position = newPosition;
+        }
+        
+        private static bool IsKeywordValid(string moduleId, TemplateNode item, string y)
+        {
+            if (item.ContainsKeyword("#K#"+y)) return true;
+            return item.ContainsKeyword("#KI#"+y) && moduleId.Equals(item.ModuleId);
+        }
+        
+        private void LinkTemplateNodes(TemplateNode left, TemplateNode right, string key)
+        {
+            var edge = new Edge
+            {
+                output = left.Outputs[key],
+                input = right.Input
+            };
+            
+            edge.input.Connect(edge);
+            edge.output.Connect(edge);
+            Add(edge);
+        }
+    }
+
+    public sealed class TemplateNode : Node
+    {
+        public TemplateAsset TemplateAsset { get; set; }
+        public string ModuleId { get; set; }
+        public Port Input { get; set; }
+        public Dictionary<string, Port> Outputs { get; set; }
+        
+        private ModuleTemplate _template;
+
+        public TemplateNode(string moduleId, ModuleTemplate template, string key) : this (moduleId, template.Template, key)
+        {
+            _template = template;
+
+            if (_template == null) return;
+            var priority = new Label("" +_template.Queue);
+            priority.AddToClassList("node-header-queue");
+            titleContainer.Add(priority);
+        }
+        
+        public TemplateNode(string moduleId, TemplateAsset templateAsset, string key)
+        {
+            ModuleId = moduleId;
+            TemplateAsset = templateAsset;
+            title = TemplateAsset.name;
+            var idLabel = new Label($"({ModuleId})");
+            idLabel.AddToClassList("node-header-id");
+            titleContainer.Insert(1, idLabel);
+            Outputs = new Dictionary<string, Port>();
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(string));
+                Input.portName = key;
+                Input.portColor = Color.cyan;
+                inputContainer.Add(Input);
+            }
+
+            foreach (string keyword in TemplateAsset.Keywords)
+            {
+                var port = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(string));
+                
+                string sanitizedKeyword = keyword.Replace("#K#", "").Replace("#KI#", "");
+                port.portName = sanitizedKeyword;
+                port.portColor = Color.cyan;
+                Outputs.Add(sanitizedKeyword, port);
+                outputContainer.Add(port);
+            }
+
+            RefreshExpandedState();
+            RefreshPorts();
+        }
+
+        public float Reposition(float right, float top, float offset)
+        {
+            float width = resolvedStyle.width;
+            float height = resolvedStyle.height;
+
+            float childrenHeight = 0;
+            float newTop = top;
+
+            foreach (var output in Outputs.Values)
+            {
+                foreach (var edge in output.connections)
+                {
+                    var node = edge.input.node as TemplateNode;
+                    if (node != null)
+                    {
+                        childrenHeight += node.Reposition(right + width + offset, newTop, offset);
+                        newTop = top + childrenHeight;
+                    }
+                }
+            }
+            SetPosition(new Rect(right, top + Math.Max((childrenHeight - height)/2, 0), 100, 100));
+            RefreshExpandedState();
+            RefreshPorts();
+
+            return Math.Max(height, childrenHeight) + 4;
+        }
+
+        public bool ContainsKeyword(string keyword)
+        {
+            return TemplateAsset.Keywords.Contains(keyword);
+        }
+    }
+
+    public class TextPopup : EditorWindow
+    {
+        public string Text;
+        private void CreateGUI()
+        {
+            var viewer = new CodeViewElement();
+            viewer.Text = Text;
+            viewer.StretchToParentSize();
+            rootVisualElement.Add(viewer);
+        }
+    }
+}

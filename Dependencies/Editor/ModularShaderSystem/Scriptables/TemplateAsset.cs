@@ -11,6 +11,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     public class TemplateAsset : ScriptableObject
     {
         public string Template;
+        public string[] Keywords;
 
         public TemplateAsset(string template)
         {
