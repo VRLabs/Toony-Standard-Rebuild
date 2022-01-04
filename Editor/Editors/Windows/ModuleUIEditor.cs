@@ -45,6 +45,8 @@ namespace VRLabs.ToonyStandardRebuild
 
             var styleSheet = Resources.Load<StyleSheet>("TSR/ModuleUI");
             _root.styleSheets.Add(styleSheet);
+            styleSheet = Resources.Load<StyleSheet>(EditorGUIUtility.isProSkin ? "TSR/ModuleUI-dark" : "TSR/ModuleUI-light");
+            _root.styleSheets.Add(styleSheet);
             _root.style.flexDirection = FlexDirection.Row;
 
             _modularShaderField = new ObjectField();
@@ -114,7 +116,7 @@ namespace VRLabs.ToonyStandardRebuild
             var leftColumn = new VisualElement();
             leftColumn.name = "LeftColumn";
             var leftColumnTitle = new Label("Clippy");
-            leftColumnTitle.AddToClassList("left-column-title");
+            leftColumnTitle.AddToClassList("column-title");
             leftColumn.Add(leftColumnTitle);
             leftColumn.Add(_modulePropertiesFoldout);
 

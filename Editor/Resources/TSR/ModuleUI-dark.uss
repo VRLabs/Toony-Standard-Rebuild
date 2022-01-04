@@ -1,0 +1,9 @@
+#LeftColumn
+{
+    border-color: #282828;
+}
+
+.column-title
+{
+    background-color: #282828;
+}
