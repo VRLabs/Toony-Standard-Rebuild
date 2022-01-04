@@ -30,6 +30,7 @@ namespace VRLabs.ToonyStandardRebuild
 
         private ObjectField _modularShaderField;
         private ObjectField _shaderModuleField;
+        private Foldout _modulePropertiesFoldout;
         private ObjectInspectorList<SectionUI> _sectionsList;
         private ObjectInspectorList<UVSet> _uvSetList;
 
@@ -44,6 +45,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             var styleSheet = Resources.Load<StyleSheet>("TSR/ModuleUI");
             _root.styleSheets.Add(styleSheet);
+            _root.style.flexDirection = FlexDirection.Row;
 
             _modularShaderField = new ObjectField();
             _shaderModuleField = new ObjectField();
@@ -51,6 +53,10 @@ namespace VRLabs.ToonyStandardRebuild
             _shaderModuleField.style.flexGrow = 1;
 
             string serializedData = null;
+
+            _modulePropertiesFoldout = new Foldout();
+            _modulePropertiesFoldout.text = "Module Property Names";
+
 
             _modularShaderField.objectType = typeof(ModularShader);
             _modularShaderField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>
@@ -62,6 +68,7 @@ namespace VRLabs.ToonyStandardRebuild
 
                 _currentSelectorUsed = false;
                 OpenData(serializedData, e.newValue);
+                SetProperties(((ModularShader)e.newValue).Properties);
             });
 
             _shaderModuleField.objectType = typeof(ShaderModule);
@@ -74,6 +81,7 @@ namespace VRLabs.ToonyStandardRebuild
 
                 _currentSelectorUsed = true;
                 OpenData(serializedData, e.newValue);
+                SetProperties(((ShaderModule)e.newValue).Properties);
             });
 
             _sectionsList = new ObjectInspectorList<SectionUI>("Sections", SectionUIElement.ElementTemplate);
@@ -102,9 +110,22 @@ namespace VRLabs.ToonyStandardRebuild
             view.Add(_sectionsList);
             view.Add(_uvSetList);
             bottomElement.Add(saveButton);
-            _root.Add(topElement);
-            _root.Add(view);
-            _root.Add(bottomElement);
+
+            var leftColumn = new VisualElement();
+            leftColumn.name = "LeftColumn";
+            var leftColumnTitle = new Label("Clippy");
+            leftColumnTitle.AddToClassList("left-column-title");
+            leftColumn.Add(leftColumnTitle);
+            leftColumn.Add(_modulePropertiesFoldout);
+
+            var centerColumn = new VisualElement();
+            centerColumn.name = "CenterColumn";
+            centerColumn.Add(topElement);
+            centerColumn.Add(view);
+            centerColumn.Add(bottomElement);
+
+            _root.Add(leftColumn);
+            _root.Add(centerColumn);
         }
 
         private void SaveData()
@@ -180,6 +201,39 @@ namespace VRLabs.ToonyStandardRebuild
             _sectionsList.UpdateList();
             _uvSetList.SetEnabled(enableSectionList);
             _uvSetList.UpdateList();
+        }
+
+        private void SetProperties(IEnumerable<Property> props)
+        {
+            _modulePropertiesFoldout.Clear();
+            foreach (var prop in props)
+            {
+                if (string.IsNullOrEmpty(prop.Name))
+                    continue;
+
+                _modulePropertiesFoldout.Add(new NameCopyElement(prop.Name, prop.Type));
+            }
+        }
+    }
+
+    public class NameCopyElement : VisualElement
+    {
+        public NameCopyElement(string name, string type)
+        {
+            var nameLabel = new Label(name);
+            nameLabel.AddToClassList("copy-name");
+            var typeLabel = new Label($"({type})");
+            typeLabel.AddToClassList("copy-type");
+            var button = new Button();
+            button.AddToClassList("copy-button");
+            var buttonContent = new VisualElement();
+
+            button.clicked += () => GUIUtility.systemCopyBuffer = name;
+
+            Add(nameLabel);
+            Add(typeLabel);
+            Add(button);
+            button.Add(buttonContent);
         }
     }
 }

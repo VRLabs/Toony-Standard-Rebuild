@@ -8,3 +8,56 @@
     margin-bottom: 4px;
     border-width: 1px;
 }
+#LeftColumn
+{
+    width: 30%;
+    margin: 4px;
+    border-width: 2px;
+    border-color: #282828;
+    
+}
+
+#CenterColumn
+{
+    width: 70%;
+}
+
+.left-column-title
+{
+    -unity-font-style: bold;
+    background-color: #282828;
+    padding: 0px 4px 4px 4px;
+}
+
+NameCopyElement
+{
+    flex-direction: Row;
+}
+
+.copy-button>VisualElement
+{
+    background-image: resource("Clipboard");
+    margin: 2px 3px 2px 3px;
+    width: 12px;
+    height: 16px;
+}
+.copy-button
+{
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.copy-name
+{
+    flex-grow: 1;
+    -unity-text-align: middle-left; 
+}
+
+.copy-type
+{
+    font-style: italic;
+    font-size: 9px;
+    color: gray;
+    -unity-text-align: middle-right; 
+}
