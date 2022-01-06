@@ -103,7 +103,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             _content.Clear();
             _contentChilden.Clear();
             
-            int maxCounter = 0;
             for (int index = Functions.Count - 1; index >= 0; index--)
             {
                 FunctionItem function = Functions[index];
@@ -587,7 +586,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 {
                     functionViewer.SelectedItem = item.Function;
                     moduleViewer.SelectedItem = item.Row.Module;
-                    templateViewer.SelectedItem = item.Function.ShaderFunctionCode.Template;
+                    templateViewer.SelectedItem = item.Function.ShaderFunctionCode == null ? null : item.Function.ShaderFunctionCode.Template;
 
                     functionViewer.OnVariableSelected = variable =>
                     {

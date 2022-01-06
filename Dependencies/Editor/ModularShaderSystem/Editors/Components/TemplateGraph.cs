@@ -174,6 +174,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             
             edge.input.Connect(edge);
             edge.output.Connect(edge);
+            edge.SetEnabled(false);
             Add(edge);
         }
     }
@@ -212,6 +213,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(string));
                 Input.portName = key;
                 Input.portColor = Color.cyan;
+                Input.edgeConnector.activators.Clear();
                 inputContainer.Add(Input);
             }
 
@@ -222,6 +224,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 string sanitizedKeyword = keyword.Replace("#K#", "").Replace("#KI#", "");
                 port.portName = sanitizedKeyword;
                 port.portColor = Color.cyan;
+                port.edgeConnector.activators.Clear();
                 Outputs.Add(sanitizedKeyword, port);
                 outputContainer.Add(port);
             }
@@ -271,6 +274,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             var viewer = new CodeViewElement();
             viewer.Text = Text;
             viewer.StretchToParentSize();
+            var darkThemeStyleSheet = EditorGUIUtility.Load("StyleSheets/Generated/DefaultCommonDark_inter.uss.asset") as StyleSheet;
+            rootVisualElement.styleSheets.Add(darkThemeStyleSheet);
             rootVisualElement.Add(viewer);
         }
     }
