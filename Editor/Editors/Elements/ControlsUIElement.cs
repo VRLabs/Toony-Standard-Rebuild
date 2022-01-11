@@ -3,8 +3,6 @@ using System.Linq;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
-using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
-using VRLabs.ToonyStandardRebuild.SSICustomControls;
 
 namespace VRLabs.ToonyStandardRebuild
 {

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
-using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
-using VRLabs.ToonyStandardRebuild.SSICustomControls;
 
 namespace VRLabs.ToonyStandardRebuild
 {
