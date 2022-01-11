@@ -137,12 +137,12 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections
         
         public IEnumerable<OrderedSection> GetControlList() => Controls;
 
-        public void AddControl(OrderedSection control) => Controls.Add(control);
+        public void AddControl(OrderedSection control, string alias = "") => Controls.AddControl(control, alias);
 
-        void IControlContainer.AddControl(SimpleControl control)
+        void IControlContainer.AddControl(SimpleControl control, string alias = "")
         {
             if(control is OrderedSection section)
-                Controls.Add(section);
+                Controls.AddControl(section, alias);
         }
 
         IEnumerable<SimpleControl> IControlContainer.GetControlList() => Controls;

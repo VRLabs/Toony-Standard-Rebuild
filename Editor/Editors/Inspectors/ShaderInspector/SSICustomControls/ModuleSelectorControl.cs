@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 
@@ -78,5 +79,21 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
                 Property.floatValue = _indexes[selected];
             }
         }
+    }
+    
+    public class ModuleSelectorControlInstancer : IControlInstancer
+    {
+        public Type InstanceType => typeof(ModuleSelectorControl);
+        public bool CanHaveChildControls => false;
+        
+        public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
+        {
+            uvSet = null;
+            if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
+                throw new TypeAccessException("The parameter given was not of the right type");
+            return parentControl.AddModuleSelectorControl((string)uiAsset.Parameters[0], shader, uiAsset.AppendAfter).Alias(uiAsset.Name);
+        }
+        
+        public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ModuleSelectorControlUIElement(uiAsset.Parameters);
     }
 }

@@ -20,7 +20,7 @@ namespace VRLabs.ToonyStandardRebuild
         private string _computeSetting;
 
         private List<object> _parameters;
-        public TextureGeneratorControlUIElement(List<object> parameters)
+        public TextureGeneratorControlUIElement(List<object> parameters, List<ControlUI> controls)
         {
             _parameters = parameters;
 
@@ -28,6 +28,8 @@ namespace VRLabs.ToonyStandardRebuild
             _firstExtraField = new TextField("First extra property");
             _secondExtraField = new TextField("Second extra property");
             _uvSetField = new TextField("UV Set ID");
+            var controlsList = new ObjectInspectorList<ControlUI>("Settings Controls", ControlsUIElement.ElementTemplate);
+            controlsList.Items = controls;
             _computeShader = new ObjectField("Compute shader");
             _computeShader.objectType = typeof(ComputeShader);
             var customCompute = new Toggle("Custom compute shader");
@@ -102,6 +104,7 @@ namespace VRLabs.ToonyStandardRebuild
             Add(_firstExtraField);
             Add(_secondExtraField);
             Add(_uvSetField);
+            Add(controlsList);
             Add(customCompute);
             Add(_computeShader);
             Add(_computeSettingsButton);

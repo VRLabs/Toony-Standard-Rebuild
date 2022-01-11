@@ -39,4 +39,11 @@ MonoBehaviour:
     Queue: 300
     TemplateKeywords: []
   Functions: []
-  AdditionalSerializedData: 
+  AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
+    Assembly-CSharp-Editor\",\r\n    \"Name\": \"Helper Functions\",\r\n    \"Sections\":
+    {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 0,\r\n       
+    \"$rcontent\": [\r\n        ]\r\n    },\r\n    \"UVSets\": {\r\n        \"$id\":
+    2,\r\n        \"$type\": \"2|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UVSet,
+    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 0,\r\n       
+    \"$rcontent\": [\r\n        ]\r\n    }\r\n}","unityGUIDReferences":[]}'

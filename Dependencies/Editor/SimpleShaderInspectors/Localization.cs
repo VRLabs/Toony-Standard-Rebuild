@@ -17,7 +17,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             else
                 localizationFile = new LocalizationFile();
 
-            List<PropertyInfo> missingInfo = SetPropertiesLocalization(controls, localizationFile.Properties, null, recursive).ToList();
+            List<PropertyInfo> missingInfo = SetPropertiesLocalization(controls, localizationFile.Properties, recursive).ToList();
 
             if (missingInfo.Count > 0 && writeIfNotFound)
             {
@@ -36,7 +36,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             else
                 localizationFile = new LocalizationFile();
 
-            List<PropertyInfo> missingInfo = SetPropertiesLocalization(new []{control}, localizationFile.Properties, null, recursive).ToList();
+            List<PropertyInfo> missingInfo = SetPropertiesLocalization(new []{control}, localizationFile.Properties, recursive).ToList();
 
             if (missingInfo.Count > 0 && writeIfNotFound)
             {
@@ -46,9 +46,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             }
         }
 
-        private static List<PropertyInfo> SetPropertiesLocalization(IEnumerable<SimpleControl> controls, PropertyInfo[] propertyInfos, List<PropertyInfo> missingInfo, bool recursive = true)
+        private static IEnumerable<PropertyInfo> SetPropertiesLocalization(IEnumerable<SimpleControl> controls, PropertyInfo[] propertyInfos, bool recursive = true)
         {
-            if(missingInfo == null) missingInfo = new List<PropertyInfo>();
+            List<PropertyInfo> missingInfo = new List<PropertyInfo>();
             foreach (var control in controls)
             {
                 var selectedInfo = propertyInfos.FindPropertyByName(control.ControlAlias) ?? missingInfo.FindPropertyByName(control.ControlAlias);
@@ -88,7 +88,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                         }
 
                     if(control is IControlContainer container)
-                        if (recursive) missingInfo = SetPropertiesLocalization(container.GetControlList(), propertyInfos, missingInfo);
+                        if (recursive) missingInfo.AddRange(SetPropertiesLocalization(container.GetControlList(), propertyInfos));
                 
             }
             return missingInfo;

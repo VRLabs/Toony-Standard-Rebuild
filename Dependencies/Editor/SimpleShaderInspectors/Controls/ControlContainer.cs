@@ -18,14 +18,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 control.DrawControl(materialEditor);
         }
         
-        public void AddControl(SimpleControl control)
-        {
-            Controls.Add(control);
-        }
-        
-        public IEnumerable<SimpleControl> GetControlList()
-        {
-            return Controls;
-        }
+        public void AddControl(SimpleControl control, string alias = "") => Controls.AddControl(control, alias);
+
+        public IEnumerable<SimpleControl> GetControlList() => Controls;
     }
 }

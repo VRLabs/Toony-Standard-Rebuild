@@ -176,7 +176,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                 Application.OpenURL("https://github.com/VRLabs/SimpleShaderInspectors");
         }
         
-        public void AddControl(SimpleControl control) => Controls.Add(control);
+        public void AddControl(SimpleControl control, string alias = "") => Controls.AddControl(control, alias);
         
         public IEnumerable<SimpleControl> GetControlList() => Controls;
     }

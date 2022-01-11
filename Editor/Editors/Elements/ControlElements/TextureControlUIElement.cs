@@ -5,12 +5,14 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public class TextureControlUIElement : VisualElement
     {
-        public TextureControlUIElement(List<object> parameters)
+        public TextureControlUIElement(List<object> parameters, List<ControlUI> controls)
         {
             var textureNameField = new TextField("Texture name");
             var firstExtraField = new TextField("First extra property");
             var secondExtraField = new TextField("Second extra property");
             var uvSetField = new TextField("UV Set ID");
+            var controlsList = new ObjectInspectorList<ControlUI>("Settings Controls", ControlsUIElement.ElementTemplate);
+            controlsList.Items = controls;
 
             if (parameters.Count != 4)
             {
@@ -45,6 +47,7 @@ namespace VRLabs.ToonyStandardRebuild
             Add(firstExtraField);
             Add(secondExtraField);
             Add(uvSetField);
+            Add(controlsList);
         }
     }
 }

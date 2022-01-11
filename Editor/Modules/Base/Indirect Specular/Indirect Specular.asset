@@ -112,60 +112,66 @@ MonoBehaviour:
     \"$rcontent\": [\r\n                        {\r\n                           
     \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
     Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Indirect
-    fallback mode\",\r\n                            \"ControlType\": 11,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 5,\r\n                               
-    \"$type\": \"5|System.Collections.Generic.List`1[[System.Object, mscorlib]],
-    mscorlib\",\r\n                                \"$rlength\": 1,\r\n                               
+    fallback mode\",\r\n                            \"AppendAfter\": null,\r\n                           
+    \"UIControlType\": {\r\n                                \"$id\": 5,\r\n                               
+    \"$type\": \"5|System.RuntimeType, mscorlib\",\r\n                               
+    \"VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl, Assembly-CSharp-Editor\"\r\n                           
+    },\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 6,\r\n                                \"$type\": \"6|System.Collections.Generic.List`1[[System.Object,
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 1,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 6,\r\n                                        \"$type\": \"6|System.String,
+    \"$id\": 7,\r\n                                        \"$type\": \"7|System.String,
     mscorlib\",\r\n                                        \"_IndirectFallbackMode\"\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 7,\r\n                               
+    \"Controls\": {\r\n                                \"$id\": 8,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 8,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Indirect override\",\r\n                            \"ControlType\":
-    12,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 9,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 3,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 10,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_IndirectOverride\"\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 11,\r\n                                        \"$type\": \"7|System.Single,
-    mscorlib\",\r\n                                        0\r\n                                   
-    },\r\n                                    {\r\n                                       
+    \"$id\": 9,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Indirect override\",\r\n                            \"AppendAfter\":
+    null,\r\n                            \"UIControlType\": {\r\n                               
+    \"$id\": 10,\r\n                                \"$type\": 5,\r\n                               
+    \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.ToggleControl,
+    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 11,\r\n                               
+    \"$type\": 6,\r\n                                \"$rlength\": 3,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
     \"$id\": 12,\r\n                                        \"$type\": 7,\r\n                                       
-    1\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 13,\r\n                               
+    \"_IndirectOverride\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 13,\r\n                                       
+    \"$type\": \"8|System.Single, mscorlib\",\r\n                                       
+    0\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 14,\r\n                                       
+    \"$type\": 8,\r\n                                        1\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 15,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
-    \"OnSectionDisableData\": {\r\n                    \"$id\": 14,\r\n                   
-    \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
-    \"FloatProperties\": {\r\n                        \"$id\": 15,\r\n                       
-    \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 16,\r\n                   
+    \"$type\": \"9|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
+    \"FloatProperties\": {\r\n                        \"$id\": 17,\r\n                       
+    \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 1,\r\n                        \"$rcontent\": [\r\n                           
-    {\r\n                                \"$id\": 16,\r\n                               
-    \"$type\": \"10|VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single, mscorlib]],
+    {\r\n                                \"$id\": 18,\r\n                               
+    \"$type\": \"11|VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single, mscorlib]],
     Assembly-CSharp-Editor\",\r\n                                \"Name\": \"_IndirectFallbackMode\",\r\n                               
     \"Value\": -1\r\n                            }\r\n                        ]\r\n                   
     },\r\n                    \"ColorProperties\": {\r\n                        \"$id\":
-    17,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    19,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 18,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    \"$id\": 20,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 19,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    \"$id\": 21,\r\n                        \"$type\": \"14|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 20,\r\n                        \"$type\": \"14|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    \"$id\": 22,\r\n                        \"$type\": \"15|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   

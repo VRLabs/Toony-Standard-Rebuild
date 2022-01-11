@@ -12,12 +12,14 @@ namespace VRLabs.ToonyStandardRebuild
         
         private List<object> _parameters;
 
-        public GradientTextureControlUIElement(List<object> parameters)
+        public GradientTextureControlUIElement(List<object> parameters, List<ControlUI> controls)
         {
             _parameters = parameters;
             
             _textureNameField = new TextField("Texture name");
             _colorPropertyField = new TextField("Color property");
+            var controlsList = new ObjectInspectorList<ControlUI>("Settings Controls", ControlsUIElement.ElementTemplate);
+            controlsList.Items = controls;
             var useMinMax = new Toggle("Use min-max values");
             _minColorPropertyField = new TextField("Min Color property");
             _maxColorPropertyField = new TextField("Max Color property");
@@ -69,6 +71,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             Add(_textureNameField);
             Add(_colorPropertyField);
+            Add(controlsList);
             Add(useMinMax);
             Add(_minColorPropertyField);
             Add(_maxColorPropertyField);

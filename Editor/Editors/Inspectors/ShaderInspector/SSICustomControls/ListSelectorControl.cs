@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 
 namespace VRLabs.ToonyStandardRebuild.SSICustomControls
@@ -57,5 +59,23 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
                 _items[selected].PropsOnSelected.UpdateMaterials(Inspector.Materials);
             }
         }
+    }
+    
+    public class ListSelectorControlInstancer : IControlInstancer
+    {
+        public Type InstanceType => typeof(ListSelectorControl);
+        public bool CanHaveChildControls => false;
+        
+        public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
+        {
+            uvSet = null;
+            if (uiAsset.Parameters.Count < 2 || !(uiAsset.Parameters[0] is string) ||
+                !(uiAsset.Parameters[1] is List<ListSelectorControl.ListSelectorItem>))
+                throw new TypeAccessException("The parameter given was not of the right type");
+            return parentControl.AddListSelectorControl((string)uiAsset.Parameters[0], (List<ListSelectorControl.ListSelectorItem>)uiAsset.Parameters[1],
+                uiAsset.AppendAfter).Alias(uiAsset.Name);
+        }
+        
+        public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ListSelectorControlUIElement(uiAsset.Parameters);
     }
 }

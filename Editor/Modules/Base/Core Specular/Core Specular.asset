@@ -264,115 +264,128 @@ MonoBehaviour:
     \"$rcontent\": [\r\n                        {\r\n                           
     \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
     Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Metallic\",\r\n                           
-    \"ControlType\": 2,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 5,\r\n                                \"$type\": \"5|System.Collections.Generic.List`1[[System.Object,
-    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 1,\r\n                               
+    \"AppendAfter\": null,\r\n                            \"UIControlType\": {\r\n                               
+    \"$id\": 5,\r\n                                \"$type\": \"5|System.RuntimeType,
+    mscorlib\",\r\n                                \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.PropertyControl,
+    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 6,\r\n                               
+    \"$type\": \"6|System.Collections.Generic.List`1[[System.Object, mscorlib]],
+    mscorlib\",\r\n                                \"$rlength\": 1,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 6,\r\n                                        \"$type\": \"6|System.String,
+    \"$id\": 7,\r\n                                        \"$type\": \"7|System.String,
     mscorlib\",\r\n                                        \"_Metallic\"\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 7,\r\n                               
+    \"Controls\": {\r\n                                \"$id\": 8,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 8,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Smoothness\",\r\n                            \"ControlType\": 2,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 9,\r\n                               
-    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
-    \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 10,\r\n                                        \"$type\": 6,\r\n                                       
-    \"_Glossiness\"\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 11,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 12,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Specular\",\r\n                            \"ControlType\": 2,\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 13,\r\n                               
-    \"$type\": 5,\r\n                                \"$rlength\": 1,\r\n                               
-    \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 14,\r\n                                        \"$type\": 6,\r\n                                       
-    \"_Specular\"\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 15,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 16,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Specular Tint\",\r\n                            \"ControlType\":
-    5,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 17,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 4,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 18,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_SpecularTintTexture\"\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 19,\r\n                                        \"$type\": 6,\r\n                                       
-    \"_SpecularTint\"\r\n                                    },\r\n                                   
-    {\r\n                                        \"$id\": 20,\r\n                                       
-    \"$type\": 6,\r\n                                        \"\"\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 21,\r\n                                        \"$type\": 6,\r\n                                       
-    \"BASESET\"\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 22,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 23,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Tint Replaces Color\",\r\n                            \"ControlType\":
-    12,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 24,\r\n                                \"$type\": 5,\r\n                               
-    \"$rlength\": 3,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 25,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_ReplaceSpecular\"\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 26,\r\n                                        \"$type\": \"7|System.Single,
-    mscorlib\",\r\n                                        0\r\n                                   
-    },\r\n                                    {\r\n                                       
-    \"$id\": 27,\r\n                                        \"$type\": 7,\r\n                                       
-    1\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 28,\r\n                               
-    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
-    \"$rcontent\": [\r\n                                ]\r\n                           
-    }\r\n                        },\r\n                        {\r\n                           
-    \"$id\": 29,\r\n                            \"$type\": 4,\r\n                           
-    \"Name\": \"Specular mode\",\r\n                            \"ControlType\":
-    11,\r\n                            \"Parameters\": {\r\n                               
-    \"$id\": 30,\r\n                                \"$type\": 5,\r\n                               
+    \"$id\": 9,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Smoothness\",\r\n                            \"AppendAfter\": null,\r\n                           
+    \"UIControlType\": $iref:5,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 10,\r\n                                \"$type\": 6,\r\n                               
     \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
-    {\r\n                                        \"$id\": 31,\r\n                                       
-    \"$type\": 6,\r\n                                        \"_SpecularMode\"\r\n                                   
+    {\r\n                                        \"$id\": 11,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_Glossiness\"\r\n                                   
     }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 32,\r\n                               
+    \"Controls\": {\r\n                                \"$id\": 12,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 13,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Specular\",\r\n                            \"AppendAfter\": null,\r\n                           
+    \"UIControlType\": $iref:5,\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 14,\r\n                                \"$type\": 6,\r\n                               
+    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 15,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_Specular\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 16,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 17,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Specular Tint\",\r\n                            \"AppendAfter\":
+    null,\r\n                            \"UIControlType\": {\r\n                               
+    \"$id\": 18,\r\n                                \"$type\": 5,\r\n                               
+    \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.TextureControl,
+    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 19,\r\n                               
+    \"$type\": 6,\r\n                                \"$rlength\": 4,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 20,\r\n                                        \"$type\": 7,\r\n                                       
+    \"_SpecularTintTexture\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 21,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_SpecularTint\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 22,\r\n                                        \"$type\": 7,\r\n                                       
+    \"\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 23,\r\n                                       
+    \"$type\": 7,\r\n                                        \"BASESET\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 24,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 25,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Tint Replaces Color\",\r\n                            \"AppendAfter\":
+    null,\r\n                            \"UIControlType\": {\r\n                               
+    \"$id\": 26,\r\n                                \"$type\": 5,\r\n                               
+    \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.ToggleControl,
+    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
+    \"Parameters\": {\r\n                                \"$id\": 27,\r\n                               
+    \"$type\": 6,\r\n                                \"$rlength\": 3,\r\n                               
+    \"$rcontent\": [\r\n                                    {\r\n                                       
+    \"$id\": 28,\r\n                                        \"$type\": 7,\r\n                                       
+    \"_ReplaceSpecular\"\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 29,\r\n                                       
+    \"$type\": \"8|System.Single, mscorlib\",\r\n                                       
+    0\r\n                                    },\r\n                                   
+    {\r\n                                        \"$id\": 30,\r\n                                       
+    \"$type\": 8,\r\n                                        1\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 31,\r\n                               
+    \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
+    \"$rcontent\": [\r\n                                ]\r\n                           
+    }\r\n                        },\r\n                        {\r\n                           
+    \"$id\": 32,\r\n                            \"$type\": 4,\r\n                           
+    \"Name\": \"Specular mode\",\r\n                            \"AppendAfter\":
+    null,\r\n                            \"UIControlType\": {\r\n                               
+    \"$id\": 33,\r\n                                \"$type\": 5,\r\n                               
+    \"VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl, Assembly-CSharp-Editor\"\r\n                           
+    },\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 34,\r\n                                \"$type\": 6,\r\n                               
+    \"$rlength\": 1,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 35,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_SpecularMode\"\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 36,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
-    \"OnSectionDisableData\": {\r\n                    \"$id\": 33,\r\n                   
-    \"$type\": \"8|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
-    \"FloatProperties\": {\r\n                        \"$id\": 34,\r\n                       
-    \"$type\": \"9|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
+    \"OnSectionDisableData\": {\r\n                    \"$id\": 37,\r\n                   
+    \"$type\": \"9|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
+    \"FloatProperties\": {\r\n                        \"$id\": 38,\r\n                       
+    \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 1,\r\n                        \"$rcontent\": [\r\n                           
-    {\r\n                                \"$id\": 35,\r\n                               
-    \"$type\": \"10|VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single, mscorlib]],
+    {\r\n                                \"$id\": 39,\r\n                               
+    \"$type\": \"11|VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single, mscorlib]],
     Assembly-CSharp-Editor\",\r\n                                \"Name\": \"_SpecularMode\",\r\n                               
     \"Value\": -1\r\n                            }\r\n                        ]\r\n                   
     },\r\n                    \"ColorProperties\": {\r\n                        \"$id\":
-    36,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
+    40,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
-    \"$id\": 37,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
+    \"$id\": 41,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
     UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
-    \"$id\": 38,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
+    \"$id\": 42,\r\n                        \"$type\": \"14|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
-    \"$id\": 39,\r\n                        \"$type\": \"14|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
+    \"$id\": 43,\r\n                        \"$type\": \"15|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
     mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   

@@ -80,7 +80,7 @@ namespace VRLabs.ToonyStandardRebuild
         public Material[] Materials { get; set; }
         public Shader Shader { get; set; }
 
-        public void AddControl(SimpleControl control) => Controls.Add(control);
+        public void AddControl(SimpleControl control, string alias = "") => Controls.AddControl(control, alias);
 
         public IEnumerable<SimpleControl> GetControlList() => Controls;
 
@@ -301,7 +301,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 if (uvSetControl is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv1" })).Alias(prop.ControlAlias + "_UV");
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).Alias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
                     loadedUVControls.Add((key, uv));
                 }
