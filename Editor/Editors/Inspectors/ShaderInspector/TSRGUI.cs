@@ -265,10 +265,8 @@ namespace VRLabs.ToonyStandardRebuild
 
             if (_isOptimisedShader) return;
             if (Materials[0].shader == Shader.Find(shaderName)) return;
-
-            //TODO: make a simpleShaderInspectors method to set multiple materials at once
-            foreach (Material material in Materials)
-                material.shader = Shader.Find(shaderName);
+            
+            Materials.SetShader(Shader.Find(shaderName));
         }
 
         private void LoadModules(List<ShaderModule> modules, List<(string, UVSetSelectorControl)> loadedUVControls)
@@ -806,11 +804,9 @@ namespace VRLabs.ToonyStandardRebuild
             }
             else
             {
-                //TODO: use SSI implementation for multiple shader swaps
                 if (GUILayout.Button("Revert to main shader"))
                 {
-                    foreach (Material material in Materials)
-                        material.shader = Shader.Find(ModularShader.ShaderPath);
+                    Materials.SetShader(Shader.Find(ModularShader.ShaderPath));
 
                     _isFirstLoop = true;
                 }
@@ -862,10 +858,8 @@ namespace VRLabs.ToonyStandardRebuild
             _previousEnablerValues = currentValues;
             string variantName = ShaderGenerator.GetVariantCode(_enablers);
             string shaderName = !string.IsNullOrEmpty(variantName) ? $"Hidden/{ModularShader.ShaderPath}-v{variantName}" : $"{ModularShader.ShaderPath}";
-
-            //TODO: make a simpleShaderInspectors method to set multiple materials at once
-            foreach (Material material in Materials)
-                material.shader = Shader.Find(shaderName);
+            
+            Materials.SetShader(Shader.Find(shaderName));
         }
 
         private void UpdateShowSettingsUI()

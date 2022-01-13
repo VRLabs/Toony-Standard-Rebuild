@@ -24,6 +24,12 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                     return true;
             return false;
         }
+        
+        public static void SetShader(this IEnumerable<Material> materials, Shader shader)
+        {
+            foreach (Material m in materials)
+                m.shader = shader;
+        }
 
         public static void SetOverrideTag(this IEnumerable<Material> materials, string tagName, string value)
         {
