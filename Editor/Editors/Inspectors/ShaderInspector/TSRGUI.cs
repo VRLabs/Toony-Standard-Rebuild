@@ -301,7 +301,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 if (uvSetControl is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).Alias(prop.ControlAlias + "_UV");
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
                     loadedUVControls.Add((key, uv));
                 }
@@ -321,7 +321,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 if (uvSetControl is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).Alias(prop.ControlAlias + "_UV");
+                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
                     loadedUVControls.Add((key, uv));
                 }
@@ -403,7 +403,7 @@ namespace VRLabs.ToonyStandardRebuild
                 var section = (Section)_staticSections.Controls.FirstOrDefault(x => x.ControlAlias.Equals(moduleSection.SectionName));
                 if (section == null)
                 {
-                    section = _staticSections.AddSection().Alias(moduleSection.SectionName);
+                    section = _staticSections.AddSection().WithAlias(moduleSection.SectionName);
                     loadedControls.Add(section);
                 }
 
@@ -425,7 +425,7 @@ namespace VRLabs.ToonyStandardRebuild
                         try
                         {
                             FindProperty(moduleSection.ActivatePropertyName, _props);
-                            section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName, moduleSection.EnableValue).Alias(moduleSection.SectionName);
+                            section = _mainOrderedSection.AddOrderedSection(moduleSection.ActivatePropertyName, moduleSection.EnableValue).WithAlias(moduleSection.SectionName);
                             loadedControls.Add(section);
                             _sectionDefaults.Add(section, new UpdateData());
                         }

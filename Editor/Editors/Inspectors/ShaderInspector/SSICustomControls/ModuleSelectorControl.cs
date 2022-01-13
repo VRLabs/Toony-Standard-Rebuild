@@ -91,7 +91,7 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
             uvSet = null;
             if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddModuleSelectorControl((string)uiAsset.Parameters[0], shader, uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddModuleSelectorControl((string)uiAsset.Parameters[0], shader, uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
         
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ModuleSelectorControlUIElement(uiAsset.Parameters);

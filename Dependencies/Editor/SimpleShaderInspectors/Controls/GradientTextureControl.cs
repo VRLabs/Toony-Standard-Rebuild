@@ -34,17 +34,17 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             "GradientCancelButton"
         };
 
-        [Chainable] public GUIStyle GradientButtonStyle { get; set; }
+        [FluentSet] public GUIStyle GradientButtonStyle { get; set; }
         
-        [Chainable] public GUIStyle GradientSaveButtonStyle { get; set; }
+        [FluentSet] public GUIStyle GradientSaveButtonStyle { get; set; }
         
-        [Chainable] public GUIStyle GradientEditorStyle { get; set; }
+        [FluentSet] public GUIStyle GradientEditorStyle { get; set; }
 
-        [Chainable] public Color GradientButtonColor { get; set; }
+        [FluentSet] public Color GradientButtonColor { get; set; }
         
-        [Chainable] public Color GradientSaveButtonColor { get; set; }
+        [FluentSet] public Color GradientSaveButtonColor { get; set; }
         
-        [Chainable] public Color GradientEditorColor { get; set; }
+        [FluentSet] public Color GradientEditorColor { get; set; }
 
         public AdditionalLocalization[] AdditionalContent { get; set; }
 

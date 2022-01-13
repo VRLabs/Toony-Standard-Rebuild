@@ -9,7 +9,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
     {
         public List<SimpleControl> Controls { get; set; }
         
-        [Chainable]
+        [FluentSet]
         public bool Indent { get; set; }
         
         protected readonly float EnableValue;

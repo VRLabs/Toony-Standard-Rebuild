@@ -5,7 +5,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
     public class LabelControl : SimpleControl
     {
-        [Chainable] public GUIStyle LabelStyle { get; set; }
+        [FluentSet] public GUIStyle LabelStyle { get; set; }
 
         public LabelControl(string alias) : base(alias)
         {

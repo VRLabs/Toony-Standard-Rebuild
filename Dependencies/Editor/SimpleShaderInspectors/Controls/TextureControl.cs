@@ -18,17 +18,17 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 
         public AdditionalProperty[] AdditionalProperties { get; set; }
 
-        [Chainable] public bool ShowTilingAndOffset { get; set; }
+        [FluentSet] public bool ShowTilingAndOffset { get; set; }
 
-        [Chainable] public bool HasHDRColor { get; set; }
+        [FluentSet] public bool HasHDRColor { get; set; }
 
-        [Chainable] public GUIStyle OptionsButtonStyle { get; set; }
+        [FluentSet] public GUIStyle OptionsButtonStyle { get; set; }
         
-        [Chainable] public GUIStyle OptionsAreaStyle { get; set; }
+        [FluentSet] public GUIStyle OptionsAreaStyle { get; set; }
 
-        [Chainable] public Color OptionsButtonColor { get; set; }
+        [FluentSet] public Color OptionsButtonColor { get; set; }
         
-        [Chainable] public Color OptionsAreaColor { get; set; }
+        [FluentSet] public Color OptionsAreaColor { get; set; }
 
         public TextureControl(string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : base(propertyName)
         {

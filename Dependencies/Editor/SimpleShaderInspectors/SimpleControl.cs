@@ -39,21 +39,21 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
         }
     }
 
-    public static partial class Chainables
+    public static partial class Extensions
     {
-        public static T Alias<T>(this T control, string alias) where T : SimpleControl
+        public static T WithAlias<T>(this T control, string alias) where T : SimpleControl
         {
             control.ControlAlias = alias;
             return control;
         }
 
-        public static T SetVisibility<T>(this T control, bool visible) where T : SimpleControl
+        public static T WithVisibility<T>(this T control, bool visible) where T : SimpleControl
         {
             control.IsVisible = visible;
             return control;
         }
 
-        public static T SetEnabled<T>(this T control, bool enabled) where T : SimpleControl
+        public static T WithEnabled<T>(this T control, bool enabled) where T : SimpleControl
         {
             control.IsEnabled = enabled;
             return control;

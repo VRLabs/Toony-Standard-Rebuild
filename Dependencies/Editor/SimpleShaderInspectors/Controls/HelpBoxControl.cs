@@ -4,9 +4,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
     public class HelpBoxControl : SimpleControl
     {
-        [Chainable] public MessageType BoxType { get; set; }
+        [FluentSet] public MessageType BoxType { get; set; }
         
-        [Chainable] public bool IsWideBox { get; set; }
+        [FluentSet] public bool IsWideBox { get; set; }
         
         public HelpBoxControl(string alias) : base(alias)
         {

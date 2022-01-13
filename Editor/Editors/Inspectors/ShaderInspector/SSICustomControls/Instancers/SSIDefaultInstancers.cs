@@ -46,7 +46,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 2 || !(uiAsset.Parameters[0] is MessageType) || !(uiAsset.Parameters[1] is bool))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddHelpBoxControl(uiAsset.Name, uiAsset.AppendAfter).SetBoxType((MessageType)uiAsset.Parameters[0]).SetIsWideBox((bool)uiAsset.Parameters[1]);
+            return parentControl.AddHelpBoxControl(uiAsset.Name, uiAsset.AppendAfter).WithBoxType((MessageType)uiAsset.Parameters[0]).WithIsWideBox((bool)uiAsset.Parameters[1]);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new HelpBoxControlUIElement(uiAsset.Parameters);
@@ -62,7 +62,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddPropertyControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddPropertyControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new PropetyControlUIElement(uiAsset.Parameters);
@@ -78,7 +78,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 2 || !(uiAsset.Parameters[0] is string) || !(uiAsset.Parameters[1] is bool))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddColorControl((string)uiAsset.Parameters[0], (bool)uiAsset.Parameters[1], uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddColorControl((string)uiAsset.Parameters[0], (bool)uiAsset.Parameters[1], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ColorControlUIElement(uiAsset.Parameters);
@@ -97,7 +97,7 @@ namespace VRLabs.ToonyStandardRebuild
                 !(uiAsset.Parameters[3] is bool) || !(uiAsset.Parameters[4] is bool))
                 throw new TypeAccessException("The parameter given was not of the right type");
             return parentControl.AddVectorControl((string)uiAsset.Parameters[0], (bool)uiAsset.Parameters[1], (bool)uiAsset.Parameters[2], 
-                (bool)uiAsset.Parameters[3], (bool)uiAsset.Parameters[4], uiAsset.AppendAfter).Alias(uiAsset.Name);
+                (bool)uiAsset.Parameters[3], (bool)uiAsset.Parameters[4], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new VectorControlUIElement(uiAsset.Parameters);
@@ -117,7 +117,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             uvSet = (string)uiAsset.Parameters[3];
             return parentControl.AddTextureControl((string)uiAsset.Parameters[0], (string)uiAsset.Parameters[1], 
-                (string)uiAsset.Parameters[2], uiAsset.AppendAfter).Alias(uiAsset.Name).SetShowTilingAndOffset(true);
+                (string)uiAsset.Parameters[2], uiAsset.AppendAfter).WithAlias(uiAsset.Name).WithShowTilingAndOffset(true);
 
         }
 
@@ -146,13 +146,13 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 uvSet = (string)uiAsset.Parameters[3];
                 return parentControl.AddTextureGeneratorControl((string)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
-                    (string)uiAsset.Parameters[2], uiAsset.AppendAfter).Alias(uiAsset.Name).SetShowTilingAndOffset(true);
+                    (string)uiAsset.Parameters[2], uiAsset.AppendAfter).WithAlias(uiAsset.Name).WithShowTilingAndOffset(true);
             }
 
             uvSet = (string)uiAsset.Parameters[5];
             return parentControl.AddTextureGeneratorControl((ComputeShader)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
                 (string)uiAsset.Parameters[2], (string)uiAsset.Parameters[3], (string)uiAsset.Parameters[4],
-                uiAsset.AppendAfter).Alias(uiAsset.Name).SetShowTilingAndOffset(true);
+                uiAsset.AppendAfter).WithAlias(uiAsset.Name).WithShowTilingAndOffset(true);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new TextureGeneratorControlUIElement(uiAsset.Parameters, uiAsset.Controls);
@@ -176,10 +176,10 @@ namespace VRLabs.ToonyStandardRebuild
             }
             if (uiAsset.Parameters.Count < 4)
                 return parentControl.AddGradientTextureControl((string)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
-                    uiAsset.AppendAfter).Alias(uiAsset.Name);
+                    uiAsset.AppendAfter).WithAlias(uiAsset.Name);
             else
                 return parentControl.AddGradientTextureControl((string)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
-                    (string)uiAsset.Parameters[2], (string)uiAsset.Parameters[3], uiAsset.AppendAfter).Alias(uiAsset.Name);
+                    (string)uiAsset.Parameters[2], (string)uiAsset.Parameters[3], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new GradientTextureControlUIElement(uiAsset.Parameters, uiAsset.Controls);
@@ -195,7 +195,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddTilingAndOffsetControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddTilingAndOffsetControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new TilingAndOffsetControlUIElement(uiAsset.Parameters);
@@ -212,7 +212,7 @@ namespace VRLabs.ToonyStandardRebuild
             if (uiAsset.Parameters.Count < 2 || !(uiAsset.Parameters[0] is string) || !(uiAsset.Parameters[1] is float))
                 throw new TypeAccessException("The parameter given was not of the right type");
             return parentControl.AddConditionalControlContainer((string)uiAsset.Parameters[0], (float)uiAsset.Parameters[1], uiAsset.AppendAfter)
-                .Alias(uiAsset.Name).SetIndent(true);
+                .WithAlias(uiAsset.Name).WithIndent(true);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ConditionalControlContainerUIElement(uiAsset.Parameters, uiAsset.Controls);
@@ -230,7 +230,7 @@ namespace VRLabs.ToonyStandardRebuild
                 !(uiAsset.Parameters[1] is float) || !(uiAsset.Parameters[2] is float))
                 throw new TypeAccessException("The parameter given was not of the right type");
             return parentControl.AddToggleControl((string)uiAsset.Parameters[0], (float)uiAsset.Parameters[1],
-                (float)uiAsset.Parameters[2], uiAsset.AppendAfter).Alias(uiAsset.Name);
+                (float)uiAsset.Parameters[2], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ToggleControlUIElement(uiAsset.Parameters);
@@ -248,7 +248,7 @@ namespace VRLabs.ToonyStandardRebuild
                 !(uiAsset.Parameters[1] is float) || !(uiAsset.Parameters[2] is float))
                 throw new TypeAccessException("The parameter given was not of the right type");
             return parentControl.AddToggleListControl((string)uiAsset.Parameters[0], (float)uiAsset.Parameters[1],
-                (float)uiAsset.Parameters[2], uiAsset.AppendAfter).Alias(uiAsset.Name);
+                (float)uiAsset.Parameters[2], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ToggleListControlUIElement(uiAsset.Parameters, uiAsset.Controls);
@@ -264,7 +264,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddKeywordToggleControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddKeywordToggleControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new KeywordToggleControlUIElement(uiAsset.Parameters);
@@ -280,7 +280,7 @@ namespace VRLabs.ToonyStandardRebuild
             uvSet = null;
             if (uiAsset.Parameters.Count < 1 || !(uiAsset.Parameters[0] is string))
                 throw new TypeAccessException("The parameter given was not of the right type");
-            return parentControl.AddKeywordToggleListControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddKeywordToggleListControl((string)uiAsset.Parameters[0], uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new KeywordToggleListControlUIElement(uiAsset.Parameters, uiAsset.Controls);
@@ -294,7 +294,7 @@ namespace VRLabs.ToonyStandardRebuild
         public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
         {
             uvSet = null;
-            return parentControl.AddLightmapEmissionControl(uiAsset.AppendAfter).Alias(uiAsset.Name);
+            return parentControl.AddLightmapEmissionControl(uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
 
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new LightmapEmissionControlUIElement(uiAsset.Parameters);

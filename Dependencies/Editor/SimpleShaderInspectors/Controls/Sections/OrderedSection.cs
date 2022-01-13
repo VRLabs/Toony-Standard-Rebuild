@@ -36,17 +36,17 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections
 
         public string CustomPopupPath => AdditionalContent[0].Content.text.Equals(ControlAlias + "_" + AdditionalContent[0].Name) ? "" : AdditionalContent[0].Content.text;
 
-        [Chainable] public GUIStyle UpIcon { get; set; }
+        [FluentSet] public GUIStyle UpIcon { get; set; }
 
-        [Chainable] public GUIStyle DownIcon { get; set; }
+        [FluentSet] public GUIStyle DownIcon { get; set; }
 
-        [Chainable] public GUIStyle DeleteIcon { get; set; }
+        [FluentSet] public GUIStyle DeleteIcon { get; set; }
 
-        [Chainable] public Color UpColor { get; set; }
+        [FluentSet] public Color UpColor { get; set; }
 
-        [Chainable] public Color DownColor { get; set; }
+        [FluentSet] public Color DownColor { get; set; }
 
-        [Chainable] public Color DeleteColor { get; set; }
+        [FluentSet] public Color DeleteColor { get; set; }
 
         protected float enableValue;
 

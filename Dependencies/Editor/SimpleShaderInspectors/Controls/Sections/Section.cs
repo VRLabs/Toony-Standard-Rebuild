@@ -23,17 +23,17 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections
 
         public bool Show { get; protected set; }
 
-        [Chainable] public GUIStyle LabelStyle { get; set; }
+        [FluentSet] public GUIStyle LabelStyle { get; set; }
 
-        [Chainable] public GUIStyle BackgroundStyle { get; set; }
+        [FluentSet] public GUIStyle BackgroundStyle { get; set; }
 
-        [Chainable] public bool AreControlsInHeader { get; set; }
+        [FluentSet] public bool AreControlsInHeader { get; set; }
 
-        [Chainable] public bool IsPropertyAnimatable { get; set; }
+        [FluentSet] public bool IsPropertyAnimatable { get; set; }
 
-        [Chainable] public bool ShowFoldoutArrow { get; set; }
+        [FluentSet] public bool ShowFoldoutArrow { get; set; }
 
-        [Chainable] public Color BackgroundColor { get; set; }
+        [FluentSet] public Color BackgroundColor { get; set; }
 
         public Section(string propertyName, float hideValue = 0, float showValue = 1) : base(propertyName)
         {

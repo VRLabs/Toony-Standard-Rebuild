@@ -3,7 +3,7 @@ using System;
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class ChainableAttribute : Attribute
+    public class FluentSetAttribute : Attribute
     {}
 
     [AttributeUsage(AttributeTargets.Constructor)]

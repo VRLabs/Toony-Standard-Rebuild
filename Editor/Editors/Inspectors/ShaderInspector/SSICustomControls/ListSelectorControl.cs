@@ -73,7 +73,7 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
                 !(uiAsset.Parameters[1] is List<ListSelectorControl.ListSelectorItem>))
                 throw new TypeAccessException("The parameter given was not of the right type");
             return parentControl.AddListSelectorControl((string)uiAsset.Parameters[0], (List<ListSelectorControl.ListSelectorItem>)uiAsset.Parameters[1],
-                uiAsset.AppendAfter).Alias(uiAsset.Name);
+                uiAsset.AppendAfter).WithAlias(uiAsset.Name);
         }
         
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new ListSelectorControlUIElement(uiAsset.Parameters);

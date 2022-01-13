@@ -38,21 +38,21 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 
         private readonly bool _containsColors;
 
-        [Chainable] public GUIStyle GeneratorButtonStyle { get; set; }
+        [FluentSet] public GUIStyle GeneratorButtonStyle { get; set; }
         
-        [Chainable] public GUIStyle GeneratorSaveButtonStyle { get; set; }
+        [FluentSet] public GUIStyle GeneratorSaveButtonStyle { get; set; }
 
-        [Chainable] public GUIStyle GeneratorStyle { get; set; }
+        [FluentSet] public GUIStyle GeneratorStyle { get; set; }
 
-        [Chainable] public GUIStyle GeneratorInputStyle { get; set; }
+        [FluentSet] public GUIStyle GeneratorInputStyle { get; set; }
 
-        [Chainable] public Color GeneratorButtonColor { get; set; }
+        [FluentSet] public Color GeneratorButtonColor { get; set; }
 
-        [Chainable] public Color GeneratorSaveButtonColor { get; set; }
+        [FluentSet] public Color GeneratorSaveButtonColor { get; set; }
 
-        [Chainable] public Color GeneratorColor { get; set; }
+        [FluentSet] public Color GeneratorColor { get; set; }
 
-        [Chainable] public Color GeneratorInputColor { get; set; }
+        [FluentSet] public Color GeneratorInputColor { get; set; }
 
         public AdditionalLocalization[] AdditionalContent
         {

@@ -5,7 +5,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
     public class ColorControl : PropertyControl
     {
-        [Chainable] public bool ShowAlphaValue { get; set; }
+        [FluentSet] public bool ShowAlphaValue { get; set; }
 
         public Color SelectedColor => Property.colorValue;
 
