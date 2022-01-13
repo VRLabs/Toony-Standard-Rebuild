@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -31,6 +33,8 @@ namespace VRLabs.ToonyStandardRebuild
         private ObjectField _modularShaderField;
         private ObjectField _shaderModuleField;
         private Foldout _modulePropertiesFoldout;
+        private ObjectField _modularShaderAliasesSourceField;
+        private Foldout _modularShaderAliasesFoldout;
         private ObjectInspectorList<SectionUI> _sectionsList;
         private ObjectInspectorList<UVSet> _uvSetList;
 
@@ -51,6 +55,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             _modularShaderField = new ObjectField();
             _shaderModuleField = new ObjectField();
+            _modularShaderAliasesSourceField = new ObjectField();
             _modularShaderField.style.flexGrow = 1;
             _shaderModuleField.style.flexGrow = 1;
 
@@ -58,6 +63,35 @@ namespace VRLabs.ToonyStandardRebuild
 
             _modulePropertiesFoldout = new Foldout();
             _modulePropertiesFoldout.text = "Module Property Names";
+            _modulePropertiesFoldout.AddToClassList("top-foldout");
+            
+            _modularShaderAliasesFoldout = new Foldout();
+            _modularShaderAliasesFoldout.text = "Current Shader Aliases";
+            _modularShaderAliasesFoldout.AddToClassList("top-foldout");
+            
+            _modularShaderAliasesSourceField.AddToClassList("aliases-field");
+            _modularShaderAliasesSourceField.objectType = typeof(ModularShader);
+            _modularShaderAliasesSourceField.RegisterCallback<ChangeEvent<UnityEngine.Object>>(e =>
+            {
+                _modularShaderAliasesFoldout.Clear();
+                var sections = new Dictionary<string, Foldout>();
+                var ms = (ModularShader)e.newValue;
+                if (ms == null) return;
+                var shaderData = DeserializeModuleUI(ms.AdditionalSerializedData);
+                AddElementsFromModuleUI(shaderData, sections);
+
+                foreach (ShaderModule module in ShaderGenerator.FindAllModules(ms))
+                {
+                    shaderData = DeserializeModuleUI(module.AdditionalSerializedData);
+                    AddElementsFromModuleUI(shaderData, sections);
+                }
+
+                foreach (var foldout in sections.Select(x => x.Value).OrderBy(x => x.text))
+                {
+                    _modularShaderAliasesFoldout.Add(foldout);
+                }
+            });
+            
 
 
             _modularShaderField.objectType = typeof(ModularShader);
@@ -114,11 +148,15 @@ namespace VRLabs.ToonyStandardRebuild
             bottomElement.Add(saveButton);
 
             var leftColumn = new VisualElement();
+            var scroll = new ScrollView(ScrollViewMode.Vertical);
             leftColumn.name = "LeftColumn";
             var leftColumnTitle = new Label("Clippy");
             leftColumnTitle.AddToClassList("column-title");
             leftColumn.Add(leftColumnTitle);
-            leftColumn.Add(_modulePropertiesFoldout);
+            leftColumn.Add(scroll);
+            scroll.Add(_modulePropertiesFoldout);
+            scroll.Add(_modularShaderAliasesSourceField);
+            scroll.Add(_modularShaderAliasesFoldout);
 
             var centerColumn = new VisualElement();
             centerColumn.name = "CenterColumn";
@@ -160,28 +198,7 @@ namespace VRLabs.ToonyStandardRebuild
         private void OpenData(string serializedData, UnityEngine.Object newValue)
         {
             bool enableSectionList = false;
-            if (string.IsNullOrWhiteSpace(serializedData))
-            {
-                _ui = new ModuleUI();
-            }
-            else
-            {
-                var data = JsonUtility.FromJson<SerializedUIData>(serializedData);
-                List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
-                foreach (var guid in data.unityGUIDReferences)
-                {
-                    if (string.IsNullOrWhiteSpace(guid))
-                    {
-                        unityObjectReferences.Add(null);
-                    }
-                    else
-                    {
-                        string path = AssetDatabase.GUIDToAssetPath(guid);
-                        unityObjectReferences.Add(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path));
-                    }
-                }
-                _ui = SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
-            }
+            _ui = DeserializeModuleUI(serializedData);
 
             if (!_currentSelectorUsed && newValue != null)
             {
@@ -203,6 +220,56 @@ namespace VRLabs.ToonyStandardRebuild
             _sectionsList.UpdateList();
             _uvSetList.SetEnabled(enableSectionList);
             _uvSetList.UpdateList();
+        }
+
+        private static ModuleUI DeserializeModuleUI(string serializedData)
+        {
+            if (string.IsNullOrWhiteSpace(serializedData))
+            {
+                return new ModuleUI();
+            }
+
+            var data = JsonUtility.FromJson<SerializedUIData>(serializedData);
+            List<UnityEngine.Object> unityObjectReferences = new List<UnityEngine.Object>();
+            foreach (var guid in data.unityGUIDReferences)
+            {
+                if (string.IsNullOrWhiteSpace(guid))
+                {
+                    unityObjectReferences.Add(null);
+                }
+                else
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(guid);
+                    unityObjectReferences.Add(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path));
+                }
+            }
+
+            return SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
+        }
+        
+        private static void AddElementsFromModuleUI(ModuleUI shaderData, Dictionary<string, Foldout> sections)
+        {
+            foreach (var section in shaderData.Sections)
+            {
+                if (!sections.ContainsKey(section.SectionName))
+                {
+                    var f = new Foldout();
+                    f.text = section.SectionName;
+                    sections.Add(section.SectionName, f);
+                }
+
+                AddElementNames(section, section.Controls, sections);
+            }
+        }
+
+        private static void AddElementNames(SectionUI section, IEnumerable<ControlUI> controls, Dictionary<string, Foldout> sections)
+        {
+            foreach (ControlUI control in controls)
+            {
+                sections[section.SectionName].Add(new NameCopyElement(control.Name, control.UIControlType?.Name));
+                if (control.CouldHaveControls())
+                    AddElementNames(section, control.Controls, sections);
+            }
         }
 
         private void SetProperties(IEnumerable<Property> props)

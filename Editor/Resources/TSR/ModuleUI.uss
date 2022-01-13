@@ -58,3 +58,18 @@ NameCopyElement
     color: gray;
     -unity-text-align: middle-right; 
 }
+
+Foldout > Toggle
+{
+    margin-left: -11px;
+}
+
+.aliases-field
+{
+    margin-top: 20px;
+}
+
+.top-foldout
+{
+    margin-left: 15px
+}
