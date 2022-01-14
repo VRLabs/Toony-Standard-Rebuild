@@ -155,7 +155,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     if (_currentDrop == dropArea) _currentDrop = null;
                 }
             });
-
+            
             _listContainer.Add(dropArea);
             _drops.Add(dropArea);
         }
@@ -267,17 +267,15 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     e.StopImmediatePropagation();
                     return;
                 }
-                else
-                {
-                    _list.draggedElement = this;
-                    _list.HighlightDrops();
-                    this.AddToClassList("inspector-list-drag-enabled");
-                }
+
+                _list.draggedElement = this;
+                _list.HighlightDrops();
+                AddToClassList("inspector-list-drag-enabled");
             });
 
             VisualElement buttonsArea = new VisualElement();
 
-            this.RegisterCallback<UnityEngine.UIElements.GeometryChangedEvent>(e =>
+            RegisterCallback<GeometryChangedEvent>(e =>
             {
                 buttonsArea.ClearClassList();
                 if (e.newRect.height > 60)

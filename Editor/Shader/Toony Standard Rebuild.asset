@@ -92,7 +92,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a1474649a9923443b8e9c6a629e5d91, type: 2}
   - {fileID: 11400000, guid: e92b870a515fc36489ddad79a989fefd, type: 2}
   - {fileID: 11400000, guid: 55db9f1d0443cee489437d6194e23a41, type: 2}
-  LockBaseModules: 0
+  LockBaseModules: 1
   LastGeneratedShaders:
   - {fileID: 4800000, guid: 854a2294bb3904740920fa97af7a7696, type: 3}
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
