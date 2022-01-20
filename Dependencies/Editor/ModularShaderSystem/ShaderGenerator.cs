@@ -13,10 +13,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     {
         public static void GenerateShader(string path, ModularShader shader, bool hideVariants = false)
         {
-            GenerateShader(path, shader, null,hideVariants);
+            GenerateShader(path, shader, null, hideVariants);
         }
 
-        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = true)
+        public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = false)
         {
             var modules = FindAllModules(shader);
             
@@ -46,7 +46,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     FreshAssets = freshAssets,
                     FilePath = path,
                     PropertiesBlock = completePropertiesBlock,
-                    AreVariantsHidden = true
+                    AreVariantsHidden = hideVariants
                 });
             }
             
@@ -526,7 +526,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             
             private void WriteFunctionsToKeywords()
             {
-                var keywordedCode = new Dictionary<string,StringBuilder>();
+                var keywordedCode = new Dictionary<string,(StringBuilder, List<TemplateAsset>)>();
 
                 foreach (ShaderFunction function in _reorderedFunctions)
                 {
@@ -536,17 +536,25 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                         foreach (string keyword in function.CodeKeywords)
                         {
                             if (!keywordedCode.ContainsKey(keyword))
-                                keywordedCode.Add(keyword, new StringBuilder());
+                                keywordedCode.Add(keyword, (new StringBuilder(), new List<TemplateAsset>()));
 
-                            if (freshAsset != null) keywordedCode[keyword].AppendLine(freshAsset.Template);
+                            if (freshAsset == null) continue;
+                            (StringBuilder builder, List<TemplateAsset> assets) = keywordedCode[keyword];
+                            if (assets.Contains(freshAsset)) continue;
+                            builder.AppendLine(freshAsset.Template);
+                            assets.Add(freshAsset);
                         }
                     }
                     else
                     {
                         if (!keywordedCode.ContainsKey(MSSConstants.DEFAULT_CODE_KEYWORD))
-                            keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, new StringBuilder());
+                            keywordedCode.Add(MSSConstants.DEFAULT_CODE_KEYWORD, (new StringBuilder(), new List<TemplateAsset>()));
                         
-                        if (freshAsset != null) keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD].AppendLine(freshAsset.Template);
+                        if (freshAsset == null) continue;
+                        (StringBuilder builder, List<TemplateAsset> assets) = keywordedCode[MSSConstants.DEFAULT_CODE_KEYWORD];
+                        if (assets.Contains(freshAsset)) continue;
+                        builder.AppendLine(freshAsset.Template);
+                        assets.Add(freshAsset);
                     }
                 }
 
@@ -554,7 +562,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 {
                     MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{code.Key}\s", RegexOptions.Multiline);
                     for (int i = m.Count - 1; i >= 0; i--)
-                        ShaderFile.Insert(m[i].Index, code.Value.ToString());   
+                        ShaderFile.Insert(m[i].Index, code.Value.Item1.ToString());   
                 }
             }
 
@@ -648,10 +656,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                             continue;
                         }
 
-                        if (line.StartsWith("}"))
+                        if (!line.StartsWith("//") && (line.StartsWith("}") || line.EndsWith("}") && !line.Contains("{")))
                             tabs--;
                         finalFile.AppendLineTabbed(tabs, line);
-                        if (line.StartsWith("{") || line.EndsWith("{"))
+                        if (!line.StartsWith("//") && (line.StartsWith("{") || line.EndsWith("{")))
                             tabs++;
                     }
                 }

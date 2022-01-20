@@ -9,11 +9,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     {
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hashCode =  (Name != null ? Name.GetHashCode() : 0);
-                return hashCode;
-            }
+            int hashCode =  (Name != null ? Name.GetHashCode() : 0);
+            return hashCode;
         }
 
         public string Name;

@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 {
     [CustomEditor(typeof(TemplateAsset))]
     public class TemplateAssetEditor : Editor

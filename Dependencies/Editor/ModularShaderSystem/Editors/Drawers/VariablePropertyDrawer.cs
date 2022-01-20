@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 {
     [CustomPropertyDrawer(typeof(Variable))]
     public class VariablePropertyDrawer : PropertyDrawer
@@ -23,6 +23,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foldout.Add(template);
             _root.Add(foldout);
             
+            var nameField = template.Q<TextField>("Name");
+            nameField.RegisterValueChangedCallback(evt => foldout.text = evt.newValue);
             var typeField = template.Q<EnumField>("Type");
             var customTypeField = template.Q<VisualElement>("CustomType");
             

@@ -504,7 +504,7 @@ namespace VRLabs.ToonyStandardRebuild
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
-                ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration, false);
+                ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration, true);
                 stopwatch.Stop();
                 Debug.Log($"Toony Standard RE:Build: regenerated shader \"{ModularShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
             }
@@ -551,7 +551,7 @@ namespace VRLabs.ToonyStandardRebuild
                     EditorUtility.SetDirty(material);
                 }
 
-                ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration);
+                ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration, true);
                 EditorUtility.SetDirty(ModularShader);
 
                 stopwatch.Stop();

@@ -6,22 +6,8 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEngine.Analytics;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 {
-    public enum PropertyType
-    {
-        Float,
-        Int,
-        Range,
-        Vector,
-        Color,
-        Texture2D,
-        Texture2DArray,
-        Cube,
-        CubeArray,
-        Texture3D
-    }
-
     public enum DefaultTextureValue
     {
         White,
@@ -46,15 +32,14 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foldout.RegisterValueChangedCallback((e) => property.isExpanded = e.newValue);
             foldout.value = property.isExpanded;
 
+            var nameField = template.Q<TextField>("Name");
+            nameField.RegisterValueChangedCallback(evt => foldout.text = evt.newValue);
             var enumField = template.Q<EnumField>("TypeField");
             var valueContainer = template.Q<VisualElement>("ValueContainer");
 
             var type = property.FindPropertyRelative("Type");
             var defaultValue = property.FindPropertyRelative("DefaultValue");
-            
-   
 
-            
             var propType = GetPropertyTypeFromSerializedProperty(type.stringValue);
 
             enumField.value = propType;
@@ -220,7 +205,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     }
 
                     if (vfi) colorValue = new Color(fv[0], fv[1], fv[2], fv[3]);
-                    else SetPropDefaultValue(defaultValue,$"({fv[0]}, {fv[1]}, {fv[2]}, {fv[3]})");
+                    else SetPropDefaultValue(defaultValue,$"({colorValue[0]}, {colorValue[1]}, {colorValue[2]}, {colorValue[3]})");
                     var clfield = new ColorField { value = colorValue, label = "Default value" };
                     field = clfield;
                     clfield.RegisterValueChangedCallback(e => SetPropDefaultValue(defaultValue,$"({e.newValue[0]}, {e.newValue[1]}, {e.newValue[2]}, {e.newValue[3]})"));
@@ -274,8 +259,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         
         private static PropertyType GetPropertyTypeFromSerializedProperty(string propType)
         {
-            
-            
             switch (propType.Trim())
             {
                 case "Float": return PropertyType.Float;

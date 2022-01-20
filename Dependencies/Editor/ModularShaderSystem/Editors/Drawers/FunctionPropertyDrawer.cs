@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 {
     [CustomPropertyDrawer(typeof(ShaderFunction))]
     public class FunctionPropertyDrawer : PropertyDrawer
@@ -19,6 +19,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foldout.text = property.displayName;
             foldout.RegisterValueChangedCallback((e) => property.isExpanded = e.newValue);
             foldout.value = property.isExpanded;
+            
+            var nameField = template.Q<TextField>("Name");
+            nameField.RegisterValueChangedCallback(evt => foldout.text = evt.newValue);
+            
             foldout.Add(template);
             _root.Add(foldout);
 

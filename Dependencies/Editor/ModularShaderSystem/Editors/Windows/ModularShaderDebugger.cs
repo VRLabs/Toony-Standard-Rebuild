@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
 {
     public interface IModularShaderDebuggerTab
     { 

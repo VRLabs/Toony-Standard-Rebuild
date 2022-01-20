@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 {
+    
     [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
     public class TemplateAssetImporter : ScriptedImporter
     { 

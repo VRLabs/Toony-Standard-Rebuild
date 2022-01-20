@@ -34,7 +34,7 @@ MonoBehaviour:
   - Name: _Color
     DisplayName: Albedo color
     Type: Color
-    DefaultValue: (0, 0, 0, 0)
+    DefaultValue: (1, 1, 1, 1)
     Attributes: []
   - Name: _BumpMap
     DisplayName: Normal map

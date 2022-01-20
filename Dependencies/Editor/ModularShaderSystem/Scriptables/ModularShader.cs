@@ -7,21 +7,35 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
     public class ModularShader : ScriptableObject
     {
         public string Id;
+        
         public string Name;
+        
         public string Version;
+        
         public string Author;
+        
         public string Description;
+        
         public bool UseTemplatesForProperties;
+        
         public TemplateAsset ShaderPropertiesTemplate;
+        
         public string ShaderPath;
+        
         public TemplateAsset ShaderTemplate;
+        
         public string CustomEditor;
-        public List<string> TemplateKeywords;
+        
         public List<Property> Properties;
+        
         public List<ShaderModule> BaseModules;
+        
         [HideInInspector] public List<ShaderModule> AdditionalModules;
+        
         public bool LockBaseModules;
+        
         public List<Shader> LastGeneratedShaders;
+        
         [HideInInspector] public string AdditionalSerializedData;
     }
 }

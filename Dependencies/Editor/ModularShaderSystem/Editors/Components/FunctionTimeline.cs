@@ -5,8 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
 {
     public class FunctionTimeline : IModularShaderDebuggerTab
     {
@@ -30,8 +31,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             TabContainer.Add(new TimelineContainer(shader));
         }
     }
-    
-     public class FunctionItem : VisualElement
+
+    internal class FunctionItem : VisualElement
     {
         public ShaderFunction Function { get; }
         public TimelineRow Row { get; set; }
@@ -65,7 +66,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class TimelineRow : VisualElement
+    internal class TimelineRow : VisualElement
     {
         public ShaderModule Module { get; }
         
@@ -143,7 +144,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class TimelineRoot : VisualElement
+    internal class TimelineRoot : VisualElement
     {
         public List<TimelineRow> Rows { get; set; }
         public List<FunctionItem> Functions { get; set; }
@@ -260,7 +261,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class FunctionViewer : VisualElement
+    internal class FunctionViewer : VisualElement
     {
         public ShaderFunction SelectedItem
         {
@@ -330,7 +331,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         {
             var title = new Label("Selected function information");
             title.AddToClassList("area-title");
-            var content = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
+            var content = new ScrollView(ScrollViewMode.Vertical);
             content.AddToClassList("area-content");
 
             _name = new LabelField("Name", "");
@@ -358,83 +359,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class LabelField : VisualElement
-    {
-        public string Label
-        {
-            get => _label;
-            set
-            {
-                _label = value;
-                _labelField.text = _label;
-            }
-        }
-
-        public string Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                _valueField.text = _value;
-            }
-        }
-
-        private Label _labelField;
-        private Label _valueField;
-        private string _label;
-        private string _value;
-
-        public LabelField(string label, string value)
-        {
-            _label = label;
-            _value = value;
-            _labelField = new Label(label);
-            _valueField = new Label(value);
-            
-            AddToClassList("unity-base-field");
-            AddToClassList("unity-base-text-field");
-            AddToClassList("unity-text-field");
-            
-            _labelField.AddToClassList("unity-text-element");
-            _labelField.AddToClassList("unity-label");
-            _labelField.AddToClassList("unity-base-field__label");
-            _labelField.AddToClassList("unity-base-text-field__label");
-            _labelField.AddToClassList("unity-text-field__label");
-            
-            Add(_labelField);
-            Add(_valueField);
-            
-        }
-    }
-    
-    public class VariableField : VisualElement
-    {
-        public Variable Variable { get; set; }
-        
-        private string _type;
-
-        public VariableField(Variable variable)
-        {
-            Variable = variable;
-            if(variable.Type == VariableType.Custom)
-                _type = variable.CustomType;
-            else
-                _type = variable.Type.ToString();
-            var nameField = new Label(variable.Name);
-            var typeField = new Label(_type);
-
-            nameField.style.flexGrow = 1;
-            typeField.AddToClassList("variable-type-text");
-            Add(nameField);
-            Add(typeField);
-
-            style.flexDirection = FlexDirection.Row;
-
-        }
-    }
-
-    public class ModuleViewer : VisualElement
+    internal class ModuleViewer : VisualElement
     {
         public ShaderModule SelectedItem
         {
@@ -475,7 +400,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         {
             var title = new Label("Function's module base info");
             title.AddToClassList("area-title");
-            var content = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
+            var content = new ScrollView(ScrollViewMode.Vertical);
             _content = content;
             _content.AddToClassList("area-content");
             
@@ -504,7 +429,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class FunctionTemplateViewer : VisualElement
+    internal class FunctionTemplateViewer : VisualElement
     {
         public string SelectedItem
         {
@@ -531,7 +456,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         }
     }
 
-    public class TimelineContainer : VisualElement
+    internal class TimelineContainer : VisualElement
     {
         private List<TimelineRoot> _roots;
         private PopupField<TimelineRoot> _popup;

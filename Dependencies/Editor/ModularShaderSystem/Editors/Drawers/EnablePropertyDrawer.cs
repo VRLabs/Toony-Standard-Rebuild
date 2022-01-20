@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
+namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 {
     [CustomPropertyDrawer(typeof(EnableProperty))]
     public class EnablePropertyDrawer : PropertyDrawer
@@ -20,6 +20,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foldout.text = property.displayName;
             foldout.RegisterValueChangedCallback((e) => property.isExpanded = e.newValue);
             foldout.value = property.isExpanded;
+
             foldout.Add(template);
             _root.Add(foldout);
 

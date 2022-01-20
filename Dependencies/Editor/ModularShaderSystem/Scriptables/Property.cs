@@ -4,18 +4,36 @@ using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 {
+    public enum PropertyType
+    {
+        Float,
+        Int,
+        Range,
+        Vector,
+        Color,
+        Texture2D,
+        Texture2DArray,
+        Cube,
+        CubeArray,
+        Texture3D
+    }
+    
     [Serializable]
     public class Property : IEquatable<Property>
     {
         public string Name;
+        
         public string DisplayName;
-        public string Type; //Check if the content is valid
-        public string DefaultValue; //Check if the content is right for the type
+        
+        public string Type;
+        
+        public string DefaultValue;
+        
         public List<string> Attributes;
 
         public virtual Variable ToVariable()
         {
-            Variable variable = new Variable();
+            var variable = new Variable();
             variable.Name = Name;
 
             switch(Type)

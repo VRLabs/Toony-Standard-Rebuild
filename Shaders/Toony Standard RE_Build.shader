@@ -15,7 +15,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 		_UVCount("UV Count", Float) = 0.0
 		_UV1Index("UV1 Index", Float) = 0.0
 		_MainTex("Main texture", 2D) = "white" {}
-		_Color("Albedo color", Color) = (0, 0, 0, 0)
+		_Color("Albedo color", Color) = (1, 1, 1, 1)
 		_BumpMap("Normal map", 2D) = "bump" {}
 		_BumpScale("Normal map scale", Float) = 1
 		_Cutoff("Alpha Cutoff", Range(0, 1)) = 0.5
