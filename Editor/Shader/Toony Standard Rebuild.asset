@@ -23,7 +23,6 @@ MonoBehaviour:
   ShaderTemplate: {fileID: -544282384758852595, guid: dfac9c1ed2c4dfe4993d609796f69d3e,
     type: 3}
   CustomEditor: VRLabs.ToonyStandardRebuild.TSRGUI
-  TemplateKeywords: []
   Properties:
   - Name: _SrcBlend
     DisplayName: Src Blend

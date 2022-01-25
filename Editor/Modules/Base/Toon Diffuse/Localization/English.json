@@ -32,7 +32,7 @@
         },
         {
             "Name": "Toon ramp_GradientRampSizeLabel",
-            "DisplayName": "Texture width",
+            "DisplayName": "Gradient width",
             "Tooltip": ""
         },
         {
@@ -43,7 +43,7 @@
         {
             "Name": "Toon ramp_GradientSaveButton",
             "DisplayName": "Save",
-            "Tooltip": "Save and apply texture"
+            "Tooltip": "Save and apply gradient"
         },
         {
             "Name": "Toon ramp_GradientCancelButton",

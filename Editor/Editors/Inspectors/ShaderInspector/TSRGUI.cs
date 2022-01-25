@@ -107,7 +107,7 @@ namespace VRLabs.ToonyStandardRebuild
                     Controls.FetchProperties(properties, out List<string> missingProperties);
                     foreach (string missingProperty in missingProperties)
                     {
-                        if (!missingProperty.Equals("")) _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
+                        if (!string.IsNullOrEmpty(missingProperty)) _startupErrors.Add($"The property \"{missingProperty}\" has been defined but is not available in the shader.");
                     }
                 }
 
