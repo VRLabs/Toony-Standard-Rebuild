@@ -84,8 +84,7 @@ MonoBehaviour:
     Keywords:
     - DEFAULT_VARIABLES
     NeedsVariant: 0
-    Queue: 100
-    TemplateKeywords: []
+    Queue: 101
   Functions:
   - Name: SampleAlbedo
     AppendAfter: '#K#FRAGMENT_FUNCTION'

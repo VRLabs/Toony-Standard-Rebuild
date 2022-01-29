@@ -18,10 +18,19 @@ MonoBehaviour:
   Author: VRLabs
   Description: Cubemap as a fallback probe
   Enabled:
-    Name: _IndirectFallbackMode
+    Name: 
     DisplayName: Indirect Fallback Mode
     Type: 
     DefaultValue: 
+    DefaultTextureAsset: {fileID: 0}
+    Attributes: []
+    EnableValue: 1
+  EnableProperties:
+  - Name: _IndirectFallbackMode
+    DisplayName: Indirect Fallback Mode
+    Type: Float
+    DefaultValue: 0.1
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 1
   Properties:
@@ -29,6 +38,7 @@ MonoBehaviour:
     DisplayName: Fallback Cubemap
     Type: Cube
     DefaultValue: '""{}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies:
   - VRLabs.TSRBase.CoreIndirectSpecular

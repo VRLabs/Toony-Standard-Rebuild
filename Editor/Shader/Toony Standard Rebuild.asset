@@ -28,50 +28,59 @@ MonoBehaviour:
     DisplayName: Src Blend
     Type: Float
     DefaultValue: 1.0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _DstBlend
     DisplayName: Dst Blend
     Type: Float
     DefaultValue: 0.0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _ZWrite
     DisplayName: ZWrite
     Type: Float
     DefaultValue: 1.0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Cull
     DisplayName: Cull Mode
     Type: Int
     DefaultValue: 2
+    DefaultTextureAsset: {fileID: 0}
     Attributes:
     - Enum(UnityEngine.Rendering.CullMode)
   - Name: _Mode
     DisplayName: Blend mode
     Type: Int
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _StencilID
     DisplayName: Stencil ID (0-255)
     Type: Range(0,255)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes:
     - IntRange
   - Name: _StencilComp
     DisplayName: Stencil Comparison
     Type: Int
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes:
     - Enum(UnityEngine.Rendering.CompareFunction)
   - Name: _StencilOp
     DisplayName: Stencil Operation
     Type: Int
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes:
     - Enum(UnityEngine.Rendering.StencilOp)
   - Name: _StencilSection
     DisplayName: Stencil Section Display
     Type: Int
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   BaseModules:
   - {fileID: 11400000, guid: 23830d8c75a857544bd3da31924e6665, type: 2}

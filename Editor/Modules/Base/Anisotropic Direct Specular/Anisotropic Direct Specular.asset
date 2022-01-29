@@ -18,10 +18,19 @@ MonoBehaviour:
   Author: VRLabs
   Description: Anisotropic version for the direct specular calculation
   Enabled:
-    Name: _SpecularMode
+    Name: 
     DisplayName: Specular Mode
     Type: Float
     DefaultValue: 0.0
+    DefaultTextureAsset: {fileID: 0}
+    Attributes: []
+    EnableValue: 1
+  EnableProperties:
+  - Name: _SpecularMode
+    DisplayName: Specular Mode
+    Type: Float
+    DefaultValue: 0.1
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 1
   Properties:
@@ -29,16 +38,19 @@ MonoBehaviour:
     DisplayName: Tangent Map
     Type: 2D
     DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Anisotropy
     DisplayName: Ansotropy
     Type: Range(-1, 1)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _TangentMap_UV
     DisplayName: Tangent Map UV
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies:
   - VRLabs.TSRBase.CoreSpecular

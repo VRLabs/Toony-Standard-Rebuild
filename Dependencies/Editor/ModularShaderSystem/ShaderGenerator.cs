@@ -54,26 +54,29 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             try
             {
                 AssetDatabase.StartAssetEditing();
+                
+                foreach (Shader generatedShader in shader.LastGeneratedShaders)
+                    File.Delete(AssetDatabase.GetAssetPath(generatedShader));
+                shader.LastGeneratedShaders = new List<Shader>();
+                
                 foreach (var context in contexts)
                     File.WriteAllText($"{path}/" + context.VariantFileName, context.ShaderFile.ToString());
             }
             finally
             {
+                // To make sure the AssetDatabase doesn't break out
                 AssetDatabase.StopAssetEditing();
             }
             
             AssetDatabase.Refresh();
-            shader.LastGeneratedShaders = new List<Shader>();
+            ApplyDefaultTextures(contexts);
+            
             foreach (var context in contexts)
                 shader.LastGeneratedShaders.Add(AssetDatabase.LoadAssetAtPath<Shader>($"{path}/" + context.VariantFileName));
+            AssetDatabase.Refresh();
         }
 
-        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials)
-        {
-            GenerateMinimalShader(path, shader, materials, null);
-        }
-
-        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
+        public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -97,12 +100,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             contexts.GenerateMinimalShaders();
         }
 
-        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials)
-        {
-            return EnqueueShadersToGenerate(path, shader, materials, null);
-        }
-
-        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration)
+        public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
@@ -173,6 +171,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 AssetDatabase.StopAssetEditing();
                 AssetDatabase.Refresh();
             }
+            
+            ApplyDefaultTextures(contexts);
 
             EditorUtility.DisplayProgressBar("Generating Optimized Shaders", "applying shaders to materials", contexts.Count - 1 / (contexts.Count + 3));
             foreach (var context in contexts)
@@ -188,14 +188,17 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             var dictionary = new Dictionary<string, List<int>>();
             foreach (ShaderModule module in modules)
             {
-                if (module == null || module.Enabled == null || 
-                    string.IsNullOrWhiteSpace(module.Enabled.Name) || 
-                    !(module.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
+                if (module == null) continue;
+                foreach (EnableProperty property in module.EnableProperties)
+                {
+                    if (property == null || string.IsNullOrWhiteSpace(property.Name) ||
+                        !(module.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
 
-                if (dictionary.ContainsKey(module.Enabled.Name))
-                    dictionary[module.Enabled.Name].Add(module.Enabled.EnableValue);
-                else
-                    dictionary.Add(module.Enabled.Name, new List<int>(new []{module.Enabled.EnableValue}));
+                    if (dictionary.ContainsKey(property.Name))
+                        dictionary[property.Name].Add(property.EnableValue);
+                    else
+                        dictionary.Add(property.Name, new List<int>(new[] { property.EnableValue }));
+                }
             }
 
             var keys = dictionary.Keys.ToList();
@@ -213,13 +216,15 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         private static List<(Dictionary<string, int>, Material)> GetMinimalVariants(List<ShaderModule> modules, IEnumerable<Material> materials)
         {
             var enablers = new List<string>();
-            var dictionary = new Dictionary<string, int>();
             foreach (ShaderModule module in modules)
             {
-                if (module == null || module.Enabled == null || 
-                    string.IsNullOrWhiteSpace(module.Enabled.Name)) continue;
+                if (module == null) continue;
+                foreach (EnableProperty property in module.EnableProperties)
+                {
+                    if (property == null || string.IsNullOrWhiteSpace(property.Name)) continue;
 
-                enablers.Add(module.Enabled.Name);
+                    enablers.Add(property.Name);
+                }
             }
 
             enablers = enablers.Distinct().ToList();
@@ -313,20 +318,17 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             private Dictionary<ShaderFunction, ShaderModule> _modulesByFunctions;
             public string Guid;
 
+            public List<ShaderModule> Modules => _modules;
+
             public void GenerateShader()
             {
                 _modules = FindActiveModules(Shader, ActiveEnablers);
                 GetLiveUpdateEnablers();
                 ShaderFile = new StringBuilder();
                 VariantName = GetVariantCode(ActiveEnablers);
-                if (OptimizedShader)
-                {
-                    VariantFileName = $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-g-{Guid}")}.shader";
-                }
-                else
-                {
-                    VariantFileName = $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-v{VariantName}")}.shader";
-                }
+                VariantFileName = OptimizedShader ? 
+                    $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-g-{Guid}")}.shader" :
+                    $"{Shader.Name}{(string.IsNullOrEmpty(VariantName) ? "" : $"-v{VariantName}")}.shader";
 
                 VariantFileName = string.Join("_", VariantFileName.Split(Path.GetInvalidFileNameChars()));
 
@@ -341,11 +343,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
                 ShaderFile.AppendLine("{");
 
-                if (string.IsNullOrEmpty(PropertiesBlock))
-                    ShaderFile.Append(GetPropertiesBlock(Shader, _modules, FreshAssets, false));
-                else
-                    ShaderFile.Append(PropertiesBlock);
-                    
+                ShaderFile.Append(string.IsNullOrEmpty(PropertiesBlock) ? GetPropertiesBlock(Shader, _modules, FreshAssets, false) : PropertiesBlock);
+
                 WriteShaderSkeleton();
                 
                 _functions = new List<ShaderFunction>();
@@ -374,24 +373,17 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
                 ShaderFile.Replace("\r\n", "\n");
 
-                if (OptimizedShader)
-                {
-                    ShaderFile = CleanupShaderFile(ShaderFile);
-                }
-                else
-                {
-                    ShaderFile = CleanupShaderFile(ShaderFile);
-                }
+                ShaderFile = CleanupShaderFile(ShaderFile);
             }
             
             private void GetLiveUpdateEnablers()
             {
                 _liveUpdateEnablers = new List<EnableProperty>();
                 var staticEnablers = ActiveEnablers.Keys.ToList();
-                foreach (ShaderModule module in _modules)
+                foreach (var property in _modules.SelectMany(x => x.EnableProperties))
                 {
-                    if(module.Enabled != null && !string.IsNullOrWhiteSpace(module.Enabled.Name) && !staticEnablers.Contains(module.Enabled.Name))
-                        _liveUpdateEnablers.Add(module.Enabled);
+                    if(property != null && !string.IsNullOrWhiteSpace(property.Name) && !staticEnablers.Contains(property.Name))
+                        _liveUpdateEnablers.Add(property);
                 }
 
                 _liveUpdateEnablers = _liveUpdateEnablers.Distinct().ToList();
@@ -405,8 +397,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
                     var callSequence = new StringBuilder();
                     WriteFunctionCallSequence(callSequence, startKeyword);
-                    callSequence.AppendLine(startKeyword);
-                    ShaderFile.Replace(startKeyword, callSequence.ToString());
+                    var m = Regex.Matches(ShaderFile.ToString(), $@"{startKeyword}(\s|$)", RegexOptions.Multiline);
+                    for (int i = m.Count - 1; i >= 0; i--)
+                        ShaderFile.Insert(m[i].Index, callSequence.ToString()); 
                 }
             }
 
@@ -419,7 +412,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
                 Dictionary<ModuleTemplate, ShaderModule> moduleByTemplate = new Dictionary<ModuleTemplate, ShaderModule>();
                 Dictionary<(string, string), string> convertedKeyword = new Dictionary<(string, string), string>();
-                int InstanceCounter = 0;
+                int instanceCounter = 0;
 
                 foreach (var module in _modules)
                     foreach (var template in module.Templates)
@@ -430,8 +423,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                         var freshTemplate = FreshAssets.GetTemplate(template.Template);
                         var module = moduleByTemplate[template];
                         if (freshTemplate == null) continue;
-                        bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
-                        bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
+                        bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
+                        bool isFilteredIn = hasEnabler && module.EnableProperties.All(x => (x == null || string.IsNullOrEmpty(x.Name)) || ActiveEnablers.TryGetValue(x.Name, out _));
                         bool needsIf = hasEnabler && !isFilteredIn && !template.NeedsVariant;
                         var tmp = new StringBuilder();
 
@@ -442,7 +435,10 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
                         else
                         {
-                            tmp.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
+                            string condition = string.Join(" && ", module.EnableProperties
+                                .Where(x => (x != null && !string.IsNullOrEmpty(x.Name)) && !ActiveEnablers.TryGetValue(x.Name, out _))
+                                .Select(x => $"{x.Name} == {x.EnableValue}"));
+                            tmp.AppendLine($"if({condition})");
                             tmp.AppendLine("{");
                             tmp.AppendLine(freshTemplate.Template);
                             tmp.AppendLine("}");
@@ -458,13 +454,13 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                             }
                             else
                             {
-                                newKeyword = $"{mki[i].Value}{InstanceCounter++}";
+                                newKeyword = $"{mki[i].Value}{instanceCounter++}";
                                 convertedKeyword.Add((module.Id, mki[i].Value), newKeyword);
                             }
                             tmp.Replace(mki[i].Value, newKeyword);
                         }
 
-                        foreach (var keyword in template.Keywords.Count == 0 ? new string[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                        foreach (var keyword in template.Keywords.Count == 0 ? new[] { MSSConstants.DEFAULT_CODE_KEYWORD } : template.Keywords.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                         {
                             MatchCollection m = Regex.Matches(ShaderFile.ToString(), $@"#K#{keyword}(\s|$)", RegexOptions.Multiline);
                             for (int i = m.Count - 1; i >= 0; i--)
@@ -478,9 +474,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                             }
                         }
                     }
-                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#.*$", RegexOptions.Multiline);
+                    MatchCollection mkr = Regex.Matches(ShaderFile.ToString(), @"#KI#\S*", RegexOptions.Multiline);
                     for (int i = mkr.Count - 1; i >= 0; i--)
-                        ShaderFile.Replace(mkr[i].Value, "");
+                        ShaderFile.Remove(mkr[i].Index, mkr[i].Length);
                 
                 ShaderFile.AppendLine("}");
             }
@@ -571,13 +567,16 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     _reorderedFunctions.Add(function);
                     ShaderModule module = _modulesByFunctions[function];
                     
-                    bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
-                    bool isFilteredIn = hasEnabler && ActiveEnablers.TryGetValue(module.Enabled.Name, out _);
+                    bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
+                    bool isFilteredIn = hasEnabler && module.EnableProperties.All(x => (x == null || string.IsNullOrEmpty(x.Name)) || ActiveEnablers.TryGetValue(x.Name, out _));
                     bool needsIf = hasEnabler && !isFilteredIn;
 
                     if (needsIf)
                     {
-                        callSequence.AppendLine($"if({module.Enabled.Name} == {module.Enabled.EnableValue})");
+                        string condition = string.Join(" && ", module.EnableProperties
+                            .Where(x => (x != null && !string.IsNullOrEmpty(x.Name)) && !ActiveEnablers.TryGetValue(x.Name, out _))
+                            .Select(x => $"{x.Name} == {x.EnableValue}"));
+                        callSequence.AppendLine($"if({condition})");
                         callSequence.AppendLine("{");
                     }
                     
@@ -649,7 +648,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             
             private static StringBuilder CleanupShaderFile(StringBuilder shaderVariant)
             {
-                var finalFile = new StringBuilder(); ;
+                var finalFile = new StringBuilder();
                 using (var sr = new StringReader(shaderVariant.ToString()))
                 {
                     string line;
@@ -719,8 +718,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 foreach (var module in modules.Where(x => x != null))
                 {
                     properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count > 0));
-                    if (!string.IsNullOrWhiteSpace(module.Enabled.Name) && includeEnablers)
-                        properties.Add(module.Enabled);
+                    if (module.EnableProperties.Count > 0 && includeEnablers)
+                        properties.AddRange(module.EnableProperties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
+                    
                 }
 
                 foreach (var prop in properties.Distinct())
@@ -738,6 +738,17 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             block.AppendLine("}");
             return block.ToString();
+        }
+        
+        private static void ApplyDefaultTextures(List<ShaderContext> contexts)
+        {
+            foreach (var context in contexts)
+            {
+                var importedShader = AssetImporter.GetAtPath($"{context.FilePath}/" + context.VariantFileName) as ShaderImporter;
+                var customTextures = context.Modules.SelectMany(x => x.Properties).Where(x => x.DefaultTextureAsset != null).ToList();
+                if (importedShader != null) importedShader.SetDefaultTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                AssetDatabase.ImportAsset($"{context.FilePath}/" + context.VariantFileName);
+            }
         }
         
         public static List<ShaderModule> FindAllModules(ModularShader shader)
@@ -759,15 +770,15 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             foreach (var module in shader.BaseModules.Where(x => x != null))
             {
                 properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
-                if (!string.IsNullOrWhiteSpace(module.Enabled.Name))
-                    properties.Add(module.Enabled);
+                if (module.EnableProperties.Count > 0)
+                    properties.AddRange(module.EnableProperties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
             }
 
             foreach (var module in shader.AdditionalModules.Where(x => x != null))
             {
                 properties.AddRange(module.Properties.Where(x => !string.IsNullOrWhiteSpace(x.Name) || x.Attributes.Count == 0));
-                if (!string.IsNullOrWhiteSpace(module.Enabled.Name))
-                    properties.Add(module.Enabled);
+                if (module.EnableProperties.Count > 0)
+                    properties.AddRange(module.EnableProperties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
             }
 
             return properties.Distinct().ToList();
@@ -792,19 +803,27 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             foreach (var module in shader.BaseModules)
             {
-                int value = 0;
-                bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
-                bool hasKey = hasEnabler && activeEnablers.TryGetValue(module.Enabled.Name, out value);
-                if (!hasEnabler || ((hasKey && module.Enabled.EnableValue == value) || !hasKey))
+                bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
+                bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
+                if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>
+                    {
+                        if (x.Name == null || string.IsNullOrEmpty(x.Name)) return true;
+                        if (!activeEnablers.TryGetValue(x.Name, out int value)) return true;
+                        return x.EnableValue == value;
+                    })))
                     modules.Add(module);
             }
 
             foreach (var module in shader.AdditionalModules)
             {
-                int value = 0;
-                bool hasEnabler = module.Enabled != null && !string.IsNullOrEmpty(module.Enabled.Name);
-                bool hasKey = hasEnabler && activeEnablers.TryGetValue(module.Enabled.Name, out value);
-                if (!hasEnabler || ((hasKey && module.Enabled.EnableValue == value) || !hasKey))
+                bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
+                bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
+                if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>
+                    {
+                        if (x.Name == null || string.IsNullOrEmpty(x.Name)) return true;
+                        if (!activeEnablers.TryGetValue(x.Name, out int value)) return true;
+                        return x.EnableValue == value;
+                    })))
                     modules.Add(module);
             }
 
@@ -830,8 +849,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     if (dependencies.Contains(modules[j].Id))
                         dependencies.Remove(modules[j].Id);
                 }
-                for (int j = 0; j < dependencies.Count; j++)
-                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
+                foreach (string t in dependencies)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{t}\".");
             }
             return errors;
         }
@@ -854,8 +873,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                     if (dependencies.Contains(modules[j].Id))
                         dependencies.Remove(modules[j].Id);
                 }
-                for (int j = 0; j < dependencies.Count; j++)
-                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{dependencies[j]}\".");
+                foreach (string t in dependencies)
+                    errors.Add($"Module \"{modules[i].Name}\" has missing dependency id \"{t}\".");
             }
             return errors;
         }

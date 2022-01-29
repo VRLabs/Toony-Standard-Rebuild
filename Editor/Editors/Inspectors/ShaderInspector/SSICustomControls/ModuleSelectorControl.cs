@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -28,11 +27,11 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
 
         public ModuleSelectorControl(string propertyName, ModularShader shader) : base(propertyName)
         {
-            List<ShaderModule> items = shader.BaseModules.Concat(shader.AdditionalModules).Where(x => x.Enabled?.Name.Equals(propertyName) ?? false).ToList();
+            List<ShaderModule> items = shader.BaseModules.Concat(shader.AdditionalModules).Where(x => x.EnableProperties.Any(y => y.Name.Equals(propertyName))).ToList();
             _indexes = new List<int>();
             int start = 0;
             int count = items.Count;
-            if (!items.Any(x => x.Enabled.EnableValue == 0))
+            if (items.All(x => x.EnableProperties.First(y => y.Name.Equals(propertyName)).EnableValue != 0))
             {
                 count++;
                 start++;
@@ -46,7 +45,7 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
             for (int i = 0; i < items.Count; i++)
             {
                 _options[i + start] = new GUIContent(items[i].Name);
-                _indexes.Add(items[i].Enabled.EnableValue);
+                _indexes.Add(items[i].EnableProperties.First(x => x.Name.Equals(propertyName)).EnableValue);
             }  
         }
         
@@ -71,13 +70,11 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
             selected = EditorGUILayout.Popup(Content, selected, _options);
             EditorGUI.showMixedValue = false;
             HasPropertyUpdated = EditorGUI.EndChangeCheck();
-            if (HasPropertyUpdated)
-            {
-                materialEditor.RegisterPropertyChangeUndo(Content.text);
-                _previousIndex = selected;
-                _previousValue = _indexes[selected];
-                Property.floatValue = _indexes[selected];
-            }
+            if (!HasPropertyUpdated) return;
+            materialEditor.RegisterPropertyChangeUndo(Content.text);
+            _previousIndex = selected;
+            _previousValue = _indexes[selected];
+            Property.floatValue = _indexes[selected];
         }
     }
     

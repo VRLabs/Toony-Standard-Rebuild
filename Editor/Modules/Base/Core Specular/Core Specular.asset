@@ -20,11 +20,12 @@ MonoBehaviour:
 
     Contains the
     base setup for pbr specular values and direct specular calculation.'
-  Enabled:
-    Name: _EnableSpecular
+  EnableProperties:
+  - Name: _EnableSpecular
     DisplayName: Enable Specular
     Type: Float
     DefaultValue: 0.0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 1
   Properties:
@@ -32,41 +33,49 @@ MonoBehaviour:
     DisplayName: Metallic
     Type: Range(0, 1)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Glossiness
     DisplayName: Glossiness
     Type: Range(0, 1)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Specular
     DisplayName: Specular
     Type: Range(0, 1)
     DefaultValue: 0.5
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _SpecularTintTexture
     DisplayName: Specular Tint Texture
     Type: 2D
     DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _SpecularTint
     DisplayName: Specular Tint
     Type: Color
     DefaultValue: (1, 1, 1, 1)
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _ReplaceSpecular
     DisplayName: Replace Specular
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _SpecularMode
     DisplayName: Specular Mode
     Type: Float
     DefaultValue: -1
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _SpecularTintTexture_UV
     DisplayName: Specular Tint UV Set
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []

@@ -28,6 +28,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         public string Type;
         
         public string DefaultValue;
+
+        public Texture DefaultTextureAsset;
         
         public List<string> Attributes;
 

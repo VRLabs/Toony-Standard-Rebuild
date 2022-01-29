@@ -117,7 +117,16 @@ namespace VRLabs.ToonyStandardRebuild
 
                 _currentSelectorUsed = true;
                 OpenData(serializedData, e.newValue);
-                SetProperties(((ShaderModule)e.newValue).Properties);
+                ShaderModule module = (ShaderModule)e.newValue;
+                var props = new List<Property>();
+                if (module != null)
+                {
+                    if (module.EnableProperties.Count > 0)
+                        props.AddRange(module.EnableProperties.Where(x => !string.IsNullOrWhiteSpace(x.Name)));
+                    props.AddRange(module.Properties);
+                }
+
+                SetProperties(props);
             });
 
             _sectionsList = new ObjectInspectorList<SectionUI>("Sections", SectionUIElement.ElementTemplate);

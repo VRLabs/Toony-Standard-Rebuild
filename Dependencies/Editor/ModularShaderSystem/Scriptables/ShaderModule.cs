@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +16,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         public string Author;
         
         public string Description;
-        
-        public EnableProperty Enabled;
+
+        public List<EnableProperty> EnableProperties;
         
         public List<Property> Properties;
         

@@ -32,6 +32,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
                 size.height = 720;
                 wnd.position = size;
             }
+            
+            wnd.Show();
         }
         
         private ObjectField _modularShaderField;

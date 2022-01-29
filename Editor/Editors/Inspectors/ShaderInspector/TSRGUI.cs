@@ -280,12 +280,15 @@ namespace VRLabs.ToonyStandardRebuild
                     loadedUVControls.AddRange(loadedControls);
                 }
 
-                if (shaderModule == null || shaderModule.Enabled == null ||
-                    string.IsNullOrWhiteSpace(shaderModule.Enabled.Name) ||
+                if (shaderModule == null || shaderModule.EnableProperties.Count == 0 ||
+                    shaderModule.EnableProperties.Any(x => string.IsNullOrWhiteSpace(x.Name)) ||
                     !(shaderModule.Templates?.Any(x => x.NeedsVariant) ?? false)) continue;
 
-                if (!_enablers.ContainsKey(shaderModule.Enabled.Name))
-                    _enablers.Add(shaderModule.Enabled.Name, (int)Materials[0].GetFloat(shaderModule.Enabled.Name));
+                foreach (var property in shaderModule.EnableProperties)
+                {
+                    if (!_enablers.ContainsKey(property.Name))
+                        _enablers.Add(property.Name, (int)Materials[0].GetFloat(property.Name));
+                }
             }
         }
 
@@ -516,7 +519,9 @@ namespace VRLabs.ToonyStandardRebuild
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                var removedEnablerValues = ModularShader.AdditionalModules.Where(x => !_usedModules.Contains(x) && x.Enabled.EnableValue != 0).Select(x => x.Enabled).ToList();
+                var removedEnablerValues = ModularShader.AdditionalModules
+                    .Where(x => !_usedModules.Contains(x) && x.EnableProperties.Any(y => y.EnableValue != 0))
+                    .SelectMany(x => x.EnableProperties.Where(y => y.EnableValue != 0)).ToList();
                 ModularShader.AdditionalModules = new List<ShaderModule>(_usedModules);
 
                 bool refreshMaterialsUVSet = false;
@@ -552,6 +557,12 @@ namespace VRLabs.ToonyStandardRebuild
                 }
 
                 ShaderGenerator.GenerateShader(Path.GetDirectoryName(_path), ModularShader, PostGeneration, true);
+                foreach (Material material in materials)
+                {
+                    if (!material.shader.name.Equals("Hidden/InternalErrorShader")) continue;
+                    material.shader = ModularShader.LastGeneratedShaders[0];
+                    EditorUtility.SetDirty(material);
+                }
                 EditorUtility.SetDirty(ModularShader);
 
                 stopwatch.Stop();

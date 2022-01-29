@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -29,31 +30,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
         {
             TabContainer.Clear();
             if (shader == null) return;
-            _graph = new TemplateGraphView();
+            _graph = new TemplateGraphView(shader);
             
-            _graph.AddBaseTemplateNode("Shader", shader.ShaderTemplate);
-
-            if (shader.UseTemplatesForProperties)
-            {
-                var keywords = new []{"#K#" + MSSConstants.TEMPLATE_PROPERTIES_KEYWORD};
-                _graph.AddBaseTemplateNode("ShaderPropertiesRoot", new TemplateAsset{ Template = "", Keywords = keywords, name = "Properties Template Root"});
-                if (shader.ShaderPropertiesTemplate != null) _graph.AddTemplateNode("ShaderPropertiesTemplate", shader.ShaderTemplate, keywords);
-                
-            }
             
-            var moduleByTemplate = new Dictionary<ModuleTemplate, ShaderModule>();
-            foreach (var module in shader.BaseModules.Concat(shader.AdditionalModules))
-            foreach (var template in module.Templates)
-                moduleByTemplate.Add(template, module);
-            
-            foreach (var template in  shader.BaseModules.Concat(shader.AdditionalModules).SelectMany(x => x.Templates).OrderBy(x => x.Queue))
-            {
-                if (template.Template == null) continue;
-               var module = moduleByTemplate[template];
-                _graph.AddTemplateNode(module.Id, template);
-            }
-            
-            _graph.ScheduleNodesPositionReset();
             
             TabContainer.Add(_graph);
         }
@@ -64,12 +43,18 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
         public List<TemplateNode> Nodes;
         public List<TemplateNode> BaseNodes;
         
+        private List<ShaderModule> _modules;
+        private ModularShader _shader;
+        
         private static TextPopup _popup;
 
-        public TemplateGraphView()
+        public TemplateGraphView(ModularShader shader)
         {
             Nodes = new List<TemplateNode>();
             BaseNodes = new List<TemplateNode>();
+
+            _modules = shader.BaseModules.Concat(shader.AdditionalModules).ToList();
+            _shader = shader;
             
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
             this.AddManipulator(new ContentDragger());
@@ -77,8 +62,31 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
 
             Insert(0, grid);
             grid.StretchToParentSize();
-
             this.StretchToParentSize();
+            
+            AddBaseTemplateNode("Shader", _shader.ShaderTemplate);
+
+            if (_shader.UseTemplatesForProperties)
+            {
+                var keywords = new []{"#K#" + MSSConstants.TEMPLATE_PROPERTIES_KEYWORD};
+                AddBaseTemplateNode("ShaderPropertiesRoot", new TemplateAsset{ Template = "", Keywords = keywords, name = "Properties Template Root"});
+                if (_shader.ShaderPropertiesTemplate != null) AddTemplateNode("ShaderPropertiesTemplate", _shader.ShaderTemplate, keywords);
+                
+            }
+            
+            var moduleByTemplate = new Dictionary<ModuleTemplate, ShaderModule>();
+            foreach (var module in _shader.BaseModules.Concat(_shader.AdditionalModules))
+            foreach (var template in module.Templates)
+                moduleByTemplate.Add(template, module);
+            
+            foreach (var template in  _shader.BaseModules.Concat(_shader.AdditionalModules).SelectMany(x => x.Templates).OrderBy(x => x.Queue))
+            {
+                if (template.Template == null) continue;
+                var module = moduleByTemplate[template];
+                AddTemplateNode(module.Id, template);
+            }
+            
+            ScheduleNodesPositionReset();
         }
 
         public void AddBaseTemplateNode(string moduleId, TemplateAsset template)
@@ -93,7 +101,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
         {
             
             var tempList = new List<TemplateNode>();
-            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, template.Keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            foreach ((TemplateNode parent, string key) in Nodes.SelectMany(item =>  template.Keywords.Where(y => IsKeywordValid(moduleId, item, y)).Select(y => (item, y))).Where(x => !string.IsNullOrEmpty(x.Item2)))
             {
                 var node = new TemplateNode(moduleId, template, key);
                 AddElement(node);
@@ -106,7 +114,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
         public void AddTemplateNode(string moduleId, TemplateAsset template, string[] keywords)
         {
             var tempList = new List<TemplateNode>();
-            foreach ((TemplateNode parent, string key) in Nodes.Select(item => (item, keywords.FirstOrDefault(y => IsKeywordValid(moduleId, item, y)))).Where(x => !string.IsNullOrEmpty(x.Item2)))
+            foreach ((TemplateNode parent, string key) in Nodes.SelectMany(item =>  keywords.Where(y => IsKeywordValid(moduleId, item, y)).Select(y => (item, y))).Where(x => !string.IsNullOrEmpty(x.Item2)))
             {
                 var node = new TemplateNode(moduleId, template, key);
                 AddElement(node);
@@ -138,6 +146,23 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.Debug
                     int lineCount =   _popup.Text == null ? 5 :  _popup.Text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Length;
                     _popup.ShowAsDropDown(position, new Vector2(600, Math.Min(lineCount * 16, 800)));
                 });
+                if (node.ModuleId.Equals("Shader") || node.ModuleId.Equals("ShaderPropertiesRoot"))
+                {
+                    evt.menu.InsertAction(1, "Select relative modular shader asset", action =>
+                    {
+                        Selection.SetActiveObjectWithContext(_shader, _shader);
+                    });
+                }
+                else
+                {
+                    evt.menu.InsertAction(1, "Select relative module asset", action =>
+                    {
+                        var module = _modules.Find(x => x.Id.Equals(node.ModuleId));
+                        if(module != null)
+                            Selection.SetActiveObjectWithContext(module, module);
+                    });
+                }
+                
             }
         }
         

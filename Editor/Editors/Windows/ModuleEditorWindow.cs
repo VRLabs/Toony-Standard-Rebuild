@@ -105,7 +105,6 @@ namespace VRLabs.ToonyStandardRebuild
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                var removedEnablerValues = _shader.AdditionalModules.Where(x => !_usedModules.Contains(x) && x.Enabled.EnableValue != 0).Select(x => x.Enabled).ToList();
                 _shader.AdditionalModules = new List<ShaderModule>(_usedModules);
 
                 var newUvSets = TSRUtilities.LoadUvSet(_shader);
