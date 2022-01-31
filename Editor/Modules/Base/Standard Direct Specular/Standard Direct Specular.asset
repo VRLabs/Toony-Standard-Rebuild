@@ -17,11 +17,12 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Standard Direct Specular
-  Enabled:
-    Name: _SpecularMode
+  EnableProperties:
+  - Name: _SpecularMode
     DisplayName: Specular Mode
-    Type: Float
-    DefaultValue: 0.0
+    Type: 
+    DefaultValue: 
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 0
   Properties: []

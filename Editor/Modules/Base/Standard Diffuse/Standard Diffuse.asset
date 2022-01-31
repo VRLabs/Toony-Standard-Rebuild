@@ -17,11 +17,12 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: The standard way of doing diffuse calculations
-  Enabled:
-    Name: _DirectLightMode
+  EnableProperties:
+  - Name: _DirectLightMode
     DisplayName: Direct Light Mode
-    Type: Float
-    DefaultValue: 0.0
+    Type: 
+    DefaultValue: 
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 0
   Properties: []

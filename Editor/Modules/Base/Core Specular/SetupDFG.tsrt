@@ -1,0 +1,6 @@
+void SetupDFG()
+{
+    float2 dfguv = float2(NdotV, Roughness);
+    Dfg = _DFG.Sample(sampler_DFG, dfguv).xy;
+    EnergyCompensation = 1.0 + SpecularColor * (1.0 / Dfg.y - 1.0);
+}

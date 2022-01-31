@@ -18,63 +18,67 @@ MonoBehaviour:
   Author: VRLabs
   Description: Default inputs used by the standard modules available in Toony Standartd
     RE:Build
-  Enabled:
-    Name: 
-    DisplayName: 
-    Type: 
-    DefaultValue: 
-    Attributes: []
-    EnableValue: 0
+  EnableProperties: []
   Properties:
   - Name: _MainTex
     DisplayName: Main texture
     Type: 2D
     DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Color
     DisplayName: Albedo color
     Type: Color
     DefaultValue: (1, 1, 1, 1)
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _BumpMap
     DisplayName: Normal map
     Type: 2D
     DefaultValue: '"bump" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _BumpScale
     DisplayName: Normal map scale
     Type: Float
     DefaultValue: 1
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Cutoff
     DisplayName: Alpha Cutoff
     Type: Range(0, 1)
     DefaultValue: 0.5
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _Occlusion
     DisplayName: Occlusion
     Type: Range(0, 1)
     DefaultValue: 1
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _MSSO
     DisplayName: MSSO
     Type: 2D
     DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _MainTex_UV
     DisplayName: Main texture UV set
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _BumpMap_UV
     DisplayName: Bump map UV set
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _MSSO_UV
     DisplayName: MSSO UV set
     Type: Float
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []
@@ -146,6 +150,9 @@ MonoBehaviour:
     UsedVariables:
     - Name: Albedo
       Type: 7
+      CustomType: 
+    - Name: _Cutoff
+      Type: 4
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []

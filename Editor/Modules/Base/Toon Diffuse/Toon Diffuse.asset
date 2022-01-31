@@ -17,11 +17,12 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: The toon way of doing diffuse calculations
-  Enabled:
-    Name: _DirectLightMode
+  EnableProperties:
+  - Name: _DirectLightMode
     DisplayName: Direct Light Mode
-    Type: Float
-    DefaultValue: 0.0
+    Type: 
+    DefaultValue: 
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
     EnableValue: 1
   Properties:
@@ -29,31 +30,37 @@ MonoBehaviour:
     DisplayName: Toon Ramp
     Type: 2D
     DefaultValue: '"white" {}'
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _RampOffset
     DisplayName: Ramp Offset
     Type: Range(-1, 1)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _ShadowIntensity
     DisplayName: Shadow intensity
     Type: Range(0, 1)
     DefaultValue: 0.6
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _OcclusionOffsetIntensity
     DisplayName: Occlusion Offset Intensity
     Type: Range(0, 1)
     DefaultValue: 0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _RampMin
     DisplayName: Ramp Min
     Type: Color
     DefaultValue: (0.003921569, 0.003921569, 0.003921569, 0.003921569)
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   - Name: _RampColor
     DisplayName: Ramp Color
     Type: Color
     DefaultValue: (1, 1, 1, 1)
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []

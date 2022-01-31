@@ -1,8 +1,3 @@
-#if defined(_ALPHATEST_ON)
-    float _Cutoff;
-#endif
-
-
 #if defined(_ALPHAMODULATE_ON)
     sampler3D _DitherMaskLOD;
 #endif

@@ -38,6 +38,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 		_ReplaceSpecular("Replace Specular", Float) = 0
 		_SpecularMode("Specular Mode", Float) = -1
 		_SpecularTintTexture_UV("Specular Tint UV Set", Float) = 0
+		[NonModifiableTextureData][NoScaleOffset] _DFG("DFG Lut", 2D) = "black" {}
 		_EnableSpecular("Enable Specular", Float) = 0.0
 		_TangentMap("Tangent Map", 2D) = "white" {}
 		_Anisotropy("Ansotropy", Range(-1, 1)) = 0
@@ -66,12 +67,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			
 			CGPROGRAM
-			#pragma target 3.0
+			#pragma target 5.0
 			#pragma vertex Vertex
 			#pragma fragment Fragment
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile_fog
 			#pragma multi_compile _ VERTEXLIGHT_ON
+			
 			#ifndef UNITY_PASS_FORWARDBASE
 			#define UNITY_PASS_FORWARDBASE
 			#endif
@@ -120,10 +122,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			FragmentData FragData;
 			float4 FinalColor;
-			#if defined(_ALPHATEST_ON)
-			float _Cutoff;
-			#endif
-			
 			#if defined(_ALPHAMODULATE_ON)
 			sampler3D _DitherMaskLOD;
 			#endif
@@ -138,6 +136,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float _Occlusion;
 			float Occlusion;
 			float _MSSO_UV;
+			float _Cutoff;
 			float _BumpScale;
 			float _BumpMap_UV;
 			float Roughness;
@@ -161,8 +160,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float _TangentMap_UV;
 			float _IndirectFallbackMode;
 			float _IndirectOverride;
+			float RoughnessSquared;
 			float _EnableSpecular;
 			float _SpecularMode;
+			float2 Dfg;
 			float3 NormalMap;
 			float3 NormalDir;
 			float3 LightDir;
@@ -180,6 +181,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float3 SpecularColor;
 			float3 DirectSpecular;
 			float3 NDF;
+			float3 EnergyCompensation;
 			float3 IndirectSpecular;
 			float3 CustomIndirect;
 			float4 LightmapDirection;
@@ -203,6 +205,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
+			Texture2D_float _DFG;
+			SamplerState sampler_DFG;
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
@@ -449,6 +453,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 				OneMinusReflectivity = (1 - sp) - (Metallic * (1 - sp));
 				Albedo.rgb *= OneMinusReflectivity;
 			}
+			void SetupDFG()
+			{
+				float2 dfguv = float2(NdotV, Roughness);
+				Dfg = _DFG.Sample(sampler_DFG, dfguv).xy;
+				EnergyCompensation = 1.0 + SpecularColor * (1.0 / Dfg.y - 1.0);
+			}
 			void PremultiplyAlpha()
 			{
 				#if defined(_ALPHAPREMULTIPLY_ON)
@@ -692,13 +702,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			void FinalizeDirectSpecularTerm()
 			{
-				DirectSpecular = GFS * NDF;
+				DirectSpecular = GFS * NDF * FresnelTerm(SpecularColor, LdotH) * EnergyCompensation;
 				#ifdef UNITY_COLORSPACE_GAMMA
 				DirectSpecular = sqrt(max(1e-4h, DirectSpecular));
 				#endif
 				DirectSpecular = max(0, DirectSpecular * Attenuation);
 				DirectSpecular *= any(SpecularColor) ? 1.0 : 0.0;
-				DirectSpecular *= FresnelTerm(SpecularColor, LdotH);
 			}
 			void GetFallbackCubemap()
 			{
@@ -722,8 +731,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				half perceptualRoughness = glossIn.roughness /* perceptualRoughness */ ;
 				
-				// TODO: CAUTION: remap from Morten may work only with offline convolution, see impact with runtime convolution!
-				// For now disabled
 				#if 0
 				float m = PerceptualRoughnessToRoughness(perceptualRoughness); // m is the real roughness parameter
 				const float fEps = 1.192092896e-07F;        // smallest such that 1.0+FLT_EPSILON != 1.0  (+1e-4h is NOT good here. is visibly very wrong)
@@ -756,6 +763,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 				envData.roughness = Roughness;
 				envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube0_ProbePosition, unity_SpecCube0_BoxMin, unity_SpecCube0_BoxMax);
 				float4 indirectSpecularRGBA = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE(unity_SpecCube0), unity_SpecCube0_HDR, envData);
+				
+				#if defined(UNITY_SPECCUBE_BLENDING) && !defined(SHADER_API_MOBILE)
+				UNITY_BRANCH
+				if (unity_SpecCube0_BoxMin.w < 0.99999)
+				{
+					envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube1_ProbePosition, unity_SpecCube1_BoxMin, unity_SpecCube1_BoxMax);
+					float4 indirectSpecularRGBA1 = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE_SAMPLER(unity_SpecCube1, unity_SpecCube0), unity_SpecCube1_HDR, envData);
+					indirectSpecularRGBA = lerp(indirectSpecularRGBA1, indirectSpecularRGBA, unity_SpecCube0_BoxMin.w);
+				}
+				#endif
+				
 				IndirectSpecular =  indirectSpecularRGBA.rgb;
 				if ((_IndirectFallbackMode > 0 && indirectSpecularRGBA.a == 0) || (_IndirectOverride > 0))
 				{
@@ -765,8 +783,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 					IndirectSpecular = CustomIndirect * min(lightColGrey, 1);
 				}
 				
+				float horizon = min(1 + NdotH, 1.0);
 				float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
-				IndirectSpecular *= FresnelLerp(SpecularColor, grazingTerm, NdotV);
+				Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
+				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
 			}
 			void AddStandardDiffuse()
 			{
@@ -782,7 +802,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void AddIndirectSpecular()
 			{
-				FinalColor.rgb += IndirectSpecular * Occlusion;
+				FinalColor.rgb += IndirectSpecular * clamp(pow(NdotV + Occlusion, exp2(-16.0 * SquareRoughness - 1.0)) - 1.0 + Occlusion, 0.0, 1.0);
 			}
 			void AddAlpha()
 			{
@@ -837,6 +857,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 				if(_EnableSpecular == 1)
 				{
 					SetupAlbedoAndSpecColor();
+				}
+				if(_EnableSpecular == 1)
+				{
+					SetupDFG();
 				}
 				PremultiplyAlpha();
 				if(_DirectLightMode == 0)
@@ -911,7 +935,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			ZWrite Off
 			
 			CGPROGRAM
-			#pragma target 3.0
+			#pragma target 5.0
 			#pragma vertex Vertex
 			#pragma fragment Fragment
 			#pragma multi_compile_fwdadd_fullshadows
@@ -961,10 +985,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			FragmentData FragData;
 			float4 FinalColor;
-			#if defined(_ALPHATEST_ON)
-			float _Cutoff;
-			#endif
-			
 			#if defined(_ALPHAMODULATE_ON)
 			sampler3D _DitherMaskLOD;
 			#endif
@@ -979,6 +999,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float _Occlusion;
 			float Occlusion;
 			float _MSSO_UV;
+			float _Cutoff;
 			float _BumpScale;
 			float _BumpMap_UV;
 			float Roughness;
@@ -1002,8 +1023,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float _TangentMap_UV;
 			float _IndirectFallbackMode;
 			float _IndirectOverride;
+			float RoughnessSquared;
 			float _EnableSpecular;
 			float _SpecularMode;
+			float2 Dfg;
 			float3 NormalMap;
 			float3 NormalDir;
 			float3 LightDir;
@@ -1021,6 +1044,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float3 SpecularColor;
 			float3 DirectSpecular;
 			float3 NDF;
+			float3 EnergyCompensation;
 			float3 IndirectSpecular;
 			float3 CustomIndirect;
 			float4 LightmapDirection;
@@ -1044,6 +1068,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_BumpMap);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_SpecularTintTexture);
 			UNITY_DECLARE_TEX2D_NOSAMPLER(_TangentMap);
+			Texture2D_float _DFG;
+			SamplerState sampler_DFG;
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
@@ -1290,6 +1316,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 				OneMinusReflectivity = (1 - sp) - (Metallic * (1 - sp));
 				Albedo.rgb *= OneMinusReflectivity;
 			}
+			void SetupDFG()
+			{
+				float2 dfguv = float2(NdotV, Roughness);
+				Dfg = _DFG.Sample(sampler_DFG, dfguv).xy;
+				EnergyCompensation = 1.0 + SpecularColor * (1.0 / Dfg.y - 1.0);
+			}
 			void PremultiplyAlpha()
 			{
 				#if defined(_ALPHAPREMULTIPLY_ON)
@@ -1533,13 +1565,12 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			void FinalizeDirectSpecularTerm()
 			{
-				DirectSpecular = GFS * NDF;
+				DirectSpecular = GFS * NDF * FresnelTerm(SpecularColor, LdotH) * EnergyCompensation;
 				#ifdef UNITY_COLORSPACE_GAMMA
 				DirectSpecular = sqrt(max(1e-4h, DirectSpecular));
 				#endif
 				DirectSpecular = max(0, DirectSpecular * Attenuation);
 				DirectSpecular *= any(SpecularColor) ? 1.0 : 0.0;
-				DirectSpecular *= FresnelTerm(SpecularColor, LdotH);
 			}
 			void GetFallbackCubemap()
 			{
@@ -1563,8 +1594,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			{
 				half perceptualRoughness = glossIn.roughness /* perceptualRoughness */ ;
 				
-				// TODO: CAUTION: remap from Morten may work only with offline convolution, see impact with runtime convolution!
-				// For now disabled
 				#if 0
 				float m = PerceptualRoughnessToRoughness(perceptualRoughness); // m is the real roughness parameter
 				const float fEps = 1.192092896e-07F;        // smallest such that 1.0+FLT_EPSILON != 1.0  (+1e-4h is NOT good here. is visibly very wrong)
@@ -1597,6 +1626,17 @@ Shader "VRLabs/Toony Standard RE:Build"
 				envData.roughness = Roughness;
 				envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube0_ProbePosition, unity_SpecCube0_BoxMin, unity_SpecCube0_BoxMax);
 				float4 indirectSpecularRGBA = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE(unity_SpecCube0), unity_SpecCube0_HDR, envData);
+				
+				#if defined(UNITY_SPECCUBE_BLENDING) && !defined(SHADER_API_MOBILE)
+				UNITY_BRANCH
+				if (unity_SpecCube0_BoxMin.w < 0.99999)
+				{
+					envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube1_ProbePosition, unity_SpecCube1_BoxMin, unity_SpecCube1_BoxMax);
+					float4 indirectSpecularRGBA1 = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE_SAMPLER(unity_SpecCube1, unity_SpecCube0), unity_SpecCube1_HDR, envData);
+					indirectSpecularRGBA = lerp(indirectSpecularRGBA1, indirectSpecularRGBA, unity_SpecCube0_BoxMin.w);
+				}
+				#endif
+				
 				IndirectSpecular =  indirectSpecularRGBA.rgb;
 				if ((_IndirectFallbackMode > 0 && indirectSpecularRGBA.a == 0) || (_IndirectOverride > 0))
 				{
@@ -1606,8 +1646,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 					IndirectSpecular = CustomIndirect * min(lightColGrey, 1);
 				}
 				
+				float horizon = min(1 + NdotH, 1.0);
 				float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
-				IndirectSpecular *= FresnelLerp(SpecularColor, grazingTerm, NdotV);
+				Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
+				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
 			}
 			void AddStandardDiffuse()
 			{
@@ -1623,7 +1665,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void AddIndirectSpecular()
 			{
-				FinalColor.rgb += IndirectSpecular * Occlusion;
+				FinalColor.rgb += IndirectSpecular * clamp(pow(NdotV + Occlusion, exp2(-16.0 * SquareRoughness - 1.0)) - 1.0 + Occlusion, 0.0, 1.0);
 			}
 			void AddAlpha()
 			{
@@ -1678,6 +1720,10 @@ Shader "VRLabs/Toony Standard RE:Build"
 				if(_EnableSpecular == 1)
 				{
 					SetupAlbedoAndSpecColor();
+				}
+				if(_EnableSpecular == 1)
+				{
+					SetupDFG();
 				}
 				PremultiplyAlpha();
 				if(_DirectLightMode == 0)
@@ -1751,7 +1797,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			CGPROGRAM
 			
-			#pragma target 3.0
+			#pragma target 5.0
 			
 			#pragma multi_compile_shadowcaster
 			#pragma skip_variants FOG_LINEAR FOG_EXP FOG_EXP2

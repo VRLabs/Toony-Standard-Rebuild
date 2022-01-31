@@ -17,8 +17,6 @@ half4 Unity_GlossyEnvironment (UNITY_ARGS_TEXCUBE(tex), half4 hdr, Unity_GlossyE
 {
     half perceptualRoughness = glossIn.roughness /* perceptualRoughness */ ;
 
-    // TODO: CAUTION: remap from Morten may work only with offline convolution, see impact with runtime convolution!
-    // For now disabled
     #if 0
         float m = PerceptualRoughnessToRoughness(perceptualRoughness); // m is the real roughness parameter
         const float fEps = 1.192092896e-07F;        // smallest such that 1.0+FLT_EPSILON != 1.0  (+1e-4h is NOT good here. is visibly very wrong)
@@ -52,6 +50,17 @@ void GetIndirectSpecular()
     envData.roughness = Roughness;
     envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube0_ProbePosition, unity_SpecCube0_BoxMin, unity_SpecCube0_BoxMax);
     float4 indirectSpecularRGBA = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE(unity_SpecCube0), unity_SpecCube0_HDR, envData);
+    
+    #if defined(UNITY_SPECCUBE_BLENDING) && !defined(SHADER_API_MOBILE)
+        UNITY_BRANCH
+        if (unity_SpecCube0_BoxMin.w < 0.99999)
+        {
+            envData.reflUVW = BoxProjectedCubemapDirection(ReflectDir, FragData.worldPos, unity_SpecCube1_ProbePosition, unity_SpecCube1_BoxMin, unity_SpecCube1_BoxMax);
+            float4 indirectSpecularRGBA1 = Unity_GlossyEnvironment(UNITY_PASS_TEXCUBE_SAMPLER(unity_SpecCube1, unity_SpecCube0), unity_SpecCube1_HDR, envData);
+            indirectSpecularRGBA = lerp(indirectSpecularRGBA1, indirectSpecularRGBA, unity_SpecCube0_BoxMin.w);
+        }
+    #endif
+    
     IndirectSpecular =  indirectSpecularRGBA.rgb;
     if ((_IndirectFallbackMode > 0 && indirectSpecularRGBA.a == 0) || (_IndirectOverride > 0))
     {
@@ -61,6 +70,8 @@ void GetIndirectSpecular()
         IndirectSpecular = CustomIndirect * min(lightColGrey, 1);
     }
 
+    float horizon = min(1 + NdotH, 1.0);
     float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
-    IndirectSpecular *= FresnelLerp(SpecularColor, grazingTerm, NdotV);
+    Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
+    IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
 }

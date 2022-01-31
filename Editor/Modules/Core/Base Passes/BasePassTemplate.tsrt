@@ -24,6 +24,8 @@ FragmentData Vertex (VertexData v)
     return i;
 }
 
+#K#FUNCTION_STAGES
+
 float4 Fragment (FragmentData i) : SV_TARGET
 {	
     FragData = i;

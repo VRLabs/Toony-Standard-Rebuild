@@ -1,4 +1,4 @@
 void AddIndirectSpecular()
 {
-    FinalColor.rgb += IndirectSpecular * Occlusion;
+    FinalColor.rgb += IndirectSpecular * clamp(pow(NdotV + Occlusion, exp2(-16.0 * SquareRoughness - 1.0)) - 1.0 + Occlusion, 0.0, 1.0);
 }
