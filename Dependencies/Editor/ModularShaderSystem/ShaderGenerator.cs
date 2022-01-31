@@ -64,7 +64,6 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             }
             finally
             {
-                // To make sure the AssetDatabase doesn't break out
                 AssetDatabase.StopAssetEditing();
             }
             
@@ -746,7 +745,11 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             {
                 var importedShader = AssetImporter.GetAtPath($"{context.FilePath}/" + context.VariantFileName) as ShaderImporter;
                 var customTextures = context.Modules.SelectMany(x => x.Properties).Where(x => x.DefaultTextureAsset != null).ToList();
-                if (importedShader != null) importedShader.SetDefaultTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                if (importedShader != null)
+                {
+                    importedShader.SetDefaultTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                    importedShader.SetNonModifiableTextures(customTextures.Select(x => x.Name).ToArray(), customTextures.Select(x => x.DefaultTextureAsset).ToArray());
+                }
                 AssetDatabase.ImportAsset($"{context.FilePath}/" + context.VariantFileName);
             }
         }
@@ -755,8 +758,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
         {
             List<ShaderModule> modules = new List<ShaderModule>();
             if (shader == null) return modules;
-            modules.AddRange(shader.BaseModules);
-            modules.AddRange(shader.AdditionalModules);
+            modules.AddRange(shader.BaseModules.Where(x => x != null));
+            modules.AddRange(shader.AdditionalModules.Where(x => x != null));
             return modules;
         }
 
@@ -803,6 +806,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             foreach (var module in shader.BaseModules)
             {
+                if (module == null) continue;
                 bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
                 bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
                 if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>
@@ -816,6 +820,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
             foreach (var module in shader.AdditionalModules)
             {
+                if (module == null) continue;
                 bool hasEnabler = module.EnableProperties.Any(x => x != null && !string.IsNullOrEmpty(x.Name));
                 bool hasKey = hasEnabler && module.EnableProperties.Any(x => activeEnablers.TryGetValue(x.Name, out _));
                 if (!hasEnabler || !hasKey || (module.EnableProperties.All(x =>

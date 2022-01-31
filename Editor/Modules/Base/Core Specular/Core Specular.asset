@@ -300,31 +300,6 @@ MonoBehaviour:
       CustomType: SamplerState
     VariableKeywords: []
     CodeKeywords: []
-  - Name: SetupDFG
-    AppendAfter: '#K#META_FRAGMENT_FUNCTION'
-    Queue: 135
-    ShaderFunctionCode: {fileID: -544282384758852595, guid: 04bbbfa0fcd66bb4a9378148b98a00f1,
-      type: 3}
-    UsedVariables:
-    - Name: _DFG
-      Type: 999
-      CustomType: Texture2D_float
-    - Name: sampler_DFG
-      Type: 999
-      CustomType: SamplerState
-    - Name: NdotV
-      Type: 4
-      CustomType: SamplerState
-    - Name: Dfg
-      Type: 5
-      CustomType: SamplerState
-    - Name: EnergyCompensation
-      Type: 6
-      CustomType: SamplerState
-    VariableKeywords:
-    - META_VARIABLES
-    CodeKeywords:
-    - META_CODE
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
     Assembly-CSharp-Editor\",\r\n    \"Name\": \"Core Specular\",\r\n    \"Sections\":
     {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
