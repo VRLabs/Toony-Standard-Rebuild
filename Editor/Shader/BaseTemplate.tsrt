@@ -16,12 +16,13 @@ Pass
     }
     
     CGPROGRAM
-    #pragma target 3.0
+    #pragma target 5.0
     #pragma vertex Vertex
     #pragma fragment Fragment
     #pragma multi_compile_fwdbase
     #pragma multi_compile_fog	
     #pragma multi_compile _ VERTEXLIGHT_ON
+    #K#MAIN_PASS_PRAGMAS
     #ifndef UNITY_PASS_FORWARDBASE
         #define UNITY_PASS_FORWARDBASE
     #endif
@@ -50,11 +51,12 @@ Pass
     ZWrite Off
 
     CGPROGRAM
-    #pragma target 3.0
+    #pragma target 5.0
     #pragma vertex Vertex
     #pragma fragment Fragment
     #pragma multi_compile_fwdadd_fullshadows
     #pragma multi_compile_fog
+    #K#ADD_PASS_PRAGMAS
 
     #pragma shader_feature_local _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
         
@@ -79,13 +81,14 @@ Pass
 
     CGPROGRAM
 
-    #pragma target 3.0
+    #pragma target 5.0
 
     #pragma multi_compile_shadowcaster
     #pragma skip_variants FOG_LINEAR FOG_EXP FOG_EXP2
 
     #pragma vertex Vertex
     #pragma fragment Fragment
+    #K#SHADOW_PASS_PRAGMAS
 
     #pragma shader_feature_local _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 
@@ -107,6 +110,7 @@ Pass
 
     #pragma vertex Vertex
     #pragma fragment Fragment
+    #K#META_PASS_PRAGMAS
 
     #K#META_PASS
 
