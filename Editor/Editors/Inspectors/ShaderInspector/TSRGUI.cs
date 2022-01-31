@@ -773,8 +773,8 @@ namespace VRLabs.ToonyStandardRebuild
             GUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
-            if (ModularShader != null) GUILayout.Label($"Modular shader loaded: {ModularShader.Name}");
-            else GUILayout.Label($"Modular shader loaded: ");
+            if (ModularShader != null) GUILayout.Label($"Modular shader loaded: {ModularShader.Name}", GUILayout.MinWidth(0));
+            else GUILayout.Label($"Modular shader loaded: ", GUILayout.MinWidth(0));
             GUILayout.FlexibleSpace();
             // Draw the language selector only if there is more than 1 language available.
             if (_languages?.Length > 1)
