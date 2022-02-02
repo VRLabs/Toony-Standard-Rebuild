@@ -18,6 +18,9 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
         public static void GenerateShader(string path, ModularShader shader, Action<StringBuilder, ShaderContext> postGeneration, bool hideVariants = false)
         {
+            
+            path = GetPathRelativeToProject(path);
+
             var modules = FindAllModules(shader);
             
             var freshAssets = new Dictionary<TemplateAsset, TemplateAsset>();
@@ -55,8 +58,13 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             {
                 AssetDatabase.StartAssetEditing();
                 
-                foreach (Shader generatedShader in shader.LastGeneratedShaders)
-                    File.Delete(AssetDatabase.GetAssetPath(generatedShader));
+                foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                {
+                    string assetPath = AssetDatabase.GetAssetPath(generatedShader);
+                    if(string.IsNullOrWhiteSpace(assetPath))
+                        File.Delete(assetPath);
+                }
+
                 shader.LastGeneratedShaders = new List<Shader>();
                 
                 foreach (var context in contexts)
@@ -75,8 +83,24 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             AssetDatabase.Refresh();
         }
 
+        private static string GetPathRelativeToProject(string path)
+        {
+            if (!Directory.Exists(path))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not found");
+
+            if (!path.Contains(Application.dataPath) && !path.StartsWith("Assets"))
+                throw new DirectoryNotFoundException($"The folder \"{path}\" is not part of the unity project");
+
+            if(!path.StartsWith("Assets"))
+                path = path.Replace(Application.dataPath, "");
+            
+            return path;
+        }
+
         public static void GenerateMinimalShader(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
+            path = GetPathRelativeToProject(path);
+            
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();
@@ -101,6 +125,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
         public static List<ShaderContext> EnqueueShadersToGenerate(string path, ModularShader shader, IEnumerable<Material> materials, Action<StringBuilder, ShaderContext> postGeneration = null)
         {
+            path = GetPathRelativeToProject(path);
+            
             var modules = FindAllModules(shader);
             var possibleVariants = GetMinimalVariants(modules, materials);
             var contexts = new List<ShaderContext>();

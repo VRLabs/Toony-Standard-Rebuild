@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI;
 
 namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 {
@@ -31,6 +32,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 
         public Texture DefaultTextureAsset;
         
+        [PropertyAttribute]
         public List<string> Attributes;
 
         public virtual Variable ToVariable()

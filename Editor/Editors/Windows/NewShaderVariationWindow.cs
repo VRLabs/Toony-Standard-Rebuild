@@ -117,9 +117,8 @@ namespace VRLabs.ToonyStandardRebuild
             }
 
             string shaderPath = EditorUtility.OpenFolderPanel("New Shader path", "Assets", "");
-            if (string.IsNullOrWhiteSpace(shaderPath) || shaderPath.IndexOf("/Assets", StringComparison.Ordinal) == -1)
+            if (string.IsNullOrWhiteSpace(shaderPath))
                 return;
-            shaderPath = shaderPath.Substring(shaderPath.IndexOf("/Assets", StringComparison.Ordinal) + 1);
             
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -182,11 +181,23 @@ namespace VRLabs.ToonyStandardRebuild
             foreach (var file in Directory.GetFiles(oldLocalizationPath).Where(x => !Path.GetExtension(x).Equals(".meta")))
                 File.Copy(file, $"{newLocalizationPath}/{Path.GetFileName(file)}");
 
-            ShaderGenerator.GenerateShader(shaderPath, newShader, PostGeneration);
-            EditorUtility.SetDirty(newShader);
-
-            stopwatch.Stop();
-            Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{newShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
+            try
+            {
+                ShaderGenerator.GenerateShader(shaderPath, newShader, PostGeneration);
+                EditorUtility.SetDirty(newShader);
+                stopwatch.Stop();
+                Debug.Log($"Toony Standard RE:Build: updated shader modules for \"{newShader.Name}\" in {stopwatch.ElapsedMilliseconds}ms");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                Debug.Log($"Toony Standard RE:Build: Failed to update shader modules for \"{newShader.Name}\"");
+                throw;
+            }
+            finally
+            {
+                stopwatch.Stop();
+            }
         }
 
         private void InitializeLists()
