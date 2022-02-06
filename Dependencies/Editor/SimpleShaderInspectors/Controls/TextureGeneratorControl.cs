@@ -1,46 +1,93 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
 {
     public class TextureGeneratorControl : TextureControl, IAdditionalLocalization
     {
-        private readonly AdditionalLocalization[] _baseContent;
-        private readonly AdditionalLocalization[] _textureContent;
-        private readonly AdditionalLocalization[] _colorContent;
-        private readonly AdditionalLocalization[] _namesContent;
+        internal readonly AdditionalLocalization[] baseContent;
+        internal AdditionalLocalization[] namesContent;
+        
         private bool _isGeneratorOpen;
-        private readonly ComputeShader _compute;
-        private readonly string _kernelName;
+        private readonly Shader _shader;
         private Resolution _resolution;
-        private readonly List<ComputeInputBase> _inputs;
-        private RenderTexture _result;
-        private Texture2D _resultTex;
-        private readonly bool _containsTextures;
-
+        private bool _linearSpace;
+        
+        private CustomRenderTexture _crt;
+        private Material _crtMaterial;
+        private MaterialEditor _crtMaterialEditor;
+        private DefaultGeneratorGUI _crtEditorGUI;
+        private PropertyInfo[] _propertyInfos;
+        private Texture2D[] _previousTextures;
+        private float _width;
+        private float _windowWidth;
+        private List<Shader> _shaderStack;
         private static readonly string[] _baseNames =
-                        {
+        {
             "GeneratorOpen",        //[0]
             "GeneratorSaveButton",  //[1]
             "GeneratorCancelButton",//[2]
-            "GeneratorTextureSize"  //[3]
+            "GeneratorTextureSize", //[3]
+            "GeneratorPreview",     //[4]
+            "GeneratorLinearSpace"  //[5]
         };
-        private static readonly string[] _textureNames =
+        
+        private ISimpleShaderInspector _inspector;
+
+        public override ISimpleShaderInspector Inspector
+        {
+            get => _inspector;
+            set
+            {
+                if (_inspector == value) return;
+                _inspector = value;
+                _crtMaterial = new Material(_shader);
+                _crtMaterialEditor = Editor.CreateEditor(_crtMaterial) as MaterialEditor;
+                _shaderStack = new List<Shader>();
+                bool isRoot = true;
+                if (Inspector is TextureGeneratorShaderInspector generatorInspector)
                 {
-            "TextureInvert"         //[0]
-        };
+                    _shaderStack.AddRange(generatorInspector.shaderStack);
+                    isRoot = false;
+                }
+                _shaderStack.Add(Inspector.Shader);
+            
+                if (_crtMaterialEditor.customShaderGUI != null && _crtMaterialEditor.customShaderGUI is TextureGeneratorShaderInspector compliantInspector)
+                {
+                    if (_shaderStack.Contains(((Material)_crtMaterialEditor.target).shader))
+                    {
+                        NamesContent = Array.Empty<AdditionalLocalization>();
+                    }
+                    else
+                    {
+                        compliantInspector.shaderStack.AddRange(_shaderStack);
+                        compliantInspector.Setup(_crtMaterialEditor, MaterialEditor.GetMaterialProperties(_crtMaterialEditor.targets));
+                        NamesContent = compliantInspector.GetRequiredLocalization().Where(x => !string.IsNullOrWhiteSpace(x.Name)).Distinct().ToArray();
+                    }
+                }
+                else
+                {
+                    NamesContent = Array.Empty<AdditionalLocalization>();
+                }
 
-        private static readonly string[] _colorNames =
-                        {
-            "ColorSpace"            //[0]
-        };
+                if(isRoot)
+                    foreach (AdditionalLocalization t in NamesContent)
+                        t.Name = "Input_" + t.Name;
 
-        private readonly bool _containsColors;
+                Object.DestroyImmediate(_crtMaterial);
+                Object.DestroyImmediate(_crtMaterialEditor);
+            }
+        }
 
         [FluentSet] public GUIStyle GeneratorButtonStyle { get; set; }
         
         [FluentSet] public GUIStyle GeneratorSaveButtonStyle { get; set; }
+        
+        [FluentSet] public GUIStyle GeneratorCloseButtonStyle { get; set; }
 
         [FluentSet] public GUIStyle GeneratorStyle { get; set; }
 
@@ -49,6 +96,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         [FluentSet] public Color GeneratorButtonColor { get; set; }
 
         [FluentSet] public Color GeneratorSaveButtonColor { get; set; }
+        
+        [FluentSet] public Color GeneratorCloseButtonColor { get; set; }
 
         [FluentSet] public Color GeneratorColor { get; set; }
 
@@ -59,71 +108,43 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             get
             {
                 List<AdditionalLocalization> content = new List<AdditionalLocalization>();
-                content.AddRange(_baseContent);
-                if (_containsTextures) content.AddRange(_textureContent);
-                if (_containsColors) content.AddRange(_colorContent);
-                content.AddRange(_namesContent);
+                content.AddRange(baseContent);
+                content.AddRange(NamesContent);
 
                 return content.ToArray();
             }
             set { }
         }
-        public TextureGeneratorControl(string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : this(ComputeShaders.RGBAPacker, ComputeShaders.RGBAPackerSettings, propertyName, extraPropertyName1, extraPropertyName2)
+
+        internal AdditionalLocalization[] NamesContent
+        {
+            get => namesContent;
+            set => namesContent = value;
+        }
+
+        public TextureGeneratorControl(string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : this(Shaders.RGBAPacker, propertyName, extraPropertyName1, extraPropertyName2)
         {
         }
 
-        public TextureGeneratorControl(ComputeShader compute, string computeOptionsJson, string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : base(propertyName, extraPropertyName1, extraPropertyName2)
+        public TextureGeneratorControl(Shader shader, string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : base(propertyName, extraPropertyName1, extraPropertyName2)
         {
             HasCustomInlineContent = true;
             _resolution = Resolution.M_512x512;
-            _result = new RenderTexture((int)_resolution, (int)_resolution, 32, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB)
-            {
-                enableRandomWrite = true
-            };
-            _result.Create();
-
-            _compute = compute;
-            (_kernelName, _inputs) = TextureGeneratorHelper.GetInputs(computeOptionsJson);
-
-            foreach (var input in _inputs)
-            {
-                switch (input)
-                {
-                    case ComputeTextureInput _:
-                        _containsTextures = true;
-                        break;
-                    case ComputeColorInput _:
-                        _containsColors = true;
-                        break;
-                }
-
-                if (_containsColors && _containsTextures)
-                {
-                    break;
-                }
-            }
+            _shader = shader;
 
             GeneratorButtonStyle = Styles.Bubble;
             GeneratorStyle = Styles.TextureBoxHeavyBorder;
             GeneratorInputStyle = Styles.Box;
             GeneratorSaveButtonStyle = Styles.Bubble;
+            GeneratorCloseButtonStyle = Styles.Bubble;
 
             GeneratorButtonColor = Color.white;
             GeneratorColor = Color.white;
             GeneratorInputColor = Color.white;
             GeneratorSaveButtonColor = Color.white;
+            GeneratorCloseButtonColor = Color.white;
 
-            _baseContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_baseNames);
-
-            if (_containsTextures)
-                _textureContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_textureNames);
-
-            if (_containsTextures)
-                _colorContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_colorNames);
-
-            _namesContent = new AdditionalLocalization[_inputs.Count];
-            for (int i = 0; i < _inputs.Count; i++)
-                _namesContent[i] = new AdditionalLocalization { Name = "Input" + (i + 1) };
+            baseContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_baseNames);
         }
 
         protected override void ControlGUI(MaterialEditor materialEditor)
@@ -148,121 +169,215 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         
         protected override void DrawSideContent(MaterialEditor materialEditor)
         {
-            if (!_isGeneratorOpen)
+            if (_isGeneratorOpen) return;
+            
+            GUI.backgroundColor = GeneratorButtonColor;
+            if (GUILayout.Button(baseContent[0].Content, GeneratorButtonStyle))
             {
-                GUI.backgroundColor = GeneratorButtonColor;
-                if (GUILayout.Button(_baseContent[0].Content, GeneratorButtonStyle))
-                {
-                    _isGeneratorOpen = true;
-                }
-                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
+                _isGeneratorOpen = true;
+                _previousTextures = new Texture2D[materialEditor.targets.Length];
+                for (int i = 0; i < Inspector.Materials.Length; i++)
+                    _previousTextures[i] = (Texture2D)Inspector.Materials[i].GetTexture(PropertyName);
+                Selection.selectionChanged += GeneratorCloseCleanup;
             }
+            GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
         }
 
         private void DrawGenerator()
         {
-            int columns = (int)((EditorGUIUtility.currentViewWidth - 20) / 90) - 1;
-            if (columns == 0) columns = 1;
-            for (int i = 0; i < _inputs.Count; i++)
+            if (_crtMaterialEditor == null)
             {
-                if (i % columns == 0)
+                _crt = new CustomRenderTexture(
+                    (int)_resolution, (int)_resolution, RenderTextureFormat.ARGB32, 
+                    _linearSpace ? RenderTextureReadWrite.Linear : RenderTextureReadWrite.sRGB);
+                Property.textureValue = _crt;
+                _crtMaterial = new Material(_shader);
+                _crt.material = _crtMaterial;
+                _crtMaterialEditor = Editor.CreateEditor(_crtMaterial) as MaterialEditor;
+                switch (_crtMaterialEditor.customShaderGUI)
                 {
-                    if (i == 0)
-                    {
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                    }
-                    else
-                    {
-                        GUILayout.FlexibleSpace();
-                        EditorGUILayout.EndHorizontal();
-                        EditorGUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                    }
+                    case null:
+                        _crtEditorGUI = new DefaultGeneratorGUI();
+                        break;
+                    case TextureGeneratorShaderInspector compliantInspector:
+                        SetupInspector(compliantInspector);
+                        break;
                 }
-
-                AdditionalLocalization[] selectedArray = _inputs[i] is ComputeTextureInput ? _textureContent : _colorContent;
+                UnityEditorInternal.InternalEditorUtility.SetIsInspectorExpanded(_crtMaterial, true);
                 
-                GUI.backgroundColor = GeneratorInputColor;
-                EditorGUILayout.BeginVertical(GeneratorInputStyle);
-                GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
-                _inputs[i].InputGUI(_namesContent[i].Content, selectedArray);
-                EditorGUILayout.EndVertical();
+                
             }
-            GUILayout.FlexibleSpace();
-            EditorGUILayout.EndHorizontal();
-            _resolution = (Resolution)EditorGUILayout.EnumPopup(_baseContent[3].Content, _resolution); //_baseContent[3]
+            
+            EditorGUI.indentLevel++;
+            EditorGUILayout.BeginVertical();
+            if (_crtEditorGUI != null)
+                _crtEditorGUI.OnGUI(_crtMaterialEditor, MaterialEditor.GetMaterialProperties(_crtMaterialEditor.targets));
+            else
+                _crtMaterialEditor.OnInspectorGUI();
+            EditorGUILayout.EndVertical();
+            EditorGUI.indentLevel--;
 
+            EditorGUILayout.Space(20);
+            
+            if(Event.current.type != EventType.Repaint)
+            {
+                float oldWindowWidth = _windowWidth;
+                _windowWidth = EditorGUIUtility.currentViewWidth;
+                float difference = _windowWidth - oldWindowWidth;
+                _width += difference;
+            }
+
+            GUI.backgroundColor = GeneratorInputColor;
+            EditorGUILayout.BeginHorizontal(GeneratorInputStyle);
+            EditorGUILayout.BeginVertical();
+            if (_width <= 400)
+            {
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.BeginVertical();
+            }
+            GUILayout.Label(baseContent[4].Content,GUILayout.MinWidth(60));
+            Rect windowRect = GUILayoutUtility.GetRect(10, 126, 10, 132);
+            float squareSize = Mathf.Min(windowRect.width - 6, windowRect.height - 12);
+            var previewRect = new Rect(windowRect.x + 7, windowRect.y + 9, squareSize, squareSize);
+            GUI.DrawTexture(previewRect, _crt, ScaleMode.StretchToFill, true);
+            
+            if (_width <= 400)
+            {
+                EditorGUILayout.EndVertical();
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.EndHorizontal();
+            }
+            else
+            {
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.BeginVertical();
+                GUILayout.FlexibleSpace();
+            }
+            
+            EditorGUI.BeginChangeCheck();
+            
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label(baseContent[5].Content,GUILayout.MinWidth(20));
+            GUILayout.FlexibleSpace();
+            _linearSpace = EditorGUILayout.Toggle( _linearSpace, GUILayout.Width(16));
+            EditorGUILayout.EndHorizontal();
+            
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label(baseContent[3].Content, GUILayout.MinWidth(20));
+            GUILayout.FlexibleSpace();
+            _resolution = (Resolution)EditorGUILayout.EnumPopup(_resolution,GUILayout.Width(130));
+            EditorGUILayout.EndHorizontal();
+            
+            if (EditorGUI.EndChangeCheck())
+            {
+                _crt.Release();
+                Object.DestroyImmediate(_crt);
+                _crt = new CustomRenderTexture(
+                    (int)_resolution, (int)_resolution, RenderTextureFormat.ARGB32, 
+                    _linearSpace ? RenderTextureReadWrite.Linear : RenderTextureReadWrite.sRGB);
+                _crt.material = _crtMaterial;
+                Property.textureValue = _crt;
+            }
             EditorGUILayout.BeginHorizontal();
             GUI.backgroundColor = GeneratorSaveButtonColor;
             
-            if (GUILayout.Button(_baseContent[1].Content, GeneratorSaveButtonStyle))
+            if (GUILayout.Button(baseContent[1].Content, GeneratorSaveButtonStyle,GUILayout.MinWidth(60)))
             {
                 GenerateTexture();
+                _previousTextures = null;
                 _isGeneratorOpen = false;
+                GeneratorCloseCleanup();
+                
             }
-            
-            if (GUILayout.Button(_baseContent[2].Content, GeneratorSaveButtonStyle))
+            GUI.backgroundColor = GeneratorCloseButtonColor;
+            if (GUILayout.Button(baseContent[2].Content, GeneratorCloseButtonStyle,GUILayout.MinWidth(60)))
+            {
                 _isGeneratorOpen = false;
+                GeneratorCloseCleanup();
+                
+            }
             
             GUI.backgroundColor = SimpleShaderInspector.DefaultBgColor;
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+            
+            EditorGUILayout.EndHorizontal();
+            
+            if (Event.current.type == EventType.Repaint)
+            {
+                _windowWidth = EditorGUIUtility.currentViewWidth;
+                _width = GUILayoutUtility.GetLastRect().width;
+            }
+
+
+        }
+
+        private void GeneratorCloseCleanup()
+        {
+            if (_crt != null)
+            {
+                _crt.Release();
+                Object.DestroyImmediate(_crt);
+                _crt = null;
+            }
+
+            Object.DestroyImmediate(_crtMaterial);
+            Object.DestroyImmediate(_crtMaterialEditor);
+            _crtMaterial = null;
+            _crtMaterialEditor = null;
+            _crtEditorGUI = null;
+            
+            if (_previousTextures != null)
+            {
+                for (int i = 0; i < Inspector.Materials.Length; i++)
+                {
+                    if (Inspector.Materials[i] == null) continue;
+                    Inspector.Materials[i].SetTexture(PropertyName, _previousTextures[i]);
+                }
+                    
+
+                _previousTextures = null;
+            }
+            
+            Selection.selectionChanged -= GeneratorCloseCleanup;
+        }
+
+        private void SetupInspector(TextureGeneratorShaderInspector compliantInspector)
+        {
+            compliantInspector.isFromGenerator = true;
+            compliantInspector.shaderStack.AddRange(_shaderStack);
+            compliantInspector.Setup(_crtMaterialEditor, MaterialEditor.GetMaterialProperties(_crtMaterialEditor.targets));
+            
+            if (Inspector is TextureGeneratorShaderInspector ins)
+                _propertyInfos = ins.stackedInfo;
+            else
+            {
+                _propertyInfos = new PropertyInfo[NamesContent.Length];
+                for (int i = 0; i < _propertyInfos.Length; i++)
+                {
+                    _propertyInfos[i] = new PropertyInfo
+                    {
+                        Name = NamesContent[i].Name.Substring(6),
+                        DisplayName = NamesContent[i].Content.text,
+                        Tooltip = NamesContent[i].Content.tooltip
+                    };
+                    
+                }
+            }
+            compliantInspector.SetShaderLocalizationFromGenerator(_propertyInfos);
         }
 
         private void GenerateTexture()
         {
-            if (_result.width != (int)_resolution || _result.height != (int)_resolution)
-            {
-                _result = new RenderTexture((int)_resolution, (int)_resolution, 32, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB)
-                {
-                    enableRandomWrite = true
-                };
-                _result.Create();
-            }
-
-            int kernel = _compute.FindKernel(_kernelName);
-            _compute.SetTexture(kernel, "Result", _result);
-            _compute.SetFloat("width", (float)_resolution);
-            _compute.SetFloat("height", (float)_resolution);
-
-            var computeData = new ComputeInputs();
-            foreach (var input in _inputs)
-                input.AssignInputsToCompute(computeData, kernel);
-            
-            ComputeBuffer textureParamsBuffer = null;
-            ComputeBuffer colorParamsBuffer = null;
-            if (computeData.TexturesMeta.Count > 0)
-            {
-                textureParamsBuffer = new ComputeBuffer(computeData.TexturesMeta.Count, 20);
-                textureParamsBuffer.SetData(computeData.TexturesMeta.ToArray());
-                _compute.SetBuffer(kernel, "TexturesMeta", textureParamsBuffer);
-            }
-            if (computeData.Colors.Count > 0)
-            {
-                colorParamsBuffer = new ComputeBuffer(computeData.Colors.Count, 16);
-                colorParamsBuffer.SetData(computeData.Colors.ToArray());
-                _compute.SetBuffer(kernel, "Colors", colorParamsBuffer);
-            }
-
-            foreach (var texture in computeData.Textures)
-                _compute.SetTexture(kernel, texture.Name, texture.Texture);
-            
-            _compute.Dispatch(kernel, (int)_resolution / 16, (int)_resolution / 16, 1);
-
-            textureParamsBuffer?.Release();
-            colorParamsBuffer?.Release();
-
-            RenderTexture.active = _result;
-            _resultTex = new Texture2D(_result.width, _result.height, TextureFormat.RGBA32, false);
-            _resultTex.ReadPixels(new Rect(0, 0, _result.width, _result.height), 0, 0);
-            RenderTexture.active = null;
-            _resultTex.Apply(true);
-            Property.textureValue = SSIHelper.SaveAndGetTexture(_resultTex, SSIHelper.GetTextureDestinationPath((Material)Property.targets[0], PropertyName + ".png"));
+            string path = SSIHelper.GetTextureDestinationPath((Material)Property.targets[0], PropertyName + ".png");
+            Property.textureValue = SSIHelper.SaveAndGetTexture(_crt, path, TextureWrapMode.Repeat, _linearSpace);
         }
     }
 
     public enum Resolution
     {
+        XXS_64x64 = 64,
         XS_128x128 = 128,
         S_256x256 = 256,
         M_512x512 = 512,

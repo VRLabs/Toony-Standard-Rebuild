@@ -39,19 +39,18 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
         }
     }
 
-    public static class ComputeShaders
+    public static class Shaders
     {
-        private static ComputeShader _rgbaPacker;
-        public static ComputeShader RGBAPacker
+        private static Shader _rgbaPacker;
+        public static Shader RGBAPacker
         {
             get
             {
                 if (_rgbaPacker != null) return _rgbaPacker;
-                _rgbaPacker = Resources.Load<ComputeShader>($"{SSIConstants.RESOURCES_FOLDER}/ComputeShaders/RGBAPacker");
+                _rgbaPacker = Resources.Load<Shader>($"{SSIConstants.RESOURCES_FOLDER}/Shaders/RGBAPacker");
                 return _rgbaPacker;
             }
         }
-        public static string RGBAPackerSettings => Resources.Load<TextAsset>($"{SSIConstants.RESOURCES_FOLDER}/ComputeShaderSettings/RGBAPackerDefault").text;
     }
 
     public static class Styles

@@ -1,6 +1,46 @@
 {
     "Properties": [
         {
+            "Name": "MSSO_Input_RGBAPacker_RedTexture",
+            "DisplayName": "Metallic map",
+            "Tooltip": "Metallic map texture"
+        },
+        {
+            "Name": "MSSO_Input_RGBAPacker_Invert",
+            "DisplayName": "Invert",
+            "Tooltip": "Invert texture channel"
+        },
+        {
+            "Name": "MSSO_Input_RGBAPacker_Channel",
+            "DisplayName": "",
+            "Tooltip": ""
+        },
+        {
+            "Name": "MSSO_Input_RGBAPacker_GreenTexture",
+            "DisplayName": "Smoothness map",
+            "Tooltip": "Smoothness map texture"
+        },
+        {
+            "Name": "MSSO_Input_RGBAPacker_BlueTexture",
+            "DisplayName": "Specular map",
+            "Tooltip": "Specular map texture"
+        },
+        {
+            "Name": "MSSO_Input_RGBAPacker_AlphaTexture",
+            "DisplayName": "Occlusion map",
+            "Tooltip": "Occlusion map texture"
+        },
+        {
+            "Name": "MSSO_GeneratorPreview",
+            "DisplayName": "Preview",
+            "Tooltip": ""
+        },
+        {
+            "Name": "MSSO_GeneratorLinearSpace",
+            "DisplayName": "Linear space",
+            "Tooltip": ""
+        },
+        {
             "Name": "Albedo_UV",
             "DisplayName": "UV set",
             "Tooltip": "UV set for the Albedo texture"

@@ -5,7 +5,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
     public abstract class SimpleControl
     {
-        public ISimpleShaderInspector Inspector { get; set; }
+        public virtual ISimpleShaderInspector Inspector { get; set; }
         public GUIContent Content { get; set; }
 
         public string ControlAlias { get; set; }

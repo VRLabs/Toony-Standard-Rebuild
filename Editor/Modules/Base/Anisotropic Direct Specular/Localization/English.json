@@ -1,6 +1,31 @@
 {
     "Properties": [
         {
+            "Name": "Tangent Map_Input_TangentGen_Tangent",
+            "DisplayName": "Tangent (RGB)",
+            "Tooltip": "Tangent map used, takes the rgb values"
+        },
+        {
+            "Name": "Tangent Map_Input_TangentGen_Anisotropy",
+            "DisplayName": "Anisotropic",
+            "Tooltip": "Anisotropic map used, will be put as alpha"
+        },
+        {
+            "Name": "Tangent Map_Input_TangentGen_Channel",
+            "DisplayName": "Anisotropic channel",
+            "Tooltip": "Channel in which the anisotropic value resides"
+        },
+        {
+            "Name": "Tangent Map_GeneratorPreview",
+            "DisplayName": "Preview",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Tangent Map_GeneratorLinearSpace",
+            "DisplayName": "Linear space",
+            "Tooltip": ""
+        },
+        {
             "Name": "Tangent Map_UV",
             "DisplayName": "UV set",
             "Tooltip": "UV set for the tangent map"
@@ -39,16 +64,6 @@
             "Name": "Tangent Map_TextureInvert",
             "DisplayName": "Invert",
             "Tooltip": "Invert texture"
-        },
-        {
-            "Name": "Tangent Map_Input1",
-            "DisplayName": "Tangent (RGB)",
-            "Tooltip": "Tangent map used, takes the rgb values"
-        },
-        {
-            "Name": "Tangent Map_Input2",
-            "DisplayName": "Anisotropic",
-            "Tooltip": "Anisotropic map used, will be put as alpha"
         },
         {
             "Name": "Anisotropy",

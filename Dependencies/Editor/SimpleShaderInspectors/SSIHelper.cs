@@ -176,6 +176,32 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             var t = AssetImporter.GetAtPath(path) as TextureImporter;
             if (t != null)
             {
+                t.streamingMipmaps = true;
+                t.wrapMode = mode;
+                t.isReadable = true;
+                t.sRGBTexture = !linear;
+            }
+
+            AssetDatabase.ImportAsset(path);
+        }
+        
+        public static void SaveTexture(RenderTexture texture, string path, TextureWrapMode mode = TextureWrapMode.Repeat, bool linear = false)
+        {
+            var oldRT = RenderTexture.active;
+ 
+            var tex = new Texture2D(texture.width, texture.height, TextureFormat.RGBA32, false);
+            RenderTexture.active = texture;
+            tex.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
+            tex.Apply();
+            RenderTexture.active = oldRT;
+            byte[] bytes = tex.EncodeToPNG();
+            File.WriteAllBytes(path, bytes);
+            AssetDatabase.Refresh();
+            path = path.Substring(path.LastIndexOf("Assets", StringComparison.Ordinal));
+            var t = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (t != null)
+            {
+                t.streamingMipmaps = true;
                 t.wrapMode = mode;
                 t.isReadable = true;
                 t.sRGBTexture = !linear;
@@ -185,6 +211,13 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
         }
 
         public static Texture2D SaveAndGetTexture(Texture2D texture, string path, TextureWrapMode mode = TextureWrapMode.Repeat, bool linear = false)
+        {
+            SaveTexture(texture, path, mode, linear);
+            path = path.Substring(path.LastIndexOf("Assets", StringComparison.Ordinal));
+            return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        }
+        
+        public static Texture2D SaveAndGetTexture(RenderTexture texture, string path, TextureWrapMode mode = TextureWrapMode.Repeat, bool linear = false)
         {
             SaveTexture(texture, path, mode, linear);
             path = path.Substring(path.LastIndexOf("Assets", StringComparison.Ordinal));

@@ -131,10 +131,10 @@ namespace VRLabs.ToonyStandardRebuild
         
         public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
         {
-            if (uiAsset.Parameters.Count < 6 || !(uiAsset.Parameters[0] is ComputeShader) ||
-                !(uiAsset.Parameters[1] is string) || !(uiAsset.Parameters[2] is string) ||
-                !(uiAsset.Parameters[3] is string) || !(uiAsset.Parameters[4] is string) ||
-                !(uiAsset.Parameters[5] is string))
+            if (uiAsset.Parameters.Count < 5 || !(uiAsset.Parameters[0] is Shader) ||
+                !(uiAsset.Parameters[1] is string) ||
+                !(uiAsset.Parameters[2] is string) || !(uiAsset.Parameters[3] is string) ||
+                !(uiAsset.Parameters[4] is string))
             {
                 if (uiAsset.Parameters.Count < 4 || !(uiAsset.Parameters[0] is string) ||
                     !(uiAsset.Parameters[1] is string) || !(uiAsset.Parameters[2] is string) ||
@@ -142,16 +142,16 @@ namespace VRLabs.ToonyStandardRebuild
                     throw new TypeAccessException("The parameter given was not of the right type");
             }
 
-            if (uiAsset.Parameters.Count < 6)
+            if (uiAsset.Parameters.Count < 5)
             {
                 uvSet = (string)uiAsset.Parameters[3];
                 return parentControl.AddTextureGeneratorControl((string)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
                     (string)uiAsset.Parameters[2], uiAsset.AppendAfter).WithAlias(uiAsset.Name).WithShowTilingAndOffset(true);
             }
 
-            uvSet = (string)uiAsset.Parameters[5];
-            return parentControl.AddTextureGeneratorControl((ComputeShader)uiAsset.Parameters[0], (string)uiAsset.Parameters[1],
-                (string)uiAsset.Parameters[2], (string)uiAsset.Parameters[3], (string)uiAsset.Parameters[4],
+            uvSet = (string)uiAsset.Parameters[4];
+            return parentControl.AddTextureGeneratorControl((Shader)uiAsset.Parameters[0],
+                (string)uiAsset.Parameters[1], (string)uiAsset.Parameters[2], (string)uiAsset.Parameters[3],
                 uiAsset.AppendAfter).WithAlias(uiAsset.Name).WithShowTilingAndOffset(true);
         }
 
