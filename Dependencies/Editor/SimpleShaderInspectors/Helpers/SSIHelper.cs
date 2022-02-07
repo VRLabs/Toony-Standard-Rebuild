@@ -65,6 +65,16 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                     con.GetControlList().SetInspector(inspector);
             }
         }
+        
+        public static void Initialize(this IEnumerable<SimpleControl> controls, bool recursive = true)
+        {
+            foreach (var control in controls)
+            {
+                control.Init();
+                if (recursive && control is IControlContainer con)
+                    con.GetControlList().Initialize();
+            }
+        }
 
         internal static int FindPropertyIndex(string propertyName, MaterialProperty[] properties, bool propertyIsMandatory = false)
         {

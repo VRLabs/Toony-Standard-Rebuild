@@ -38,51 +38,6 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
         
         private ISimpleShaderInspector _inspector;
 
-        public override ISimpleShaderInspector Inspector
-        {
-            get => _inspector;
-            set
-            {
-                if (_inspector == value) return;
-                _inspector = value;
-                _crtMaterial = new Material(_shader);
-                _crtMaterialEditor = Editor.CreateEditor(_crtMaterial) as MaterialEditor;
-                _shaderStack = new List<Shader>();
-                bool isRoot = true;
-                if (Inspector is TextureGeneratorShaderInspector generatorInspector)
-                {
-                    _shaderStack.AddRange(generatorInspector.shaderStack);
-                    isRoot = false;
-                }
-                _shaderStack.Add(Inspector.Shader);
-            
-                if (_crtMaterialEditor.customShaderGUI != null && _crtMaterialEditor.customShaderGUI is TextureGeneratorShaderInspector compliantInspector)
-                {
-                    if (_shaderStack.Contains(((Material)_crtMaterialEditor.target).shader))
-                    {
-                        NamesContent = Array.Empty<AdditionalLocalization>();
-                    }
-                    else
-                    {
-                        compliantInspector.shaderStack.AddRange(_shaderStack);
-                        compliantInspector.Setup(_crtMaterialEditor, MaterialEditor.GetMaterialProperties(_crtMaterialEditor.targets));
-                        NamesContent = compliantInspector.GetRequiredLocalization().Where(x => !string.IsNullOrWhiteSpace(x.Name)).Distinct().ToArray();
-                    }
-                }
-                else
-                {
-                    NamesContent = Array.Empty<AdditionalLocalization>();
-                }
-
-                if(isRoot)
-                    foreach (AdditionalLocalization t in NamesContent)
-                        t.Name = "Input_" + t.Name;
-
-                Object.DestroyImmediate(_crtMaterial);
-                Object.DestroyImmediate(_crtMaterialEditor);
-            }
-        }
-
         [FluentSet] public GUIStyle GeneratorButtonStyle { get; set; }
         
         [FluentSet] public GUIStyle GeneratorSaveButtonStyle { get; set; }
@@ -109,19 +64,12 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             {
                 List<AdditionalLocalization> content = new List<AdditionalLocalization>();
                 content.AddRange(baseContent);
-                content.AddRange(NamesContent);
+                content.AddRange(namesContent);
 
                 return content.ToArray();
             }
             set { }
         }
-
-        internal AdditionalLocalization[] NamesContent
-        {
-            get => namesContent;
-            set => namesContent = value;
-        }
-
         public TextureGeneratorControl(string propertyName, string extraPropertyName1 = null, string extraPropertyName2 = null) : this(Shaders.RGBAPacker, propertyName, extraPropertyName1, extraPropertyName2)
         {
         }
@@ -145,6 +93,45 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             GeneratorCloseButtonColor = Color.white;
 
             baseContent = AdditionalContentExtensions.CreateLocalizationArrayFromNames(_baseNames);
+        }
+
+        public override void Initialization()
+        {
+            _crtMaterial = new Material(_shader);
+            _crtMaterialEditor = Editor.CreateEditor(_crtMaterial) as MaterialEditor;
+            _shaderStack = new List<Shader>();
+            bool isRoot = true;
+            if (Inspector is TextureGeneratorShaderInspector generatorInspector)
+            {
+                _shaderStack.AddRange(generatorInspector.shaderStack);
+                isRoot = false;
+            }
+            _shaderStack.Add(Inspector.Shader);
+            
+            if (_crtMaterialEditor.customShaderGUI != null && _crtMaterialEditor.customShaderGUI is TextureGeneratorShaderInspector compliantInspector)
+            {
+                if (_shaderStack.Contains(((Material)_crtMaterialEditor.target).shader))
+                {
+                    namesContent = Array.Empty<AdditionalLocalization>();
+                }
+                else
+                {
+                    compliantInspector.shaderStack.AddRange(_shaderStack);
+                    compliantInspector.Setup(_crtMaterialEditor, MaterialEditor.GetMaterialProperties(_crtMaterialEditor.targets));
+                    namesContent = compliantInspector.GetRequiredLocalization().Where(x => !string.IsNullOrWhiteSpace(x.Name)).Distinct().ToArray();
+                }
+            }
+            else
+            {
+                namesContent = Array.Empty<AdditionalLocalization>();
+            }
+
+            if(isRoot)
+                foreach (AdditionalLocalization t in namesContent)
+                    t.Name = "Input_" + t.Name;
+
+            Object.DestroyImmediate(_crtMaterial);
+            Object.DestroyImmediate(_crtMaterialEditor);
         }
 
         protected override void ControlGUI(MaterialEditor materialEditor)
@@ -353,14 +340,14 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
                 _propertyInfos = ins.stackedInfo;
             else
             {
-                _propertyInfos = new PropertyInfo[NamesContent.Length];
+                _propertyInfos = new PropertyInfo[namesContent.Length];
                 for (int i = 0; i < _propertyInfos.Length; i++)
                 {
                     _propertyInfos[i] = new PropertyInfo
                     {
-                        Name = NamesContent[i].Name.Substring(6),
-                        DisplayName = NamesContent[i].Content.text,
-                        Tooltip = NamesContent[i].Content.tooltip
+                        Name = namesContent[i].Name.Substring(6),
+                        DisplayName = namesContent[i].Content.text,
+                        Tooltip = namesContent[i].Content.tooltip
                     };
                     
                 }

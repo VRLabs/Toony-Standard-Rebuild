@@ -5,6 +5,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 {
     public abstract class SimpleControl
     {
+        private bool _initialized;
+
         public virtual ISimpleShaderInspector Inspector { get; set; }
         public GUIContent Content { get; set; }
 
@@ -23,6 +25,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 
         protected abstract void ControlGUI(MaterialEditor materialEditor);
 
+        public virtual void Initialization() {}
+
         public void DrawControl(MaterialEditor materialEditor)
         {
             if (!IsVisible) return;
@@ -35,6 +39,15 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             else
             {
                 ControlGUI(materialEditor);
+            }
+        }
+        
+        internal void Init()
+        {
+            if (!_initialized)
+            {
+                Initialization();
+                _initialized = true;
             }
         }
     }

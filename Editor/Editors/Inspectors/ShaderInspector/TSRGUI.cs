@@ -310,6 +310,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             LoadMainOrderedSectionLocalization();
             loadedControls.SetInspector(this);
+            loadedControls.Initialize();
             LoadModuleLocalization(loadedControls, modulePath);
         }
 
@@ -330,6 +331,7 @@ namespace VRLabs.ToonyStandardRebuild
             }
 
             loadedControls.SetInspector(this);
+            loadedControls.Initialize();
             LoadModuleLocalization(loadedControls, modulePath);
         }
 

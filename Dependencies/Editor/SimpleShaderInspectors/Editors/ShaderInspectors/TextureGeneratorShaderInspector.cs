@@ -62,6 +62,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             Shader = Materials[0].shader;
             Start();
             Controls.SetInspector(this);
+            Controls.Initialize();
             _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
             Controls.FetchProperties(properties);
             StartChecks(materialEditor);
@@ -113,7 +114,7 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             {
                 if (additional is TextureGeneratorControl texture)
                 {
-                        elements.AddRange(texture.NamesContent.Select(x => new AdditionalLocalization{Name = $"{x.Name}", Content = null}));
+                        elements.AddRange(texture.namesContent.Select(x => new AdditionalLocalization{Name = $"{x.Name}", Content = null}));
                         elements.AddRange(texture.baseContent.Select(x => new AdditionalLocalization { Name = $"{control.ControlAlias}_{x.Name}", Content = null }));
                 }
                 else

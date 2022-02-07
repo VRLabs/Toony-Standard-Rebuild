@@ -36,6 +36,11 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
 
         protected abstract void Start();
 
+        protected virtual void LoadLocalization()
+        {
+            LoadLocalizationsPrivate();
+        }
+
         protected virtual void Header() { }
 
         protected virtual void Footer() { }
@@ -50,19 +55,8 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
             {
                 DefaultBgColor = GUI.backgroundColor;
                 _logo = EditorGUIUtility.isProSkin ? Styles.SSILogoDark : Styles.SSILogoLight;
-                NeedsNonAnimatableUpdate = false;
-                Controls = new List<SimpleControl>();
-                Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
-                Shader = Materials[0].shader;
-                Start();
-                Controls.SetInspector(this);
-                LoadLocalizations();
-                _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
-                Controls.FetchProperties(properties);
-                StartChecks(materialEditor);
+                Setup(materialEditor, properties);
                 _isFirstLoop = false;
-                if (Controls == null || Controls.Count == 0)
-                    _doesContainControls = false;
             }
             else
             {
@@ -75,11 +69,27 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors
                 SSIHelper.UpdateNonAnimatableProperties(_nonAnimatablePropertyControls, materialEditor, NeedsNonAnimatableUpdate);
 
             DrawFooter();
-
             CheckChanges(materialEditor);
         }
 
-        private void LoadLocalizations()
+        private void Setup(MaterialEditor materialEditor, MaterialProperty[] properties)
+        {
+            NeedsNonAnimatableUpdate = false;
+            Controls = new List<SimpleControl>();
+            Materials = Array.ConvertAll(materialEditor.targets, item => (Material)item);
+            Shader = Materials[0].shader;
+            Start();
+            Controls.SetInspector(this);
+            Controls.FetchProperties(properties);
+            _nonAnimatablePropertyControls = (List<INonAnimatableProperty>)Controls.FindNonAnimatablePropertyControls();
+            if (Controls == null || Controls.Count == 0)
+                _doesContainControls = false;
+            Controls.Initialize();
+            LoadLocalization();
+            StartChecks(materialEditor);
+        }
+
+        private void LoadLocalizationsPrivate()
         {
             if (string.IsNullOrWhiteSpace(_path))
             {
