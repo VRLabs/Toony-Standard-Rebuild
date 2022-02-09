@@ -210,7 +210,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
-			float2 Uvs[16];
+			float2 Uvs[1];
 			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
@@ -1073,7 +1073,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
-			float2 Uvs[16];
+			float2 Uvs[1];
 			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
@@ -1867,7 +1867,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
-			float2 Uvs[16];
+			float2 Uvs[1];
 			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;
@@ -2038,7 +2038,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			#define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 			
-			float2 Uvs[16];
+			float2 Uvs[1];
 			inline void LoadUV0()
 			{
 				Uvs[0] = FragData.uv;

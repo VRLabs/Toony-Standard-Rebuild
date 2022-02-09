@@ -1,6 +1,6 @@
 #define TSR_TRANSFORM_TEX(set,name) (set[name##_UV].xy * name##_ST.xy + name##_ST.zw)
 
-float2 Uvs[16];
+float2 Uvs[#K#IDXC#BASESET];
 #K#BASE_UV_SET_FUNCTIONS
 
 void LoadUVList()
