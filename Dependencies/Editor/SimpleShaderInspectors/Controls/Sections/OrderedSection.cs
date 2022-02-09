@@ -152,8 +152,9 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.Sections
                     _sectionPosition = 0;
             }
 
-            Enabled = SectionPosition > 0;
-            AdditionalProperties[0].Property.floatValue = Enabled ? enableValue : disableValue;
+            Enabled = SectionPosition > 0 && !AdditionalProperties[0].Property.hasMixedValue;
+            if(!AdditionalProperties[0].Property.hasMixedValue || HasSectionTurnedOn)
+                AdditionalProperties[0].Property.floatValue = Enabled ? enableValue : disableValue;
             HasActivatePropertyUpdated = false;
         }
         
