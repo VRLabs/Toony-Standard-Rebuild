@@ -42,6 +42,8 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem.UI
 
             var propType = GetPropertyTypeFromSerializedProperty(type.stringValue);
 
+            enumField.Init(propType);
+            
             enumField.value = propType;
             
             enumField.RegisterValueChangedCallback(e =>

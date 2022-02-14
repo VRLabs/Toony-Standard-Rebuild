@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
 
-namespace VRLabs.ToonyStandardRebuild
+namespace VRLabs.ToonyStandardRebuild.SSIControls
 {
     public class HelpBoxControlUIElement : VisualElement
     {

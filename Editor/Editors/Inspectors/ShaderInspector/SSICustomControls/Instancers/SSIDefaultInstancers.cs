@@ -6,7 +6,7 @@ using VRLabs.ToonyStandardRebuild.ModularShaderSystem;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors;
 using VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls;
 
-namespace VRLabs.ToonyStandardRebuild
+namespace VRLabs.ToonyStandardRebuild.SSIControls
 {
     public class LabelControlInstancer : IControlInstancer
     {

@@ -2,7 +2,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Collections.Generic;
 
-namespace VRLabs.ToonyStandardRebuild
+namespace VRLabs.ToonyStandardRebuild.SSIControls
 {
     public class ConditionalControlContainerUIElement : VisualElement
     {

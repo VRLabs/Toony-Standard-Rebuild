@@ -5,7 +5,7 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 
-namespace VRLabs.ToonyStandardRebuild
+namespace VRLabs.ToonyStandardRebuild.SSIControls
 {
     public class TextureGeneratorControlUIElement : VisualElement
     {

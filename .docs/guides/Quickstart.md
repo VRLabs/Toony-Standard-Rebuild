@@ -22,7 +22,7 @@ Apply the shader to a material by selecting `VRLabs/Toony Standard RE:Build` and
 After the banner you can see a line showing the selected modular shader, the language selection, and a gear icon that let's you go to the options for the shader, we'll check this one later on.
 
 > [!NOTE]
-> There are 2 reasons to why the modular shader used is selected:
+> There are 2 reasons to why the modular shader used is showed:
 > - A modular shader can contain multiple generated shaders
 > - The inspector can handle different shaders
 
@@ -99,4 +99,4 @@ Remember that if you update the module package to get new updates of said module
 
 Now you're up to speed with what you need to know to use the shader and have fun with it! There are still a *lot* more features and things to talk about, but they're not needed for a basic use of the shader. 
 
-If you want to get more detailed info about a topic, check the other guides on this site, and if you think there's something missing in the guides, come on [Discord](discord.vrlabs.dev) and notify us about it, if it's something that we agree it should be in here we will gladly take it into consideration.
+If you want to get more detailed info about a topic, check the other guides on this site, and if you think there's something missing in the guides, come on [Discord](https://discord.vrlabs.dev) and notify us about it, if it's something that we agree it should be in here we will gladly take it into consideration.

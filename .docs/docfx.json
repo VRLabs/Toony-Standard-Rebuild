@@ -23,7 +23,7 @@
       }
     ],
     "dest": "_site",
-    "xref": [ "https://normanderwan.github.io/UnityXrefMaps/xrefmap.yml", "ssi.vrlabs.dev/Next.xrefmap.yml", "mss.vrlabs.dev/Next.xrefmap.yml" ],
+    "xref": [ "https://normanderwan.github.io/UnityXrefMaps/xrefmap.yml", "https://ssi.vrlabs.dev/Next.xrefmap.yml", "https://mss.vrlabs.dev/Next.xrefmap.yml" ],
     "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ],
     "postProcessors": [ "ExtractSearchIndex" ],
     "globalMetadata": {

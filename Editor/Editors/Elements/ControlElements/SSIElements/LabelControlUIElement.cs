@@ -1,7 +1,7 @@
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 
-namespace VRLabs.ToonyStandardRebuild
+namespace VRLabs.ToonyStandardRebuild.SSIControls
 {
     public class LabelControlUIElement : VisualElement
     {
