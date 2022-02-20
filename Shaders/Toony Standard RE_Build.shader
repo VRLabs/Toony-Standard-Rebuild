@@ -431,6 +431,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			void GetDotProducts()
 			{
 				UnmaxedNdotL = dot(NormalDir, LightDir);
+				UnmaxedNdotL = min(UnmaxedNdotL, LightColor.a);
 				NdotL = max(UnmaxedNdotL, 0);
 				NdotV = abs(dot(NormalDir, ViewDir));
 				NdotH = max(dot(NormalDir, HalfDir),0);
@@ -1294,6 +1295,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			void GetDotProducts()
 			{
 				UnmaxedNdotL = dot(NormalDir, LightDir);
+				UnmaxedNdotL = min(UnmaxedNdotL, LightColor.a);
 				NdotL = max(UnmaxedNdotL, 0);
 				NdotV = abs(dot(NormalDir, ViewDir));
 				NdotH = max(dot(NormalDir, HalfDir),0);

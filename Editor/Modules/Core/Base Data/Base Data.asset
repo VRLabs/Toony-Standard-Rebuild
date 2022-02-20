@@ -17,18 +17,13 @@ MonoBehaviour:
   Version: 1.0
   Author: VRLabs
   Description: Base Data given by the shader in the fragment pass
-  Enabled:
-    Name: 
-    DisplayName: 
-    Type: Float
-    DefaultValue: 0.0
-    Attributes: []
-    EnableValue: 0
+  EnableProperties: []
   Properties:
   - Name: _DirectLightMode
     DisplayName: Direct Light Mode
     Type: Float
     DefaultValue: 0.0
+    DefaultTextureAsset: {fileID: 0}
     Attributes: []
   ModuleDependencies: []
   IncompatibleWith: []
@@ -139,6 +134,9 @@ MonoBehaviour:
       CustomType: 
     - Name: LdotH
       Type: 4
+      CustomType: 
+    - Name: LightColor
+      Type: 7
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []
