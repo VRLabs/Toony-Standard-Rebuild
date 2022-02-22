@@ -57,12 +57,14 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             try
             {
                 AssetDatabase.StartAssetEditing();
-                
-                foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                if (shader.LastGeneratedShaders != null)
                 {
-                    string assetPath = AssetDatabase.GetAssetPath(generatedShader);
-                    if(string.IsNullOrWhiteSpace(assetPath))
-                        File.Delete(assetPath);
+                    foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))
+                    {
+                        string assetPath = AssetDatabase.GetAssetPath(generatedShader);
+                        if (string.IsNullOrWhiteSpace(assetPath))
+                            File.Delete(assetPath);
+                    }
                 }
 
                 shader.LastGeneratedShaders = new List<Shader>();
@@ -92,7 +94,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
                 throw new DirectoryNotFoundException($"The folder \"{path}\" is not part of the unity project");
 
             if(!path.StartsWith("Assets"))
-                path = path.Replace(Application.dataPath, "");
+                path = path.Replace(Application.dataPath, "Assets");
             
             return path;
         }

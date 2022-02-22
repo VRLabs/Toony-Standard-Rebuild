@@ -299,26 +299,26 @@ MonoBehaviour:
     CodeKeywords:
     - META_CODE
   AdditionalSerializedData: '{"module":"{\r\n    \"$id\": 0,\r\n    \"$type\": \"0|VRLabs.ToonyStandardRebuild.ModuleUI,
-    Assembly-CSharp-Editor\",\r\n    \"Name\": \"Default Inputs\",\r\n    \"Sections\":
+    VRLabs.ToonyStandardRebuild\",\r\n    \"Name\": \"Default Inputs\",\r\n    \"Sections\":
     {\r\n        \"$id\": 1,\r\n        \"$type\": \"1|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.SectionUI,
-    Assembly-CSharp-Editor]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
+    VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
     \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
-    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, Assembly-CSharp-Editor\",\r\n               
+    \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, VRLabs.ToonyStandardRebuild\",\r\n               
     \"SectionName\": \"Main\",\r\n                \"IsPermanent\": true,\r\n               
     \"ActivatePropertyName\": \"\",\r\n                \"EnableValue\": 1,\r\n               
     \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
     \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,
-    Assembly-CSharp-Editor]], mscorlib\",\r\n                    \"$rlength\": 5,\r\n                   
-    \"$rcontent\": [\r\n                        {\r\n                           
+    VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                    \"$rlength\":
+    5,\r\n                    \"$rcontent\": [\r\n                        {\r\n                           
     \"$id\": 4,\r\n                            \"$type\": \"4|VRLabs.ToonyStandardRebuild.ControlUI,
-    Assembly-CSharp-Editor\",\r\n                            \"Name\": \"Albedo\",\r\n                           
+    VRLabs.ToonyStandardRebuild\",\r\n                            \"Name\": \"Albedo\",\r\n                           
     \"AppendAfter\": null,\r\n                            \"UIControlType\": {\r\n                               
     \"$id\": 5,\r\n                                \"$type\": \"5|System.RuntimeType,
     mscorlib\",\r\n                                \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.TextureControl,
-    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 6,\r\n                               
-    \"$type\": \"6|System.Collections.Generic.List`1[[System.Object, mscorlib]],
-    mscorlib\",\r\n                                \"$rlength\": 4,\r\n                               
+    VRLabs.ToonyStandardRebuild.SimpleShaderInspectors\"\r\n                           
+    },\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 6,\r\n                                \"$type\": \"6|System.Collections.Generic.List`1[[System.Object,
+    mscorlib]], mscorlib\",\r\n                                \"$rlength\": 4,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
     \"$id\": 7,\r\n                                        \"$type\": \"7|System.String,
     mscorlib\",\r\n                                        \"_MainTex\"\r\n                                   
@@ -340,24 +340,24 @@ MonoBehaviour:
     null,\r\n                            \"UIControlType\": {\r\n                               
     \"$id\": 13,\r\n                                \"$type\": 5,\r\n                               
     \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.ConditionalControlContainer,
-    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 14,\r\n                               
-    \"$type\": 6,\r\n                                \"$rlength\": 2,\r\n                               
-    \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 15,\r\n                                        \"$type\": 7,\r\n                                       
-    \"_Mode\"\r\n                                    },\r\n                                   
-    {\r\n                                        \"$id\": 16,\r\n                                       
-    \"$type\": \"8|System.Single, mscorlib\",\r\n                                       
-    1\r\n                                    }\r\n                               
-    ]\r\n                            },\r\n                            \"Controls\":
-    {\r\n                                \"$id\": 17,\r\n                               
+    VRLabs.ToonyStandardRebuild.SimpleShaderInspectors\"\r\n                           
+    },\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 14,\r\n                                \"$type\": 6,\r\n                               
+    \"$rlength\": 2,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 15,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_Mode\"\r\n                                   
+    },\r\n                                    {\r\n                                       
+    \"$id\": 16,\r\n                                        \"$type\": \"8|System.Single,
+    mscorlib\",\r\n                                        1\r\n                                   
+    }\r\n                                ]\r\n                            },\r\n                           
+    \"Controls\": {\r\n                                \"$id\": 17,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 1,\r\n                               
     \"$rcontent\": [\r\n                                    {\r\n                                       
     \"$id\": 18,\r\n                                        \"$type\": 4,\r\n                                       
     \"Name\": \"Alpha Cutoff\",\r\n                                        \"AppendAfter\":
     null,\r\n                                        \"UIControlType\": {\r\n                                           
     \"$id\": 19,\r\n                                            \"$type\": 5,\r\n                                           
-    \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.PropertyControl, Assembly-CSharp-Editor\"\r\n                                       
+    \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.PropertyControl, VRLabs.ToonyStandardRebuild.SimpleShaderInspectors\"\r\n                                       
     },\r\n                                        \"Parameters\": {\r\n                                           
     \"$id\": 20,\r\n                                            \"$type\": 6,\r\n                                           
     \"$rlength\": 1,\r\n                                            \"$rcontent\":
@@ -393,17 +393,18 @@ MonoBehaviour:
     \"Name\": \"MSSO\",\r\n                            \"AppendAfter\": null,\r\n                           
     \"UIControlType\": {\r\n                                \"$id\": 30,\r\n                               
     \"$type\": 5,\r\n                                \"VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.TextureGeneratorControl,
-    Assembly-CSharp-Editor\"\r\n                            },\r\n                           
-    \"Parameters\": {\r\n                                \"$id\": 31,\r\n                               
-    \"$type\": 6,\r\n                                \"$rlength\": 4,\r\n                               
-    \"$rcontent\": [\r\n                                    {\r\n                                       
-    \"$id\": 32,\r\n                                        \"$type\": 7,\r\n                                       
-    \"_MSSO\"\r\n                                    },\r\n                                   
-    $iref:9,\r\n                                    $iref:9,\r\n                                   
-    {\r\n                                        \"$id\": 33,\r\n                                       
-    \"$type\": 7,\r\n                                        \"BASESET\"\r\n                                   
-    }\r\n                                ]\r\n                            },\r\n                           
-    \"Controls\": {\r\n                                \"$id\": 34,\r\n                               
+    VRLabs.ToonyStandardRebuild.SimpleShaderInspectors\"\r\n                           
+    },\r\n                            \"Parameters\": {\r\n                               
+    \"$id\": 31,\r\n                                \"$type\": 6,\r\n                               
+    \"$rlength\": 4,\r\n                                \"$rcontent\": [\r\n                                   
+    {\r\n                                        \"$id\": 32,\r\n                                       
+    \"$type\": 7,\r\n                                        \"_MSSO\"\r\n                                   
+    },\r\n                                    $iref:9,\r\n                                   
+    $iref:9,\r\n                                    {\r\n                                       
+    \"$id\": 33,\r\n                                        \"$type\": 7,\r\n                                       
+    \"BASESET\"\r\n                                    }\r\n                               
+    ]\r\n                            },\r\n                            \"Controls\":
+    {\r\n                                \"$id\": 34,\r\n                               
     \"$type\": 3,\r\n                                \"$rlength\": 0,\r\n                               
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        },\r\n                        {\r\n                           
@@ -420,26 +421,26 @@ MonoBehaviour:
     \"$rcontent\": [\r\n                                ]\r\n                           
     }\r\n                        }\r\n                    ]\r\n                },\r\n               
     \"OnSectionDisableData\": {\r\n                    \"$id\": 39,\r\n                   
-    \"$type\": \"9|VRLabs.ToonyStandardRebuild.UpdateData, Assembly-CSharp-Editor\",\r\n                   
+    \"$type\": \"9|VRLabs.ToonyStandardRebuild.UpdateData, VRLabs.ToonyStandardRebuild\",\r\n                   
     \"FloatProperties\": {\r\n                        \"$id\": 40,\r\n                       
     \"$type\": \"10|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Single,
-    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    mscorlib]], VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"ColorProperties\": {\r\n                       
     \"$id\": 41,\r\n                        \"$type\": \"11|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Color,
-    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    UnityEngine.CoreModule]], VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"TextureProperties\": {\r\n                       
     \"$id\": 42,\r\n                        \"$type\": \"12|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[UnityEngine.Texture,
-    UnityEngine.CoreModule]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    UnityEngine.CoreModule]], VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"Keywords\": {\r\n                       
     \"$id\": 43,\r\n                        \"$type\": \"13|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.Boolean,
-    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    mscorlib]], VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"OverrideTags\": {\r\n                       
     \"$id\": 44,\r\n                        \"$type\": \"14|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.UpdateProp`1[[System.String,
-    mscorlib]], Assembly-CSharp-Editor]], mscorlib\",\r\n                       
+    mscorlib]], VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n                       
     \"$rlength\": 0,\r\n                        \"$rcontent\": [\r\n                       
     ]\r\n                    },\r\n                    \"SetRenderQueue\": false,\r\n                   
     \"RenderQueue\": -1\r\n                }\r\n            }\r\n        ]\r\n   
