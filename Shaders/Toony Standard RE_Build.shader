@@ -417,6 +417,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				if(any(_WorldSpaceLightPos0.xyz) == 0 || _LightColor0.a < 0.01)
 				{
 					LightDir = normalize(unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
+					HalfDir = Unity_SafeNormalize(LightDir + ViewDir);
 					SpecLightColor.rgb = IndirectDiffuse;
 					LightColor.a = 1;
 					if(_DirectLightMode > 0)
@@ -1281,6 +1282,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				if(any(_WorldSpaceLightPos0.xyz) == 0 || _LightColor0.a < 0.01)
 				{
 					LightDir = normalize(unity_SHAr.xyz + unity_SHAg.xyz + unity_SHAb.xyz);
+					HalfDir = Unity_SafeNormalize(LightDir + ViewDir);
 					SpecLightColor.rgb = IndirectDiffuse;
 					LightColor.a = 1;
 					if(_DirectLightMode > 0)

@@ -100,6 +100,12 @@ MonoBehaviour:
     - Name: _DirectLightMode
       Type: 4
       CustomType: 
+    - Name: HalfDir
+      Type: 6
+      CustomType: 
+    - Name: ViewDir
+      Type: 6
+      CustomType: 
     VariableKeywords: []
     CodeKeywords: []
   - Name: GetDotProducts
