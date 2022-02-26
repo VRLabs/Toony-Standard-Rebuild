@@ -306,7 +306,7 @@ MonoBehaviour:
     VRLabs.ToonyStandardRebuild]], mscorlib\",\r\n        \"$rlength\": 1,\r\n       
     \"$rcontent\": [\r\n            {\r\n                \"$id\": 2,\r\n               
     \"$type\": \"2|VRLabs.ToonyStandardRebuild.SectionUI, VRLabs.ToonyStandardRebuild\",\r\n               
-    \"SectionName\": \"Specular\",\r\n                \"IsPermanent\": false,\r\n               
+    \"SectionName\": \"Specular Section\",\r\n                \"IsPermanent\": false,\r\n               
     \"ActivatePropertyName\": \"_EnableSpecular\",\r\n                \"EnableValue\":
     1,\r\n                \"DisableValue\": 0,\r\n                \"Controls\": {\r\n                   
     \"$id\": 3,\r\n                    \"$type\": \"3|System.Collections.Generic.List`1[[VRLabs.ToonyStandardRebuild.ControlUI,

@@ -6,7 +6,7 @@
             "Tooltip": "UV set for specular tint"
         },
         {
-            "Name": "Specular_Path",
+            "Name": "Specular Section_Path",
             "DisplayName": "Lighting",
             "Tooltip": ""
         },
@@ -19,6 +19,11 @@
             "Name": "Specular",
             "DisplayName": "Specular",
             "Tooltip": "Specular reflection intensity (standard like default is 0.5)"
+        },
+        {
+            "Name": "Specular Section",
+            "DisplayName": "Specular",
+            "Tooltip": "Define specular behaviour"
         },
         {
             "Name": "Metallic",

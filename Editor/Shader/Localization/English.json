@@ -16,7 +16,7 @@
             "Tooltip": "Controls which face of the mesh is rendered \n\nOff: Double sided \n\nFront: Single sided (internal parts showing) \n\nBack: Single sided"
         },
         {
-            "Name": "Main",
+            "Name": "Main Section",
             "DisplayName": "Main",
             "Tooltip": "Main settings of the shader"
         },
