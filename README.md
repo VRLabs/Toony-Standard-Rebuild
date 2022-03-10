@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild">
-    <img alt="Toony Standard RE:Build" height="128" src="https://raw.githubusercontent.com/VRLabs/Toony-Standard-Rebuild/main/Editor/Resources/TSR/Logo.png">
+    <img alt="Toony Standard RE:Build" height="128" src="Editor/Resources/TSR/Logo.png">
   </a>
   <h1>Toony Standard RE:Build</h1>
   <p>
