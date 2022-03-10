@@ -2,7 +2,6 @@
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild">
     <img alt="Toony Standard RE:Build" height="128" src="Editor/Resources/TSR/Logo.png">
   </a>
-  <h1>Toony Standard RE:Build</h1>
   <p>
      A modular shader designed for VRChat.
   </p>
