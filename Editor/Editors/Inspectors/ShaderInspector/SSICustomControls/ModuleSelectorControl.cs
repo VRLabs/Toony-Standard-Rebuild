@@ -20,7 +20,7 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
         }
         private readonly GUIContent[] _options;
         private readonly List<int> _indexes;
-        private int _previousIndex = -1;
+        private int _previousIndex = 0;
         private int _previousValue;
 
         public int SelectedOption =>  (int)Property.floatValue;
@@ -75,6 +75,30 @@ namespace VRLabs.ToonyStandardRebuild.SSICustomControls
             _previousIndex = selected;
             _previousValue = _indexes[selected];
             Property.floatValue = _indexes[selected];
+        }
+    }
+    
+    public class ModuleSelectorControlUIElement : VisualElement
+    {
+        public ModuleSelectorControlUIElement(List<object> parameters)
+        {
+            var parameterNameField = new TextField("Parameter name");
+
+            if (parameters.Count != 1)
+            {
+                parameters.Clear();
+                parameters.Add("");
+            }
+            else
+            {
+                if (!(parameters[0] is string))
+                    parameters[0] = "";
+            }
+
+            parameterNameField.SetValueWithoutNotify((string)parameters[0]);
+            parameterNameField.RegisterValueChangedCallback(e => parameters[0] = e.newValue);
+
+            Add(parameterNameField);
         }
     }
     

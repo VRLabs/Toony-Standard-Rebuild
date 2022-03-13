@@ -22,6 +22,7 @@ Pass
     #pragma multi_compile_fwdbase
     #pragma multi_compile_fog	
     #pragma multi_compile _ VERTEXLIGHT_ON
+    #pragma multi_compile_instancing
     #K#MAIN_PASS_PRAGMAS
     #ifndef UNITY_PASS_FORWARDBASE
         #define UNITY_PASS_FORWARDBASE
@@ -56,6 +57,7 @@ Pass
     #pragma fragment Fragment
     #pragma multi_compile_fwdadd_fullshadows
     #pragma multi_compile_fog
+    #pragma multi_compile_instancing
     #K#ADD_PASS_PRAGMAS
 
     #pragma shader_feature_local _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON

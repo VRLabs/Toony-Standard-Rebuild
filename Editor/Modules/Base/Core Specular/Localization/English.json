@@ -1,6 +1,11 @@
 {
     "Properties": [
         {
+            "Name": "Material Type",
+            "DisplayName": "Material Type",
+            "Tooltip": ""
+        },
+        {
             "Name": "Specular Tint_UV",
             "DisplayName": "UV set",
             "Tooltip": "UV set for specular tint"

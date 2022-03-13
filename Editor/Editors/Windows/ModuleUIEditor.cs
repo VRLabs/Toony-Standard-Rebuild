@@ -20,7 +20,7 @@ namespace VRLabs.ToonyStandardRebuild
     }
     public class ModuleUIEditor : EditorWindow
     {
-        [MenuItem("VRLabs/Toony Standard RE:Build/Edit UI For module")]
+        [MenuItem("VRLabs/Toony Standard RE:Build/Edit UI For module", priority = 10)]
         public static void ShowExample()
         {
             ModuleUIEditor window = GetWindow<ModuleUIEditor>();

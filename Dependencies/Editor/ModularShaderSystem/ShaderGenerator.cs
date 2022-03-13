@@ -57,6 +57,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             try
             {
                 AssetDatabase.StartAssetEditing();
+                
                 if (shader.LastGeneratedShaders != null)
                 {
                     foreach (Shader generatedShader in shader.LastGeneratedShaders.Where(x => x != null))

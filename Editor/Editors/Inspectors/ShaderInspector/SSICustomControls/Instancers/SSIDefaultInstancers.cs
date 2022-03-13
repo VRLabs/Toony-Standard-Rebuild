@@ -300,6 +300,34 @@ namespace VRLabs.ToonyStandardRebuild.SSIControls
         public VisualElement InstanceEditorUI(ControlUI uiAsset) => new LightmapEmissionControlUIElement(uiAsset.Parameters);
     }
     
+    public class DoubleSidedGIControlInstancer : IControlInstancer
+    {
+        public Type InstanceType => typeof(DoubleSidedGIControl);
+        public bool CanHaveChildControls => false;
+        
+        public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
+        {
+            uvSet = null;
+            return parentControl.AddDoubleSidedGIControl(uiAsset.AppendAfter).WithAlias(uiAsset.Name);
+        }
+
+        public VisualElement InstanceEditorUI(ControlUI uiAsset) => new DoubleSidedGIControlUIElement(uiAsset.Parameters);
+    }
+    
+    public class EnableInstancingControlInstancer : IControlInstancer
+    {
+        public Type InstanceType => typeof(EnableInstancingControl);
+        public bool CanHaveChildControls => false;
+        
+        public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet)
+        {
+            uvSet = null;
+            return parentControl.AddEnableInstancingControl(uiAsset.AppendAfter).WithAlias(uiAsset.Name);
+        }
+
+        public VisualElement InstanceEditorUI(ControlUI uiAsset) => new EnableInstancingControlUIElement(uiAsset.Parameters);
+    }
+    
     public class VertexStreamsControlInstancer : IControlInstancer
     {
         public Type InstanceType => typeof(VertexStreamsControl);

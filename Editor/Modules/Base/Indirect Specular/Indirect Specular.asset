@@ -86,7 +86,7 @@ MonoBehaviour:
       Type: 6
       CustomType: 
     - Name: Dfg
-      Type: 5
+      Type: 6
       CustomType: 
     - Name: Occlusion
       Type: 4
@@ -96,6 +96,9 @@ MonoBehaviour:
       CustomType: 
     - Name: SpecularColor
       Type: 6
+      CustomType: 
+    - Name: _DFGType
+      Type: 4
       CustomType: 
     VariableKeywords: []
     CodeKeywords: []

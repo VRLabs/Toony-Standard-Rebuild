@@ -73,5 +73,5 @@ void GetIndirectSpecular()
     float horizon = min(1 + NdotH, 1.0);
     float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
     Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
-    IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
+    IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(lerp(Dfg.xxx, Dfg.yyy, SpecularColor), SpecularColor * Dfg.z, _DFGType);
 }

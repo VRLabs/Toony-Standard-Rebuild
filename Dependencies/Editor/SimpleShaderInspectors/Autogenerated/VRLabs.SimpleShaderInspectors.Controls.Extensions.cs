@@ -33,6 +33,20 @@ namespace VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls
             return control;
         }
 
+        public static VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.DoubleSidedGIControl AddDoubleSidedGIControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, string appendAfterAlias = "")
+        {
+            var control = new VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.DoubleSidedGIControl();
+            container.AddControl(control, appendAfterAlias);
+            return control;
+        }
+
+        public static VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.EnableInstancingControl AddEnableInstancingControl(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, string appendAfterAlias = "")
+        {
+            var control = new VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.EnableInstancingControl();
+            container.AddControl(control, appendAfterAlias);
+            return control;
+        }
+
         public static VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.EnumControl<TEnum> AddEnumControl<TEnum>(this VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.IControlContainer container, System.String propertyName, string appendAfterAlias = "") where TEnum : System.Enum
         {
             var control = new VRLabs.ToonyStandardRebuild.SimpleShaderInspectors.Controls.EnumControl<TEnum>(propertyName);

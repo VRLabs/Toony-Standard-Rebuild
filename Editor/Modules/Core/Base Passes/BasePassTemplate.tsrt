@@ -1,11 +1,15 @@
 struct VertexData 
 {
     #K#VERTEX_DATA
+
+    UNITY_VERTEX_INPUT_INSTANCE_ID 
 };
 
 struct FragmentData 
 {
     #K#FRAGMENT_DATA
+
+    UNITY_VERTEX_OUTPUT_STEREO 
 };
 
 FragmentData FragData;
@@ -17,7 +21,9 @@ float4 FinalColor;
 FragmentData Vertex (VertexData v)
 {
     FragmentData i;
+    UNITY_SETUP_INSTANCE_ID(v);
     UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+    UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(i);
 	
     #K#VERTEX_FUNCTION
 	

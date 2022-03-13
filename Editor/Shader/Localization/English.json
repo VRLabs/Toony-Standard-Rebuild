@@ -1,6 +1,16 @@
 {
     "Properties": [
         {
+            "Name": "Enable Instancing",
+            "DisplayName": "Enable Instancing",
+            "Tooltip": ""
+        },
+        {
+            "Name": "Double Sided GI",
+            "DisplayName": "Double Sided GI",
+            "Tooltip": ""
+        },
+        {
             "Name": "Stencil Options_Path",
             "DisplayName": "Advanced",
             "Tooltip": ""

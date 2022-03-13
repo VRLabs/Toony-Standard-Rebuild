@@ -39,6 +39,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 		_SpecularMode("Specular Mode", Float) = -1
 		_SpecularTintTexture_UV("Specular Tint UV Set", Float) = 0
 		[NonModifiableTextureData][NoScaleOffset] _DFG("DFG Lut", 2D) = "black" {}
+		[NonModifiableTextureData][NoScaleOffset] _DFGType("Lighing Type", Float) = 0
 		_EnableSpecular("Enable Specular", Float) = 0.0
 		_TangentMap("Tangent Map", 2D) = "white" {}
 		_Anisotropy("Ansotropy", Range(-1, 1)) = 0
@@ -73,6 +74,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile_fog
 			#pragma multi_compile _ VERTEXLIGHT_ON
+			#pragma multi_compile_instancing
 			
 			#ifndef UNITY_PASS_FORWARDBASE
 			#define UNITY_PASS_FORWARDBASE
@@ -95,6 +97,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float3 normal     : NORMAL;
 				float4 tangentDir : TANGENT;
 				
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 			
 			struct FragmentData
@@ -118,6 +121,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 dynamicLightmapUV : TEXCOORD8;
 				#endif
 				
+				UNITY_VERTEX_OUTPUT_STEREO
 			};
 			
 			FragmentData FragData;
@@ -156,6 +160,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float OneMinusReflectivity;
 			float _SpecularTintTexture_UV;
 			float GFS;
+			float _DFGType;
 			float _Anisotropy;
 			float _TangentMap_UV;
 			float _IndirectFallbackMode;
@@ -163,7 +168,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float RoughnessSquared;
 			float _EnableSpecular;
 			float _SpecularMode;
-			float2 Dfg;
 			float3 NormalMap;
 			float3 NormalDir;
 			float3 LightDir;
@@ -182,6 +186,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float3 DirectSpecular;
 			float3 NDF;
 			float3 EnergyCompensation;
+			float3 Dfg;
 			float3 IndirectSpecular;
 			float3 CustomIndirect;
 			float4 LightmapDirection;
@@ -457,9 +462,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SetupDFG()
 			{
-				float2 dfguv = float2(NdotV, Roughness);
-				Dfg = _DFG.Sample(sampler_DFG, dfguv).xy;
-				EnergyCompensation = 1.0 + SpecularColor * (1.0 / Dfg.y - 1.0);
+				float3 dfguv = float3(NdotV, Roughness, 0);
+				Dfg = _DFG.Sample(sampler_DFG, dfguv).xyz;
+				EnergyCompensation = lerp(1.0 + SpecularColor * (1.0 / Dfg.y - 1.0), 1, _DFGType);
 			}
 			void PremultiplyAlpha()
 			{
@@ -788,7 +793,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float horizon = min(1 + NdotH, 1.0);
 				float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
 				Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
-				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
+				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(lerp(Dfg.xxx, Dfg.yyy, SpecularColor), SpecularColor * Dfg.z, _DFGType);
 			}
 			void AddStandardDiffuse()
 			{
@@ -814,7 +819,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			FragmentData Vertex (VertexData v)
 			{
 				FragmentData i;
+				UNITY_SETUP_INSTANCE_ID(v);
 				UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(i);
 				
 				i.pos        = UnityObjectToClipPos(v.vertex);
 				i.normal     = UnityObjectToWorldNormal(v.normal);
@@ -942,6 +949,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			#pragma fragment Fragment
 			#pragma multi_compile_fwdadd_fullshadows
 			#pragma multi_compile_fog
+			#pragma multi_compile_instancing
 			
 			#pragma shader_feature_local _ _ALPHATEST_ON _ALPHAMODULATE_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 			
@@ -960,6 +968,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float3 normal     : NORMAL;
 				float4 tangentDir : TANGENT;
 				
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 			
 			struct FragmentData
@@ -983,6 +992,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 dynamicLightmapUV : TEXCOORD8;
 				#endif
 				
+				UNITY_VERTEX_OUTPUT_STEREO
 			};
 			
 			FragmentData FragData;
@@ -1021,6 +1031,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float OneMinusReflectivity;
 			float _SpecularTintTexture_UV;
 			float GFS;
+			float _DFGType;
 			float _Anisotropy;
 			float _TangentMap_UV;
 			float _IndirectFallbackMode;
@@ -1028,7 +1039,6 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float RoughnessSquared;
 			float _EnableSpecular;
 			float _SpecularMode;
-			float2 Dfg;
 			float3 NormalMap;
 			float3 NormalDir;
 			float3 LightDir;
@@ -1047,6 +1057,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			float3 DirectSpecular;
 			float3 NDF;
 			float3 EnergyCompensation;
+			float3 Dfg;
 			float3 IndirectSpecular;
 			float3 CustomIndirect;
 			float4 LightmapDirection;
@@ -1322,9 +1333,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			}
 			void SetupDFG()
 			{
-				float2 dfguv = float2(NdotV, Roughness);
-				Dfg = _DFG.Sample(sampler_DFG, dfguv).xy;
-				EnergyCompensation = 1.0 + SpecularColor * (1.0 / Dfg.y - 1.0);
+				float3 dfguv = float3(NdotV, Roughness, 0);
+				Dfg = _DFG.Sample(sampler_DFG, dfguv).xyz;
+				EnergyCompensation = lerp(1.0 + SpecularColor * (1.0 / Dfg.y - 1.0), 1, _DFGType);
 			}
 			void PremultiplyAlpha()
 			{
@@ -1653,7 +1664,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float horizon = min(1 + NdotH, 1.0);
 				float grazingTerm = saturate(1 - SquareRoughness + (1 - OneMinusReflectivity));
 				Dfg.x *= lerp(1.0, saturate(dot(IndirectDiffuse, 1.0)), Occlusion);
-				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(Dfg.xxx, Dfg.yyy, SpecularColor);
+				IndirectSpecular *= EnergyCompensation * horizon * horizon * lerp(lerp(Dfg.xxx, Dfg.yyy, SpecularColor), SpecularColor * Dfg.z, _DFGType);
 			}
 			void AddStandardDiffuse()
 			{
@@ -1679,7 +1690,9 @@ Shader "VRLabs/Toony Standard RE:Build"
 			FragmentData Vertex (VertexData v)
 			{
 				FragmentData i;
+				UNITY_SETUP_INSTANCE_ID(v);
 				UNITY_INITIALIZE_OUTPUT(FragmentData, i);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(i);
 				
 				i.pos        = UnityObjectToClipPos(v.vertex);
 				i.normal     = UnityObjectToWorldNormal(v.normal);

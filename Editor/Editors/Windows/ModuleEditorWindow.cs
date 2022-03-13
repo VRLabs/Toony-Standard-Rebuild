@@ -17,7 +17,7 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public class ModuleEditorWindow : EditorWindow
     {
-        [MenuItem("VRLabs/Toony Standard RE:Build/Debug/Edit modules from modular shader")]
+        [MenuItem("VRLabs/Toony Standard RE:Build/Debug/Edit modules from modular shader", priority = 2)]
         private static void ShowWindow()
         {
             var window = GetWindow<ModuleEditorWindow>();
