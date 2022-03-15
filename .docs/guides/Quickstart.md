@@ -22,9 +22,7 @@ Apply the shader to a material by selecting `VRLabs/Toony Standard RE:Build` and
 After the banner you can see a line showing the selected modular shader, the language selection, and a gear icon that let's you go to the options for the shader, we'll check this one later on.
 
 > [!NOTE]
-> There are 2 reasons to why the modular shader used is showed:
-> - A modular shader can contain multiple generated shaders
-> - The inspector can handle different shaders
+> There are 2 reasons to why the modular shader used is showed: a modular shader can contain multiple generated shaders and the inspector can handle different shaders
 
 After that you can see a button to generate an optimized shader for this material. This can be used to create a version of the shader optimized for the currently selected features, which, depending on the amount of the modules currently added in the shader, can generate a way more performant shader, since even modules that have been added to the shader do get optimized out if they're not actively used.
 
@@ -61,7 +59,7 @@ You can play around with them and test them out, we have a dedicated page for ea
 If you want to remove a section, just click the `X` button on the section header, and if you want to reorder around the list of sections you can use the arrows on the side. The sections order is kept per material, so go have fun with it.
 
 Ok, now let's get to the fun part and let's add some more features by downloading and activating more modules. 
-In [this page](notyet) we keep a collection of links to all our first party free modules for the shader, as well as some free third party ones that we liked or at least tried and verified that work. Go and download what you like.
+In [this page](https://github.com/VRLabs/TSR-Modules-List) we keep a collection of links to all our first party free modules for the shader, as well as some free third party ones that we liked or at least tried and verified that work. Go and download what you like.
 
 After downloading and installing the packages, get back to the material, and click the gear icon we mentioned before. This opens the settings part of the inspector, where you can add and remove modules from the active list.
 

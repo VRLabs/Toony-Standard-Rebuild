@@ -7,7 +7,7 @@ title: Create Modules
 
 Toony Standard RE:Build is a modular shader that uses modules to define features. This means that you can create modules to add features yourself.
 
-First of all, you should check out the [Modular Shader System documentation](notyet) to get an hold on the basis of creating modules.
+First of all, you should check out the [Modular Shader System documentation](https://mss.vrlabs.dev) to get an hold on the basis of creating modules.
 
 ## Structure and hooks
 

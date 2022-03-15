@@ -57,7 +57,7 @@ documentType: index
 <div class="titleArea">
   <div class="wrap">
     <div class="text">
-      <img alt="Toony Standard RE:Build" width="200" src="logo.png" />
+      <img alt="Toony Standard RE:Build" height="128" src="logo-full.png" />
     </div>
     <div class="buttons-unit-small">
       <br/>
