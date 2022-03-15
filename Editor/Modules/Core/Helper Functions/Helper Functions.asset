@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.HelperFunctions
   Name: Helper Functions
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Templates containing some base functions used in a shader
   Enabled:

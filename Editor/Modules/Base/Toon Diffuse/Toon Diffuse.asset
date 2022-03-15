@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.ToonDiffuse
   Name: Toon Diffuse
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: The toon way of doing diffuse calculations
   EnableProperties:

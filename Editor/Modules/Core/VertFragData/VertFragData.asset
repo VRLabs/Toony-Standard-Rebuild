@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.VertFragData
   Name: Vertex and fragment data
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Base structures for the vertex and fragment functions
   Enabled:

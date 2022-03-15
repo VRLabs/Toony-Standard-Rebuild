@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.VertexFunction
   Name: Vertex Function
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Vertex function
   Enabled:

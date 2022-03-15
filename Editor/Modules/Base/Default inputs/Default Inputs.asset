@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.DefaultInputs
   Name: Default Inputs
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Default inputs used by the standard modules available in Toony Standartd
     RE:Build

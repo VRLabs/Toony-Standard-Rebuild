@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.BaseUVSets
   Name: Base UV Sets
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Basic UV Sets implementation, can be expanded on.
   EnableProperties: []

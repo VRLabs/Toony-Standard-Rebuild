@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.BaseShadows
   Name: Base Shadows
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Base template for the shadow pass
   Enabled:

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.StandardDirectSpecular
   Name: Standard Specular
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Standard Direct Specular
   EnableProperties:

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.CubemapFallback
   Name: Cubemap Fallback
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Cubemap as a fallback probe
   EnableProperties:

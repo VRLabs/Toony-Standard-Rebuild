@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.AnisotropicDirectSpecular
   Name: Anisotropic Specular
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Anisotropic version for the direct specular calculation
   EnableProperties:

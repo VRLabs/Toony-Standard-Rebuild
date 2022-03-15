@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.CoreSpecular
   Name: Core Specular
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: 'Base for the specular workflow of Toony Standard.
 

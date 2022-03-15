@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.BaseMeta
   Name: Base Meta
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Base structure for the meta pass
   Enabled:

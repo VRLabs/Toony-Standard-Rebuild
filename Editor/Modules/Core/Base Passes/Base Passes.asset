@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.BasePasses
   Name: Base passes templates (Core)
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Template for the main and add passes
   Enabled:

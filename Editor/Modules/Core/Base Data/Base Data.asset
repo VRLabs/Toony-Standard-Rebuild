@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRCore.BaseData
   Name: Base Data
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Base Data given by the shader in the fragment pass
   EnableProperties: []

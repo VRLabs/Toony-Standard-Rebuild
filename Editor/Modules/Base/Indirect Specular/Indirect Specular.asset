@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.CoreIndirectSpecular
   Name: Indirect Specular
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: Base indirect specular calculation
   EnableProperties:

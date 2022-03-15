@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: VRLabs.TSRBase.StandardDiffuse
   Name: Standard Diffuse
-  Version: 1.0
+  Version: master
   Author: VRLabs
   Description: The standard way of doing diffuse calculations
   EnableProperties:

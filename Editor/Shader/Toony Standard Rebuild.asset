@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: ToonyStandardRebuild
   Name: Toony Standard RE:Build
-  Version: 0.1
+  Version: master
   Author: VRLabs
   Description: 
   UseTemplatesForProperties: 0
