@@ -1,0 +1,4460 @@
+{
+  "sitemap": {
+    "baseUrl": "https://tsr.vrlabs.dev/",
+    "changefreq": "monthly",
+    "priority": 0.4
+  },
+  "homepages": [],
+  "source_base_path": "D:/a/Toony-Standard-Rebuild/Toony-Standard-Rebuild/docsOutput/docs",
+  "xrefmap": [
+    "xrefmap.yml",
+    "Next.xrefmap.yml"
+  ],
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlInstancerUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlInstancerUtility.ControlInstancers.html",
+          "hash": "t84P6fXIWW3/ktRNaJ92E12dTOxEt5LaylBcRfr1FVY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlInstancerUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlInstancerUtility.html",
+          "hash": "N9p/S4JTNrljm2hRxRVZabLdmrektERBy0rWbOuUXg8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.Name.html",
+          "hash": "lMnjWb8B5zzc2j4kd5qBPQP0NNJvBNL8XxrnbL2Oe0s="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.AppendAfter.html",
+          "hash": "KaThFABWLchbV550m7ac1d64W9EOd4MfDBDdac3ZcJ4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.UIControlType.html",
+          "hash": "kxGRwlGAoE35R0jV4x2UgOP9NzP6c4lnMxxIPF6cFCY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.Parameters.html",
+          "hash": "IjXulk7Z+CBt0r3ZTdgc21uhHZ+EM6T+AErE2hW29I4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.Controls.html",
+          "hash": "zgg6NR0voY2zfTcKZfMXjefWWQ+OuMqQmmoeyToYbAc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.-ctor.html",
+          "hash": "HgiU/u83eHKh95/GwZg4SJcYRUqNxe9BjHQnUSLm6XI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.CouldHaveControls.html",
+          "hash": "8A8vJuRe9M8YPFT4mlQZ0cqDSjyxk5zaQmGk3VEU7GM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.CreateControl.html",
+          "hash": "qw+vGp/WpHeEvZ8/uMbJ8vAap5QD7tFdPjsr6EtCsVM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlUI.html",
+          "hash": "EYmJhbsWhH6ehvdFpDB0QRLGzkFZMFPCeFxKIE1LhC4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.Template.CreateVisualElementForObject.html",
+          "hash": "p9oqjod2q2BjwNF1R7JO+iXRyHw4ePQYnu6q+DwoALs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.Template.html",
+          "hash": "qGC0GFf3wfxJKVyIYVR6UIMGuCzfbMjSqR0mUjJBd10="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.ElementTemplate.html",
+          "hash": "AVxOv8OqnUAvLIC7IGorhsvVj9dpe2ipewYYuwkbRGQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.-ctor.html",
+          "hash": "4yduBRrHEvi3CDFr9Sxz5qCiDEKmbsYbC3/uFH2XKio="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.AssignObject.html",
+          "hash": "PK0D5DecHCwtGxujukChhYd5wYHe6pKdlbF5v1zNpL4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ControlsUIElement.html",
+          "hash": "leFeicpGMxkvKN0Pv9DJDHVaHx5Bew9NHocCsfLpQKI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.Template.CreateVisualElementForObject.html",
+          "hash": "TNyflYHQHqr5wfUOX5igruG2ESAKfIhDMvOYa7Rvsfo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.Template.html",
+          "hash": "xdiyu1QZpa6vJzxaEiGLiALYiykjYunbW+YVks+hqek="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.ElementTemplate.html",
+          "hash": "2PMUhJqzwbkq8vpQ403ycmyYi7k24t2HCj5zg12wv3k="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.-ctor.html",
+          "hash": "KqIKWaTbQ5lJtAuczsdAqbPcX4bbDf5o9J2CchGhwCo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.AssignObject.html",
+          "hash": "/nbl8wGOKQP2yNzIc/N8eiGZwdDlNWNFe73Br//gSOE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.DisabledParameterElement-1.html",
+          "hash": "dNPMdl4kewrHI71VELsDc3JFb8P8vkExHSutw5rl/B0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.InstanceType.html",
+          "hash": "wvk9IXHxrB98wdm56G9d6L2NiI8AkMO5S00JuZhOlPI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.CanHaveChildControls.html",
+          "hash": "bwXIakvReh6/sQ+fnXQw0LY6Mzyz8VocuRni+3QihXE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.InstanceInspectorControl.html",
+          "hash": "YOmjF1F6NDFydsL+W/rh0HELCy6aADTbxKJFcnAhjOs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.InstanceEditorUI.html",
+          "hash": "L8xv+Xml0LVKJa05lmDZjshugSAIcR20sfQYm8lsXps="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IControlInstancer.html",
+          "hash": "4XGRjg/a705b86TK8XxS0d2ifZAdJ9IgY1INKMGWxbY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IVisualElementTemplate-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IVisualElementTemplate-1.CreateVisualElementForObject.html",
+          "hash": "AoHwilBwIfR58i97lFP7TZ5krsM1yMm+FQCkOGleJ6I="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IVisualElementTemplate-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.IVisualElementTemplate-1.html",
+          "hash": "NezlMeVk+Cm6ha6oDEhEvWeKE4GZH7AEJ0QeKYNo7sM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.removeButton.html",
+          "hash": "W0WgWQ2Erzv8TdAFkUUEmKL3dwm07IX9gt8GYENqkPY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.upButton.html",
+          "hash": "4GMeGodgYjXq1zgbLDK857Jxl3Lu/Jl5iICY4Jn3brE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.downButton.html",
+          "hash": "c61jHZPCganJLWOZ6gABtHlfrG+U31Y69i04ryWpVyo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.dragArea.html",
+          "hash": "Mo7PhJG+TDUlDs3m5TsZ8PN35ZchEdsI0RJOo7+0cnE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.index.html",
+          "hash": "eLeeFTptnBW57PHzTCrCE+kDwnJ3SwAVmzInx3qgDYc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.-ctor.html",
+          "hash": "EchrgOZvkTBnmajBT0cpCO8j8H4Bk1c8GB1/ObRKeq4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.InspectorListItem-1.html",
+          "hash": "4ksyd/RrHm8OquxfMDncsrNJAr8tfaMohRd/hdu3+4o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.Template.CreateVisualElementForObject.html",
+          "hash": "ls755nG1Aq3O6wMgXyI7uZjVpQVWrVWrLfGIXUvuaJc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.Template.html",
+          "hash": "48VXLZiddFv6DPwlWH7yIJQYIHkdnaLd4AeeuM3uLQY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.ElementTemplate.html",
+          "hash": "xEGdaewRRpHV4J7ntHPKMRZT7vS0Hyu638kQUWIQsf4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.-ctor.html",
+          "hash": "yFg4E0mXIxAW/0VtR2tl0Bcgok2lSK53k+G4T05fRPE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.AssignObject.html",
+          "hash": "FWjUN3I6dodVctxEqj1XGHkKcii8q4lG8bbqgW0vvL4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ListSelectorItemUIElement.html",
+          "hash": "2O3t6oLZHdqjf+5NwtYFzNatPeVA1BQwmdgUYdXCJRc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleEditorWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleEditorWindow.PostGeneration.html",
+          "hash": "GNe3MqPD2OzjB6oVrImaYEeni5GlAvvmirB83ZEF0eA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleEditorWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleEditorWindow.html",
+          "hash": "R534UWyCLlZluwwU8FjJmUJHbFd7p4rRDfwfLvtBLNI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.-ctor.html",
+          "hash": "JyKWfTKf+zd772WxT5W3OOsqJWRko/BrIrDP6P6+8SE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.html",
+          "hash": "OWOO7fSXJB2akSZ/uUK+kbg7bW/XVjcfNfxUrcVuHXM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.Name.html",
+          "hash": "Cr/p96eydryTjEN16Aj3q1SMxn4OBY8YzKOAZvGNfRA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.Sections.html",
+          "hash": "TF4/dgxg1nzzNDP3m1RPDh6FU0gD8UP0CCv/F3e9Jmk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUI.UVSets.html",
+          "hash": "XlHCKAgfKbVr1V52Ul/4vYHzARxvsyXb4/3ECbhFpeI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.ShowExample.html",
+          "hash": "/VD0xB1QpX1IwGzHmC4+AQTfcQiGkEOW2IIMYmlB4QA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.CreateGUI.html",
+          "hash": "VGQhVK2q4ChgmEWERn2Yr+WOcgP6U3sL8vZdr3d59Hk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ModuleUIEditor.html",
+          "hash": "maktEBdbjrvdCH3vb3Cct3IWz/PlRlsxF+7LuWcuOxc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NameCopyElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NameCopyElement.-ctor.html",
+          "hash": "J1CvDwBECGIzLORYYp3BvmnEzTGvQPYth8O0FyrV0U4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NameCopyElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NameCopyElement.html",
+          "hash": "DWCUAwhggLvgaAfhpUryd6MgfFdrwE+MC0yLuDvrxvY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.shader.html",
+          "hash": "HCyywRBRlHjn3QGzxbk1LjXGZREwCzhQTTa3oKgol7c="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.PostGeneration.html",
+          "hash": "kanGytSug4W/uhFqqWff7KFLQuni+uci8Lj1nqvPPjk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.NewShaderVariationWindow.html",
+          "hash": "bZSvxYlkdaZr4FINkH8587b/d7tfeU01KxNnVr+m83E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.IsFoldoutOpen.html",
+          "hash": "lvUZ4FO/JDHbTpy+v07kyPF977e2KZRcipOsW9IunQM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.Items.html",
+          "hash": "HnCZgvFxAoP05NmtbYSkJgfJ+EbNEoYx1jlT5ctTTRI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.draggedElement.html",
+          "hash": "KKnOILb0eIxOF7uPPrQFedq6d/sBW/r2EQBCCXPClI8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1._highlightDrops.html",
+          "hash": "dDXlGfgKUqKg9B1yuuLbLAy0cDynv+7eTUqBGkMcFHI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.-ctor.html",
+          "hash": "crRqWo9yl/DseNkOYiAO1W/nh/o5I+n4uAxdrxEG/ks="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.HighlightDrops.html",
+          "hash": "ZF7kN+PJY1Ye6KNOGab3mDC9C7e0FjEbIGntkfolWh8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.DeHighlightDrops.html",
+          "hash": "9L95yCOkyDlKUD3loyCA2438hGDsi4LKRtbAykF4Wfs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.UpdateList.html",
+          "hash": "erGRVpO4QLCKAZ48m3VRVlLmbMvMnIsG2XZg0JSG2eA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.RemoveItem.html",
+          "hash": "sFO1P5mgJwuC0n3Mf5ogKxZs5f7cVyMwJtGX8UnGsu4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.MoveUpItem.html",
+          "hash": "nKDqeA89lO6EpxtAbTNIX+rcAOvizlYJ5g9L09TwN64="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.MoveDownItem.html",
+          "hash": "EsOf3U6Il3KsWWKZqtDsnCs9Hpx6Dnp3BgmcjvBNW9c="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.AddItem.html",
+          "hash": "zm+7Q3za4Zl3RUYYP08BeVFwGoCX1RBAS4l1nJ2w2Io="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.ObjectInspectorList-1.html",
+          "hash": "G+t6zGfXsVd8iDesyUs4DKVPBG5xp592OXVzYY4ENNc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.InstanceType.html",
+          "hash": "az3kIQj+Zc61AXLBwxUv8XXkrLkQAj8JdUfaEWz1jBk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.CanHaveChildControls.html",
+          "hash": "6VCsApX2eE+q4zJdfwnQcYKMcHZee9RsrCdQBKqETyI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.InstanceInspectorControl.html",
+          "hash": "UxroMoplzc3TYOnPXNuawD2hudqTNQWz4xnkppZaYRw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.InstanceEditorUI.html",
+          "hash": "+5al0Kuqj0cN2nZjFJv7AaBwIUgWVwtzC8jJMZhOG/o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlInstancer.html",
+          "hash": "3WJ11O0W7YVA52Y/DSj66S/Pllq7CL7t9Tz1ac4JoJc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlUIElement.-ctor.html",
+          "hash": "rQ5SBo3BqVLvSHTipdHm5sOMZxieLH31ib52LQtbf7o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ColorControlUIElement.html",
+          "hash": "Os//xSSafFFn0ZTYDdv9KPEnvaXOklmFE9aD5PB33oA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.InstanceType.html",
+          "hash": "bitnVOHvaobkasOJYT2ZU1H8Q2CiirPTrsFWMsOeayI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.CanHaveChildControls.html",
+          "hash": "JnTHAL2jKfdAmO6KOC4q1DSm0DYcZwJhFNDDjopH+lY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.InstanceInspectorControl.html",
+          "hash": "nxDzsrFhfskH9/v52ElmEPKqv12e/nlehmJ5uZDbOlk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.InstanceEditorUI.html",
+          "hash": "BFhhrdbBHIAuaK08+2/eObl0nrLu1LT+Fcgtc8YZCBc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerInstancer.html",
+          "hash": "7z4IpFjsm6tPI2mFmVmbgCIExRgf3LJVlYA6Azi5osQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerUIElement.-ctor.html",
+          "hash": "KuHXqooRirz5hw8UF3GHtq4kDYzO9VkFgJpacsr9UDg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ConditionalControlContainerUIElement.html",
+          "hash": "BCjeaNqwjv6/utEEGMKcKH+v2WIX8+fD7siirwwD3Y4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.InstanceType.html",
+          "hash": "G7PQBcAutPQvZJtqP9FrDo3xECYwWYaYfAlmE9eQLsc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.CanHaveChildControls.html",
+          "hash": "7FB6OwUKlUrAd0VhTup705+9BAOPx/FhhL9JKo9bFWY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.InstanceInspectorControl.html",
+          "hash": "zn10ulWWwckfl1Gu7MO9a3K7s1n/ls5nFRLmG3Pm6To="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.InstanceEditorUI.html",
+          "hash": "xgzLynJ/EIEMcFAxfNSTnjjNrEmcVtz01vLS06Whyrc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlInstancer.html",
+          "hash": "fyJKWaR1PLiWujT9YISVZfxEH3HaviELP8ILHEwhWzo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlUIElement.-ctor.html",
+          "hash": "zN+CBSm+xuEWhawRGIU7DgcbuX378orwXr4pkQPzZfs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.DoubleSidedGIControlUIElement.html",
+          "hash": "yORrrwyPo4yvzPivlM+1uTIA9b2tNTew8kFLmy8qaY0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.InstanceType.html",
+          "hash": "lPmO8sLukFo8EG8r7k749Hm3nULuye7xMCjeapOlRDI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.CanHaveChildControls.html",
+          "hash": "gtT1fX+bX64rRZimRGm8F4Ikqcz3P3KqUvMb9U/rUEU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.InstanceInspectorControl.html",
+          "hash": "maOyl70lgBX1AMcqV1l/XzVLhbaDw7F0Gvji/aTVVWc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.InstanceEditorUI.html",
+          "hash": "vS1wH8WdeWAjXUvAHup0qDLXsGTNNJXTFMDMY8uJdgc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlInstancer.html",
+          "hash": "R813FgKIJdpYCbMzZPNOdG/d4doN8rzRIWmoTfy8BN8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlUIElement.-ctor.html",
+          "hash": "wrT4yQMQOhO2dqL9i7tCXNX4yjz6m97g2BK22KpSW9o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.EnableInstancingControlUIElement.html",
+          "hash": "4THDW5nvJZ2Tmm4oeBsvSK8Yg8hSnAMfWCc9D9//TV4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.InstanceType.html",
+          "hash": "GRfrYwSwbbfF3/C+n+2H+Gw1Ve0WkCMsogxElzT3Gkc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.CanHaveChildControls.html",
+          "hash": "oyrahWDmdwxbrJ/cCjEXIu8M5ds5kxjM21YFAfJHIq8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.InstanceInspectorControl.html",
+          "hash": "54KTPRu62ziYYQQk57S+EEyYJL08lmzOIzzgCEx5EEc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.InstanceEditorUI.html",
+          "hash": "rPu+xzkQIZW3FBpxzxyF0+yaxrJfT5C7RfH3ZdJMjW4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlInstancer.html",
+          "hash": "SkA156NhPVdh2RRmvXwAvpSLUIThQ2qw7WaBWSeuwMY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlUIElement.-ctor.html",
+          "hash": "iRXCMLRr7ZkjddaDSsg9HcXausklJcJBzKJDidvgJu8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.GradientTextureControlUIElement.html",
+          "hash": "OnGJlpGSUsUYvoPqxy9DL/VVdkGdSXTX3n+YbsFWvH0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.InstanceType.html",
+          "hash": "uC3CXffdW5P/g1Cz/ZeqXBhyRU0IUwy8/TS6+piHvNc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.CanHaveChildControls.html",
+          "hash": "oVjdFwzYzBTb2moQN48TT+4UQpu3LvztcyugaNEVlYc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.InstanceInspectorControl.html",
+          "hash": "njQeYvVPJke4NzSYJQ2xt8HZzmt7M9U+pVdvWUl1hUo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.InstanceEditorUI.html",
+          "hash": "qhIrd8HkhgnzkKDOYv/tSzdte1+v4AaAYJsKRF3oTLY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlInstancer.html",
+          "hash": "1m1YJOeQljpfWdUnyJtmTP6gfLx/opWAMZXsAkjjUZ8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlUIElement.-ctor.html",
+          "hash": "K+zxkAjK9yyrjmNhDHfgtmh2um7jpkuCioVX8KGCmfU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.HelpBoxControlUIElement.html",
+          "hash": "OqlsaZlnnwEGceRyZ8NskEFcp5mcBmJkyPvrEZr5WgQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.InstanceType.html",
+          "hash": "3uyHOggEAgkPUEMOEfV3g6Vc2/S9FiyBkq3I2Tht1HM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.CanHaveChildControls.html",
+          "hash": "glAC/ftZ2Ejc3kOrzftcEdax+xAD2+HXnq5zHUqb5ic="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.InstanceInspectorControl.html",
+          "hash": "iialEtGy0YdWE51VW1nMvC84wErsK/aKiAKHfJ8G2iI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.InstanceEditorUI.html",
+          "hash": "yCymN62NtVqzaVzYAkEGnkDVpX+tp4NZjzrY3q9/1HM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlInstancer.html",
+          "hash": "POjdVnxhHZEfQwc5WyE08zgg/lmR5Zp0mUP2rOOmJvM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlUIElement.-ctor.html",
+          "hash": "yz6aUa38I+ExFrgS60MOAwjRc2zktC+pw1Nr3Bpt2yg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleControlUIElement.html",
+          "hash": "ciBH56pL41N5PtD8vTetGwPFCOr2fZjK1nzXbs6lzUw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.InstanceType.html",
+          "hash": "6fYhqWZ23GAU7i+ZPu9J4LMVW/twuW7DqHERCfkgekc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.CanHaveChildControls.html",
+          "hash": "INYcLtGI6U2DoegA6TCFVX1Mgk0cKx2BM1Jno8bGd1M="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.InstanceInspectorControl.html",
+          "hash": "IEJtbAIaPW+85K5TuduqzV+J65hCKwpzG8C6iq4o2eI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.InstanceEditorUI.html",
+          "hash": "jkuYAS/Ur3fczkYDiMPCRMGQVzYbI5ND2zSy3769JH8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlInstancer.html",
+          "hash": "bYF0wFnwrwne8A06h5R45ZxllYI5OjX1400qjq2ZI8Y="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlUIElement.-ctor.html",
+          "hash": "Kg6CD52zFjUSzqCyDXWZNP7HBKJfciX6yRLcoz4hUiM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.KeywordToggleListControlUIElement.html",
+          "hash": "yhGSETnbVK0p8ebOwuALEIf/Rp67k9z+0sxWJq0RZg0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.InstanceType.html",
+          "hash": "ICOdf60VE5l1toCEzJCDgKnGRUdczgHgXseWzZpgp+s="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.CanHaveChildControls.html",
+          "hash": "8D6+3C/dVXwPNuCWxGS2zOBIWIdEIkfQ0mYln9zPGnw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.InstanceInspectorControl.html",
+          "hash": "X6kviHJdISpqvMFj8vMOuRXEAuW9IiNdEU+G/AWGDk8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.InstanceEditorUI.html",
+          "hash": "glBdYU7iPZoZKsj1RcvwyLmum8vZpOBPCvLJt37dUxo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlInstancer.html",
+          "hash": "+3ptgAcS5QKIwMMTzMMvxoal1TTTTuX5eCkzpDm72D4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlUIElement.-ctor.html",
+          "hash": "OYwl7oZ2TjyEb6CE09ayTkC6VKO9QuQqyQ1Ml+krL68="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LabelControlUIElement.html",
+          "hash": "AxTvZG0I+RyOYACXfoRTKOxncG9w45jCw4raw0YnhN0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.InstanceType.html",
+          "hash": "2qrCYKfT/6SQ9noai7PWOtJZfYj9j7oSXYjUH9Qovgk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.CanHaveChildControls.html",
+          "hash": "f/dwhk2hnvxacJWov6dK1+UdD3Iv+SoBumh/XA87UsA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.InstanceInspectorControl.html",
+          "hash": "En9eUG1Olzh29r9lyFCKrrcQ4b5kkpFw3AE/NWFmfCg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.InstanceEditorUI.html",
+          "hash": "rXlBN+dIt9SKTcNddX35PZjtHf33j6/rWYg/IY0vJh8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlInstancer.html",
+          "hash": "K+azXpZJh+Lb6LajtYGkoXfjNF7aJPN4X/sA1/HZN+U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlUIElement.-ctor.html",
+          "hash": "tU9iOjjliEST5dBGEmArgiIR1AwoQbufVISAY2TFaEs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.LightmapEmissionControlUIElement.html",
+          "hash": "fhd2e20Kcoqj3PWJn6n1su1C36HufAYemdHyzCRTfAU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.InstanceType.html",
+          "hash": "JXnpp2/IvV1kZFQ5zEXsKBMSrzFX4h392rgskgbau2E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.CanHaveChildControls.html",
+          "hash": "3wo1g9WCfyWNQS8P0chHAmDIM+VXP0+pJvlVYn2kBx8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.InstanceInspectorControl.html",
+          "hash": "QTY+CNCgY6TtqUf5i5QkD64Rgco19WjvJpa+pJlmX6A="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.InstanceEditorUI.html",
+          "hash": "6KOFcHvvr0x9PTs9FccGUlbMQZ7tJCjR5C4Cbnh0fik="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropertyControlInstancer.html",
+          "hash": "gzVNlz1DCdy3hAnKOlHgLUxuRJQ2e8sfhd+DidK8Lwg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropetyControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropetyControlUIElement.-ctor.html",
+          "hash": "MHxQ2aPctHF+0tTM01DikRZXGsIzVp9vDXIQMja7JJw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropetyControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.PropetyControlUIElement.html",
+          "hash": "fewpY1fyyWkNm9C6pTenVGh0R7QJ5BFCYOt7SrfYAQ0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.InstanceType.html",
+          "hash": "WIqcWpbi6icGJ20gSj53ig9COLXUBhOSCOLgCRumEU8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.CanHaveChildControls.html",
+          "hash": "w2HCz5MEXhxemMnKOymcWrEsGGaL0T1oUIfExItV7dM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.InstanceInspectorControl.html",
+          "hash": "i+lZionE0lagCQ23cxZJYnm5lFhfbFjMW8cH1Tx5jcA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.InstanceEditorUI.html",
+          "hash": "wzIiH0JnnbygZojheym8Qqhf5I4KqgKAvzZq3nneWGQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlInstancer.html",
+          "hash": "L0K1GX2zNwzLY5Zt+OWCv4Zau+eeANjBfCH4l87iakM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlUIElement.-ctor.html",
+          "hash": "Iklm/TQvWt55WmAtHbYMNx4845NrE33SMRoY9B0osXI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.SpaceControlUIElement.html",
+          "hash": "I/NjH4A5KAh/e0unKhpUrio2e2Fs7O5k/1X+kGCXZaI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.InstanceType.html",
+          "hash": "LD/Gs4gJKWlXcMDMcM0WtOW9YbjiZHjOlUMVM+O+nLw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.CanHaveChildControls.html",
+          "hash": "yLmeHkqKwZCGkIwgyBDQBAYd7V1HN+ZxDICKr9UEpAk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.InstanceInspectorControl.html",
+          "hash": "jYTHKqXNODfoC0bfQpJgbkS/4zvKrArSvf4NDZZ/TBM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.InstanceEditorUI.html",
+          "hash": "jYna3x6+A1XjWQn15pWIK6Yr3sWpHk3h5/O+f+xx+XA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlInstancer.html",
+          "hash": "Z09a/sFISrXDT3jFn/tWcl5u6dXdYBEcmJLjE2g/TFk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlUIElement.-ctor.html",
+          "hash": "hYePy+kPsy6XK+eCoW3NYOZDm5nS3DHvZfleTuhK44U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureControlUIElement.html",
+          "hash": "MAP3vCFNh3xlAZ/EEJlxzqphXU9lwFVp/11qESFZ7Xo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.InstanceType.html",
+          "hash": "Nog21GHBQxhIbHcySRwY4qkvuc0IO69ihbsiiq8JGMw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.CanHaveChildControls.html",
+          "hash": "COvg9RsZVrbrtNVy0DLCo/mQcP19o4kZVVsKU+Y0fHc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.InstanceInspectorControl.html",
+          "hash": "PI2gqVA6ClkRFT1CqlcRQ0jAzExBf8qq8SM+daaRofU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.InstanceEditorUI.html",
+          "hash": "LKwWTrdr1uSb4ZlM7hy1NUUL5vh11fWguZpF/O4dEQk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlInstancer.html",
+          "hash": "F3eyPKga6n/zsHlKE77CPWElBt+wLpLkHcY9RgtpKmE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlUIElement.-ctor.html",
+          "hash": "jVln3Nx0gWTMWNODPE1Jr4ZLQvynjw90u2dG6B2IrkY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TextureGeneratorControlUIElement.html",
+          "hash": "zNuZIw/ULjZhJs9IGhYzA/XoVAnnb79+fIEQv16YwAk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.InstanceType.html",
+          "hash": "QrCjLiZ0/AqWYPl/uVKtINvJIUxUTyVUwu6KFtAcZMg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.CanHaveChildControls.html",
+          "hash": "DucGaNT/VITcGQi8oE38J/GJOXzj3U3NJnB4iCQd12Y="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.InstanceInspectorControl.html",
+          "hash": "MUOVeC1M/vAHtC5Lt/S57kK/8/7uk3DdHmBj4vk5wxQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.InstanceEditorUI.html",
+          "hash": "D+d2cqGnq4js9+glsWlW4vK0y0CTOk0ZhQ0AtG3rEzQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlInstancer.html",
+          "hash": "lkE7W9oJVuw6EL2G+0ANvkay7wWTFFaiKk8GaByTSLw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlUIElement.-ctor.html",
+          "hash": "tm7I7kLzJlPWSAWEyAm/VDipj17c5pT4Z6DxLLfkTAI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.TilingAndOffsetControlUIElement.html",
+          "hash": "J9MJuBAIq+7HOA3rnUmdrTYF1uU3DjdEQXy3ZXZPd3M="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.InstanceType.html",
+          "hash": "22+T8kOKpRlw+q2sKrStbWOQc1IFrrssgWFT7033x9o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.CanHaveChildControls.html",
+          "hash": "xdE301/UtEL/agJwi5yIbaCwf7AF5JLOkDaeDhpQd0o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.InstanceInspectorControl.html",
+          "hash": "IJfOuUVsxRNqnM+dHpZDF5hi93wxbV3F+yJlfM5kS1U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.InstanceEditorUI.html",
+          "hash": "U+cgpMuSyORkZH1Ce0m3Z/NozfxMdiFDyn8akGlG2zo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlInstancer.html",
+          "hash": "5EdlejVtXSTNxe+544tOZIf7OrAmN/LItyIZ80Ji468="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlUIElement.-ctor.html",
+          "hash": "rGlZA5sov2YFw7K/jLs1r61tM+fcGqAO6CMr8xotRIQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleControlUIElement.html",
+          "hash": "PY2UceU8m/THWyQnCQN/hQhAHve1vuNsZN9/1cxJ1X0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.InstanceType.html",
+          "hash": "yBs3gbhaulzmyrpmqvPA2+QpBuUaUQuWjesyAOhRhcw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.CanHaveChildControls.html",
+          "hash": "gnBY8ARmOEMNiVPTGPn6L0VHiLy+6Fp3UigvlniXbP8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.InstanceInspectorControl.html",
+          "hash": "Q2VHxLCzw7h52sdcaP52lveh7jqIkfr5WnhOxE9E2QI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.InstanceEditorUI.html",
+          "hash": "TOIsHZ8fCc4AJXxYll/XYjYa7wzcDPBaWae10l7kplM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlInstancer.html",
+          "hash": "oRr84nqqDh2dTrErUgUYKV7RLB0vg8HK3Zny7cXlPlU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlUIElement.-ctor.html",
+          "hash": "REq7gSMD/hqqT3TCJ/yxtv5KVE+nk3qcFSRhmKEk9JM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.ToggleListControlUIElement.html",
+          "hash": "QWBvecJSwt0ncWtZpt/SwMjyFRmUtQ2Wtysv+AW9PW8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.InstanceType.html",
+          "hash": "0mAQ4z8cDnH2JyPRuaeFytmjIspwL0ogFNGxT7VBmr0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.CanHaveChildControls.html",
+          "hash": "lDBq2BPz7HSr9jHSvm/VSSSUFBpVO6jN0EI1w0ee3Qs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.InstanceInspectorControl.html",
+          "hash": "dxErmm1OPtg2szwSaUZJP/5lTy4lij/+MoG0MOAgozY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.InstanceEditorUI.html",
+          "hash": "B6xVzXjCaocDCXIDh+Q9nUCvBeus7nBJkvwcY7zL0XE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlInstancer.html",
+          "hash": "p9P4dGcropSG/pstOyedljlZiym3dNWal3ngCkdjh/E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlUIElement.-ctor.html",
+          "hash": "FI8hX0g5jb2DYCq6gHxUv/8f721j2r6RK0s47WMY8IA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VectorControlUIElement.html",
+          "hash": "tOr+GKNdNqRuH1GwqaWEYtCpTW/GLTdalykhnN57Bak="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.InstanceType.html",
+          "hash": "gzEgvrTz8N5nRTNPvedWfQ0UEOa/99HnmaOzRaUomkM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.CanHaveChildControls.html",
+          "hash": "PS5lqSZgJYSDz3IEPOQ6O/MhlbBUwP712vYVcru1i7I="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.InstanceInspectorControl.html",
+          "hash": "2KUybY3LoAOptRktPYHmxOhBkJUFeydudTIf2hsGvAU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.InstanceEditorUI.html",
+          "hash": "bminqv185DDbXHr+M+QVFXwriBJpClwQQMd2vrXT2jk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.VertexStreamsControlInstancer.html",
+          "hash": "eamg6YEEFvRXzHyBnDZaXNaC3uh8CAioVcRW9MblH2M="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSIControls.html",
+          "hash": "3JcG1+24GJ+w6SlzFFIfQ6iepjjQ06g5BnShAHJlb5g="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.AddListSelectorControl.html",
+          "hash": "TT0/bG5m0SQ9dYLXsPyqMgvsXbLQGkxgaDFPGiEnSxk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.AddModuleSelectorControl.html",
+          "hash": "P2n5tzAe8KFF4qOLfFprSf61Tz+lZ5d0CUbx3obRo04="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.AddUVSetSelectorControl.html",
+          "hash": "YRiX3ILWSjCYc/RC8pOpFtdHqMAiBmq2bS1vZCez1Zw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.Chainables.html",
+          "hash": "zCPJxgZo3mLMFlxqQxWGMipTetg6tqWmhpVZ9Dpu1NI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.Name.html",
+          "hash": "hQ+wSPCYTQkizEy3x6gc4qYe4t3vkQOecJaXLVthCIY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.Index.html",
+          "hash": "FmbzQAC0TnHQNFH45sI2YTLKTMZh601tMMpFdkb9t5o="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.PropsOnSelected.html",
+          "hash": "7dALaI/BKTvRRXm4mOsmtYOxdNnjHaIFPH4/GSl/ivQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ListSelectorItem.html",
+          "hash": "m6tFLIY6VDhj+1ft5nUoDgXfCj+vqCWjObBkjhy7OJs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.SelectedOption.html",
+          "hash": "pwY6rH84zZpkkb5eyH2eFpJj2qqu5EswHJtoIX93GwM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.-ctor.html",
+          "hash": "2lM9SHS32IPRtSzTuVcrM6q87Lokub0RY/4CqLNKXlU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ControlGUI.html",
+          "hash": "tiXAA7iRvzer92mat9qSo6fuU3cr7Rts5aF1+AaNC1s="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.html",
+          "hash": "ADRcr5uTf2WUTZp+IztmxR7ZgAVmwgzt0LVsFpqvxjg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.InstanceType.html",
+          "hash": "XDHQEZeBb7g+BmNh8rUV4GrYjlSdxTaCVHDyVC9WFi0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.CanHaveChildControls.html",
+          "hash": "Vn7Cwy1WLUtp6avfr9Td/qyH63uAthCayypZW9+HAr8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.InstanceInspectorControl.html",
+          "hash": "XudhIo3M2euOUD6JbZYg6XwRy5/IGp7WfBTiB5WavT0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.InstanceEditorUI.html",
+          "hash": "3+RUjM8YT4GH5kyiKIBn/hdCLMAktGLlCf/TSRUX21E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlInstancer.html",
+          "hash": "XnFGUUkXvFo03v3V6i8DBZBtUzzeRmFcsu0WGvq2lcM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlUIElement.-ctor.html",
+          "hash": "c70XlLyIcKI4VzazfPrkojLpATAKoSgnZAkWp9pagk8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControlUIElement.html",
+          "hash": "QiQcib/Drdhl+2CeeHjzE6m0YHj+gPFPi1ODTahet/0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.Name.html",
+          "hash": "hoOsR3xyzGtK+tflaojoAA3yU0qcTvJxDPV/3elNVy4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.Index.html",
+          "hash": "TxV5KROyXNggxyBrYtlrD6yIOOYfTlZIGCMrYEsieoM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.PropsOnSelected.html",
+          "hash": "+LigieHyVLS03ta7yoinVvzPHl+kFezT11hshcaS2rg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ListSelectorItem.html",
+          "hash": "GwpwO2vNd0DGS2DkVo8lMu3lxv5848OtJhidqapG6co="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.SelectedOption.html",
+          "hash": "W7lyUmMLdl66LcHqZCPmPxRe49sp09zcddgfheXSE4U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.-ctor.html",
+          "hash": "DJe4k8JDGRD5Ap3h9JmYGW7SFkf1AdXMun+IapXGJg8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.ControlGUI.html",
+          "hash": "4N7PUXGGAnu1U2Rgv8JtNRxaNLqbXf5sHJnTFOe6iQs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControl.html",
+          "hash": "NuklhoURPmCX54G/QoSHeOmpfFu/I1TsLjqNrShoMIg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.InstanceType.html",
+          "hash": "JObWq4Ang8BXua0pE8Jm6NrTsdzX45o10ior2Sa15oU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.CanHaveChildControls.html",
+          "hash": "5l2TmIxPd/ivqfLlSUwt/kY2zvN99S3FKjPz8tYuVrM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.InstanceInspectorControl.html",
+          "hash": "JT8GOB4LVii2VQ4BE7gnSdJ5EdfYdIU+Jn/6nqdqR6g="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.InstanceEditorUI.html",
+          "hash": "841qOFlLD9hHFMKqrq8bF0At0IIFII/C820T5LXSNy8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlInstancer.html",
+          "hash": "1qfyScnou2QBYFZC57mS7JNcYnfhJzt4idKLv1VduQQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlUIElement.-ctor.html",
+          "hash": "l0iwwy54A9rCjktjimS6doqViAl/KoHcV6iMg9tHwS8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ModuleSelectorControlUIElement.html",
+          "hash": "Q4LQMtdj4/y7Wivn9rGjYKS6qEFzZEvglw77Ha+sDo0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Name.html",
+          "hash": "EXV/J95QkVxAHKbaM8+XKaf0hdLP7Fjw/RAbd4LHz+8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Index.html",
+          "hash": "ZOX5kWSMpxaRNGhinAiVNDAW3elzmwjzRTUS7mPrvUM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.html",
+          "hash": "fJOLOjuIHX2KgP/iQCMgvwuY7eX1wVC3Hn+Gd2t+KOQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.SelectedOption.html",
+          "hash": "WZErysVlzgSnwNi8BEZvC3CemfLfUA4MHqdTUPwjtEM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.-ctor.html",
+          "hash": "Ow1njB/NYNlnO5Vbg40Xp3LwJ24JGBxvl43vcuDTbS4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.SetNewOptions.html",
+          "hash": "GrwnKQjY0bH0Llc0XJx06ouSbzyP/7wmii2hQJ7mzng="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.ControlGUI.html",
+          "hash": "CjFGmsjyigjN+MzSmXiIV3tX9jxs6sJ8CXHGtS5T8/A="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.html",
+          "hash": "KoludpMma672N1ZfFgzD98rdLKgGFs9HgA53QpcJkWQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.html",
+          "hash": "X++IdWn8JMjxhKyLhv81lXEJn2aFiXQFaxOJoGJbAsM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.SectionName.html",
+          "hash": "0clJeL3FTk++60vKONNkLdPxHGGxrpGjVwnNylrKr6A="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.IsPermanent.html",
+          "hash": "rFhNzSJI/fp6zJR/Vnexu0XkepUm5nDoB7cewY0TUDo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.ActivatePropertyName.html",
+          "hash": "YSFqp++shTi5+aafyekCerjwTcZMEcDWkm3dW0zW0R8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.EnableValue.html",
+          "hash": "DJB6KjcyDizcAuKcJ398BDlyLU0OkqNM3vW5uxnrHJE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.DisableValue.html",
+          "hash": "zYeuApTC0iStL8RlIPmmv32vdSWvs9Y5ZL1pHijBeso="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.Controls.html",
+          "hash": "p2o/l+twfzEAs/D8IA6d/KkGBHV79n+9RAcLwTQ4YnY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.OnSectionDisableData.html",
+          "hash": "UO+F9YNbe0LzCzluJtblm1MY91I77jypVR9SspTigUQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.-ctor.html",
+          "hash": "cYlQi9wncnjtVBYst3kyhRfpDZCtVZKAViahqtUFg0E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUI.html",
+          "hash": "0VnsVBHt1mr5mrkxbMYWO8H4F+yULsQ0WGiICLYR850="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.Template.CreateVisualElementForObject.html",
+          "hash": "/wmzQi8suzSRSJk+LnQmdHseniQDQZap/3Jnp0NjvbA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.Template.html",
+          "hash": "X5IVXddLIkbU2951hF1zulnYkmNAiPUNIZFx5dgxAIE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.ElementTemplate.html",
+          "hash": "MS6Stc0Hu2oQy9mPU0M9Spuqkw8piRAkJkwilMyO63A="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.-ctor.html",
+          "hash": "KSVw1+b9jzKWMJrDZt6fkevQNx9iN6vMJU24ckIN2a8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.AssignObject.html",
+          "hash": "4BacUMPP3UT6yICxQEtJD5yWJijHoJwMnbZr5K/R/94="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SectionUIElement.html",
+          "hash": "vQVTIoUwvt0cv/ROj/KDEL4R7Ld+xe4QdZfppBZtTNw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.module.html",
+          "hash": "M7CES/thsbYisStaP8IJDyzPSouifFBRRRdO83qkhEI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.unityGUIDReferences.html",
+          "hash": "SIs+J59RCCrJ0bJBqJP7aPtxM4FLpWk2O7E/woyEUo0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.SerializedUIData.html",
+          "hash": "tEdVoeNwOU5CciUJhNfXeVbX1jG31v1Y0sy+bo3N2H4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.GITHUB_LINK.html",
+          "hash": "hyTSHXR94tNP1bo4VLoOJWQutReagPXTvnX8T4tiiL0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.PATREON_LINK.html",
+          "hash": "v+ixQ/SQOpYfT0oBLfx9gpDpB30XVI34qNsJFLD1ocU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.DISCORD_LINK.html",
+          "hash": "hypt8Bbuo1muYuqAW0dFmb3oQ0S749xY8qyB79BiaAw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.html",
+          "hash": "2bQkaEpUYSlR68oL4HDmJmy6np1owYFW81m/0cJvwjE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.ModularShader.html",
+          "hash": "G0+u6C3hCCxBUYZ6GjsFDC7SFVVGS8hBlmzQwAvWJ8s="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.Controls.html",
+          "hash": "JDnHeOrwtCHOm6yAAacG21Lx/0QM2Wrj5qZxkKN12KU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.DefaultBgColor.html",
+          "hash": "urnU45EEhjrG2qBcCcT40wogVd9Y1ZF7Qa/4IT2gVmc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.NeedsNonAnimatableUpdate.html",
+          "hash": "UR+3AiAkj0FuqJ7kpnGa/JqWXIfIHwo0berRAtX9ooc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.Materials.html",
+          "hash": "S/CW3nI6AL6T8Ji+5LCPaYaVraodUUwzYsXA2KQ7CjE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.Shader.html",
+          "hash": "JQFuE+LaOzreRhFg52wWcTJKqDv0zJU79LfJsQUQpK4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.AddControl.html",
+          "hash": "5O75QdVKxEQVUyAqLDjJO2rOHwgY7Sji3Y2nZ+jRpc4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.GetControlList.html",
+          "hash": "PvfjBpVdupxhX6ivIVoq7z/+vRfjxz9BsnR9m9qv3Zg="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.OnGUI.html",
+          "hash": "RIYH3OfUg5pnkvLwnh0roY3qi52R1rzE8D9YBDU+TG0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.PostGeneration.html",
+          "hash": "OLQlOAWTNSAS2RynEyL9npVyRF/2FoaDtNIKYgcXlTc="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRGUI.html",
+          "hash": "cOEdXAtmyZhRfYdl/2knDwCSiq7Etr+htwbEesEHH84="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.SelectedLanguage.html",
+          "hash": "65zyPQMfUOxEUkIT+3T6wBrGIwOTfbzy3SntMZwIo4U="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.AvailableLanguages.html",
+          "hash": "6CXrWYvN98q2YV69hcZQz+rDTcnzCLt2sDDGUcvm54A="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRSettingsFile.html",
+          "hash": "JfRaoYQch6A/j96wLreSUgoav+LuYOtYLLhUrXnL0Lo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.FindAssetsByType.html",
+          "hash": "qyQAaILbbxju8oROIt7m0qGI0TmniMR2R3QQwrnKGvk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.LoadUvSet.html",
+          "hash": "AwF7si5tedt5rtJAugT7HvheIgp5nbHd29kQFACXzy0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.TSRPostGeneration.html",
+          "hash": "+aIn7zgFYT6CVT3j9tkCEgcO+Fyzun64wfbGvJpUg5E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.TSRUtilities.html",
+          "hash": "wFNaZFZ6CFEaHYmK2R15MCWB6E0Omm0rzqLidqD5DK8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.ID.html",
+          "hash": "qiVRZ2y/RAuW2qRK0eWNfTLGSEwDRjQe6LsXjEkpl28="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.Name.html",
+          "hash": "XLteE7RIDl2fTfxnhNMT2XNTFeFUuBzRBd41JOGPe4I="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItem.html",
+          "hash": "0t9L/ebi2NV4dXIOiEP61bqzX3mU2xe+nTc2twaHNYE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.Template.CreateVisualElementForObject.html",
+          "hash": "wnOG7C76zK5pA60MWN0ZE0uuehg01+fdqgiIYWSzwWM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.Template.html",
+          "hash": "i4tKDR7yo3HrJxq17xJTta7P16i2rjfn640XF1jHef4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.ElementTemplate.html",
+          "hash": "SDjWaLc330SYnSO0UaGNVIYU+nMCXsKW0PX+t6r0ujw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.-ctor.html",
+          "hash": "ccGYJwpKbQH2Yjg7Ae5IXYgxxgmbtWwuCEDxcpNONxE="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.AssignObject.html",
+          "hash": "YG+mkw7URY0qlNm4kgxRKQf0YH2Ni+qLcme8UiN7srk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVItemUIElement.html",
+          "hash": "lUWoweXeUL4Ndl5IOEB8G6EXhGHlC5HRxcdu937Dhlo="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.ID.html",
+          "hash": "y4slq2DCq7JJUJRlihP80tufquL9qss0Q82N9FMsJds="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.Items.html",
+          "hash": "01StJg6/3KTSbeYLgxZbBMP5jjXRXVCbAKUjQ/w9LZk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.-ctor.html",
+          "hash": "DmgmjTOzeA3KxwRHfwQBEScLWwXJxT6A/NE+0KSFK+g="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSet.html",
+          "hash": "gtZQZuZh58NiSGBRC4gUtaI2Kh+vvYiphlB4Pkah69s="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.Template.CreateVisualElementForObject.html",
+          "hash": "ujsLV48+WVtt93kZGHw/G4yqtR/xGGp5yAvUY/2l1HY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.Template.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.Template.html",
+          "hash": "3f+TWWo8V99dF6QsuHkEarZZ7VTJlnOpyG6ZCTxC4hA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.ElementTemplate.html",
+          "hash": "TNmmRzUmepxLcLkAOrXx/xN+3RGmzj9ULiqQImeDPvQ="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.-ctor.html",
+          "hash": "Gmxs/w12wluTMGo7tCIthUVT+BQM8CEieZ1mU9d4KzM="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.AssignObject.html",
+          "hash": "/jx9GDjdm6Ia5v+LS2OGWZAUjxL0LLXLO5AHCFtnSbk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UVSetUIElement.html",
+          "hash": "dpAgi1hEZfo4WjZS1D+bnrFSzDB+SRN+YCSvEf7QJZY="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.FloatProperties.html",
+          "hash": "vKsfOD1J3fGsXk2yTv3suBWGL7Zrb/Wwffom4IvXjng="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.ColorProperties.html",
+          "hash": "bruHtJO+4mSrpzi0a1yVHkOPw9jmcJMseTEGt2eCOB0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.TextureProperties.html",
+          "hash": "hFoDKSx97X7yqoWzWPnceESOJoeQTQ5EedDuac6nshs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.Keywords.html",
+          "hash": "B0uKYb2iww79iQCuAVkm/gsFkhFbNkgkCkstXx+K61Y="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.OverrideTags.html",
+          "hash": "/P1BbbcjAAj92yipLTot9e+SdeLqe9MdfmJIRgCRERU="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.SetRenderQueue.html",
+          "hash": "NXnt5seaR55gQo2neZMAmMYVmI6qTLSkkek7R+bk8Qw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.RenderQueue.html",
+          "hash": "C/8S50eOKAfLJYNygUUQ259BXf7wUeCfbP1Zahdjtvs="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.-ctor.html",
+          "hash": "MvBt+GScPruFBvpv56ehVutCIRnXF8qwYwE6cMHi5U0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.UpdateMaterials.html",
+          "hash": "Adth6ad6HH+cdiWAOrfB7XI4BBd6N4TQ/O2ZC+tAnS8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateData.html",
+          "hash": "+ye4OQqMtELNViqnzIO3rte8exSPBZ1AuP4ObvJ26+8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.FoldoutText.html",
+          "hash": "AguT2Wzj2uJingffihh2UOQXxjjFNY25p6Xo76tKmc0="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.-ctor.html",
+          "hash": "rjUomK7VAF58qQGaQPFBmM5TlcwlUHLpkkMvIsW9F/Y="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.AssignObject.html",
+          "hash": "hRLsA86Uif2QzPJpL8J3CD5k1FZ7+ylds6i0FeHC8C4="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateDataUIElement.html",
+          "hash": "7I++5l8/09gtl/ZBp3mn3R5CZctqZ/uKfA0AHe/PLb8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.Name.html",
+          "hash": "mxfiqTKSYqiiJ9/kf6CKsvI56duUgzVpFk0dudKto6E="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.Value.html",
+          "hash": "FqZKKA8csqqXAYkJZRl/j5lxPXH6QEwnnw2YKiEfb5I="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.UpdateProp-1.html",
+          "hash": "zAAuDFEhS7NmfKdwDfQxbEnMYvaWMQjDaGlovPrIc8w="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Next/api/VRLabs.ToonyStandardRebuild.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/VRLabs.ToonyStandardRebuild.html",
+          "hash": "6uj1XgQqzag4lheOUAqXFlwMWW0W1jbwAxaug7EqYi8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Next/api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/index.html",
+          "hash": "+Dug7DzA2oaFMCqZHIzQl5oRRhdTAaqVcF7xeMSZfRA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Next/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/api/toc.html",
+          "hash": "9W1kHiFzOiw742G2OxeydZI43zrkeRO4CFgAdSromas="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Next/guides/CreateModules.md",
+      "output": {
+        ".html": {
+          "relative_path": "Next/guides/CreateModules.html",
+          "hash": "IyYHpUNO7vgo/jFi9AqDaV+0k7mc8x5MmFnFa1KBpBI="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Next/guides/Quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "Next/guides/Quickstart.html",
+          "hash": "DnNO5AK6yLWmxt97oTKu+61GVaw8MnRZKMpHlZmjqyA="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Next/guides/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Next/guides/index.html",
+          "hash": "Yy7abrcByaRnQuPT1SlibzsloiF92ByxcdmxZe/i0B8="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Next/guides/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/guides/toc.html",
+          "hash": "uTREq2T9jexRIN8199amgg+PrW5drIm4b6n82zqZjsk="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "Next/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Next/toc.html",
+          "hash": "LwfAk4gTp/0Mx775ZGCfmoQ/3FxbXL5aLQ2mG9sgTKw="
+        }
+      },
+      "is_incremental": false,
+      "version": "Next",
+      "group": "Next"
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/Quickstart/1.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/Quickstart/1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/Quickstart/2.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/Quickstart/2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/Quickstart/3.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/Quickstart/3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/docs/Quickstart/4.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/docs/Quickstart/4.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "logo-full.png",
+      "output": {
+        "resource": {
+          "relative_path": "logo-full.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 85,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {
+    "Next": {}
+  },
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    },
+    {
+      "name": "Next",
+      "xrefmap": "Next.xrefmap.yml"
+    }
+  ]
+}
