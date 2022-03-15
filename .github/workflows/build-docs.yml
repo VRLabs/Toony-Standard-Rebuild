@@ -50,4 +50,4 @@ jobs:
         with:
           email: 41898282+github-actions[bot]@users.noreply.github.com
           build_dir: site
-          cname: mss.vrlabs.dev
+          cname: tsr.vrlabs.dev
