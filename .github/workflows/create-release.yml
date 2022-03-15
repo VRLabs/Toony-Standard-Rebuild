@@ -18,7 +18,7 @@ jobs:
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
       - name: Update version number
         run: |
-          node .github\update-version-number.js ${{ env.SOURCE_TAG }}
+          node .github/update-version-number.js ${{ env.SOURCE_TAG }}
           echo "${{ env.SOURCE_TAG }}" > Editor/Resources/TSR/VERSION.txt
       - name: Prepare Folder For Packaging
         run: |
