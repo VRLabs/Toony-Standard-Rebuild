@@ -29,7 +29,7 @@ if (!gitRepo.endsWith(".git")) {
 }
 
 const destinationTagsFolder = destinationFolder + '/.t/tags';
-const destinationMasterFolder = destinationFolder + '/.t/master';
+const destinationMasterFolder = destinationFolder + '/.t/main';
 const destinationDocsFolder = destinationFolder + '/docs';
 
 createDirectory(destinationTagsFolder);
@@ -51,7 +51,7 @@ else {
 }
 
 // Generate empty docs
-console.log('Generating empty docs based on master');
+console.log('Generating empty docs based on main');
 exec('cp -r "' + destinationMasterFolder + '/.docs/." "' + destinationDocsFolder + '"');
 exec('rm -r -f "' + destinationDocsFolder + '/.guides"');
 exec('rm -r -f "' + destinationDocsFolder + '/.api"');
@@ -67,7 +67,7 @@ else {
     console.log('Retrieving Tags');
     exec('git -C "' + destinationMasterFolder + '" tag -l --sort=-version:refname * > "' + destinationTagsFolder + '/tags.txt"');
     tags = fs.readFileSync(destinationTagsFolder + '/tags.txt', "utf-8").split("\n");
-    tags.unshift("master");
+    tags.unshift("main");
 }
 
 const masterSrcFolder = destinationMasterFolder + '/Editor';
@@ -87,7 +87,7 @@ for (let i = 0; i < tags.length; i++) {
     currentlyIn++;
     lastBigTag = tags[i].lastIndexOf(".") != -1 ? tags[i].substring(0, tags[i].lastIndexOf(".")) : "nothing";
     const tag = tags[i];
-    const tagName = tag === "master" ? "Next" : tag;
+    const tagName = tag === "main" ? "Next" : tag;
     const tagFolder = i === 1 ? "" : tagName;
     const tagFolderSlashed = i === 1 ? "" : tagFolder + "/";
 
@@ -146,10 +146,10 @@ for (let i = 0; i < tags.length; i++) {
         currentlyInTOC++;
         lastBigTagTOC = tags[j].lastIndexOf(".") != -1 ? tags[j].substring(0, tags[j].lastIndexOf(".")) : "nothing";
         var internalTag = tags[j];
-        tocFile += '    - name: ' + (internalTag === "master" ? "Next" : internalTag) + '\n';
+        tocFile += '    - name: ' + (internalTag === "main" ? "Next" : internalTag) + '\n';
 
         var ref = (i === 1 ? "" : "../");
-        ref += internalTag === tags[1] ? "" : (internalTag === "master" ? "Next/" : internalTag + '/');
+        ref += internalTag === tags[1] ? "" : (internalTag === "main" ? "Next/" : internalTag + '/');
         tocFile += '      topicHref: ' + ref + 'api\n';
     }
 
