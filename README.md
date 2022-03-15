@@ -31,9 +31,7 @@
 
 Welcome to Toony Standard RE:Build, a shader based on the [Modular Shader System](https://github.com/VRLabs/Modular-Shader-System/) that aims to be a small shader with some base features that can be expanded via dedicated modules, giving people just what they need.
 
-![example materials](notyet)
-
-By default the shader only comes with a default pbr workflow and optional toon diffuse lighting, but if you want to add more features you can start by looking at [this page](notyet) where we have a selected collection of first and third party modules with additional features.
+By default the shader only comes with a default pbr workflow and optional toon diffuse lighting, but if you want to add more features you can start by looking at [this page](https://github.com/VRLabs/TSR-Modules-List) where we have a selected collection of first and third party modules with additional features.
 
 For a quick start check out the official [Documentation](https://tsr.vrlabs.dev).
 

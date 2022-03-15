@@ -20,6 +20,7 @@ namespace VRLabs.ToonyStandardRebuild
 {
     public class TSRGUI : ShaderGUI, ISimpleShaderInspector
     {
+        private static readonly string _tsrVersion = "Toony Standard RE:Build " + ((TextAsset)Resources.Load("TSR/VERSION")).text;
         private static Vector2 _firstSettingsViewPosition;
         private static Vector2 _secondSettingsViewPosition;
 
@@ -853,7 +854,7 @@ namespace VRLabs.ToonyStandardRebuild
 
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
-            GUILayout.Label(TSRConstants.TSR_VERSION, _aboutLabelStyle, GUILayout.Height(26));
+            GUILayout.Label(_tsrVersion, _aboutLabelStyle, GUILayout.Height(26));
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }
