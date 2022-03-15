@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Create Modules | Toony Standard RE:Build Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Create Modules | Toony Standard RE:Build Documentation ">
+    <meta name="generator" content="docfx 2.58.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="png" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="CreateModules">
+<h1 id="create-modules">Create Modules</h1>
+
+<p>Toony Standard RE:Build is a modular shader that uses modules to define features. This means that you can create modules to add features yourself.</p>
+<p>First of all, you should check out the <a href="https://mss.vrlabs.dev">Modular Shader System documentation</a> to get an hold on the basis of creating modules.</p>
+<h2 id="structure-and-hooks">Structure and hooks</h2>
+<p>Now that you have a basic idea on how the modular shader system works in general, it's time to talk about how it's used in Toony Standard RE:Build and what are the main hooks available.</p>
+<p>By default the modular shader asset does not have the <code>base modules</code> part editable, because the management of the modules is done via shader inspector to begin with.
+Also the modules shown in there are considered <code>core modules</code> that make up the base structure of the shader, as well as the base hookups, and that should not be edited.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the shader would be left with only core modules, it would still compile fine, but would just have a black output.</p>
+</div>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>When creating a new variation from the inspector, you have the possibility to change out core modules for the new modular shader assets, but in general unless you know what you're doing (or if specified by some third party as the way to get their modules to work) you should not be doing that,
+as it may make the shader unusable or break the compatibility to other modules in case some hookups are not available anymore</p>
+</div>
+<p>These core modules exposes quite some hooks, with some of them designed to be targeted by templates, some to be targeted by functions, and some others are code or variables destinations.</p>
+<p>These ones are the keywords designed to be used by templated and that need to generate a new variant if they can be toggled on or off:</p>
+<ul>
+<li><p><code>MAIN_PASS</code>: Hook for the base pass CG code, defined right after some common unity includes. In general this should not be used</p>
+</li>
+<li><p><code>MAIN_PASS_PRAGMAS</code>: Hook used to add #pragma features to the base pass</p>
+</li>
+<li><p><code>ADD_PASS</code>: Hook for the add pass CG code, defined right after some common unity includes. In general this should not be used</p>
+</li>
+<li><p><code>ADD_PASS_PRAGMAS</code>: Hook used to add #pragma features to the add pass</p>
+</li>
+<li><p><code>SHADOW_PASS</code>: Hook for the shadow pass CG code, defined right after some common unity includes. In general this should not be used</p>
+</li>
+<li><p><code>SHADOW_PASS_PRAGMAS</code>: Hook used to add #pragma features to the shadow pass</p>
+</li>
+<li><p><code>META_PASS</code>: Hook for the meta pass CG code, defined right after some common unity includes. In general this should not be used</p>
+</li>
+<li><p><code>META_PASS_PRAGMAS</code>: Hook used to add #pragma features to the meta pass</p>
+</li>
+<li><p><code>ADDITIONAL_PASSES</code>: Hook used to add more passes after the meta pass, can be used to add whatever type of pass you want</p>
+</li>
+<li><p><code>VERTEX_DATA</code>: Hook that is inside the base pass vertex data structure, used to define additional component that need to be inside the vertex structure. It's going to be used for both the base and add pass.</p>
+</li>
+<li><p><code>FRAGMENT_DATA</code>: Hook that is inside the base pass fragment data structure, used to define additional component that need to be inside the fragment structure. It's going to be used for both the base and add pass.</p>
+</li>
+<li><p><code>META_FRAGMENT_DATA</code>: Same as <code>FRAGMENT_DATA</code>, but for the meta pass.</p>
+</li>
+<li><p><code>FUNCTION_STAGES</code>: Hook that can be used to define some other pass stages (like a geometry stage for example) in the main and add passes. To get the stage to work you also need to give the proper #pragma in <code>MAIN_PASS_PRAGMAS</code> and <code>ADD_PASS_PRAGMAS</code>.</p>
+</li>
+</ul>
+<p>These keywords instead are designed to be used as functions target, but they can also be used for some templates if they need to access some local only data, and they don't need to generate a variant if they can be toggled on or off:</p>
+<ul>
+<li><code>VERTEX_FUNCTION</code>: Hook for adding code to the vertex function, if you need to access or set some data for the output you need to use templates. For main and add passes.</li>
+<li><code>FRAGMENT_FUNCTION</code>: Hook for adding code to the fragment function, should be used mainly for functions, as both the input data and output data can be accessed by global variables. For main and add passes.</li>
+<li><code>SHADOW_FRAGMENT_FUNCTION</code>: Same of <code>FRAGMENT_FUNCTION</code>, but for the shadow pass.</li>
+<li><code>META_VERTEX_FUNCTION</code>: Same as <code>VERTEX_FUNCTION</code>, but for the meta pass.</li>
+<li><code>META_FRAGMENT_FUNCTION</code>: Same as <code>FRAGMENT_FUNCTION</code>, but for the meta pass.</li>
+</ul>
+<p>These keywords are designed to be targets for function implementations or variables:</p>
+<ul>
+<li><code>DEFAULT_VARIABLES</code>: Hook for the variables for the main and add passes, it's used by default if a keywords for variables of a function is not given.</li>
+<li><code>DEFAULT_CODE</code>: Hook for the function implementation code for the main and add passes, it's used by default if a keyword for function implementation code of a function is not given.</li>
+<li><code>SHADOW_VARIABLES</code>: Hook for the variables for the shadow pass.</li>
+<li><code>SHADOW_CODE</code>: Hook for the function implementation code for the shadow pass.</li>
+<li><code>META_VARIABLES</code>: Hook for the variables for the meta pass.</li>
+<li><code>META_CODE</code>: Hook for the function implementation code for the meta pass.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Some modules may add other hooks in new places.</p>
+<p>For example an hypothetical outline module may expose hooks for vertex and fragment functions to be placed inside of it.</p>
+<p>Whenever you use hooks that are not part of core modules be sure to define the module that declares it as a required module for your module.</p>
+</div>
+<h2 id="standards-on-modules">Standards on modules</h2>
+<p>While you can pretty much swap and replace all modules that provide the lighting calculations on the shader with custom ones with your own naming conventions,
+it is a better idea to keep a standard so that it's easier to have modules from multiple creators being able to integrate with your own.</p>
+<p>The first big standard is: if you don't need to change some structural part of the shader (like adding some data to the vertex or fragment structures because you need them for your module),
+you should lean towards using functions, relegating templates to just some bigger stuff, like extra passes definitions, or stuff that is being preferred by a specific hookup.</p>
+<p>Another convention is to keep the same conventions for some common variable names that will most likely be used by the shader even when the default modules are not used:</p>
+<ul>
+<li>Albedo (float4): object main color. Alpha is transparency.</li>
+<li>Diffuse (float3): calculated color of the direct diffuse.</li>
+<li>DirectSpecular (float3): calculated color for the direct specular reflection.</li>
+<li>Emission (float3): color of the emission.</li>
+<li>Glossiness (float): how glossy the object should be.</li>
+<li>IndirectDiffuse (float3): calculated color of the indirect diffuse.</li>
+<li>IndirectSpecular (float3): calculated color of the indirect specular.</li>
+<li>Occlusion (float): occlusion value on the surface, 0 = fully occluded, 1 = no occlusion.</li>
+<li>Roughness (float): how rough the object should be, opposite of Glossiness.</li>
+<li>Specular (float): how specular the object is, default is 0.5 and the value should only affect non metallic specular.</li>
+<li>FinalColor (float4): Final result, in the main passes it should always be available without defining a variable for the function.</li>
+<li>FragData (FragmentData): data passed to the fragment function, in the main passes it should always be available without defining a variable for the function.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>These variables are only a part of the ones available normally, and it should be considered more of a guideline in case you want to make modules that work in multiple non standard module combinations.</p>
+</div>
+<p>Another good standard that can be applied to your module is to split the calculation of whatever you're doing to the final assignment/add operation to the final color or the variables you need to add your result.
+By doing this you allow other modules to be able to intercept that value and add their own stuff into it if they need to for their own purposes, therefore allowing creators to make other modules that build upon your module.</p>
+<h2 id="the-uvset-system">The UVSet system</h2>
+<p>Toony Standard RE:Build comes with a system to allow you to define and use different uv sets where for each uv set you can add uv spaces, either sampled or calculated, that every texture using that uv set can be set to use via inspector, allowing you to add effects to already defined and used textures.</p>
+<p>But to be able to use the system the textures you defined need to use a specific macro to retrieve the uv position to sample, and you also need to define a float variable called <code>*_YourTextureName*_UV</code> (this variable is going to pass the index of the uv used from the set):</p>
+<pre><code class="lang-glsl">// Macro usage
+TSR_TRANSFORM_TEX(UvSetToUse, _YourTexture)
+
+// Example sampling
+float4 sampledTexture = UNITY_SAMPLE_TEX2D(_YourTexture, TSR_TRANSFORM_TEX(UvSetToUse, _YourTexture));
+</code></pre>
+<p>The <code>UvSetToUse</code> should be the array of the set you want to use, usually you want to use the <code>Uvs</code> one since that's the main uv set available by default from the shader.</p>
+<p>You will also need to define the used uv set in the ui.</p>
+<h2 id="modules-ui">Module's UI</h2>
+<p>Now that you have the module, you need to tell the inspector what options to show to the user. You can modify what is shown by going to <code>VRLabs &gt; Toony Standard RE:Build &gt; Edit UI for module</code>.
+This window let you select which ui controls to show, and where to show them, as well as defining eventual UV sets.</p>
+<p>First add a section, it can be an already existing section or a new one. In case of an already existing one you just need to put in the same name, and set is as permanent if the original one is also permanent.
+In case it's a new one, you also have to define which property is used to check if it's enabled or not (in case you want it to always be enabled, you have to set it as a permanent section).</p>
+<p>Now you can add the controls you want to add. A control corresponds to an input. There are different type of controls for different type of data, and some of them have also utilities integrated. In [this page](not yet) you have an overview of the controls available by default.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The ui system is based on the <a href="https:%5Cssi.vrlabs.dev">Simple Shader Inspectors</a> library, and you have the option to create your own controls and have them available to be used here.</p>
+</div>
+<p>For each control you have to give a couple of static informations, and some extra depending on the type of control:</p>
+<ul>
+<li>Name: name of the control, is similar to an id, and is used as reference for localization.</li>
+<li>Append after: name of the control you want this control to be added after. Can be a control in your list, or a control of another module (you can use the left tab to see the control names of a modular shader's ui).</li>
+<li>Type: type of control to use, all the next parameters will be based on the type of control you select.</li>
+</ul>
+<p>In general, each control will also ask for the name of the property you want to edit, unless it's a control that only shows text like a label.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Texture related controls will also have an input for the uv set to use. For this input you should be set it to the id corresponding to the uv set you're using in the code. For the main set this id is <code>BASESET</code>.</p>
+</div>
+<p>Aside of controls, you also have the possibility to set values for properties, keywords, override tags, and render queue when the section is disabled.</p>
+<h2 id="localization">Localization</h2>
+<p>After loading your new module for the first time into the shader, you will notice that the controls of your section of the ui may have weird names as labels.</p>
+<p>This is due to the default localization being generated. the shader has generated a localization folder with an english localization file in the same folder your module is located.</p>
+<p>You can use this localization file to edit the text of the controls.</p>
+<p>You can also duplicate this file, rename it to another language, and edit the display text and tooltip for that language</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The shader needs to have enabled that language in its settings to be a able to display that localization.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © VRLabs.<br>Generated by <strong>DocFX</strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
