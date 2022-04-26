@@ -1612,7 +1612,7 @@
   "api/VRLabs.ToonyStandardRebuild.SSICustomControls.html": {
     "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.html",
     "title": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls | Toony Standard RE:Build Documentation",
-    "keywords": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls Classes Chainables ListSelectorControl ListSelectorControl.ListSelectorItem ListSelectorControlInstancer ListSelectorControlUIElement ModuleSelectorControl ModuleSelectorControl.ListSelectorItem ModuleSelectorControlInstancer ModuleSelectorControlUIElement UVSetSelectorControl UVSetSelectorControl.UvSetSelectorItem"
+    "keywords": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls Classes Chainables ListSelectorControl ListSelectorControl.ListSelectorItem ListSelectorControlInstancer ListSelectorControlUIElement ModuleSelectorControl ModuleSelectorControl.ListSelectorItem ModuleSelectorControlInstancer ModuleSelectorControlUIElement UVSetSelectorControl UVSetSelectorControl.UvSetSelectorItem UVSetSelectorControlInstancer UVSetSelectorControlUIElement"
   },
   "api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ControlGUI.html": {
     "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ControlGUI.html",
@@ -1803,6 +1803,41 @@
     "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Name.html",
     "title": "Field Name | Toony Standard RE:Build Documentation",
     "keywords": "Field Name Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public string Name Returns String"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html",
+    "title": "Property CanHaveChildControls | Toony Standard RE:Build Documentation",
+    "keywords": "Property CanHaveChildControls CanHaveChildControls Declaration public bool CanHaveChildControls { get; } Property Value Type Description Boolean Implements IControlInstancer.CanHaveChildControls"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.html",
+    "title": "Class UVSetSelectorControlInstancer | Toony Standard RE:Build Documentation",
+    "keywords": "Class UVSetSelectorControlInstancer Inheritance Object UVSetSelectorControlInstancer Implements IControlInstancer Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public class UVSetSelectorControlInstancer : IControlInstancer Properties Name Description CanHaveChildControls InstanceType Methods Name Description InstanceEditorUI(ControlUI) InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html",
+    "title": "Method InstanceEditorUI | Toony Standard RE:Build Documentation",
+    "keywords": "Method InstanceEditorUI InstanceEditorUI(ControlUI) Declaration public VisualElement InstanceEditorUI(ControlUI uiAsset) Parameters Type Name Description ControlUI uiAsset Returns Type Description VisualElement Implements IControlInstancer.InstanceEditorUI(ControlUI)"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html",
+    "title": "Method InstanceInspectorControl | Toony Standard RE:Build Documentation",
+    "keywords": "Method InstanceInspectorControl InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String) Declaration public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet) Parameters Type Name Description ControlUI uiAsset IControlContainer parentControl ModularShader shader String uvSet Returns Type Description SimpleControl Implements IControlInstancer.InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html",
+    "title": "Property InstanceType | Toony Standard RE:Build Documentation",
+    "keywords": "Property InstanceType InstanceType Declaration public Type InstanceType { get; } Property Value Type Description Type Implements IControlInstancer.InstanceType"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html",
+    "title": "Constructor UVSetSelectorControlUIElement | Toony Standard RE:Build Documentation",
+    "keywords": "Constructor UVSetSelectorControlUIElement UVSetSelectorControlUIElement(List<Object>) Declaration public UVSetSelectorControlUIElement(List<object> parameters) Parameters Type Name Description List < Object > parameters"
+  },
+  "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.html": {
+    "href": "api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.html",
+    "title": "Class UVSetSelectorControlUIElement | Toony Standard RE:Build Documentation",
+    "keywords": "Class UVSetSelectorControlUIElement Inheritance Object CallbackEventHandler Focusable VisualElement UVSetSelectorControlUIElement Implements IEventHandler ITransform ITransitionAnimations IExperimentalFeatures IVisualElementScheduler IResolvedStyle Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public class UVSetSelectorControlUIElement : VisualElement, IEventHandler, ITransform, ITransitionAnimations, IExperimentalFeatures, IVisualElementScheduler, IResolvedStyle Constructors Name Description UVSetSelectorControlUIElement(List<Object>)"
   },
   "api/VRLabs.ToonyStandardRebuild.TSRConstants.DISCORD_LINK.html": {
     "href": "api/VRLabs.ToonyStandardRebuild.TSRConstants.DISCORD_LINK.html",
@@ -3252,7 +3287,7 @@
   "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.html": {
     "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.html",
     "title": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls | Toony Standard RE:Build Documentation",
-    "keywords": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls Classes Chainables ListSelectorControl ListSelectorControl.ListSelectorItem ListSelectorControlInstancer ListSelectorControlUIElement ModuleSelectorControl ModuleSelectorControl.ListSelectorItem ModuleSelectorControlInstancer ModuleSelectorControlUIElement UVSetSelectorControl UVSetSelectorControl.UvSetSelectorItem"
+    "keywords": "Namespace VRLabs.ToonyStandardRebuild.SSICustomControls Classes Chainables ListSelectorControl ListSelectorControl.ListSelectorItem ListSelectorControlInstancer ListSelectorControlUIElement ModuleSelectorControl ModuleSelectorControl.ListSelectorItem ModuleSelectorControlInstancer ModuleSelectorControlUIElement UVSetSelectorControl UVSetSelectorControl.UvSetSelectorItem UVSetSelectorControlInstancer UVSetSelectorControlUIElement"
   },
   "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ControlGUI.html": {
     "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.ListSelectorControl.ControlGUI.html",
@@ -3443,6 +3478,41 @@
     "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Name.html",
     "title": "Field Name | Toony Standard RE:Build Documentation",
     "keywords": "Field Name Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public string Name Returns String"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html",
+    "title": "Property CanHaveChildControls | Toony Standard RE:Build Documentation",
+    "keywords": "Property CanHaveChildControls CanHaveChildControls Declaration public bool CanHaveChildControls { get; } Property Value Type Description Boolean Implements IControlInstancer.CanHaveChildControls"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.html",
+    "title": "Class UVSetSelectorControlInstancer | Toony Standard RE:Build Documentation",
+    "keywords": "Class UVSetSelectorControlInstancer Inheritance Object UVSetSelectorControlInstancer Implements IControlInstancer Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public class UVSetSelectorControlInstancer : IControlInstancer Properties Name Description CanHaveChildControls InstanceType Methods Name Description InstanceEditorUI(ControlUI) InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html",
+    "title": "Method InstanceEditorUI | Toony Standard RE:Build Documentation",
+    "keywords": "Method InstanceEditorUI InstanceEditorUI(ControlUI) Declaration public VisualElement InstanceEditorUI(ControlUI uiAsset) Parameters Type Name Description ControlUI uiAsset Returns Type Description VisualElement Implements IControlInstancer.InstanceEditorUI(ControlUI)"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html",
+    "title": "Method InstanceInspectorControl | Toony Standard RE:Build Documentation",
+    "keywords": "Method InstanceInspectorControl InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String) Declaration public SimpleControl InstanceInspectorControl(ControlUI uiAsset, IControlContainer parentControl, ModularShader shader, out string uvSet) Parameters Type Name Description ControlUI uiAsset IControlContainer parentControl ModularShader shader String uvSet Returns Type Description SimpleControl Implements IControlInstancer.InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html",
+    "title": "Property InstanceType | Toony Standard RE:Build Documentation",
+    "keywords": "Property InstanceType InstanceType Declaration public Type InstanceType { get; } Property Value Type Description Type Implements IControlInstancer.InstanceType"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html",
+    "title": "Constructor UVSetSelectorControlUIElement | Toony Standard RE:Build Documentation",
+    "keywords": "Constructor UVSetSelectorControlUIElement UVSetSelectorControlUIElement(List<Object>) Declaration public UVSetSelectorControlUIElement(List<object> parameters) Parameters Type Name Description List < Object > parameters"
+  },
+  "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.html": {
+    "href": "Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.html",
+    "title": "Class UVSetSelectorControlUIElement | Toony Standard RE:Build Documentation",
+    "keywords": "Class UVSetSelectorControlUIElement Inheritance Object CallbackEventHandler Focusable VisualElement UVSetSelectorControlUIElement Implements IEventHandler ITransform ITransitionAnimations IExperimentalFeatures IVisualElementScheduler IResolvedStyle Namespace : VRLabs.ToonyStandardRebuild.SSICustomControls Syntax public class UVSetSelectorControlUIElement : VisualElement, IEventHandler, ITransform, ITransitionAnimations, IExperimentalFeatures, IVisualElementScheduler, IResolvedStyle Constructors Name Description UVSetSelectorControlUIElement(List<Object>)"
   },
   "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.DISCORD_LINK.html": {
     "href": "Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.DISCORD_LINK.html",

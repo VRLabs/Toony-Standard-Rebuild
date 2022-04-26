@@ -2780,6 +2780,84 @@ references:
   commentId: F:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Name
   fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControl.UvSetSelectorItem.Name
   nameWithType: UVSetSelectorControl.UvSetSelectorItem.Name
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer
+  name: UVSetSelectorControlInstancer
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.html
+  commentId: T:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer
+  nameWithType: UVSetSelectorControlInstancer
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls
+  name: CanHaveChildControls
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html#VRLabs_ToonyStandardRebuild_SSICustomControls_UVSetSelectorControlInstancer_CanHaveChildControls
+  commentId: P:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls
+  nameWithType: UVSetSelectorControlInstancer.CanHaveChildControls
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls*
+  name: CanHaveChildControls
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls.html
+  commentId: Overload:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.CanHaveChildControls
+  nameWithType: UVSetSelectorControlInstancer.CanHaveChildControls
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI(VRLabs.ToonyStandardRebuild.ControlUI)
+  name: InstanceEditorUI(ControlUI)
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html#VRLabs_ToonyStandardRebuild_SSICustomControls_UVSetSelectorControlInstancer_InstanceEditorUI_VRLabs_ToonyStandardRebuild_ControlUI_
+  commentId: M:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI(VRLabs.ToonyStandardRebuild.ControlUI)
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI(VRLabs.ToonyStandardRebuild.ControlUI)
+  nameWithType: UVSetSelectorControlInstancer.InstanceEditorUI(ControlUI)
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI*
+  name: InstanceEditorUI
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI.html
+  commentId: Overload:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceEditorUI
+  nameWithType: UVSetSelectorControlInstancer.InstanceEditorUI
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl(VRLabs.ToonyStandardRebuild.ControlUI,IControlContainer,ModularShader,System.String@)
+  name: InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html#VRLabs_ToonyStandardRebuild_SSICustomControls_UVSetSelectorControlInstancer_InstanceInspectorControl_VRLabs_ToonyStandardRebuild_ControlUI_IControlContainer_ModularShader_System_String__
+  commentId: M:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl(VRLabs.ToonyStandardRebuild.ControlUI,IControlContainer,ModularShader,System.String@)
+  name.vb: InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, ByRef String)
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl(VRLabs.ToonyStandardRebuild.ControlUI, IControlContainer, ModularShader, out System.String)
+  fullName.vb: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl(VRLabs.ToonyStandardRebuild.ControlUI, IControlContainer, ModularShader, ByRef System.String)
+  nameWithType: UVSetSelectorControlInstancer.InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, out String)
+  nameWithType.vb: UVSetSelectorControlInstancer.InstanceInspectorControl(ControlUI, IControlContainer, ModularShader, ByRef String)
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl*
+  name: InstanceInspectorControl
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl.html
+  commentId: Overload:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceInspectorControl
+  nameWithType: UVSetSelectorControlInstancer.InstanceInspectorControl
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType
+  name: InstanceType
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html#VRLabs_ToonyStandardRebuild_SSICustomControls_UVSetSelectorControlInstancer_InstanceType
+  commentId: P:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType
+  nameWithType: UVSetSelectorControlInstancer.InstanceType
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType*
+  name: InstanceType
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType.html
+  commentId: Overload:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlInstancer.InstanceType
+  nameWithType: UVSetSelectorControlInstancer.InstanceType
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement
+  name: UVSetSelectorControlUIElement
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.html
+  commentId: T:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement
+  nameWithType: UVSetSelectorControlUIElement
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.#ctor(System.Collections.Generic.List{System.Object})
+  name: UVSetSelectorControlUIElement(List<Object>)
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html#VRLabs_ToonyStandardRebuild_SSICustomControls_UVSetSelectorControlUIElement__ctor_System_Collections_Generic_List_System_Object__
+  commentId: M:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.#ctor(System.Collections.Generic.List{System.Object})
+  name.vb: UVSetSelectorControlUIElement(List(Of Object))
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.UVSetSelectorControlUIElement(System.Collections.Generic.List<System.Object>)
+  fullName.vb: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.UVSetSelectorControlUIElement(System.Collections.Generic.List(Of System.Object))
+  nameWithType: UVSetSelectorControlUIElement.UVSetSelectorControlUIElement(List<Object>)
+  nameWithType.vb: UVSetSelectorControlUIElement.UVSetSelectorControlUIElement(List(Of Object))
+- uid: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.#ctor*
+  name: UVSetSelectorControlUIElement
+  href: Next/api/VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.-ctor.html
+  commentId: Overload:VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.#ctor
+  fullName: VRLabs.ToonyStandardRebuild.SSICustomControls.UVSetSelectorControlUIElement.UVSetSelectorControlUIElement
+  nameWithType: UVSetSelectorControlUIElement.UVSetSelectorControlUIElement
 - uid: VRLabs.ToonyStandardRebuild.TSRConstants
   name: TSRConstants
   href: Next/api/VRLabs.ToonyStandardRebuild.TSRConstants.html
