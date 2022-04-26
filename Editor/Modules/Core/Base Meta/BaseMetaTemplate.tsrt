@@ -18,6 +18,7 @@ struct FragmentData
 	float2 uv1 : TEXCOORD1;
 	float2 uv2 : TEXCOORD2;
 	float2 uv3 : TEXCOORD3;
+	float4 vertex : TEXCOORD4;
 	#K#META_FRAGMENT_DATA;
 };
 
@@ -33,6 +34,7 @@ float Roughness;
 FragmentData  Vertex (VertexData v) 
 {
 	FragmentData  i;
+	i.vertex = v.vertex;
 	i.pos = UnityMetaVertexPosition(v.vertex, v.uv1.xy, v.uv2.xy, unity_LightmapST, unity_DynamicLightmapST);
 	i.uv  = v.uv;
 	i.uv1 = v.uv1;

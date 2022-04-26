@@ -110,15 +110,16 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv2        : TEXCOORD2;
 				float2 uv3        : TEXCOORD3;
 				float3 worldPos   : TEXCOORD4;
+				float4 vertex     : TEXCOORD5;
 				
-				UNITY_SHADOW_COORDS(5)
-				UNITY_FOG_COORDS(6)
+				UNITY_SHADOW_COORDS(6)
+				UNITY_FOG_COORDS(7)
 				
 				#if defined(LIGHTMAP_ON)
-				float2 lightmapUV : TEXCOORD7;
+				float2 lightmapUV : TEXCOORD8;
 				#endif
 				#if defined(DYNAMICLIGHTMAP_ON)
-				float2 dynamicLightmapUV : TEXCOORD8;
+				float2 dynamicLightmapUV : TEXCOORD9;
 				#endif
 				
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -823,6 +824,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				UNITY_INITIALIZE_OUTPUT(FragmentData, i);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(i);
 				
+				i.vertex     = v.vertex;
 				i.pos        = UnityObjectToClipPos(v.vertex);
 				i.normal     = UnityObjectToWorldNormal(v.normal);
 				i.worldPos   = mul(unity_ObjectToWorld, v.vertex);
@@ -981,15 +983,16 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv2        : TEXCOORD2;
 				float2 uv3        : TEXCOORD3;
 				float3 worldPos   : TEXCOORD4;
+				float4 vertex     : TEXCOORD5;
 				
-				UNITY_SHADOW_COORDS(5)
-				UNITY_FOG_COORDS(6)
+				UNITY_SHADOW_COORDS(6)
+				UNITY_FOG_COORDS(7)
 				
 				#if defined(LIGHTMAP_ON)
-				float2 lightmapUV : TEXCOORD7;
+				float2 lightmapUV : TEXCOORD8;
 				#endif
 				#if defined(DYNAMICLIGHTMAP_ON)
-				float2 dynamicLightmapUV : TEXCOORD8;
+				float2 dynamicLightmapUV : TEXCOORD9;
 				#endif
 				
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -1694,6 +1697,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				UNITY_INITIALIZE_OUTPUT(FragmentData, i);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(i);
 				
+				i.vertex     = v.vertex;
 				i.pos        = UnityObjectToClipPos(v.vertex);
 				i.normal     = UnityObjectToWorldNormal(v.normal);
 				i.worldPos   = mul(unity_ObjectToWorld, v.vertex);
@@ -1828,7 +1832,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			struct VertexData
 			{
-				float4 position : POSITION;
+				float4 vertex : POSITION;
 				float3 normal : NORMAL;
 				float2 uv : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
@@ -1838,7 +1842,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			
 			struct VertexOutput
 			{
-				float4 position : SV_POSITION;
+				float4 pos : SV_POSITION;
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				float2 uv : TEXCOORD0;
 				float2 uv1 : TEXCOORD1;
@@ -1848,6 +1852,8 @@ Shader "VRLabs/Toony Standard RE:Build"
 				#if defined(SHADOWS_CUBE)
 				float3 lightVec : TEXCOORD4;
 				#endif
+				
+				float4 vertex : TEXCOORD5;
 			};
 			
 			struct FragmentData
@@ -1855,7 +1861,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				#if defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				UNITY_VPOS_TYPE pos : VPOS;
 				#else
-				float4 position : SV_POSITION;
+				float4 pos : SV_POSITION;
 				#endif
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				float2 uv : TEXCOORD0;
@@ -1866,6 +1872,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				#if defined(SHADOWS_CUBE)
 				float3 lightVec : TEXCOORD4;
 				#endif
+				float4 vertex : TEXCOORD5;
 			};
 			
 			sampler3D _DitherMaskLOD;
@@ -1945,12 +1952,13 @@ Shader "VRLabs/Toony Standard RE:Build"
 			VertexOutput  Vertex (VertexData v)
 			{
 				VertexOutput  i;
+				i.vertex = v.vertex;
 				#if defined(SHADOWS_CUBE)
-				i.position = UnityObjectToClipPos(v.position);
-				i.lightVec = mul(unity_ObjectToWorld, v.position).xyz - _LightPositionRange.xyz;
+				i.pos = UnityObjectToClipPos(v.vertex);
+				i.lightVec = mul(unity_ObjectToWorld, v.vertex).xyz - _LightPositionRange.xyz;
 				#else
-				i.position = UnityClipSpaceShadowCasterPos(v.position.xyz, v.normal);
-				i.position = UnityApplyLinearShadowBias(i.position);
+				i.pos = UnityClipSpaceShadowCasterPos(v.vertex.xyz, v.normal);
+				i.pos = UnityApplyLinearShadowBias(i.pos);
 				#endif
 				#if defined(_ALPHATEST_ON) || defined(_ALPHABLEND_ON) || defined(_ALPHAPREMULTIPLY_ON) || defined(_ALPHAMODULATE_ON)
 				i.uv = v.uv;
@@ -2017,6 +2025,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 				float2 uv1 : TEXCOORD1;
 				float2 uv2 : TEXCOORD2;
 				float2 uv3 : TEXCOORD3;
+				float4 vertex : TEXCOORD4;
 				
 			};
 			
@@ -2134,6 +2143,7 @@ Shader "VRLabs/Toony Standard RE:Build"
 			FragmentData  Vertex (VertexData v)
 			{
 				FragmentData  i;
+				i.vertex = v.vertex;
 				i.pos = UnityMetaVertexPosition(v.vertex, v.uv1.xy, v.uv2.xy, unity_LightmapST, unity_DynamicLightmapST);
 				i.uv  = v.uv;
 				i.uv1 = v.uv1;

@@ -245,14 +245,17 @@ namespace VRLabs.ToonyStandardRebuild
                 if (_uiUVSets.TryGetValue(id, out List<string> items))
                 {
                     control.SetNewOptions(items);
-                    if (_uvPropsSet.TryGetValue(control.PropertyName, out string s) && !s.Equals(id))
-                        _startupErrors.Add($"UV property \"{control.PropertyName}\" has been assigned 2 different UV sets \"{s}\" and \"{id}\", this is not allowed");
-                    else
-                        _uvPropsSet.Add(control.PropertyName, id);
+                    if (_uvPropsSet.TryGetValue(control.PropertyName, out string s))
+                    {
+                        if(!s.Equals(id))
+                            _startupErrors.Add($"UV property \"{control.PropertyName}\" has been assigned 2 different UV sets \"{s}\" and \"{id}\", this is not allowed");
+                        else
+                            _uvPropsSet.Add(control.PropertyName, id);
+                    }
                 }
                 else
                 {
-                    _startupErrors.Add($"UV Set ID \"{id}\" has been declared in a texture control uv but has not been found in the list of available UV Sets");
+                    _startupErrors.Add($"UV Set ID \"{id}\" has been declared as an used UV set but has not been found in the list of available UV Sets");
                 }
             }
 
@@ -296,15 +299,19 @@ namespace VRLabs.ToonyStandardRebuild
         private void LoadUIModule(ModularShader modularShader, string modulePath, out List<(string, UVSetSelectorControl)> loadedUVControls)
         {
             ModuleUI module = LoadSerializedData(modularShader.AdditionalSerializedData);
-            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, IControlContainer)> uvSetControls);
+            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, SimpleControl)> uvSetControls);
             _controlsByModule.Add(modulePath, loadedControls);
             loadedUVControls = new List<(string, UVSetSelectorControl)>();
-            foreach ((string key, IControlContainer uvSetControl) in uvSetControls)
+            foreach ((string key, SimpleControl uvSetControl) in uvSetControls)
             {
-                if (uvSetControl is PropertyControl prop)
+                if (uvSetControl is IControlContainer container && container is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
+                    var uv = container.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
+                    loadedUVControls.Add((key, uv));
+                }
+                else if (uvSetControl is UVSetSelectorControl uv)
+                {
                     loadedUVControls.Add((key, uv));
                 }
             }
@@ -318,15 +325,19 @@ namespace VRLabs.ToonyStandardRebuild
         private void LoadUIModule(ShaderModule shaderModule, string modulePath, out List<(string, UVSetSelectorControl)> loadedUVControls)
         {
             ModuleUI module = LoadSerializedData(shaderModule.AdditionalSerializedData);
-            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, IControlContainer)> uvSetControls);
+            List<SimpleControl> loadedControls = LoadControls(module, out List<(string, SimpleControl)> uvSetControls);
             _controlsByModule.Add(modulePath, loadedControls);
             loadedUVControls = new List<(string, UVSetSelectorControl)>();
-            foreach ((string key, IControlContainer uvSetControl) in uvSetControls)
+            foreach ((string key, SimpleControl uvSetControl) in uvSetControls)
             {
-                if (uvSetControl is PropertyControl prop)
+                if (uvSetControl is IControlContainer container && container is PropertyControl prop)
                 {
-                    var uv = uvSetControl.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
+                    var uv = container.AddUVSetSelectorControl(prop.PropertyName + "_UV", new List<string>(new[] { "uv0" })).WithAlias(prop.ControlAlias + "_UV");
                     _controlsByModule[modulePath].Add(uv);
+                    loadedUVControls.Add((key, uv));
+                }
+                else if (uvSetControl is UVSetSelectorControl uv)
+                {
                     loadedUVControls.Add((key, uv));
                 }
             }
@@ -363,10 +374,10 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        private List<SimpleControl> LoadControls(ModuleUI module, out List<(string, IControlContainer)> uvSetControls)
+        private List<SimpleControl> LoadControls(ModuleUI module, out List<(string, SimpleControl)> uvSetControls)
         {
             var loadedControls = new List<SimpleControl>();
-            uvSetControls = new List<(string, IControlContainer)>();
+            uvSetControls = new List<(string, SimpleControl)>();
             foreach (var moduleSection in module.Sections)
                 LoadSection(module, uvSetControls, moduleSection, loadedControls);
 
@@ -402,7 +413,7 @@ namespace VRLabs.ToonyStandardRebuild
             return loadedControls;
         }
 
-        private void LoadSection(ModuleUI module, List<(string, IControlContainer)> uvSetControls, SectionUI moduleSection, List<SimpleControl> loadedControls)
+        private void LoadSection(ModuleUI module, List<(string, SimpleControl)> uvSetControls, SectionUI moduleSection, List<SimpleControl> loadedControls)
         {
             if (moduleSection.IsPermanent)
             {
@@ -456,12 +467,12 @@ namespace VRLabs.ToonyStandardRebuild
             }
         }
 
-        private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls, List<(string, IControlContainer)> uvSetControls)
+        private void LoadControl(IControlContainer control, ControlUI sectionControl, List<SimpleControl> loadedControls, List<(string, SimpleControl)> uvSetControls)
         {
             var newControl = sectionControl.CreateControl(control, ModularShader, out string uvSet);
 
-            if (!string.IsNullOrWhiteSpace(uvSet) && newControl is IControlContainer ct)
-                uvSetControls.Add((uvSet, ct));
+            if (!string.IsNullOrWhiteSpace(uvSet) && (newControl is IControlContainer || newControl is UVSetSelectorControl))
+                uvSetControls.Add((uvSet, newControl));
 
             loadedControls.Add(newControl);
 
