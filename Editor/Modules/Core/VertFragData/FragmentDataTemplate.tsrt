@@ -6,13 +6,14 @@ float2 uv1        : TEXCOORD1;
 float2 uv2        : TEXCOORD2;
 float2 uv3        : TEXCOORD3;
 float3 worldPos   : TEXCOORD4;
+float4 vertex     : TEXCOORD5;
 
-UNITY_SHADOW_COORDS(5)
-UNITY_FOG_COORDS(6)
+UNITY_SHADOW_COORDS(6)
+UNITY_FOG_COORDS(7)
 
 #if defined(LIGHTMAP_ON)
-    float2 lightmapUV : TEXCOORD7;
+    float2 lightmapUV : TEXCOORD8;
 #endif
 #if defined(DYNAMICLIGHTMAP_ON)
-    float2 dynamicLightmapUV : TEXCOORD8;
+    float2 dynamicLightmapUV : TEXCOORD9;
 #endif
