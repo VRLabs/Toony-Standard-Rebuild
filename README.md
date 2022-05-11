@@ -7,23 +7,32 @@
   </p>
 
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/releases/latest">
-    <img src="https://img.shields.io/github/v/release/VRLabs/Toony-Standard-Rebuild.svg?style=flat-square">
+    <img src="https://img.shields.io/github/v/release/VRLabs/Toony-Standard-Rebuild.svg">
+  </a>
+  <a href="https://docs.unity3d.com/2019.4/Documentation/Manual/UnityManual.html">
+    <img src="https://img.shields.io/badge/Unity-2019.4-blue.svg">
+  </a>
+  <a href="https://vrchat.com/home/download">
+    <img src="https://img.shields.io/badge/SDK-AvatarSDK3-blue.svg">
+  </a>
+  <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg">
   </a>
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/releases/latest">
-    <img src="https://img.shields.io/badge/Unity-2019.4-green.svg?style=flat-square">
+    <img src="https://img.shields.io/github/downloads/VRLabs/Toony-Standard-Rebuild/total?label=Downloads">
   </a>
   <br />
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/issues">
-    <img src="https://img.shields.io/github/issues-raw/VRLabs/Toony-Standard-Rebuild.svg?style=flat-square">
+    <img src="https://img.shields.io/github/issues-raw/VRLabs/Toony-Standard-Rebuild.svg">
   </a>
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/issues?q=is%3Aissue+is%3Aclosed">
-    <img src="https://img.shields.io/github/issues-closed-raw/VRLabs/Toony-Standard-Rebuild.svg?style=flat-square">
+    <img src="https://img.shields.io/github/issues-closed-raw/VRLabs/Toony-Standard-Rebuild.svg">
   </a>
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/pull">
-    <img src="https://img.shields.io/github/issues-pr-raw/VRLabs/Toony-Standard-Rebuild.svg?style=flat-square">
+    <img src="https://img.shields.io/github/issues-pr-raw/VRLabs/Toony-Standard-Rebuild.svg">
   </a>
   <a href="https://github.com/VRLabs/Toony-Standard-Rebuild/pulls?q=is%3Apr+is%3Aclosed">
-    <img src="https://img.shields.io/github/issues-pr-closed-raw/VRLabs/Toony-Standard-Rebuild.svg?style=flat-square">
+    <img src="https://img.shields.io/github/issues-pr-closed-raw/VRLabs/Toony-Standard-Rebuild.svg">
   </a>
   <br />
   <br />
