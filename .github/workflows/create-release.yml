@@ -26,15 +26,13 @@ jobs:
         run: |
           mkdir -p "Assets/VRLabs/Toony Standard Rebuild"
           ls | grep -v "Assets" | xargs mv -t "Assets/VRLabs/Toony Standard Rebuild"
-          echo "Assets/VRLabs.meta" > tsrFullPackage
-          echo "Assets/VRLabs/Toony Standard Rebuild.meta" >> tsrFullPackage
           echo -e "fileFormatVersion: 2\nguid: 652a1ba5b00554143bc9a76307dbc4e8\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs.meta"
           echo -e "fileFormatVersion: 2\nguid: f96499e63d999164ea5de50d9ab6aeb7\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {}\n  userData: \n  assetBundleName: \n  assetBundleVariant: " > "Assets/VRLabs/Toony Standard Rebuild.meta"
-          find "Assets/VRLabs/Toony Standard Rebuild/" -name \*.meta >> tsrFullPackage
+
       - name: Create UnityPackage
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
-        uses: FrostBanditTeam/extract-unity-package-action@1
+        uses: VRLabs/extract-unity-package-action@v1.2.1
         with:
           outputPackagePath: 'Toony.Standard.Rebuild.${{ env.SOURCE_TAG }}.unitypackage'
           unityProjectPath: '.'

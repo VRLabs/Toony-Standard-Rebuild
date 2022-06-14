@@ -138,6 +138,7 @@ namespace VRLabs.ToonyStandardRebuild
                 if (!uvSetDictionary.TryGetValue(uvSet, out int value)) continue;
                 
                 shaderFile.Replace(m[i].Value, $"{value}");
+                shaderFile.Replace($"#K#IDXC#{pieces[0]}", $"{uvSetDictionary.Count}");
             }
         }
     }
