@@ -41,6 +41,10 @@ namespace VRLabs.ToonyStandardRebuild
                 var mats = new Material[oldMats.Length];
                 for (int i = 0; i < oldMats.Length; i++)
                 {
+                    if (oldMats[i] == null)
+                    {
+                        continue;
+                    }
                     if (loadedShaders.FirstOrDefault(y => y.LastGeneratedShaders.Contains(oldMats[i].shader)) != null)
                         SwapMaterial(materialByGuid, oldMats, i, mats);
                     else
@@ -99,6 +103,7 @@ namespace VRLabs.ToonyStandardRebuild
             
             var materials = renderers
                 .SelectMany(r => r.sharedMaterials)
+                .Where(x => x != null)
                 .Distinct()
                 .GroupBy(x => loadedShaders.FirstOrDefault(y => y.LastGeneratedShaders.Contains(x.shader)));
 
