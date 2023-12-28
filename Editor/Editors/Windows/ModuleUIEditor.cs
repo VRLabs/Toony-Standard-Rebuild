@@ -182,7 +182,7 @@ namespace VRLabs.ToonyStandardRebuild
             if (!_currentSelectorUsed && _modularShaderField.value != null)
             {
                 SerializedUIData data = new SerializedUIData();
-                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
+                data.module = Encoding.ASCII.GetString(VRLabs.ToonyStandardRebuild.OdinSerializer.SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
                 foreach (var reference in unityObjectReferences)
                     data.unityGUIDReferences.Add(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _) ? guid : "");
                 
@@ -194,7 +194,7 @@ namespace VRLabs.ToonyStandardRebuild
             if (_currentSelectorUsed && _shaderModuleField.value != null)
             {
                 SerializedUIData data = new SerializedUIData();
-                data.module = Encoding.ASCII.GetString(SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
+                data.module = Encoding.ASCII.GetString(VRLabs.ToonyStandardRebuild.OdinSerializer.SerializationUtility.SerializeValue(_ui, DataFormat.JSON, out List<UnityEngine.Object> unityObjectReferences));
                 foreach (var reference in unityObjectReferences)
                     data.unityGUIDReferences.Add(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(reference, out string guid, out long _) ? guid : "");
                 
@@ -253,7 +253,7 @@ namespace VRLabs.ToonyStandardRebuild
                 }
             }
 
-            return SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
+            return VRLabs.ToonyStandardRebuild.OdinSerializer.SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
         }
         
         private static void AddElementsFromModuleUI(ModuleUI shaderData, Dictionary<string, Foldout> sections)
