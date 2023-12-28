@@ -370,7 +370,7 @@ namespace VRLabs.ToonyStandardRebuild
                     }
                 }
 
-                return SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
+                return VRLabs.ToonyStandardRebuild.OdinSerializer.SerializationUtility.DeserializeValue<ModuleUI>(Encoding.UTF8.GetBytes(data.module), DataFormat.JSON, unityObjectReferences) ?? new ModuleUI();
             }
         }
 

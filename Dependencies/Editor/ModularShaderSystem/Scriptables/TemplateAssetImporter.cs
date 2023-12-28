@@ -2,16 +2,16 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 {
     
-    [ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
-    public class TemplateAssetImporter : ScriptedImporter
+    [UnityEditor.AssetImporters.ScriptedImporter(1, MSSConstants.TEMPLATE_EXTENSION)]
+    public class TemplateAssetImporter : UnityEditor.AssetImporters.ScriptedImporter
     {
-        public override void OnImportAsset(AssetImportContext ctx)
+        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             var subAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             subAsset.Template = File.ReadAllText(ctx.assetPath);

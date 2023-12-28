@@ -3,15 +3,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using UnityEditor.Experimental.AssetImporters;
+
 using UnityEngine;
 
 namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
 {
-    [ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION)]
-    public class TemplateColletionAssetImporter : ScriptedImporter
+    [UnityEditor.AssetImporters.ScriptedImporter(1, MSSConstants.TEMPLATE_COLLECTION_EXTENSION)]
+    public class TemplateColletionAssetImporter : UnityEditor.AssetImporters.ScriptedImporter
     {
-        public override void OnImportAsset(AssetImportContext ctx)
+        public override void OnImportAsset(UnityEditor.AssetImporters.AssetImportContext ctx)
         {
             var subAsset = ScriptableObject.CreateInstance<TemplateCollectionAsset>();
             
@@ -57,7 +57,7 @@ namespace VRLabs.ToonyStandardRebuild.ModularShaderSystem
             ctx.SetMainObject(subAsset);
         }
 
-        private static void SaveSubAsset(AssetImportContext ctx, TemplateCollectionAsset asset, StringBuilder builder, string name)
+        private static void SaveSubAsset(UnityEditor.AssetImporters.AssetImportContext ctx, TemplateCollectionAsset asset, StringBuilder builder, string name)
         {
             var templateAsset = ScriptableObject.CreateInstance<TemplateAsset>();
             templateAsset.Template = builder.ToString();
